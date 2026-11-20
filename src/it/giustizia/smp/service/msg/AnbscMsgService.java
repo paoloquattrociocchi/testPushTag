@@ -42,7 +42,7 @@ import it.giustizia.smp.webservice.utility.JAXBUtil;
 @Service
 public class AnbscMsgService  {
 
-	private static char ERRORE_VALIDAZIONE_XML = 'E';
+	private static final char ERRORE = 'E';
 	
 	@Autowired
 	private AnbscService anbscService;
@@ -90,9 +90,8 @@ public class AnbscMsgService  {
 	}
 	*/
 
-	public SequestroResponse invioSequestro(final long idProcedimento,final  long idAtto,final  Integer idUfficioUtente,final  String codUtente)
+	public EsitoFromResponse invioSequestro(final long idProcedimento,final  long idAtto,final  Integer idUfficioUtente,final  String codUtente)
 	{
-		SequestroResponse responseAnbsc = null;
 		SequestroRequest sequestroRequest = anbscService.createSequestroRequest(idProcedimento, idAtto, idUfficioUtente, Constants.DECRETO_SEQUESTRO_ORDINARIO);
 		long idMsg = anbscService.insertMsgDatabase(sequestroRequest, idProcedimento, idAtto, AnbscEnum.ANBSC_SEQUESTRO.getId(), codUtente);
 		if(idMsg > 0)
@@ -102,15 +101,13 @@ public class AnbscMsgService  {
 			try {
 				out = JAXBUtil.validationAndMarshal(sequestroRequest);
 			} catch (Exception e) {
-				anbscService.updateRispostaMsgDatabase(idMsg, ERRORE_VALIDAZIONE_XML, e.getCause().getLocalizedMessage());	
-				return responseAnbsc; 
-			}						
-			
-			responseAnbsc = anbscService.inviaSequestro(sequestroRequest);
-			if(responseAnbsc != null)
-				anbscService.updateRispostaMsgDatabase(idMsg, responseAnbsc.getEsito(), responseAnbsc);			
+				String errMsg = e.getCause().getLocalizedMessage();
+				anbscService.updateRispostaMsgDatabase(idMsg, ERRORE, errMsg);
+				return new EsitoFromResponse(ERRORE, "anbsc.errore.validazione.xml");
+			}
+			return getEsitoInCoda();
 		}
-		return responseAnbsc;
+		return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");
 	}
 	// Mev 2020/22 Fine	
 	
@@ -154,9 +151,8 @@ public class AnbscMsgService  {
 	}
 	*/
 
-	public SequestroResponse invioDecretoConvalidaSequestro(final long idProcedimento,final long idAttoFi,final Integer idUfficioUtente,final String codUtente,final String tipoSequestro)
+	public EsitoFromResponse invioDecretoConvalidaSequestro(final long idProcedimento,final long idAttoFi,final Integer idUfficioUtente,final String codUtente,final String tipoSequestro)
 	{
-		SequestroResponse responseAnbsc = null;
 		long idAttoOr = anbscService.recuperaAttoOrig(idAttoFi, idUfficioUtente); 
 		
 		if(idAttoOr != 0)
@@ -175,20 +171,17 @@ public class AnbscMsgService  {
 				try {
 					out = JAXBUtil.validationAndMarshal(sequestroRequest);
 				} catch (Exception e) {
-					anbscService.updateRispostaMsgDatabase(idMsg, ERRORE_VALIDAZIONE_XML, e.getCause().getLocalizedMessage());	
-					return responseAnbsc; 
+					String errMsg = e.getCause().getLocalizedMessage();
+					anbscService.updateRispostaMsgDatabase(idMsg, ERRORE, errMsg);
+					return new EsitoFromResponse(ERRORE, "anbsc.errore.validazione.xml");
 				}
-				
-				responseAnbsc = anbscService.inviaSequestro(sequestroRequest);
-				if(responseAnbsc != null)
-					anbscService.updateRispostaMsgDatabase(idMsg, responseAnbsc.getEsito(), responseAnbsc);
+				return getEsitoInCoda();
 			}
-			
-			return responseAnbsc;
+			return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");
 
 		}
 		else
-			return responseAnbsc;
+			return getEsitoInCoda();
 	}
 	// Mev 2020/22 Fine	
 
@@ -223,10 +216,8 @@ public class AnbscMsgService  {
 		return result;
 	}
 	*/
-	public ConfiscaPrimoGradoResponse invioConfiscaIGrado(final long idProcedimento,final long idAtto,final Integer idUfficioUtente,final String codUtente)
+	public EsitoFromResponse invioConfiscaIGrado(final long idProcedimento,final long idAtto,final Integer idUfficioUtente,final String codUtente)
 	{
-		ConfiscaPrimoGradoResponse responseAnbsc = null;
-		boolean result = true;
 		ConfiscaPrimoGradoRequest confiscaPrimoGradoRequest = anbscService.createConfiscaPrimoGradoRequest(idProcedimento, idAtto, idUfficioUtente);
 		long idMsg = anbscService.insertMsgDatabase(confiscaPrimoGradoRequest, idProcedimento, idAtto, AnbscEnum.ANBSC_CONFISCA_I_GRADO.getId(), codUtente);
 		if(idMsg > 0)
@@ -236,15 +227,13 @@ public class AnbscMsgService  {
 			try {
 				out = JAXBUtil.validationAndMarshal(confiscaPrimoGradoRequest);
 			} catch (Exception e) {
-				anbscService.updateRispostaMsgDatabase(idMsg, ERRORE_VALIDAZIONE_XML, e.getCause().getLocalizedMessage());	
-				return responseAnbsc; 
+				String errMsg = e.getCause().getLocalizedMessage();
+				anbscService.updateRispostaMsgDatabase(idMsg, ERRORE, errMsg);
+				return new EsitoFromResponse(ERRORE, "anbsc.errore.validazione.xml");
 			}
-			
-			responseAnbsc = anbscService.inviaConfiscaPrimoGrado(confiscaPrimoGradoRequest);
-			if(responseAnbsc != null)
-				anbscService.updateRispostaMsgDatabase(idMsg, responseAnbsc.getEsito(), responseAnbsc);
+			return getEsitoInCoda();
 		}
-		return responseAnbsc;
+		return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");
 	}
 	
 	
@@ -282,9 +271,8 @@ public class AnbscMsgService  {
 	}
 	Mev 2020/22 */
 	
-	public ConfiscaSecondoGradoResponse invioConfiscaIIGrado(final long idProcedimento,final long idAtto,final Integer idUfficioUtente,final String codUtente)
+	public EsitoFromResponse invioConfiscaIIGrado(final long idProcedimento,final long idAtto,final Integer idUfficioUtente,final String codUtente)
 	{
-		ConfiscaSecondoGradoResponse responseAnbsc = null;
 		ConfiscaSecondoGradoRequest confiscaSecondoGradoRequest = anbscService.createConfiscaSecondoGradoRequest(idProcedimento, idAtto, idUfficioUtente);
 		long idMsg = anbscService.insertMsgDatabase(confiscaSecondoGradoRequest, idProcedimento, idAtto, AnbscEnum.ANBSC_CONFISCA_II_GRADO.getId(), codUtente);
 		if(idMsg > 0)
@@ -294,15 +282,13 @@ public class AnbscMsgService  {
 			try {
 				out = JAXBUtil.validationAndMarshal(confiscaSecondoGradoRequest);
 			} catch (Exception e) {
-				anbscService.updateRispostaMsgDatabase(idMsg, ERRORE_VALIDAZIONE_XML, e.getCause().getLocalizedMessage());	
-				return responseAnbsc; 
+				String errMsg = e.getCause().getLocalizedMessage();
+				anbscService.updateRispostaMsgDatabase(idMsg, ERRORE, errMsg);
+				return new EsitoFromResponse(ERRORE, "anbsc.errore.validazione.xml");
 			}
-			
-			responseAnbsc = anbscService.inviaConfiscaSecondoGrado(confiscaSecondoGradoRequest);
-			if(responseAnbsc != null)
-				anbscService.updateRispostaMsgDatabase(idMsg, responseAnbsc.getEsito(), responseAnbsc);	
+			return getEsitoInCoda();
 		}
-		return responseAnbsc;
+		return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");
 	}	
 	
 	/**
@@ -339,10 +325,8 @@ public class AnbscMsgService  {
 	Mev 2020/22 */
 	
 	//Mev 2020/22 inizio
-	public StralcioResponse invioStralcio(final long idProcedimentoOrigine,final long idProcedimentoDestinazione,final Integer idUfficioUtente,final String codUtente)
+	public EsitoFromResponse invioStralcio(final long idProcedimentoOrigine,final long idProcedimentoDestinazione,final Integer idUfficioUtente,final String codUtente)
 	{
-		StralcioResponse responseAnbsc = null;
-		boolean result = true;
 		if(anbscService.verificaInvioStralcioRiunione(idProcedimentoOrigine) == true)
 		{
 			StralcioRequest stralcioRequest = anbscService.createStralcioRequest(idProcedimentoOrigine, idProcedimentoDestinazione, idUfficioUtente);
@@ -356,16 +340,15 @@ public class AnbscMsgService  {
 				try {
 					out = JAXBUtil.validationAndMarshal(stralcioRequest);
 				} catch (Exception e) {
-					anbscService.updateRispostaMsgDatabase(idMsg, ERRORE_VALIDAZIONE_XML, e.getCause().getLocalizedMessage());	
-					return responseAnbsc; 
+					String errMsg = e.getCause().getLocalizedMessage();
+					anbscService.updateRispostaMsgDatabase(idMsg, ERRORE, errMsg);
+					return new EsitoFromResponse(ERRORE, "anbsc.errore.validazione.xml");
 				}
-				
-				responseAnbsc = anbscService.inviaStralcio(stralcioRequest);
-				if(responseAnbsc != null)
-					anbscService.updateRispostaMsgDatabase(idMsg, responseAnbsc.getEsito(), responseAnbsc);
+				return getEsitoInCoda();
 			}
+			return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");
 		}
-		return responseAnbsc;		
+		return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");		
 	}
 	//Mev 2020/22 fine
 	
@@ -404,10 +387,8 @@ public class AnbscMsgService  {
 	Mev 2020/22 */
 	
 	//Mev 2020/22 inizio
-	public RiunioneResponse invioRiunione(final long idProcedimentoRiunito,final long idProcedimentoRiunente,final Integer idUfficioUtente,final String codUtente)
+	public EsitoFromResponse invioRiunione(final long idProcedimentoRiunito,final long idProcedimentoRiunente,final Integer idUfficioUtente,final String codUtente)
 	{
-		RiunioneResponse responseAnbsc = null;
-		boolean result = true;
 		if(anbscService.verificaInvioStralcioRiunione(idProcedimentoRiunito) == true)
 		{
 			RiunioneRequest riunioneRequest = anbscService.createRiunioneRequest(idProcedimentoRiunito, idProcedimentoRiunente, idUfficioUtente);
@@ -421,16 +402,15 @@ public class AnbscMsgService  {
 				try {
 					out = JAXBUtil.validationAndMarshal(riunioneRequest);
 				} catch (Exception e) {
-					anbscService.updateRispostaMsgDatabase(idMsg, ERRORE_VALIDAZIONE_XML, e.getCause().getLocalizedMessage());	
-					return responseAnbsc; 
+					String errMsg = e.getCause().getLocalizedMessage();
+					anbscService.updateRispostaMsgDatabase(idMsg, ERRORE, errMsg);
+					return new EsitoFromResponse(ERRORE, "anbsc.errore.validazione.xml");
 				}
-				
-				responseAnbsc = anbscService.inviaRiunione(riunioneRequest);
-				if(responseAnbsc != null)
-					anbscService.updateRispostaMsgDatabase(idMsg, responseAnbsc.getEsito(), responseAnbsc);
+				return getEsitoInCoda();
 			}
+			return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");
 		}
-		return responseAnbsc;
+		return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");
 	}
 	//Mev 2020/22 fine	
 	
@@ -460,10 +440,8 @@ public class AnbscMsgService  {
 	}
 	Mev 2020/22 */
 	//Mev 2020/22 Inizio
-	public RevocaSequestroResponse invioRevocaSequestro(final long idProcedimento,final long idAtto,final Integer idUfficioUtente,final String codUtente, final Long idTipoAnbscMsg)
+	public EsitoFromResponse invioRevocaSequestro(final long idProcedimento,final long idAtto,final Integer idUfficioUtente,final String codUtente, final Long idTipoAnbscMsg)
 	{
-		RevocaSequestroResponse responseAnbsc = null;
-		boolean result = true;
 		RevocaSequestroRequest revocaSequestroRequest = anbscService.createRevocaSequestroRequest(idProcedimento, idAtto, idUfficioUtente);
 		long idMsg = anbscService.insertMsgDatabase(revocaSequestroRequest, idProcedimento, idAtto, idTipoAnbscMsg, codUtente);
 		if(idMsg > 0)
@@ -473,15 +451,13 @@ public class AnbscMsgService  {
 			try {
 				out = JAXBUtil.validationAndMarshal(revocaSequestroRequest);
 			} catch (Exception e) {
-				anbscService.updateRispostaMsgDatabase(idMsg, ERRORE_VALIDAZIONE_XML, e.getCause().getLocalizedMessage());	
-				return responseAnbsc; 
+				String errMsg = e.getCause().getLocalizedMessage();
+				anbscService.updateRispostaMsgDatabase(idMsg, ERRORE, errMsg);
+				return new EsitoFromResponse(ERRORE, "anbsc.errore.validazione.xml");
 			}
-			
-			responseAnbsc = anbscService.inviaRevocaSequestro(revocaSequestroRequest);
-			if(responseAnbsc != null)
-				anbscService.updateRispostaMsgDatabase(idMsg, responseAnbsc.getEsito(), responseAnbsc);				
+			return getEsitoInCoda();
 		}
-		return responseAnbsc;
+		return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");
 	}
 	//Mev 2020/22 fine
 	
@@ -515,17 +491,12 @@ public class AnbscMsgService  {
 	Mev 2020/22 */
 	
 	//Mev 2020/22 Inizio
-	public ConfiscaDefinitivaResponse invioConfiscaDefinitiva(final long idProcedimento, final long idAtto, final Integer idUfficioUtente, final String codUtente, final Long idTipoAnbscMsg, List<TDefPatr> listaMisPatrDaInviareANBSC, boolean sincrono)
+	public EsitoFromResponse invioConfiscaDefinitiva(final long idProcedimento, final long idAtto, final Integer idUfficioUtente, final String codUtente, final Long idTipoAnbscMsg, List<TDefPatr> listaMisPatrDaInviareANBSC, boolean sincrono)
 	{
-		ConfiscaDefinitivaResponse responseAnbsc = null;
 		ConfiscaDefinitivaRequest confiscaDefinitivaRequest = anbscService.createConfiscaDefinitivaRequest(idProcedimento, idAtto, idUfficioUtente, 4, listaMisPatrDaInviareANBSC);
 		long idMsg = anbscService.insertMsgDatabase(confiscaDefinitivaRequest, idProcedimento, idAtto, idTipoAnbscMsg, codUtente);
 		if(idMsg > 0)
 		{
-			if(idTipoAnbscMsg.equals(AnbscEnum.ANBSC_CONFISCA_DEFINITIVA_CASSAZIONE.getId())) {
-				anbscDao.updateSentenzaInviata(idAtto, idUfficioUtente);
-			}
-			
 			if(sincrono) {
 				
 				// Controllo se XML che sto inviando e' corretto 
@@ -533,17 +504,14 @@ public class AnbscMsgService  {
 				try {
 					out = JAXBUtil.validationAndMarshal(confiscaDefinitivaRequest);
 				} catch (Exception e) {
-					anbscService.updateRispostaMsgDatabase(idMsg, ERRORE_VALIDAZIONE_XML, e.getCause().getLocalizedMessage());	
-					return responseAnbsc; 
+					String errMsg = e.getCause().getLocalizedMessage();
+					anbscService.updateRispostaMsgDatabase(idMsg, ERRORE, errMsg);
+					return new EsitoFromResponse(ERRORE, "anbsc.errore.validazione.xml");
 				}
-				
-				responseAnbsc = anbscService.inviaConfiscaDefinitiva(confiscaDefinitivaRequest);
-				if(responseAnbsc != null)
-					anbscService.updateRispostaMsgDatabase(idMsg, responseAnbsc.getEsito(), responseAnbsc);				
 			}
+			return getEsitoInCoda();
 		}
-		
-		return responseAnbsc;
+		return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");
 	}	
 	//Mev 2020/22 fine
 	
@@ -599,8 +567,7 @@ public class AnbscMsgService  {
 	}
 	Mev 2020/22 Fine */
 	/* Mev 2020/22 Inizio */
-	public RevocaConfiscaResponse inviaRevocaConfisca(long idProcedimento, long idAtto, Integer idUfficio) {
-		RevocaConfiscaResponse responseAnbsc = null;
+	public EsitoFromResponse inviaRevocaConfisca(long idProcedimento, long idAtto, Integer idUfficio) {
 		RevocaConfiscaRequest request = anbscService.createRevocaConfiscaRequest(idProcedimento, idAtto, idUfficio);
 		long idMsg = anbscService.insertMsgDatabase(request, idProcedimento, idAtto, AnbscEnum.ANBSC_REVOCA_CONFISCA.getId(), "999");
 		if(idMsg > 0)
@@ -610,22 +577,21 @@ public class AnbscMsgService  {
 			try {
 				out = JAXBUtil.validationAndMarshal(request);
 			} catch (Exception e) {
-				anbscService.updateRispostaMsgDatabase(idMsg, ERRORE_VALIDAZIONE_XML, e.getCause().getLocalizedMessage());	
-				return responseAnbsc; 
-			}			
-			
-			responseAnbsc = anbscService.inviaRevocaConfisca(request);
-			if(responseAnbsc != null)
-			{
-				anbscService.updateRispostaMsgDatabase(idMsg, responseAnbsc.getEsito(), responseAnbsc);
+				String errMsg = e.getCause().getLocalizedMessage();
+				anbscService.updateRispostaMsgDatabase(idMsg, ERRORE, errMsg);
+				return new EsitoFromResponse(ERRORE, "anbsc.errore.validazione.xml");
 			}
+			return getEsitoInCoda();
 		}
-		
-		return responseAnbsc;
+		return new EsitoFromResponse(ERRORE, "anbsc.errore.insert.msg");
 	}
 	/* Mev 2020/22 Fine */
 	
 	// Mev 2020 22 Inizio
+	
+	public EsitoFromResponse getEsitoInCoda() {
+		return new EsitoFromResponse('C', "anbsc.coda");
+	}
 	
 	public EsitoFromResponse getEsitoFromResponse(Esito esito) {
 		String descRisposta = "";

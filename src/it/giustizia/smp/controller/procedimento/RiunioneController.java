@@ -334,27 +334,15 @@ public class RiunioneController extends BreadcrumbsController {
 		String codUtente = recuperaIdCodiceUtente();
 		
 		if(anbscService.verificaInvioStralcioRiunione(idProcedimentoRiunito) == true)  {
-			RiunioneResponse responseAnbsc = anbscMsgService.invioRiunione(idProcedimentoRiunito, idProcedimentoRiunente, idUfficio, codUtente);
-			
-			it.giustizia.smp.service.msg.AnbscMsgService.EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-			
-			if(responseAnbsc != null) {
-				if(responseAnbsc.getEsito() != null) {
-					esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-				}
-			}
-			
+			it.giustizia.smp.service.msg.AnbscMsgService.EsitoFromResponse esitoFromResponse = anbscMsgService.invioRiunione(idProcedimentoRiunito, idProcedimentoRiunente, idUfficio, codUtente);
+
 			switch (esitoFromResponse.getEsito()) {
-			case 'T':
-				super.addMessageIntoList(listaMessaggiSuccesso, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
+			case 'C':
+				super.addMessageIntoList(listaMessaggiSuccesso, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 				break;
-				
-			case 'F':					
-				super.addMessageIntoList(listaMessaggiErrore, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
-				break;
-				
-			default:				
-				super.addMessageIntoList(listaMessaggiErrore, Constants.MESSAGE, "anbsc.invio.no.risposta", null);	
+
+			default:
+				super.addMessageIntoList(listaMessaggiErrore, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 				break;
 
 			}			

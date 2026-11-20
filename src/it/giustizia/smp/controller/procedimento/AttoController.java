@@ -6188,7 +6188,7 @@ public class AttoController extends BreadcrumbsController {
 						for (TDefPatr recordTdefPatr : misPatrDaInviareANBSC) {
 							if(!recordTdefPatr.getDataDefinitivita().equals(tempData)) {
 								// e' cambiata la data, faccio l'invio verso ANBSC
-								ConfiscaDefinitivaResponse responseAnbsc = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
+								anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
 																												   idAtto,
 																												   idUfficioUtente,
 																												   codUtente,
@@ -6204,7 +6204,7 @@ public class AttoController extends BreadcrumbsController {
 						}
 
 						// Invio l'ultimo gruppo di record
-						ConfiscaDefinitivaResponse responseAnbsc = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
+						EsitoFromResponse esitoFromResponse = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
 								   idAtto,
 								   idUfficioUtente,
 								   codUtente,
@@ -6214,30 +6214,18 @@ public class AttoController extends BreadcrumbsController {
 
 						// Se le data di definitività erano tutte uguali l'invio e' sincrono e quindi aspetto l'esito del WS di ANBSC
 						if(dateUguali) {
-							EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-
-							if(responseAnbsc != null) {
-								if(responseAnbsc.getEsito() != null) {
-									esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-								}
-							}
-
 							switch (esitoFromResponse.getEsito()) {
-							case 'T':
-								super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
-								break;
-
-							case 'F':
-								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
+							case 'C':
+								super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 								break;
 
 							default:
-								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.no.risposta", null);
+								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 								break;
 
 							}
 						} else {
-							super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.asincrono", null);
+							super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.coda", null);
 						}
 					}
 					//Mev 2020/22 Fine
@@ -6261,7 +6249,7 @@ public class AttoController extends BreadcrumbsController {
 						for (TDefPatr recordTdefPatr : misPatrDaInviareANBSC) {
 							if(!recordTdefPatr.getDataDefinitivita().equals(tempData)) {
 								// e' cambiata la data, faccio l'invio verso ANBSC
-								ConfiscaDefinitivaResponse responseAnbsc = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
+								anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
 																												   idAtto,
 																												   idUfficioUtente,
 																												   codUtente,
@@ -6277,7 +6265,7 @@ public class AttoController extends BreadcrumbsController {
 						}
 
 						// Invio l'ultimo gruppo di record
-						ConfiscaDefinitivaResponse responseAnbsc = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
+						EsitoFromResponse esitoFromResponse = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
 								   idAtto,
 								   idUfficioUtente,
 								   codUtente,
@@ -6287,30 +6275,18 @@ public class AttoController extends BreadcrumbsController {
 
 						// Se le data di definitività erano tutte uguali l'invio e' sincrono e quindi aspetto l'esito del WS di ANBSC
 						if(dateUguali) {
-							EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-
-							if(responseAnbsc != null) {
-								if(responseAnbsc.getEsito() != null) {
-									esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-								}
-							}
-
 							switch (esitoFromResponse.getEsito()) {
-							case 'T':
-								super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
-								break;
-
-							case 'F':
-								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
+							case 'C':
+								super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 								break;
 
 							default:
-								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.no.risposta", null);
+								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 								break;
 
 							}
 						} else {
-							super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.asincrono", null);
+							super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.coda", null);
 						}
 					}
 					//Mev 2020/22 Fine
@@ -6393,7 +6369,7 @@ public class AttoController extends BreadcrumbsController {
 						for (TDefPatr recordTdefPatr : misPatrDaInviareANBSC) {
 							if(!recordTdefPatr.getDataDefinitivita().equals(tempData)) {
 								// e' cambiata la data, faccio l'invio verso ANBSC
-								ConfiscaDefinitivaResponse responseAnbsc = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
+								anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
 																												   idAtto,
 																												   idUfficioUtente,
 																												   codUtente,
@@ -6409,7 +6385,7 @@ public class AttoController extends BreadcrumbsController {
 						}
 
 						// Invio l'ultimo gruppo di record
-						ConfiscaDefinitivaResponse responseAnbsc = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
+						EsitoFromResponse esitoFromResponse = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
 								   idAtto,
 								   idUfficioUtente,
 								   codUtente,
@@ -6419,30 +6395,18 @@ public class AttoController extends BreadcrumbsController {
 
 						// Se le data di definitività erano tutte uguali l'invio e' sincrono e quindi aspetto l'esito del WS di ANBSC
 						if(dateUguali) {
-							EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-
-							if(responseAnbsc != null) {
-								if(responseAnbsc.getEsito() != null) {
-									esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-								}
-							}
-
 							switch (esitoFromResponse.getEsito()) {
-							case 'T':
-								super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
-								break;
-
-							case 'F':
-								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
+							case 'C':
+								super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 								break;
 
 							default:
-								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.no.risposta", null);
+								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 								break;
 
 							}
 						} else {
-							super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.asincrono", null);
+							super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.coda", null);
 						}
 					}
 					//Mev 2020/22 Fine
@@ -6465,7 +6429,7 @@ public class AttoController extends BreadcrumbsController {
 						for (TDefPatr recordTdefPatr : misPatrDaInviareANBSC) {
 							if(!recordTdefPatr.getDataDefinitivita().equals(tempData)) {
 								// e' cambiata la data, faccio l'invio verso ANBSC
-								ConfiscaDefinitivaResponse responseAnbsc = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
+								anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
 																												   idAtto,
 																												   idUfficioUtente,
 																												   codUtente,
@@ -6481,7 +6445,7 @@ public class AttoController extends BreadcrumbsController {
 						}
 
 						// Invio l'ultimo gruppo di record
-						ConfiscaDefinitivaResponse responseAnbsc = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
+						EsitoFromResponse esitoFromResponse = anbscMsgService.invioConfiscaDefinitiva(idProcedimento,
 								   idAtto,
 								   idUfficioUtente,
 								   codUtente,
@@ -6491,30 +6455,18 @@ public class AttoController extends BreadcrumbsController {
 
 						// Se le data di definitività erano tutte uguali l'invio e' sincrono e quindi aspetto l'esito del WS di ANBSC
 						if(dateUguali) {
-							EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-
-							if(responseAnbsc != null) {
-								if(responseAnbsc.getEsito() != null) {
-									esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-								}
-							}
-
 							switch (esitoFromResponse.getEsito()) {
-							case 'T':
-								super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
-								break;
-
-							case 'F':
-								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
+							case 'C':
+								super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 								break;
 
 							default:
-								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.no.risposta", null);
+								super.addMessageIntoList(customMessageListError, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 								break;
 
 							}
 						} else {
-							super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.asincrono", null);
+							super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.coda", null);
 						}
 					}
 					//Mev 2020/22 Fine
@@ -8620,27 +8572,15 @@ public class AttoController extends BreadcrumbsController {
 			Mev 2020/22 */
 
 			// Mev 2020/22 Inizio
-			SequestroResponse responseAnbsc = anbscMsgService.invioDecretoConvalidaSequestro(idProcedimento, idAtto, idUffOwn, codiceUtente,attoTmp.getCategoriaAtto().getId());
-
-			EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-
-			if(responseAnbsc != null) {
-				if(responseAnbsc.getEsito() != null) {
-					esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-				}
-			}
+			EsitoFromResponse esitoFromResponse = anbscMsgService.invioDecretoConvalidaSequestro(idProcedimento, idAtto, idUffOwn, codiceUtente,attoTmp.getCategoriaAtto().getId());
 
 			switch (esitoFromResponse.getEsito()) {
-			case 'T':
-				super.setMessage(Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null, false);
-				break;
-
-			case 'F':
-				super.setMessage(Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio(), false);
+			case 'C':
+				super.setMessage(Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null, false);
 				break;
 
 			default:
-				super.setMessage(Constants.MESSAGE, "anbsc.invio.no.risposta", null, false);
+				super.setMessage(Constants.MESSAGE, esitoFromResponse.getMessaggio(), null, false);
 				break;
 
 			}
@@ -8799,27 +8739,16 @@ public class AttoController extends BreadcrumbsController {
 		if ((Integer) request.getSession().getAttribute("idTipoUfficio") == Constants.TIPO_UFFICIO_CORTE_D_APPELLO)
 			grado = 2;
 
-		RevocaSequestroResponse responseAnbsc = confermaInviaUtilService.inviaRevocaSequestroAnbsc(procedimento, attoForm, idProcedimento, idAtto, idUffOwn, codiceUtente, grado);
-
-		EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-
-		if(responseAnbsc != null) {
-			if(responseAnbsc.getEsito() != null) {
-				esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-			}
-		}
+		EsitoFromResponse esitoFromResponse = confermaInviaUtilService.inviaRevocaSequestroAnbsc(procedimento, attoForm, idProcedimento, idAtto, idUffOwn, codiceUtente, grado);
+		if (esitoFromResponse == null) esitoFromResponse = anbscMsgService.getEsitoInCoda();
 
 		switch (esitoFromResponse.getEsito()) {
-		case 'T':
-			super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
-			break;
-
-		case 'F':
-			super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
+		case 'C':
+			super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 			break;
 
 		default:
-			super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.no.risposta", null);
+			super.addMessageIntoList(customMessageListError, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 			break;
 
 		}
@@ -9377,27 +9306,15 @@ public class AttoController extends BreadcrumbsController {
 					super.setMessage(Constants.MESSAGE, "anbsc.invio.error", null, false);
 				*/
 				// Mev 2020/22 Inizio
-				SequestroResponse responseAnbsc = anbscMsgService.invioSequestro(idProcedimento, idAtto, idUfficioUtente, codUtente);
-
-				EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-
-				if(responseAnbsc != null) {
-					if(responseAnbsc.getEsito() != null) {
-						esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-					}
-				}
+				EsitoFromResponse esitoFromResponse = anbscMsgService.invioSequestro(idProcedimento, idAtto, idUfficioUtente, codUtente);
 
 				switch (esitoFromResponse.getEsito()) {
-				case 'T':
-					super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
-					break;
-
-				case 'F':
-					super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
+				case 'C':
+					super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 					break;
 
 				default:
-					super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.no.risposta", null);
+					super.addMessageIntoList(customMessageListError, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 					break;
 
 				}
@@ -12409,26 +12326,15 @@ public class AttoController extends BreadcrumbsController {
 					if(anbscMsgService.invioConfiscaIGrado(proced.getIdProcedimento().longValue(), idAtto, idUffOwn, codUtente) == false)
 						super.setMessage(Constants.MESSAGE, "anbsc.invio.error", null, false);
 					*/
-					ConfiscaPrimoGradoResponse responseAnbsc = anbscMsgService.invioConfiscaIGrado(proced.getIdProcedimento().longValue(), idAtto, idUffOwn, codUtente);
-					EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-
-					if(responseAnbsc != null) {
-						if(responseAnbsc.getEsito() != null) {
-							esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-						}
-					}
+					EsitoFromResponse esitoFromResponse = anbscMsgService.invioConfiscaIGrado(proced.getIdProcedimento().longValue(), idAtto, idUffOwn, codUtente);
 
 					switch (esitoFromResponse.getEsito()) {
-					case 'T':
-						super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
-						break;
-
-					case 'F':
-						super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
+					case 'C':
+						super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 						break;
 
 					default:
-						super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.no.risposta", null);
+						super.addMessageIntoList(customMessageListError, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 						break;
 
 					}
@@ -12450,26 +12356,15 @@ public class AttoController extends BreadcrumbsController {
 					if(anbscMsgService.invioConfiscaIIGrado(proced.getIdProcedimento().longValue(), idAtto, idUffOwn, codUtente) == false)
 						super.setMessage(Constants.MESSAGE, "anbsc.invio.error", null, false);
 					*/
-					ConfiscaSecondoGradoResponse responseAnbsc = anbscMsgService.invioConfiscaIIGrado(proced.getIdProcedimento().longValue(), idAtto, idUffOwn, codUtente);
-					EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-
-					if(responseAnbsc != null) {
-						if(responseAnbsc.getEsito() != null) {
-							esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-						}
-					}
+					EsitoFromResponse esitoFromResponse = anbscMsgService.invioConfiscaIIGrado(proced.getIdProcedimento().longValue(), idAtto, idUffOwn, codUtente);
 
 					switch (esitoFromResponse.getEsito()) {
-					case 'T':
-						super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
-						break;
-
-					case 'F':
-						super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
+					case 'C':
+						super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 						break;
 
 					default:
-						super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.no.risposta", null);
+						super.addMessageIntoList(customMessageListError, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 						break;
 
 					}

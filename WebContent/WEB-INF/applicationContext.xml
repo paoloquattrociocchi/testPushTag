@@ -851,7 +851,6 @@
 		<!-- 20200709 [SG]: nuovo job per allineamento fascicoli PDoc andati in errore col documentaleJob -->
 		<task:scheduled ref="allineamentoFascicoliPDocJob" method="scheduledMethod" cron = "0 0/1 6-23 * * ?"/> <!-- scheduler ogni giorno dalle 06 alle 23 ogni 59 minuti -->
 <!-- 	    <task:scheduled ref="invioCassazioneJob" method="scheduledMethod" cron = "0 0/50 1-2 * * ?"/> scheduler ogni giorno dalle 06 alle 23 ogni 50 minuti -->
-<!-- 	    <task:scheduled ref="anbscJob" method="scheduledMethod" cron="0 0/50 1-2 * * ?"/> scheduler ogni giorno dalle 06 alle 23 ogni 50 minuti -->
 <!-- 	    <task:scheduled ref="notificheRicezioneRicevuteJob" method="scheduledMethod" cron = "0 0/50 1-2 * * ?"/> scheduler ogni giorno dalle 01 alle 23 ogni 5 minuti -->
 <!-- 	    <task:scheduled ref="notificheRicezioneRappTrasmJob" method="scheduledMethod" cron = "0 0/50 1-2 * * ?"/> scheduler ogni giorno dalle 01 alle 23 ogni 5 minuti -->
 <!-- 	    <task:scheduled ref="ricezioneDepositiJob" method="scheduledMethod" cron = "0 0/50 1-2 * * ?"/> scheduler ogni giorno dalle 01 alle 23 ogni 7 minuti -->
@@ -862,8 +861,6 @@
 	<bean id="documentaleJob" class="it.giustizia.smp.scheduler.DocumentaleJob">
 	</bean>
 	<bean id="invioCassazioneJob" class="it.giustizia.smp.scheduler.InvioCassazioneJob">
-	</bean>
-	<bean id="anbscJob" class="it.giustizia.smp.scheduler.AnbscJob"> 
 	</bean>
 	<bean id="notificheRicezioneRicevuteJob" class="it.giustizia.smp.scheduler.NotificheRicezioneRicevuteJob">
 	</bean>

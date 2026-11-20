@@ -505,27 +505,15 @@ public class FlussiController extends BreadcrumbsController {
 		{
 			// Mev 2020/22 Inizio
 			//confermaInviaUtilService.inviaRevocaSequestroAnbsc(procedimento, attoForm, idProcedimento, idAtto, idUffOwn, codiceUtente);
-			RevocaConfiscaResponse responseAnbsc = anbscMsgService.inviaRevocaConfisca(idProc, idAtto, idUffOwn);
-			
-			EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-			
-			if(responseAnbsc != null) {
-				if(responseAnbsc.getEsito() != null) {
-					esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-				}
-			}
-			
+			EsitoFromResponse esitoFromResponse = anbscMsgService.inviaRevocaConfisca(idProc, idAtto, idUffOwn);
+
 			switch (esitoFromResponse.getEsito()) {
-			case 'T':
-				super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
+			case 'C':
+				super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 				break;
-				
-			case 'F':
-				super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
-				break;
-				
-			default:				
-				super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.no.risposta", null);	
+
+			default:
+				super.addMessageIntoList(customMessageListError, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 				break;
 
 			}
@@ -546,27 +534,15 @@ public class FlussiController extends BreadcrumbsController {
 				if(procedimento.getTTpTipoProc().getCodiKIdTipoProc() == Integer.parseInt(Constants.TIPOPROC_PATRIMONIALE) || procedimento.getTTpTipoProc().getCodiKIdTipoProc() == Integer.parseInt(Constants.TIPOPROC_PERSONALE_E_PATRIMONIALE)){
 					//Mev 2020/22 Inizio 
 					//anbscMsgService.invioConfiscaDefinitiva(idProc, idAtto, idUffOwn, codUtente, AnbscEnum.ANBSC_CONFISCA_DEFINITIVA_CASSAZIONE.getId());
-					ConfiscaDefinitivaResponse responseAnbsc = anbscMsgService.invioConfiscaDefinitiva(idProc, idAttoSentenza, idUffOwn, codUtente, AnbscEnum.ANBSC_CONFISCA_DEFINITIVA_CASSAZIONE.getId(), null, true);
-					
-					EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-					
-					if(responseAnbsc != null) {
-						if(responseAnbsc.getEsito() != null) {
-							esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-						}
-					}
-					
+					EsitoFromResponse esitoFromResponse = anbscMsgService.invioConfiscaDefinitiva(idProc, idAttoSentenza, idUffOwn, codUtente, AnbscEnum.ANBSC_CONFISCA_DEFINITIVA_CASSAZIONE.getId(), null, true);
+
 					switch (esitoFromResponse.getEsito()) {
-					case 'T':
-						super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
+					case 'C':
+						super.addMessageIntoList(customMessageListSuccess, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 						break;
-						
-					case 'F':
-						super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
-						break;
-						
-					default:				
-						super.addMessageIntoList(customMessageListError, Constants.MESSAGE, "anbsc.invio.no.risposta", null);	
+
+					default:
+						super.addMessageIntoList(customMessageListError, Constants.MESSAGE, esitoFromResponse.getMessaggio(), null);
 						break;
 		
 					}	

@@ -325,27 +325,15 @@ public class StralcioController extends BreadcrumbsController {
 			//	super.setMessage(Constants.MESSAGE, "anbsc.invio.error", null, false);
 			//}
 			if(anbscService.verificaInvioStralcioRiunione(idProcedimento) == true) {
-				StralcioResponse responseAnbsc = anbscMsgService.invioStralcio(idProcedimento, obj.getId(), idUffOwner, codUtente);
-				
-				it.giustizia.smp.service.msg.AnbscMsgService.EsitoFromResponse esitoFromResponse = anbscMsgService.new EsitoFromResponse('0', "");
-				
-				if(responseAnbsc != null) {
-					if(responseAnbsc.getEsito() != null) {
-						esitoFromResponse = anbscMsgService.getEsitoFromResponse(responseAnbsc.getEsito());
-					}
-				}
-				
+				it.giustizia.smp.service.msg.AnbscMsgService.EsitoFromResponse esitoFromResponse = anbscMsgService.invioStralcio(idProcedimento, obj.getId(), idUffOwner, codUtente);
+
 				switch (esitoFromResponse.getEsito()) {
-				case 'T':
-					super.addMessageIntoList(listaMessaggiSuccesso, Constants.SUCCESS_MESSAGE, "anbsc.invio.ok", null);
+				case 'C':
+					super.addMessageIntoList(listaMessaggiSuccesso, Constants.SUCCESS_MESSAGE, esitoFromResponse.getMessaggio(), null);
 					break;
-					
-				case 'F':					
+
+				default:
 					super.addMessageIntoList(listaMessaggiErrore, Constants.MESSAGE, "anbsc.invio.ko", esitoFromResponse.getMessaggio());
-					break;
-					
-				default:				
-					super.addMessageIntoList(listaMessaggiErrore, Constants.MESSAGE, "anbsc.invio.no.risposta", null);	
 					break;
 	
 				}			

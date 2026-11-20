@@ -1,15 +1,17 @@
 Correzione da TT:
 /* Riportare Num TT, Num JIRA e breve descrizione */
-- Ticket#202512020161 — SITMP - REGISTRAZIONE DECRETO CONVALIDA
+ 20260612013 
+ 20260612013 
 
 /* Correzione di Sviluppo o derivanti da altre segnalazioni */
-- versione sw base 6.0.13
+- versione sw base 6.0.14
 
 /* MEV */
-- 
+- Servizi Anbsc
 
 /* DB */
 - 
 
 /* PACKAGE */
-- PG_NUMERO_ATTO (GENERA_NUMERO_ATTO_DCRS, GENERA_NUMERO_ATTO_DPES)
+ PG_MISURA
+ PG_PROCEDIMENTO

@@ -15,11 +15,11 @@ import it.giustizia.smp.form.ComboForm;
 import it.giustizia.smp.form.ProcedimentoForm;
 import it.giustizia.smp.model.TTpCatAtto;
 import it.giustizia.smp.service.msg.AnbscMsgService;
+import it.giustizia.smp.service.msg.AnbscMsgService.EsitoFromResponse;
 import it.giustizia.smp.service.utility.component.UfficiUtilComponent;
 import it.giustizia.smp.utility.AnbscEnum;
 import it.giustizia.smp.utility.Constants;
 import it.giustizia.smp.utility.RequestUtil;
-import it.giustizia.smp.webservice.client.anbsc.RevocaSequestroResponse;
 
 @Service
 public class ConfermaInviaUtilService extends AttoUtilService {
@@ -215,8 +215,8 @@ public class ConfermaInviaUtilService extends AttoUtilService {
 	Mev 2020/22 Fine */
 	
 	/* Mev 2020/22 Inizio */
-	public RevocaSequestroResponse inviaRevocaSequestroAnbsc(ProcedimentoForm procedimentoForm, AttoForm attoForm, Long idProcedimento, Long idAtto, Integer idUfficioUtente, String codUtente, int grado) {
-		RevocaSequestroResponse revocaSequestroResponse = null;
+	public EsitoFromResponse inviaRevocaSequestroAnbsc(ProcedimentoForm procedimentoForm, AttoForm attoForm, Long idProcedimento, Long idAtto, Integer idUfficioUtente, String codUtente, int grado) {
+		EsitoFromResponse esitoFromResponse = null;
 		
 		if(procedimentoForm.getTipoProcedimento()!=null) {
 			if(procedimentoForm.getTipoProcedimento().getId().equals(Constants.TIPOPROC_PERSONALE_E_PATRIMONIALE) 
@@ -225,15 +225,15 @@ public class ConfermaInviaUtilService extends AttoUtilService {
 					|| procedimentoForm.getTipoProcedimento().getId().equals(Constants.TIPOPROC_PATRIMONIALE)) {
 				if (grado == 2) {
 					// TODO: Revoca Sequestro II grado
-					revocaSequestroResponse = anbscMsgService.invioRevocaSequestro(idProcedimento, idAtto, idUfficioUtente, codUtente, AnbscEnum.ANBSC_REVOCA_SEQUESTRO_II_GRADO.getId());
+					esitoFromResponse = anbscMsgService.invioRevocaSequestro(idProcedimento, idAtto, idUfficioUtente, codUtente, AnbscEnum.ANBSC_REVOCA_SEQUESTRO_II_GRADO.getId());
 				} else {
 					// TODO: Revoca Sequestro II grado
-					revocaSequestroResponse = anbscMsgService.invioRevocaSequestro(idProcedimento, idAtto, idUfficioUtente, codUtente, AnbscEnum.ANBSC_REVOCA_SEQUESTRO_I_GRADO.getId());
+					esitoFromResponse = anbscMsgService.invioRevocaSequestro(idProcedimento, idAtto, idUfficioUtente, codUtente, AnbscEnum.ANBSC_REVOCA_SEQUESTRO_I_GRADO.getId());
 				}
 			}
 		} 
 		
-		return revocaSequestroResponse;
+		return esitoFromResponse;
 	}	
 	/* Mev 2020/22 Fine */
 	

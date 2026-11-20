@@ -819,7 +819,6 @@
 	<task:scheduled-tasks>
 	    <task:scheduled ref="documentaleJob" method="scheduledMethod" cron = "0 0/10 8-20 * * ?"/> <!-- scheduler ogni giorno dalle 01 alle 23 ogni 10 minuti-->
 	    <task:scheduled ref="invioCassazioneJob" method="scheduledMethod" cron = "0 0/50 8-20 * * ?"/> <!-- scheduler ogni giorno dalle 01 alle 23 ogni 50 minuti-->
-	    <task:scheduled ref="anbscJob" method="scheduledMethod" cron="0 0/50 8-20 * * ?"/> <!-- scheduler ogni giorno dalle 01 alle 23 ogni 50 minuti-->
 	    <task:scheduled ref="notificheRicezioneRicevuteJob" method="scheduledMethod" cron = "0 0/45 1-2 * * ?"/> <!-- scheduler ogni giorno dalle 01 alle 23 ogni 5 minuti-->
 	    <task:scheduled ref="notificheRicezioneRappTrasmJob" method="scheduledMethod" cron = "0 0/45 1-2 * * ?"/> <!-- scheduler ogni giorno dalle 01 alle 23 ogni 5 minuti-->
 	    <task:scheduled ref="ricezioneDepositiJob" method="scheduledMethod" cron = "0 0/45 1-2 * * ?"/> <!-- scheduler ogni giorno dalle 01 alle 23 ogni 5 minuti-->
@@ -831,9 +830,7 @@
 	<bean id="documentaleJob" class="it.giustizia.smp.scheduler.DocumentaleJob">
 	</bean>
 	<bean id="invioCassazioneJob" class="it.giustizia.smp.scheduler.InvioCassazioneJob">
-	</bean>
-	<bean id="anbscJob" class="it.giustizia.smp.scheduler.AnbscJob"> 
-	</bean>
+	</bean>	
 	<bean id="notificheRicezioneRicevuteJob" class="it.giustizia.smp.scheduler.NotificheRicezioneRicevuteJob">
 	</bean>
 	<bean id="notificheRicezioneRappTrasmJob" class="it.giustizia.smp.scheduler.NotificheRicezioneRappTrasmJob">
