@@ -1,10 +1,9 @@
 Correzione da TT:
 /* Riportare Num TT, Num JIRA e breve descrizione */
-- Ticket#202507300140 - Non si riesce a registrare il permesso
-- Ticket#20250807017 - SITMP-Tribunale-Impossibile acquisire flusso.
+- Ticket#202512020161 — SITMP - REGISTRAZIONE DECRETO CONVALIDA
 
 /* Correzione di Sviluppo o derivanti da altre segnalazioni */
-- versione sw base 6.0.12
+- versione sw base 6.0.13
 
 /* MEV */
 - 
@@ -13,4 +12,4 @@ Correzione da TT:
 - 
 
 /* PACKAGE */
-- PG_FLUSSI
+- PG_NUMERO_ATTO (GENERA_NUMERO_ATTO_DCRS, GENERA_NUMERO_ATTO_DPES)
