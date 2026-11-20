@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="PG_STRALCIO_ricerca_stralcio" callable="true">
+		{ call PG_STRALCIO.RICERCA_STRALCIO(?,:ID_PROCEDIMENTO,:ID_UFF_OWNER,:IDS_MIS,:IDS_SOGG_INT,:IDS_SOGG_TIT,:ID_TIPO_BENE,:ID_CAT_BENE,:ID_SCTG_BENE,:FLG_VALIDO)}
+	</sql-query>
+    <sql-query name="PG_STRALCIO_imposta_stralcio_mis_patr" callable="true" >
+		{ call PG_STRALCIO.IMPOSTA_STRALCIO_MIS_PATR(?,:VID_PROCEDIMENTO,:VID_UFF_OWNER,:VID_SOGG_INT,:VID_BENE,:VID_SOGG_TIT,:VID_TIPO_BENE,:VID_CAT_BENE,:VID_SCTG_BENE,:VFLG_VALIDO,:IJ_UTENTE) }	
+	</sql-query>  
+	<sql-query name="PG_STRALCIO_imposta_stralcio_mis_pers" callable="true" >
+		{ call PG_STRALCIO.IMPOSTA_STRALCIO_MIS_PERS(?,:VID_PROCEDIMENTO,:VID_UFF_OWNER,:VID_SOGG_INT,:VFLG_VALIDO,:IJ_UTENTE) }	
+	</sql-query>
+	<sql-query name="PG_STRALCIO_imposta_stralcio_soggetto" callable="true" >
+		{ call PG_STRALCIO.IMPOSTA_STRALCIO_SOGGETTO(?,:VID_PROCEDIMENTO,:VID_UFF_OWNER,:VID_SOGG_INT,:VID_BENE,:VID_SOGG_TIT,:VIDS_MIS,:VID_TIPO_BENE,:VID_CAT_BENE,:VID_SCTG_BENE,:VFLG_VALIDO,:IJ_UTENTE) }	
+	</sql-query>  
+	<sql-query name="PG_STRALCIO_fnc_cntr_main" callable="true" >
+	    <return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_STRALCIO.FNC_CNTR_MAIN(?,:IJ_ID_PROCEDIMENTO) }	
+	</sql-query> 
+	<sql-query name="PG_STRALCIO_fnc_insert_main" callable="true" >
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+	    <return-scalar column="KEY" type="long"/>	    
+		{ call PG_STRALCIO.FNC_INSERT_MAIN(?,:IJ_FUNZIONE,:IJ_ID_ATTO,:IJ_ID_PROCEDIMENTO,:IJ_UTENTE,:IJ_DATASTRALCIO,:IJ_MAGISTRATO,:DOCUMENTO,:TIPO_DOCUMENTO,:NOME_DOCUMENTO) }	
+	</sql-query> 
+	<sql-query name="PG_STRALCIO_copiaSpostaAttoGenerico" callable="true" >
+	    <return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_STRALCIO.FNC_TRATTA_ATTO_X_STRALCIO(?,:IJ_ID_PROC_ORIGINE,:IJ_ID_PROC_STRALCIO,:IJ_ID_ATTO,:IJ_FLG_TRATTAMENTO,:IJ_UTENTE,:IJ_UFFICIO,:IJ_NOME_METODO) }	
+	</sql-query> 
+</hibernate-mapping>

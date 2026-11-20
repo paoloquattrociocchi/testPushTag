@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/misura" targetNamespace="http://anbsc.almaviva.it/schema/misura" elementFormDefault="qualified">
+	<complexType name="misura">
+		<sequence>
+			<element name="identificativoBene" type="integer"/>
+			<element name="identificativoSoggettoTitolare" type="integer"/>
+			<element name="tipoSoggetto" type="integer"/>
+			<element name="tipoInteresse" type="integer"/>
+			<element name="quota">
+				<complexType>
+					<choice>
+						<element name="quotaIntera">
+							<simpleType>
+								<restriction base="decimal">
+									<pattern value="\d{1,3}(\.\d{1,2})?"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="quotaFrazione">
+							<complexType>
+								<sequence>
+									<element name="numFrazioneInteresse" type="integer"/>
+									<element name="denomFrazioneInteresse" type="integer"/>
+								</sequence>
+							</complexType>
+						</element>
+					</choice>
+				</complexType>
+			</element>
+			<element name="identificativoSoggettoProposto" type="integer" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="identificativoNormativa" type="integer"/>
+			<element name="decisione" type="string"/>
+		</sequence>
+	</complexType>     
+</schema>

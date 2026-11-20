@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/vecchiaUdienza" targetNamespace="http://anbsc.almaviva.it/schema/vecchiaUdienza" elementFormDefault="qualified">
+	<complexType name="vecchiaUdienza">
+		<sequence>
+			<element name="idUdienza" type="integer"/>
+			<element name="statoUdienza" type="string"/>
+		</sequence>
+	</complexType>
+</schema>

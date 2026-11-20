@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/azienda" targetNamespace="http://anbsc.almaviva.it/schema/azienda" elementFormDefault="qualified">
+	<complexType name="azienda">
+		<sequence>
+			<element name="ragioneSociale" type="string"/>
+			<element name="partitaIva" type="string" minOccurs="0"/>
+			<element name="numerocciaa" type="string" minOccurs="0"/>
+			<element name="codiceFiscale" type="string" minOccurs="0"/>
+			<element name="indirizzo" type="string" minOccurs="0"/>
+			<element name="numeroCivico" type="string" minOccurs="0"/>
+			<element name="capitaleSociale" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,13}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="identificativoStatoManutenzione" type="integer" minOccurs="0"/>
+			<element name="descrizioneRappresentanteSocieta" type="string" minOccurs="0"/>
+			<element name="descrizioneAmministratore" type="string" minOccurs="0"/>
+			<element name="numeroDipendenti" type="integer" minOccurs="0"/>
+			<element name="identificativoSettoreAttivita" type="integer" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

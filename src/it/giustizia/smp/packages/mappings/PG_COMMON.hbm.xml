@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+   
+    <sql-query name="PG_COMMON_getProcuraInUdienza" callable="true" >
+	 	<return alias="ufficio" class="it.giustizia.smp.model.TAnUfficio"/>
+		 { call PG_COMMON.GETPROCURAINUDIENZA(?,:idUffOwn) }
+    </sql-query>
+ 
+     <sql-query name="PG_COMMON_getNumeProcTRelProcProc" callable="true" >
+         <return alias="relProcProc" class="it.giustizia.smp.model.TRelProcProc"/>
+		 { call PG_COMMON.NUMEPROC_TRELPROCPROC(?,:idProc,:idTipoUff) }
+    </sql-query>   
+
+	 <sql-query name="PG_COMMON_controllaInvioProcuraPG" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_COMMON.CNTR_PRESENZA_PU_PG(?,:I_ID_PROCEDIMENTO,:I_ID_UFFICIO,:I_ID_UTENTE,:I_TIPO_FUNZIONE,:I_NOME_METODO) }	
+    </sql-query>
+    <sql-query name="PG_COMMON_controllaAperturaRicorsi" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_COMMON.CNTR_PRESENZA_CDA(?,:I_ID_PROCEDIMENTO,:I_ID_UFFICIO,:I_ID_UTENTE,:I_TIPO_FUNZIONE,:I_NOME_METODO) }	
+    </sql-query>
+  
+   	<sql-query name="PG_COMMON_UfficiRevocazioneConfisca" callable="true" >
+		<return alias="procCDA" class="it.giustizia.smp.model.TAnUfficio"/>	  	
+		{ call PG_COMMON.ufficiRevocazioneConfisca(?,:idUffOwn,:idTipoUfficio)	 }
+	</sql-query>
+   
+   <sql-query name="PG_COMMON_ControllaPresenzaAttiInLavorazione" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_COMMON.CNTR_ATTI_IN_LAVORAZIONE(?,:I_ID_PROCEDIMENTO,:I_ID_TIPO_ATTO,:I_ID_CAT_ATTO,:I_ID_UFFICIO,:I_ID_UTENTE,:I_TIPO_FUNZIONE,:I_NOME_METODO) }	
+    </sql-query>
+    
+    <sql-query callable="true"  name="PG_COMMON_cntr_RelMagistratoUfficio">
+	    { call PG_COMMON.CNTR_REL_MAGISTRATO_UFF(?,:IDUFFOWN, :IDMAGISTRATO) }
+		<return-scalar column="MESSAGGIO" type="string"/>
+		<return-scalar column="STATUS" type="string"/>
+ 	 </sql-query>
+
+    <sql-query name="PG_COMMON_listaProcedRic" callable="true" >
+	 	<return alias="procedente" class="it.giustizia.smp.model.TAnProcedente"/>
+		 { call PG_COMMON.LISTA_PROCED_RIC(?,:IDUFFOWN,:IDTIPOUFFOWN,:IDTIPOUFFRIC) }
+    </sql-query> 	 
+ 
+ <sql-query name="PG_COMMON_ufficiRicercaProcedimenti" callable="true">
+		<return alias="ufficio" class="it.giustizia.smp.model.TAnUfficio"/>
+   		{ call PG_COMMON.UFFICI_RICERCA_PROCEDIMENTI(?,:idUfficio) }
+ 	</sql-query>
+ 	
+	<sql-query name="PG_COMMON_getTipoAttoAbilitati" callable="true">
+		<return alias="tipoAtto" class="it.giustizia.smp.model.TTpTipoAtto" />
+		{ call PG_COMMON.GET_TIPO_ATTO_ABILITATI(?,:ID_PROCEDIMENTO, :ID_TIPOUFFICIO,:ID_TIPOPROC,:ID_STATOPROC) }
+	</sql-query>	
+	
+	<sql-query name="PG_COMMON_getCategoriaAttoAbilitate" callable="true">
+		<return alias="categoriaAtto" class="it.giustizia.smp.model.TTpCatAtto" />
+		{ call PG_COMMON.GET_CATEGORIA_ATTO_ABILITATE(?,:ID_PROCEDIMENTO, :ID_TIPOUFFICIO, :ID_TIPOPROC,:ID_STATOPROC,:ID_TIPO_ATTO) }
+	</sql-query>	
+
+	<sql-query name="PG_COMMON_insert_into_t_cass_mag" callable="true" >
+		<return-scalar column="RETVALUE" type="long"/>
+	 	{ call PG_COMMON.INSERT_CASS_MAG(?, :idUffOwn, :idAttoImpugnazione, :idProcedimento, :descUtente) }
+	</sql-query>
+	
+	
+	<sql-query name="PG_COMMON_modifica_t_cass_mag" callable="true" >
+		<return-scalar column="RETVALUE" type="string"/>
+		{ call PG_COMMON.UPDATE_CASS_MAG(?, :idUffOwn, :idAttoImpugnazione, :idProcedimento, :flagInviato, :descErrore, :blobXML  ) }
+	</sql-query> 	 	
+
+	<sql-query name="PG_COMMON_getRicorsiCassDaInviare" callable="true">
+		{ call PG_COMMON.GET_RIC_CASS_DA_INVIARE(?) }
+	</sql-query>	
+
+	<sql-query name="PG_COMMON_GET_FASCICOLO_GEST" callable="true" >
+		<return-scalar column="idProcGest" type="long"/>
+		<return-scalar column="idUffRic" type="long"/>
+		{ call PG_COMMON.GET_FASCICOLO_GEST(?, :idProc, :idUffOwn, :descUtente) } 
+	</sql-query> 	
+	
+	<sql-query name="PG_COMMON_getMagistratiByUff" callable="true">
+		<return alias="magistrato" class="it.giustizia.smp.model.TAnMagistrati" />
+		{ call PG_COMMON.GET_MAGISTRATI_BY_UFF(?,:idUffOwn) }
+	</sql-query>
+	
+	<sql-query name="PG_COMMON_getMagistratiById" callable="true">
+		<return alias="magistrato" class="it.giustizia.smp.model.TAnMagistrati" />
+		{ call PG_COMMON.GET_MAGISTRATI_BY_ID(?,:idMagistrato) }
+	</sql-query>	
+	                             	 
+</hibernate-mapping>

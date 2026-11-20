@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/proc" targetNamespace="http://anbsc.almaviva.it/schema/proc" elementFormDefault="qualified">
+	<complexType name="procedimento">
+		<sequence>
+			<element name="identificativoProcedimento" type="integer"/>
+			<element name="ufficioCompetente" type="string"/>
+			<element name="ufficioRiferimento" type="string"/>
+			<element name="dataIscrizione" type="dateTime"/>
+			<element name="annoProcedimento" type="integer"/>
+			<element name="numeroProcedimento" type="integer"/>
+			<element name="dataPropostaSequestro" type="dateTime"/>
+			<element name="nomeGiudiceDelegato" type="string" minOccurs="0"/>
+			<element name="cognomeGiudiceDelegato" type="string" minOccurs="0"/>
+			<element name="dataAssegnazioneGiudiceDelegato" type="dateTime" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping>
+		<class-a>it.giustizia.smp.form.AmministratoreForm</class-a>
+		<class-b>it.giustizia.smp.dto.pg_cameralini.AmmDettaglioProcedimentoDto</class-b>
+		<field>
+			<a>id</a>
+			<b>ID_AMMIN</b>
+		</field>
+		<field>
+			<a>cognome</a>
+			<b>DESC_COGNOME</b>
+		</field>
+		<field>
+			<a>nome</a>
+			<b>DESC_NOME</b>
+		</field>
+		<field>
+			<a>codiceFiscale</a>
+			<b>DESC_CODICE_FISCALE</b>
+		</field>
+		<field>
+			<a>descrIscrizioneAlbo</a>
+			<b>DESC_ISCR_ALBO</b>
+		</field>
+		<field>
+			<a>comuneDomicilioLegale</a>
+			<b>DESC_COMUNE</b>
+		</field>
+		
+			
+	</mapping>
+	<mapping>
+		<class-a>it.giustizia.smp.form.AmministratoreForm</class-a>
+		<class-b>it.giustizia.smp.dto.pg_cameralini.IntestatarioDto</class-b>
+		<field>
+			<a>id</a>
+			<b>CODI_K_ID_INTESTATARIO</b>
+		</field>
+		<field>
+			<a>cognome</a>
+			<b>DESC_COGNOME</b>
+		</field>
+		<field>
+			<a>nome</a>
+			<b>DESC_NOME</b>
+		</field>
+		<field>
+			<a>codiceFiscale</a>
+			<b>DESC_CODICE_FISCALE</b>
+		</field>
+		
+	</mapping>
+	
+
+</mappings>

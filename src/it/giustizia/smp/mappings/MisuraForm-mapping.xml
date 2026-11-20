@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping wildcard="false">
+		<class-a>it.giustizia.smp.form.MisuraForm</class-a>
+		<class-b>it.giustizia.smp.model.TMisuraPers</class-b>
+		<field>
+			<a>idMisura</a>
+			<b>id.codiKIdMisura</b>
+		</field>
+		<field>
+			<a>idSoggetto</a>
+			<b>TSoggetto.id.codiKIdSoggInt</b>
+		</field>
+		<field>
+			<a>descrizioneMisura</a>
+			<b>TTpCaratMisura.descCaratMisura</b>
+		</field>
+	</mapping>
+
+</mappings>

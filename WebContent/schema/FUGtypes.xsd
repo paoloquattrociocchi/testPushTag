@@ -1,0 +1,1491 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://fug.type.ws.mg.it/FUGtypes" xmlns:tb="http://fug.type.ws.mg.it/basetypes" xmlns:typ="http://fug.type.ws.mg.it/FUGtypes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import namespace="http://fug.type.ws.mg.it/basetypes" schemaLocation="TipiBase.xsd"/>
+<!--INIZIO Modello A -->
+	<xs:element name="AcquisisciModelloA">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloA"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloA">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloA" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloA">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello A</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloA">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloA">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiRisorsa"/>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true"/>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo"/>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DataProvvedimentoSequestro" type="tb:Data">
+							</xs:element>
+							<xs:element name="FlagSequestro">
+                                <xs:simpleType>
+                                    <xs:annotation>
+                                    	<xs:documentation>P=Preventivo
+C=Conservativo                                    	
+B=Probatorio</xs:documentation>
+                                    </xs:annotation>
+                                	<xs:restriction base="xs:string">
+                                		<xs:length value="1"/>
+                                		<xs:enumeration value="P">
+                                		</xs:enumeration>
+                                		<xs:enumeration value="C">
+                                		</xs:enumeration>
+                                		<xs:enumeration value="B">
+                                		</xs:enumeration>
+                                	</xs:restriction>
+                                </xs:simpleType>
+							</xs:element>
+							<xs:element name="Importo" type="tb:Importo12">
+							</xs:element>
+							<xs:element name="Divisa" type="tb:alfanum3">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+        </xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello A -->
+<!--INIZIO Modello E -->
+	<xs:element name="AcquisisciModelloE">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloE"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloE">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloE" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloE">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello E</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloE">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloE">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiRisorsa"/>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo">
+				</xs:element>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+                        <xs:annotation>
+                           	<xs:documentation>S=Sequestro
+C=Confisca</xs:documentation>
+                        </xs:annotation>
+                        <xs:sequence>
+                        	<xs:element name="FlagConfiscaSequestro">
+                        		<xs:simpleType>
+                        			<xs:restriction base="xs:string">
+                        				<xs:length value="1"/>
+                        				<xs:enumeration value="S">
+                        				</xs:enumeration>
+                        				<xs:enumeration value="C">
+                        				</xs:enumeration>
+                        			</xs:restriction>
+                        		</xs:simpleType>
+                        	</xs:element>
+                        	<xs:element name="DataVendita" type="tb:Data">
+                        	</xs:element>
+                        	<xs:element name="DataVersamento" type="tb:Data">
+                        	</xs:element>
+                        	<xs:element name="TipoPagamento" nillable="true" type="typ:TipoPagamentoTipo">
+                        	</xs:element>
+                        	<xs:element name="Bollettino" nillable="true" type="tb:alfanumMax27">
+                        	</xs:element>
+                        	<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+                        	</xs:element>
+                        	<xs:element name="Importo" type="tb:Importo12">
+                        	</xs:element>
+                        	<xs:element name="Divisa" type="tb:alfanum3">
+                        	</xs:element>
+                        </xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element maxOccurs="20" minOccurs="0" name="ModelliF23" type="typ:ModelliF23Tipo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello E -->
+<!--INIZIO Modello E2 -->
+	<xs:element name="AcquisisciModelloE2">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloE2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloE2">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloE2" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloE2">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello E2</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloE2">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloE2">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiRisorsa"/>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true"/>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo"/>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DataVendita" type="tb:Data">
+							</xs:element>
+							<xs:element name="DataVersamento" type="tb:Data">
+							</xs:element>
+                        	<xs:element name="TipoPagamento" nillable="true" type="typ:TipoPagamentoTipo">
+                        	</xs:element>
+							<xs:element name="Bollettino" nillable="true" type="tb:alfanumMax27">
+							</xs:element>
+							<xs:element name="Importo" type="tb:Importo12">
+							</xs:element>
+							<xs:element name="Divisa" type="tb:alfanum3">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element maxOccurs="20" minOccurs="0" name="ModelliF23" type="typ:ModelliF23Tipo">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello E2 -->
+<!--INIZIO Modello B -->
+	<xs:element name="AcquisisciModelloB">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloB"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloB">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloB" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloB">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello B</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloB">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloB">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiRisorsa"/>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true"/>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo"/>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="NumeroProvvedimento" type="tb:numericoMax7">
+							</xs:element>
+							<xs:element name="AnnoProvvedimento" type="tb:Anno">
+							</xs:element>
+							<xs:element name="DataPassaggioGiudicato" type="tb:Data">
+							</xs:element>
+							<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+							</xs:element>
+							<xs:element name="Importo" type="tb:Importo12">
+							</xs:element>
+							<xs:element name="Divisa" type="tb:alfanum3">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello B -->
+<!--INIZIO Modello B2 -->
+	<xs:element name="AcquisisciModelloB2">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloB2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloB2">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloB2" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloB2">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello B2</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloB2">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloB2">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiRisorsa"/>
+
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo"/>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="NumeroProvvedimento" type="tb:numericoMax7">
+							</xs:element>
+							<xs:element name="AnnoProvvedimento" type="tb:Anno">
+							</xs:element>
+							<xs:element name="DataPassaggioGiudicato" type="tb:Data">
+							</xs:element>
+							<xs:element name="DataProvvedimentoEsecuzione" type="tb:Data">
+							</xs:element>
+							<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+							</xs:element>
+							<xs:element name="Importo" type="tb:Importo12">
+							</xs:element>
+							<xs:element name="Divisa" type="tb:alfanum3">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello B2 -->
+<!--INIZIO Modello C -->
+	<xs:element name="AcquisisciModelloC">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloC"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloC">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloC" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloC">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello C</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloC">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloC">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiRisorsa"/>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true">
+				</xs:element>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo">
+				</xs:element>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DataProvvedimentoSequestro" type="tb:Data">
+							</xs:element>
+							<xs:element name="DataProvvedimentoRestituzione" type="tb:Data">
+							</xs:element>
+							<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element maxOccurs="unbounded" minOccurs="1" name="Beneficiari" type="typ:BeneficiariTipo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello C -->
+<!--INIZIO Modello C2 -->
+	<xs:element name="AcquisisciModelloC2">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloC2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloC2">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloC2" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloC2">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello C2</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloC2">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloC2">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TipoAcquisizione" type="typ:TipoAcquisizioneTipo">
+				</xs:element>
+				<xs:element name="ProtocolloRicevutaModelloC" nillable="true" type="typ:ProtocolloRicevutaTipo">
+				</xs:element>
+				<xs:element name="DatiRisorsa" nillable="true" type="typ:DatiRisorsaTipo"/>
+				<xs:element name="InfoProcessoModelloC" nillable="true" type="typ:InfoProcessoTipo">
+				</xs:element>
+				<xs:element name="InfoProvvedimentoModelloC" nillable="true">
+                    <xs:complexType>
+						<xs:sequence>
+							<xs:element name="DataProvvedimentoSequestro" type="tb:Data">
+							</xs:element>
+							<xs:element name="DataProvvedimentoRestituzione" type="tb:Data">
+							</xs:element>
+						</xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+				<xs:element name="InfoBeneficiarioModelloC" nillable="true">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="TipoSoggetto" type="typ:TipoSoggettoTipo"/>
+							<xs:element name="CF" nillable="true" type="tb:alfanum16"/>
+							<xs:element name="PIVA" nillable="true" type="tb:numerico11"/>
+							<xs:element name="Cognome" nillable="true" type="tb:alfanumMax25"/>
+							<xs:element name="Nome" nillable="true" type="tb:alfanumMax25"/>
+							<xs:element name="Denominazione" nillable="true" type="tb:alfanumMax60"/>
+							<xs:element name="DataNascitaCostituzione" nillable="true" type="tb:Data"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true">
+				</xs:element>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo">
+				</xs:element>
+				<!-- 
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element
+								name="DataProvvedimentoSequestro" type="tb:Data">
+							</xs:element>
+							<xs:element
+								name="DataProvvedimentoRestituzione" type="tb:alfanumMax27">
+							</xs:element>
+							<xs:element name="FlagParziale"
+								type="typ:FlagParzialeTipo">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				-->
+				<xs:element name="InfoNotifica">
+					<xs:complexType>
+						<xs:sequence>
+
+							<xs:element name="DataNotifica" nillable="true" type="tb:Data">
+							</xs:element>
+							<xs:element name="DataPassaggioGiudicatroProvvedimentoRestituzione" nillable="true" type="tb:Data">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello C2 -->
+<!--INIZIO Modello C3 -->
+	<xs:element name="AcquisisciModelloC3">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloC3"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloC3">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloC3" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloC3">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello C3</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloC3">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloC3">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiRisorsa"/>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true"/>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo"/>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DataProvvedimentoAssegnazione" type="tb:Data">
+							</xs:element>
+							<xs:element name="DataProvvedimentoSequestro" type="tb:Data">
+							</xs:element>
+							<xs:element name="FlagDestSomme">
+                                <xs:simpleType>
+                                    <xs:annotation>
+                                    	<xs:documentation>1=Paramento spese processuali
+2=Paramento spese pecuniarie
+3=Paramento spese processual e pecuniarie</xs:documentation>
+                                    </xs:annotation>
+                                	<xs:restriction base="xs:string">
+                                		<xs:enumeration value="1">
+                                		</xs:enumeration>
+                                		<xs:enumeration value="2">
+                                		</xs:enumeration>
+                                		<xs:enumeration value="3">
+                                		</xs:enumeration>
+
+                                		<xs:length value="1"/>
+                                	</xs:restriction>
+                                </xs:simpleType>
+							</xs:element>
+							<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element maxOccurs="20" minOccurs="1" name="ModelliF23" type="typ:ModelliF23Tipo">
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello C3 -->
+<!--INIZIO Modello C4 -->
+	<xs:element name="AcquisisciModelloC4">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloC4"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloC4">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloC4" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloC4">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello C4</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloC4">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloC4">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiRisorsa"/>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true"/>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo"/>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="FlagIrrepIgnoto">
+                                <xs:simpleType>
+                                    <xs:annotation>
+                                    	<xs:documentation>1=irreperibile
+2=ignoto</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                		<xs:enumeration value="1">
+                                		</xs:enumeration>
+                                		<xs:enumeration value="2">
+                                		</xs:enumeration>
+
+                                		<xs:length value="1"/>
+                                	</xs:restriction>
+                                </xs:simpleType>
+							</xs:element>
+							<xs:element name="DataProvvedimentoSequestro" type="tb:Data">
+							</xs:element>
+							<xs:element name="DataPassaggioGiudicatoProvvedimentoRestituzione" type="tb:Data">
+							</xs:element>
+							<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+							</xs:element>
+							<xs:element name="Importo" type="tb:Importo12">
+							</xs:element>
+							<xs:element name="Divisa" type="tb:alfanum3">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello C4 -->
+<!--INIZIO Modello D -->
+	<xs:element name="AcquisisciModelloD">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloD"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloD">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloD" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloD">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello D</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloD">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloD">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiRisorsa"/>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true"/>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo"/>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="FlagSentDecr">
+                                <xs:simpleType>
+                                    <xs:annotation>
+                                    	<xs:documentation>1=Provvedimento di Sentenza 
+2=Provvedimento di Decreto/Ordinanza 
+</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+
+                                		<xs:length value="1"/>
+                                		<xs:enumeration value="1">
+                                		</xs:enumeration>
+                                		<xs:enumeration value="2">
+                                		</xs:enumeration>
+                                	</xs:restriction>
+                                </xs:simpleType>
+							</xs:element>
+							<xs:element name="NumeroProvvedimento" nillable="true" type="tb:numericoMax7">
+							</xs:element>
+							<xs:element name="AnnoProvvedimento" nillable="true" type="tb:Anno">
+							</xs:element>
+							<xs:element name="DataDecreto" nillable="true" type="tb:Data">
+							</xs:element>
+							<xs:element name="NumeroDecreto" nillable="true" type="tb:numericoMax7">
+							</xs:element>
+							<xs:element name="AnnoDecreto" nillable="true" type="tb:Anno">
+							</xs:element>
+							<xs:element name="DataEsecutivitaProvvedimentoConfisca" type="tb:Data">
+							</xs:element>
+							<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+							</xs:element>
+							<xs:element name="Importo" type="tb:Importo12">
+							</xs:element>
+							<xs:element name="Divisa" type="tb:alfanum3">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello D -->
+<!--INIZIO Modello C5 -->
+	<xs:element name="AcquisisciModelloC5">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloC5"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloC5">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloC5" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloC5">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello C su E-bis</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloC5">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloC5">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TipoAcquisizione" type="typ:TipoAcquisizioneTipo">
+				</xs:element>
+				<xs:element name="ProtocolloRicevutaModelloEBis" nillable="true" type="typ:ProtocolloRicevutaTipo">
+				</xs:element>
+				<xs:element name="DatiRisorsa" nillable="true" type="typ:DatiRisorsaTipo"/>
+				<xs:element name="InfoProcessoModelloEBis" nillable="true" type="typ:InfoProcessoTipo">
+				</xs:element>
+				<xs:element name="InfoProvvedimentoModelloEBis" nillable="true" type="typ:InfoProvvedimentoModelloEBisTipo">
+
+                </xs:element>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true">
+				</xs:element>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo">
+				</xs:element>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DataProvvedimentoSequestro" type="tb:Data">
+							</xs:element>
+							<xs:element name="DataProvvedimentoRestituzione" type="tb:Data">
+							</xs:element>
+							<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element maxOccurs="unbounded" minOccurs="1" name="Beneficiari" type="typ:BeneficiariTipo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello C5 -->
+<!--INIZIO Modello C6 -->
+	<xs:element name="AcquisisciModelloC6">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloC6"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloC6">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModello64" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloC6">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello C6 C-bis irreperibile o ignoto su E-bis</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloC6">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloC6">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TipoAcquisizione" type="typ:TipoAcquisizioneTipo">
+				</xs:element>
+				<xs:element name="ProtocolloRicevutaModelloEBis" nillable="true" type="typ:ProtocolloRicevutaTipo">
+				</xs:element>
+				<xs:element name="DatiRisorsa" nillable="true" type="typ:DatiRisorsaTipo"/>
+				<xs:element name="InfoProcessoModelloEBis" nillable="true" type="typ:InfoProcessoTipo">
+				</xs:element>
+				<xs:element name="InfoProvvedimentoModelloEBis" nillable="true" type="typ:InfoProvvedimentoModelloEBisTipo">
+
+                </xs:element>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true"/>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo"/>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="FlagIrrepIgnoto">
+                                <xs:simpleType>
+                                    <xs:annotation>
+                                    	<xs:documentation>1=irreperibile
+2=ignoto</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                		<xs:enumeration value="1">
+                                		</xs:enumeration>
+                                		<xs:enumeration value="2">
+                                		</xs:enumeration>
+
+                                		<xs:length value="1"/>
+                                	</xs:restriction>
+                                </xs:simpleType>
+							</xs:element>
+							<xs:element name="DataProvvedimentoSequestro" type="tb:Data">
+							</xs:element>
+							<xs:element name="DataPassaggioGiudicatoProvvedimentoRestituzione" type="tb:Data">
+							</xs:element>
+							<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+							</xs:element>
+							<xs:element name="Importo" type="tb:Importo12">
+							</xs:element>
+							<xs:element name="Divisa" type="tb:alfanum3">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello C6 -->
+<!--INIZIO Modello D2 -->
+	<xs:element name="AcquisisciModelloD2">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloD2"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloD2">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloD2" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloD2">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello D su E-bis</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloD2">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloD2">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="TipoAcquisizione" type="typ:TipoAcquisizioneTipo">
+				</xs:element>
+				<xs:element name="ProtocolloRicevutaModelloEBis" nillable="true" type="typ:ProtocolloRicevutaTipo">
+				</xs:element>
+				<xs:element name="DatiRisorsa" nillable="true" type="typ:DatiRisorsaTipo"/>
+				<xs:element name="InfoProcessoModelloEBis" nillable="true" type="typ:InfoProcessoTipo">
+				</xs:element>
+				<xs:element name="InfoProvvedimentoModelloEBis" nillable="true" type="typ:InfoProvvedimentoModelloEBisTipo">
+
+                </xs:element>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true"/>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo"/>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="FlagSentDecr">
+                                <xs:simpleType>
+                                    <xs:annotation>
+                                    	<xs:documentation>1=Provvedimento di Sentenza 
+2=Provvedimento di Decreto/Ordinanza 
+</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+
+                                		<xs:length value="1"/>
+                                		<xs:enumeration value="1">
+                                		</xs:enumeration>
+                                		<xs:enumeration value="2">
+                                		</xs:enumeration>
+                                	</xs:restriction>
+                                </xs:simpleType>
+							</xs:element>
+							<xs:element name="NumeroProvvedimento" nillable="true" type="tb:numericoMax7">
+							</xs:element>
+							<xs:element name="AnnoProvvedimento" nillable="true" type="tb:Anno">
+							</xs:element>
+							<xs:element name="DataDecreto" nillable="true" type="tb:Data">
+							</xs:element>
+							<xs:element name="NumeroDecreto" nillable="true" type="tb:numericoMax7">
+							</xs:element>
+							<xs:element name="AnnoDecreto" nillable="true" type="tb:Anno">
+							</xs:element>
+							<xs:element name="DataEsecutivitaProvvedimentoConfisca" type="tb:Data">
+							</xs:element>
+							<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+							</xs:element>
+							<xs:element name="Importo" type="tb:Importo12">
+							</xs:element>
+							<xs:element name="Divisa" type="tb:alfanum3">
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello D2 -->
+<!--INIZIO Modello H -->
+	<xs:element name="AcquisisciModelloH">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaModelloH"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaModelloH">
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaModelloH" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaModelloH">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio del modello H</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaInvioModelloH">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaInvioModelloH">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiRisorsa"/>
+				<xs:element name="DatiRegistroFUG" type="typ:DatiRegistroFUGTipo" nillable="true">
+				</xs:element>
+				<xs:element name="InfoProcesso" type="typ:InfoProcessoTipo"/>
+				<xs:element name="InfoProvvedimento">
+					<xs:complexType>
+                        <xs:annotation>
+                           	<xs:documentation>S=Sequestro</xs:documentation>
+                        </xs:annotation>
+                        <xs:sequence>
+                        	<xs:element name="FlagConfiscaSequestro">
+                        		<xs:simpleType>
+                        			<xs:restriction base="xs:string">
+                        				<xs:length value="1"/>
+                        				<xs:enumeration value="S">
+                        				</xs:enumeration>
+                        				<xs:enumeration value="C">
+                        				</xs:enumeration>
+                        			</xs:restriction>
+                        		</xs:simpleType>
+                        	</xs:element>
+                        	<xs:element name="DataVendita" type="tb:Data">
+                        	</xs:element>
+                        	<xs:element name="DataVersamento" type="tb:Data">
+                        	</xs:element>
+                        	<xs:element name="TipoPagamento" nillable="true" type="typ:TipoPagamentoTipo">
+                        	</xs:element>
+                        	<xs:element name="Bollettino" nillable="true" type="tb:alfanumMax27">
+                        	</xs:element>
+                        	<xs:element name="FlagParziale" type="typ:FlagParzialeTipo">
+                        	</xs:element>
+                        	<xs:element name="Importo" type="tb:Importo12">
+                        	</xs:element>
+                        	<xs:element name="Divisa" type="tb:alfanum3">
+                        	</xs:element>
+                        </xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element maxOccurs="20" minOccurs="0" name="ModelliF23" type="typ:ModelliF23Tipo"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+<!--FINE Modello H -->
+<!--INIZIO Richiesta annullamento Modello -->
+	<xs:element name="RichiestaAnnullamentoModello">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:RichiestaRichiestaAnnullamentoModello"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaRichiestaAnnullamentoModello">
+
+        <xs:complexType>
+        	<xs:sequence>
+        		<xs:element name="RispostaRichiestaAnnullamentoModello" type="typ:RispostaModelloTipo"/>
+        	</xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	<xs:element name="RichiestaRichiestaAnnullamentoModello">
+		<xs:annotation>
+			<xs:documentation>Richiesta contenente l'invio della richiesta di annullamento di un modello</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DatiIdentificativiInvio">
+					<xs:annotation>
+						<xs:documentation>Dati identificativi dell'invio. </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element ref="typ:DatiRichiestaAnnullamentoModello">
+					<xs:annotation>
+						<xs:documentation> Estremi dell'invio</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DatiRichiestaAnnullamentoModello" type="typ:ProtocolloRicevutaTipo">
+		<xs:annotation>
+			<xs:documentation>Dati di dettaglio della richiesta</xs:documentation>
+		</xs:annotation>
+
+	</xs:element>
+<!--FINE Richiesta Annullamento Modello -->
+
+<!-- Sezione comune -->
+ 	<xs:element name="DatiIdentificativiInvio" type="typ:DatiIdentificativiInvioTipo">
+	</xs:element>
+	
+ 	<xs:element name="DatiRisorsa" type="typ:DatiRisorsaTipo">
+	</xs:element>
+
+	<xs:element name="esitoFUG" type="typ:EsitoFUGTipo">
+	</xs:element>
+
+	<xs:complexType name="InfoProcessoTipo">
+		<xs:sequence>
+			<xs:element name="CodUffEmittente" type="tb:numerico11"/>
+			<xs:element name="TipoRegistro" type="typ:TipoRegistroTipo"/>
+			<xs:element name="NumeroRegistro" type="tb:numericoMax7"/>
+			<xs:element name="AnnoRegistro" type="tb:Anno"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+    <xs:complexType name="DatiRegistroFUGTipo">
+    	<xs:sequence>
+    		<xs:element name="TipoRegistroFUG" type="typ:tipoRegistroFUGTipo"/>
+    		<xs:element name="NumeroRegistroFUG" nillable="true" type="tb:numericoMax7"/>
+    		<xs:element name="AnnoRegistroFUG" nillable="true" type="tb:Anno"/>
+    	</xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="tipoRegistroFUGTipo">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="5"/>
+    		<xs:enumeration value="RFUG1"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="DatiRisorsaTipo">
+    	<xs:sequence>
+    		<xs:element name="CodiceOperatore" type="tb:alfanum11-16"/>
+    		<xs:element name="TipoRisorsa" type="tb:numerico2"/>
+    		<xs:element name="NumeroRisorsa" type="tb:alfanumMax27"/>
+    		<xs:element name="ABI" type="tb:numerico5"/>
+    		<xs:element name="CAB" nillable="true" type="tb:numerico5"/>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="TipoRegistroTipo">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="5"/>
+			<xs:enumeration value="RPRO1"/>
+			<xs:enumeration value="RPRO2"/>
+			<xs:enumeration value="RPRO3"/>
+			<xs:enumeration value="RPRO4"/>
+			<xs:enumeration value="RPRO6"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="FlagParzialeTipo">
+        <xs:annotation>
+        	<xs:documentation>P=Parziale
+T=Totale</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+    		<xs:length value="1"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="T"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="IdProtocolloTipo">
+    	<xs:restriction base="tb:numerico">
+    		<xs:length value="17"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="DatiIdentificativiInvioTipo">
+    	<xs:sequence>
+    		<xs:element name="CodUffMittente" type="tb:numerico11"/>
+    		<xs:element name="Cancelliere" type="tb:alfanum16"/>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EsitoFUGTipo">
+    	<xs:sequence>
+    		<xs:element name="CodiceSezione" type="typ:CodiceSezioneTipo">
+    		</xs:element>
+    		<xs:element name="CodiceCampo" type="typ:CodiceCampoTipo"/>
+    		<xs:element name="CodiceErrore" type="typ:CodiceErroreTipo"/>
+    		<xs:element name="DescrizioneErrore" type="tb:alfanumMax300"/>
+    	</xs:sequence>
+    </xs:complexType>
+
+
+    <xs:simpleType name="CodiceSezioneTipo">
+    	<xs:restriction base="xs:string">
+    		<xs:maxLength value="2"/>
+    		<xs:minLength value="1"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodiceCampoTipo">
+    	<xs:restriction base="xs:string">
+    		<xs:maxLength value="10"/>
+    		<xs:minLength value="2"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodiceErroreTipo">
+    	<xs:restriction base="xs:string">
+    		<xs:length value="3"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="RispostaModelloTipo">
+    	<xs:sequence>
+    		<xs:element name="IdProtocollo" type="typ:IdProtocolloTipo"/>
+    		<xs:element maxOccurs="unbounded" minOccurs="0" name="Esito" type="typ:EsitoFUGTipo"/>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ModelliF23Tipo">
+    	<xs:sequence>
+    		<xs:element name="ImportoF23" type="tb:Importo12"/>
+    		<xs:element maxOccurs="9" minOccurs="1" name="Tributi" type="typ:TributiTipoF23"/>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TributiTipoF23">
+    	<xs:sequence>
+    		<xs:element name="CodiceTributoF23">
+                <xs:simpleType>
+                	<xs:restriction base="xs:string">
+                		<xs:length value="4"/>                	</xs:restriction>
+                </xs:simpleType>
+    		</xs:element>
+    		<xs:element name="ImportoTributo" type="tb:Importo12"/>
+    	</xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="BeneficiariTipo">
+		<xs:sequence>
+			<xs:element name="TipoSoggetto" type="typ:TipoSoggettoTipo"/>
+			<xs:element name="CF" nillable="true" type="tb:alfanum16"/>
+			<xs:element name="PIVA" nillable="true" type="tb:numerico11"/>
+			<xs:element name="Cognome" nillable="true" type="tb:alfanumMax25"/>
+			<xs:element name="Nome" nillable="true" type="tb:alfanumMax25"/>
+			<xs:element name="Denominazione" nillable="true" type="tb:alfanumMax60"/>
+			<xs:element name="DataNascitaCostituzione" type="tb:Data"/>
+			<xs:element name="ProvinciaNascita" nillable="true" type="tb:alfanum2"/>
+			<xs:element name="ComuneNascita" nillable="true" type="tb:alfanumMax40"/>
+			<xs:element name="StatoNascita" nillable="true" type="tb:alfanum3"/>
+			<xs:element name="RecapitoDomicilio" type="tb:alfanumMax140"/>
+			<xs:element name="ComuneRecapito" type="tb:alfanumMax40"/>
+			<xs:element name="ProvinciaRecapito" type="tb:alfanum2"/>
+			<xs:element name="StatoRecapito" type="tb:alfanum3"/>
+			<xs:element name="Importo" type="tb:Importo12"/>
+			<xs:element name="Divisa" type="tb:alfanum3"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ProtocolloRicevutaTipo">
+		<xs:sequence>
+			<xs:element name="IdProtocollo" type="typ:IdProtocolloTipo">
+			</xs:element>
+			<xs:element name="IdRicevuta" type="typ:IdRicevutaTipo"/>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:simpleType name="TipoPagamentoTipo">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="3"/>
+			<xs:maxLength value="5"/>		</xs:restriction>
+	</xs:simpleType>
+
+    <xs:simpleType name="TipoAcquisizioneTipo">
+ 		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="TipoSoggettoTipo">
+    	<xs:restriction base="xs:string">
+    		<xs:minLength value="2"/>
+    		<xs:maxLength value="3"/>
+    		<xs:enumeration value="PF"/>
+    		<xs:enumeration value="PNF"/>
+    	</xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="InfoProvvedimentoModelloEBisTipo">
+		<xs:sequence>
+			<xs:element name="DataVendita" type="tb:Data">
+			</xs:element>
+			<xs:element name="DataVersamento" type="tb:Data">
+			</xs:element>
+			<xs:element name="Bollettino" nillable="true" type="tb:alfanumMax27">
+			</xs:element>
+		</xs:sequence>
+    </xs:complexType>
+    
+	<!-- Almaviva -->
+	<xs:element name="EsitoAcquisizioneRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CodUffRicevente" type="tb:numerico11"/>
+				<xs:element name="TipoRegistro" type="typ:TipoRegistroTipo" nillable="true"></xs:element>
+				<xs:element name="IdProtocollo" type="typ:IdProtocolloTipo"/>
+				<xs:choice>
+					<xs:element name="IdRicevuta" type="typ:IdRicevutaTipo"/>
+					<xs:element maxOccurs="unbounded" name="Esito" type="typ:EsitoFUGTipo"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EsitoResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="codice" type="typ:CodiceEsito"/>
+				<xs:element name="dettagli" nillable="true" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="CodiceEsito">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="OK"/>
+			<xs:enumeration value="ERRORE_INTERNO"/>
+			<xs:enumeration value="ID_PROT_MANC"/>
+			<xs:enumeration value="ID_PROT_ESIT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="IdRicevutaTipo">
+		<xs:sequence>
+			<xs:element name="IdRisorsa" type="tb:numericoMax22"/>
+			<xs:element name="IdProvvedimento" type="tb:numericoMax22"/>
+			<xs:element name="IdNotifica" type="tb:alfanumMax100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="EsitoAcquisizione">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:EsitoAcquisizioneRequest"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaEsitoAcquisizione">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:EsitoResponse"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="CodiceEsitoAnnullamento">
+		<xs:annotation>
+			<xs:documentation>1:Annullato; 2:Non Annullabile</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:enumeration value="1"/>
+			<xs:enumeration value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="EsitoAnnullamentoRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CodUffRicevente" type="tb:numerico11"/>
+				<xs:element name="TipoRegistro" type="typ:TipoRegistroTipo" nillable="true"></xs:element>
+				<xs:element name="IdProtocolloAnnullamento" type="typ:IdProtocolloTipo"/>
+				<xs:element name="IdProtocollo" nillable="true" type="typ:IdProtocolloTipo"/>
+				<xs:choice>
+					<xs:element name="IdRicevuta" type="typ:IdRicevutaTipo"/>
+					<xs:element maxOccurs="unbounded" name="Esito" type="typ:EsitoFUGTipo"/>
+				</xs:choice>
+				<xs:element minOccurs="0" name="CodiceEsitoAnnullamento" type="typ:CodiceEsitoAnnullamento"/>
+				<xs:element minOccurs="0" name="Note" nillable="true" type="tb:alfanumMax300"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EsitoAnnullamento">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:EsitoAnnullamentoRequest"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaEsitoAnnullamento">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:EsitoResponse"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DefinitaPosizioneRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CodUffRicevente" type="tb:numerico11"/>
+				<xs:element name="TipoRegistro" type="typ:TipoRegistroTipo" nillable="true"></xs:element>
+				<xs:element name="IdProtocollo" type="typ:IdProtocolloTipo"/>
+				<xs:element name="IdRicevuta" type="typ:IdRicevutaTipo"/>
+				<xs:element name="FlagDP" type="tb:numerico1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DefinitaPosizione">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:DefinitaPosizioneRequest"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RispostaDefinitaPosizione">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="typ:EsitoResponse"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Almaviva -->
+    
+</xs:schema>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.FlussiToolAmministratoriForm</class-a>
+		<class-b>it.giustizia.smp.dto.pg_flussi.FlussiToolAmministratoriDto</class-b>	
+		
+		<field>
+			<a>idDeposito</a>
+			<b>ID_DEPOSITO</b>
+		</field>
+		
+		<field>
+			<a>dataRicezione</a>
+			<b>DATA_RICEZIONE</b>
+		</field>
+
+		<field>
+			<a>idProc</a>
+			<b>ID_PROC</b>
+		</field>
+		
+		<field>
+			<a>descProc</a>
+			<b>DESC_PROC</b>
+		</field>
+
+		<field>
+			<a>idProcFG</a>
+			<b>ID_PROC_FG</b>
+		</field>
+		
+		<field>
+			<a>descProcFG</a>
+			<b>DESC_PROC_FG</b>
+		</field>
+		
+		<field>
+			<a>descCodiceFiscale</a>
+			<b>DESC_CODICE_FISCALE</b>
+		</field>		
+		
+		<field>
+			<a>descCognome</a>
+			<b>DESC_COGNOME</b>
+		</field>
+		
+		<field>
+			<a>descNome</a>
+			<b>DESC_NOME</b>
+		</field>
+
+		<field>
+			<a>idUffMitt</a>
+			<b>ID_UFF_MIT</b>
+		</field>
+		
+	</mapping>
+
+</mappings>

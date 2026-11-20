@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="autenticazione">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="codiceapplicazione"/>
+        <xs:element ref="password"/>
+        <xs:element ref="idutente"/>
+        <xs:element ref="idufficio"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="codiceapplicazione" nillable="false">
+  	<xs:simpleType>
+  		<xs:restriction base="xs:NCName">
+  			<xs:minLength value="1"></xs:minLength>
+  			<xs:whiteSpace value="collapse"></xs:whiteSpace>
+  		</xs:restriction>
+  	</xs:simpleType>
+  </xs:element>
+  <xs:element name="password" nillable="false">
+  	<xs:simpleType>
+  		<xs:restriction base="xs:NCName">
+  			<xs:minLength value="1"></xs:minLength>
+  			<xs:whiteSpace value="collapse"></xs:whiteSpace>
+  		</xs:restriction>
+  	</xs:simpleType>
+  </xs:element>
+  <xs:element name="idutente" nillable="false">
+  	<xs:simpleType>
+  		<xs:restriction base="xs:integer">
+  			<xs:minInclusive value="1"></xs:minInclusive>
+  			<xs:whiteSpace value="collapse"></xs:whiteSpace>
+  		</xs:restriction>
+  	</xs:simpleType>
+  </xs:element>
+  <xs:element name="idufficio" nillable="false">
+  	<xs:simpleType>
+  		<xs:restriction base="xs:integer">
+  			<xs:minInclusive value="1"></xs:minInclusive>
+  			<xs:whiteSpace value="collapse"></xs:whiteSpace>
+  		</xs:restriction>
+  	</xs:simpleType>
+  </xs:element>
+</xs:schema>

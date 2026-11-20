@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
+<!-- 2015-09-03T11:41:04 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="P15" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="98c32cbc-a59a-4cf0-a064-4bd416532ab9">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP_COLL"/>
+	<subDataset name="DatasetTitolo" uuid="57c56a22-a327-480a-b780-60724b3a8e41">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP_GIU2"/>
+		<parameter name="DS_UFFICIO" class="java.lang.Integer"/>
+		<queryString language="SQL">
+			<![CDATA[select   
+'Ufficio: '  ||
+ "T_AN_UFFICIO"."DESC_UFFICIO" as TITOLO
+from  "T_AN_UFFICIO" 
+where  "T_AN_UFFICIO"."CODI_K_ID_UFFICIO" = $P{DS_UFFICIO}]]>
+		</queryString>
+		<field name="TITOLO" class="java.lang.String"/>
+		<group name="TITOLO">
+			<groupExpression><![CDATA[$F{TITOLO}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="DatasetP15_02" uuid="dce924c2-ede1-44fb-9f22-2353bbc1b290">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP2"/>
+		<parameter name="UFFICIO" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[1419]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DATA_FINE" class="java.util.Date"/>
+		<parameter name="ORACLE_REF_CURSOR" class="java.sql.ResultSet">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<parameter name="PROCEDENTE" class="java.lang.Integer"/>
+		<parameter name="UTENTE" class="java.lang.String"/>
+		<queryString language="plsql">
+			<![CDATA[{ call PG_STATISTICHE.P15_02($P{DATA_FINE}, $P{UFFICIO}, $P{PROCEDENTE}, $P{ORACLE_REF_CURSOR}) }]]>
+		</queryString>
+		<field name="PERSONALI_ORDINARIE" class="java.math.BigDecimal"/>
+		<field name="PERSONALI_ANTIMAFIA" class="java.math.BigDecimal"/>
+		<field name="PERSONALI_ANTITERRORISMO" class="java.math.BigDecimal"/>
+		<field name="PATRIMONIALI_ORDINARIE" class="java.math.BigDecimal"/>
+		<field name="PATRIMONIALI_ANTIMAFIA" class="java.math.BigDecimal"/>
+		<field name="PATRIMONIALI_ANTITERRORISMO" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="UFFICIO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[58]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_FINE" class="java.util.Date"/>
+	<parameter name="ORACLE_REF_CURSOR" class="java.sql.ResultSet">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="PROCEDENTE" class="java.lang.Integer"/>
+	<parameter name="UTENTE" class="java.lang.String"/>
+	<queryString language="plsql">
+		<![CDATA[{ call PG_STATISTICHE.P15_01( $P{DATA_FINE}, $P{UFFICIO}, $P{PROCEDENTE}, $P{ORACLE_REF_CURSOR}) }]]>
+	</queryString>
+	<field name="TITOLARE_PROPOSTA" class="java.lang.String"/>
+	<field name="TIPO_PROCEDIMENTO" class="java.lang.String"/>
+	<field name="TOTALI" class="java.math.BigDecimal"/>
+	<field name="ORDINARIE" class="java.math.BigDecimal"/>
+	<field name="ANTIMAFIA" class="java.math.BigDecimal"/>
+	<field name="ANTITERRORISMO" class="java.math.BigDecimal"/>
+	<field name="ALTRO" class="java.math.BigDecimal"/>
+	<variable name="TOTALE_PROPOSTE" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTALI}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="TOTALE_ORDINARIE" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{ORDINARIE}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="TOTALE_ANTIMAFIA" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{ANTIMAFIA}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="TOTALE_ANTITERRORISMO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{ANTITERRORISMO}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="TOTALE_ALTRO" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{ALTRO}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="38" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<componentElement>
+				<reportElement x="0" y="1" width="554" height="27" uuid="312922ac-347b-4257-9ad0-c42831710422">
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="DatasetTitolo" uuid="ade6dd2e-cf45-4790-bd94-fed6cecc44f1">
+						<datasetParameter name="DS_UFFICIO">
+							<datasetParameterExpression><![CDATA[$P{UFFICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="27" width="554">
+						<textField>
+							<reportElement x="0" y="0" width="0" height="0" uuid="3015aadc-33a8-4847-aff8-12445f4de8fa"/>
+							<textFieldExpression><![CDATA[$F{TITOLO}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="0" width="550" height="27" uuid="1a8af15d-a8a9-41ad-8f86-45d68d1a50e0"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{TITOLO}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="118" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField evaluationTime="Report">
+				<reportElement mode="Transparent" x="0" y="75" width="554" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="e3901d36-118d-4124-a8c1-2670c77a055f">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Procedimenti pendenti al " + DATEFORMAT($P{DATA_FINE},"dd/MM/yyyy") + " : " + $V{TOTALE_PROPOSTE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="554" height="20" uuid="70f7e6ff-9e93-4f15-8954-f8a3d4d4e165"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P15. Procedimenti pendenti per procedente e tipologia di prevenzione]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="100" width="554" height="8" backcolor="#336699" uuid="d42ffcb3-c24a-48dd-8ea7-a91c3047c1ae"/>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="39" width="210" height="20" uuid="bed2d1a0-2abf-43e6-9eed-32a5fdd4921c">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titolare potere di Proposta:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement mode="Transparent" x="215" y="39" width="340" height="33" forecolor="#000000" backcolor="#FFFFFF" uuid="c44d9645-373f-470b-875f-7ddca251f185">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TITOLARE_PROPOSTA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="194" y="0" width="90" height="20" uuid="b1730c9e-8e2b-41bb-bf21-11dafe8ccd91">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ORDINARIE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="0" width="90" height="20" uuid="e4156d37-8e10-4135-8bad-818f0f5f5b36">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANTIMAFIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="0" width="90" height="20" uuid="93e465ad-f563-4d8e-890a-b03409beb2d8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANTITERRORISMO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="0" width="90" height="20" uuid="8b43699d-68e2-4da3-a7ff-4f59daa16b3a">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="194" height="20" uuid="cdbba423-e9af-493a-84b6-709cc80031b2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[totali     ]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="194" y="20" width="90" height="20" uuid="019833dd-5941-4c14-92a6-10ee40402040">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTALE_ORDINARIE}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="284" y="20" width="90" height="20" uuid="e66435b0-1964-4aa9-9627-d4c086e2ab4f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTALE_ANTIMAFIA}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="374" y="20" width="90" height="20" uuid="f0601a42-3713-4f22-a316-fbdff2ad0f04">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTALE_ANTITERRORISMO}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="464" y="20" width="90" height="20" uuid="54da86d6-a049-497c-ba7d-ec512ecafeb7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TOTALE_ALTRO}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="192" y="41" width="361" height="1" uuid="6ccf37f5-b325-4d0d-932d-197e045c5978">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="0" y="0" width="154" height="23" uuid="47d47666-8c0a-42aa-a21f-876151418690">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIPO_PROCEDIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="194" y="0" width="90" height="23" uuid="b7375c3e-41da-4ba7-b4bf-209e1ec30ff5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ORDINARIE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="0" width="90" height="23" uuid="685b12d6-b3cb-4658-aee7-619e12501773">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ANTIMAFIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="374" y="0" width="90" height="23" uuid="ebd247b3-e3e5-4388-85ca-ad07d2ea213a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ANTITERRORISMO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="0" width="90" height="23" uuid="48bc2859-f82e-4319-862b-22628e8a5788">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ALTRO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="0" width="38" height="23" uuid="f07cf368-aa35-4a72-82b4-3200aa3303a3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTALI}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="192" y="0" width="1" height="23" uuid="4ac64f1f-7f07-4ea1-83c1-ecfd23458754">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="404" y="4" width="83" height="17" uuid="6a78de0a-6843-4f4d-bbdc-07eb63aab6f0">
+					<property name="local_mesure_unity" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Data Stampa]]></text>
+			</staticText>
+			<textField pattern="d/M/yy h:mm a">
+				<reportElement x="488" y="4" width="66" height="17" uuid="aadf76cf-8b0b-4c43-98ab-76dc36b505dd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DATEFORMAT(new java.util.Date(),"dd/MM/yyy")]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="236" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<componentElement>
+				<reportElement x="0" y="31" width="545" height="192" uuid="8f6bca9e-4cd4-4a0e-9e1c-bf146f07453b"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="DatasetP15_02" uuid="03ec1d7e-aec7-4d68-a815-dc74a62a7f1d">
+						<datasetParameter name="DATA_FINE">
+							<datasetParameterExpression><![CDATA[$P{DATA_FINE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="PROCEDENTE">
+							<datasetParameterExpression><![CDATA[$P{PROCEDENTE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UFFICIO">
+							<datasetParameterExpression><![CDATA[$P{UFFICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UTENTE">
+							<datasetParameterExpression><![CDATA[$P{UTENTE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ORACLE_REF_CURSOR">
+							<datasetParameterExpression><![CDATA[$P{ORACLE_REF_CURSOR}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="192" width="545">
+						<textField>
+							<reportElement x="0" y="0" width="0" height="0" uuid="3c3ac4b1-64bf-4316-b3e3-991306cbe978"/>
+							<textFieldExpression><![CDATA[$F{PERSONALI_ORDINARIE}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="0" width="0" height="0" uuid="d7596083-00f7-4977-9f1b-9004afe35b3b"/>
+							<textFieldExpression><![CDATA[$F{PERSONALI_ANTIMAFIA}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="0" width="0" height="0" uuid="058d3539-4972-443d-952b-a00fd304a4fa"/>
+							<textFieldExpression><![CDATA[$F{PERSONALI_ANTITERRORISMO}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="0" width="0" height="0" uuid="804e9582-0f74-4a13-b2f3-92b380ddc373"/>
+							<textFieldExpression><![CDATA[$F{PATRIMONIALI_ORDINARIE}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="0" width="0" height="0" uuid="54b7649b-cdf2-41dd-8767-a910aa7aa245"/>
+							<textFieldExpression><![CDATA[$F{PATRIMONIALI_ANTIMAFIA}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="0" y="0" width="0" height="0" uuid="2bc65aaa-9037-4688-8eff-62bbdca8f2e0"/>
+							<textFieldExpression><![CDATA[$F{PATRIMONIALI_ANTITERRORISMO}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="5" y="0" width="540" height="30" uuid="fe5e8799-0d22-455e-bc91-1536661497eb"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Misure contenute nei procedimenti (in proposta)]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="5" y="40" width="270" height="30" uuid="6116e2ae-0969-45d6-9517-e92eb8b4aecb"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Personali]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="275" y="40" width="270" height="30" uuid="d7682837-2c7b-4ba8-afc7-7f10a7ab6e4f"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Patrimoniali / Beni]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="40" y="87" width="136" height="30" uuid="a8f1cd0c-7100-4712-bf12-2e0f7c92e127"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Ordinarie]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="181" y="124" width="75" height="30" uuid="7241ca3c-8d1e-43fe-adf6-319837ff4dab">
+								<property name="local_mesure_unitheight" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textElement textAlignment="Left" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{PERSONALI_ANTIMAFIA}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="40" y="124" width="136" height="30" uuid="107f95cf-816e-4f3a-ac0b-4602ae1afff1"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Antimafia]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="181" y="87" width="75" height="30" uuid="ae9d53e8-1f32-4190-ba8d-3b1f5e085812">
+								<property name="local_mesure_unitheight" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textElement textAlignment="Left" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{PERSONALI_ORDINARIE}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="300" y="160" width="124" height="30" uuid="acf4e2f8-3a03-43a0-b588-a13e6c52c453"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Antiterrorismo]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="429" y="86" width="70" height="30" uuid="14e9e294-663d-456c-a299-34dbf0248fa6">
+								<property name="local_mesure_unitheight" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textElement textAlignment="Left" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{PATRIMONIALI_ORDINARIE}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="40" y="162" width="136" height="30" uuid="21cf109d-143d-454c-b5bc-68eb7c917c17"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Antiterrorismo]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="429" y="161" width="70" height="30" uuid="07f8fae4-a1c5-43c6-8fc8-226b91d41874">
+								<property name="local_mesure_unitheight" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textElement textAlignment="Left" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{PATRIMONIALI_ANTITERRORISMO}]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement x="429" y="124" width="70" height="30" uuid="2e47e5bf-6bd7-4c45-be6d-3f8b33a0c059">
+								<property name="local_mesure_unitheight" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textElement textAlignment="Left" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{PATRIMONIALI_ANTIMAFIA}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="300" y="123" width="124" height="30" uuid="3c1c0171-08be-400b-a258-79fc2663f72b"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Antimafia]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="300" y="86" width="124" height="30" uuid="de3f6303-510b-4700-a782-d2793bb8a949"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Ordinarie]]></text>
+						</staticText>
+						<textField>
+							<reportElement x="181" y="162" width="75" height="30" uuid="401cd503-225d-4c41-9b47-57c664154b79">
+								<property name="local_mesure_unitheight" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+							<textElement textAlignment="Left" verticalAlignment="Middle"/>
+							<textFieldExpression><![CDATA[$F{PERSONALI_ANTITERRORISMO}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

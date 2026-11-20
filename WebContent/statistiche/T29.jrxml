@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
+<!-- 2015-07-21T16:04:10 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="T29" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b3f56e86-e757-4fd7-9049-bf9d87bfff7a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP_GIU2"/>
+	<subDataset name="DatasetTitolo" uuid="f1f2c8db-282e-45d7-95b9-da1e54c1b6dc">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP_GIU2"/>
+		<parameter name="UFFICIO" class="java.lang.Integer"/>
+		<queryString language="plsql">
+			<![CDATA[SELECT PG_STATISTICHE.TESTATA($P{UFFICIO})  AS NEW_DESC_UFFICIO FROM "DUAL" DUAL]]>
+		</queryString>
+		<field name="NEW_DESC_UFFICIO" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="UFFICIO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1420]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MAGISTRATO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_INIZIO" class="java.util.Date">
+		<defaultValueExpression><![CDATA[DATE(2014,1,12)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_FINE" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[DATE(2014,12,16)]]></defaultValueExpression>
+	</parameter>
+	<queryString language="plsql">
+		<![CDATA[{ call PG_STATISTICHE.T29_01($P{DATA_INIZIO}, $P{DATA_FINE},  $P{MAGISTRATO}, $P{UFFICIO},  $P{ORACLE_REF_CURSOR}) }]]>
+	</queryString>
+	<field name="DEFINIZIONE" class="java.lang.String"/>
+	<field name="TIPO_DEF" class="java.lang.String"/>
+	<field name="CODI_K_ID_PROC" class="java.math.BigDecimal"/>
+	<field name="NUME_ANNO_PROC" class="java.math.BigDecimal"/>
+	<field name="NUME_PROC" class="java.math.BigDecimal"/>
+	<field name="PROCEDIMENTO" class="java.lang.String"/>
+	<field name="TIPO_PROC" class="java.lang.String"/>
+	<field name="DESC_TIPO_PREVEN" class="java.lang.String"/>
+	<field name="MAGISTRATO" class="java.lang.String"/>
+	<field name="CODI_K_ID_MAGISTRATO" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="2" width="800" height="28" uuid="8d26e8e7-8c65-4059-85a1-f5ecadb31fa6"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="DatasetTitolo" uuid="667296fa-dc54-4795-b10b-0cad7d925bea">
+						<datasetParameter name="UFFICIO">
+							<datasetParameterExpression><![CDATA[$P{UFFICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ORACLE_REF_CURSOR">
+							<datasetParameterExpression><![CDATA[$P{ORACLE_REF_CURSOR}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="28" width="800">
+						<textField isStretchWithOverflow="true">
+							<reportElement x="0" y="0" width="800" height="28" uuid="90b9bfaa-84b4-4fcf-847e-9dd16457b247"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="13" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{NEW_DESC_UFFICIO}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Transparent" x="0" y="30" width="802" height="40" forecolor="#000000" backcolor="#FFFFFF" uuid="6f69fcc4-fbd0-4269-b430-63cd3f187765">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph firstLineIndent="0" leftIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA["T29. Dettaglio procedimenti definiti nel periodo per giudice relatore attuale\n" + "Dal "  +DATEFORMAT($P{DATA_INIZIO},"dd/MM/yyy") + " al " + DATEFORMAT($P{DATA_FINE},"dd/MM/yyy")]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="71" width="802" height="8" backcolor="#6699FF" uuid="90cd1f2f-14c2-459a-8f1f-7b146d78cc44">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="100" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-1" y="59" width="804" height="40" backcolor="#61A3E8" uuid="b7e45382-6ca6-4158-8352-29f7ca8a2594"/>
+				<staticText>
+					<reportElement mode="Transparent" x="1" y="1" width="121" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="88debace-9f02-40af-805b-4da90d205166">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Anno/Numero]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="122" y="1" width="263" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="2343b0fb-771c-4a53-b8c7-8fcadf47ddf2"/>
+					<box>
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Tipo procedimento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="385" y="1" width="240" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="59a0e969-56b0-4ff7-8576-00390b7d00e5"/>
+					<box>
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Modalità di definizione]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="625" y="1" width="175" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="1530f858-897a-4e95-864c-a80bda464853"/>
+					<box>
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Tipo prevenzione]]></text>
+				</staticText>
+			</frame>
+			<textField evaluationTime="Report">
+				<reportElement mode="Transparent" x="0" y="0" width="802" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="3d1bf4cb-a191-42d3-9d6b-b3e18ebbc042"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="13" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Numero totale procedimenti definiti: " + $V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Transparent" x="0" y="28" width="802" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="c9404b18-486e-4284-b531-17b98d72e689"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="13" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relatore: " + $F{MAGISTRATO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="121" height="32" uuid="f87b39e1-8ad9-4ced-9074-f3eee3e1fad8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROCEDIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="121" y="0" width="263" height="32" uuid="9949def9-3a97-41d9-9edc-82224a2e15bf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIPO_PROC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="384" y="0" width="240" height="32" uuid="117c410b-78e3-4475-9fcb-f7a85ce129d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEFINIZIONE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="624" y="0" width="176" height="32" uuid="096502f1-1259-46f1-a187-0cd605de6525"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESC_TIPO_PREVEN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="9" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="d/M/yy h:mm a">
+				<reportElement x="706" y="2" width="93" height="17" uuid="c2eaad6a-49c3-40a5-b42a-d7d39ddbec60"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="604" y="2" width="93" height="17" uuid="26c492b6-7a4f-4598-8927-1265be99c556">
+					<property name="local_mesure_unity" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Data Stampa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="3" width="70" height="17" uuid="e2ee8cf2-4039-464d-b4a4-1716d96bca8d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="75" y="3" width="70" height="17" uuid="c9b23a95-9b0e-4169-91ea-49912b82f6b2"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" di " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>

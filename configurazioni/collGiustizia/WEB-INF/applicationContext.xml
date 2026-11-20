@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	   http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd
+	   http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<context:component-scan base-package="it.giustizia.smp.service" />
+	<context:component-scan base-package="it.giustizia.smp.webservice" />
+	<context:component-scan base-package="it.giustizia.smp.scheduler" />
+	<context:component-scan base-package="it.giustizia.smp.dao" />
+	<context:component-scan base-package="it.giustizia.smp.jms" />
+	<context:component-scan base-package="it.giustizia.smp.validation" />
+	<context:component-scan base-package="it.giustizia.smp.utility" />
+	<context:annotation-config/>
+	<task:annotation-driven/>
+	<mvc:annotation-driven />
+	<mvc:interceptors>
+		<bean class="it.giustizia.smp.utility.permission.PermissionInterceptor"/>
+	</mvc:interceptors>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+		
+	<jee:jndi-lookup id="dataSourceDefault" jndi-name="java:/smp" />
+	<jee:jndi-lookup id="dataSourceGiu" jndi-name="java:/smp_giu" />
+
+	<bean id="myDataSource" class="it.giustizia.smp.multidb.UserRoutingDataSource" >
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry key="SMP" value-ref="dataSourceDefault" />
+				<entry key="SMP_GIU" value-ref="dataSourceGiu" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="dataSourceDefault" />
+	</bean>
+	
+	<!-- JSR-303 Validator -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
+	<!-- Register User.properties for validation error message -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/messages" />
+	</bean>
+
+	<bean id="configParameterSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" scope="singleton">
+		<property name="basename" value="/WEB-INF/config" />
+	</bean>
+	
+	<bean id="viewResolver1" class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="location" value="/WEB-INF/views.xml"/>
+    </bean>
+
+	
+
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/documenti/" mapping="/documenti/**" />
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="order" value="0"/> 
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.tiles2.TilesView</value>
+		</property>
+	</bean>
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
+	
+	<bean id="mySessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource" />
+		<property name="packagesToScan" value="it.giustizia.smp.model" />
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop> 
+				<prop key="hibernate.bytecode.use_reflection_optimizer">false</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.connection.release_mode">after_transaction</prop>
+				<prop key="hibernate.search.autoregister_listeners">false</prop>
+				<!--prop key="hibernate.hbm2ddl.auto">create</prop -->
+				<prop key="hibernate.transaction.auto_close_session">true</prop>
+				<prop key="hibernate.transaction.flush_before_completion">true</prop>
+			</props>
+		</property>
+
+		<property name="mappingResources">
+			<list>
+				<value>it/giustizia/smp/packages/mappings/PG_PROCEDIMENTO.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_SOGGETTO.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_BENE.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_MISURA.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_ATTO.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_FLUSSI.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_UDIENZA.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_COMMON.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_REPORT.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_STRALCIO.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_RIUNIONE.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_ANNUL_DUPLICATI.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_FUG.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_AMMINISTRAZIONE.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_CONSERVATORIE.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_CAMERALINI.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_NOTIFICHE.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_ANBSC.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/PG_POLIZIA.hbm.xml</value>
+				<value>it/giustizia/smp/packages/mappings/TEST_DOCUMENTALE.hbm.xml</value>
+				<!-- Specifiche Intervento-006-SpeseProces-NumAtto -->
+				<value>it/giustizia/smp/packages/mappings/PG_NUMERO_ATTO.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	
+	
+	<aop:config>
+		<aop:pointcut id="daoMethods" expression="execution(* it.giustizia.smp.service.*Service.*(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="daoMethods" />
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" rollback-for="org.springframework.dao.DataAccessException" />
+		</tx:attributes>
+	</tx:advice>
+	
+	
+
+	<!-- DOZER MAPPING BEAN -->
+	<bean id="mapperBean" class="org.dozer.DozerBeanMapper" scope="singleton">
+		<property name="mappingFiles">
+			<list>
+				<value>it/giustizia/smp/mappings/dozer-global-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/BeneForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/MagistratoForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/SoggettoForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/ProcedimentoForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/ComboForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/IndirizzoForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/BeneSoggettoForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/AttoForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/FlussiForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/DifensoreSoggettoForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/UdienzaForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/NumeroRegistroForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/EredeConviventeForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/WebService-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/StralcioForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/ImpugnazioneForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/ConservatorieForm-mapping.xml	</value>
+				<value>it/giustizia/smp/mappings/CameraliniForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/CoadiutoreForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/FlussiPoliziaForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/FlussiToolAmministratoriForm-mapping.xml</value>
+				<value>it/giustizia/smp/mappings/SpeseSoggettoForm-mapping.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- CustomPropertyEditorRegistrar -->
+	<bean id="customPropertyEditorRegistrar" class="it.giustizia.smp.utility.CustomPropertyEditorRegistrar" />
+
+	<!-- LOG configuration -->
+	<bean id="log4jDirectConfigurer" class="it.giustizia.smp.init.Log4jDirectConfigurer">
+		<property name="location" value="classpath:resources/log4j.xml" />
+		<property name="refreshInterval" value="0" />
+		<property name="logdirKey" value="webapp.logDir" />
+		<property name="logdirValue" value="${jboss.server.home.dir}/logs" />
+	</bean>
+
+	<bean id="autoCompleteDao" class="it.giustizia.smp.dao.AutoCompleteImpl">
+        <property name="conservatorieDao" ref="conservatorieDao" />
+        <property name="commonDao" ref="commonDao" />
+		<property name="beneDao" ref="beneDao" /> 
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+
+	<bean id="autoComplete" class="it.giustizia.smp.utility.AutoCompleteDwr">
+	    <dwr:remote javascript="AjaxAutoComplete">         
+	        <dwr:include method="getSuggestionsComboForm"/>
+	        <dwr:include method="getConservatComboForm"/>
+	        <dwr:include method="getSuggestionsIdBene"/>
+	        <dwr:include method="getSuggestionsIdBeneCopia"/>
+	        <dwr:include method="getCodiceCatastaleComune"/>
+	        <dwr:include method="getOperatoriFinanziari"/>
+	        <dwr:include method="getOperatoriFinanziariPolizze"/>
+	        <dwr:include method="getCodiciCab"/>
+	        <dwr:include method="getAutocompleteComuniError"/>
+	    </dwr:remote>
+	</bean>
+	<dwr:configuration>   
+	    <dwr:convert class="it.giustizia.smp.form.ComboForm" type="bean" />  
+	    <dwr:convert class="java.lang.Exception" type="exception" />  
+	</dwr:configuration>  
+
+	<bean id="utilityDwr" class="it.giustizia.smp.utility.UtilityDwr">
+	    <dwr:remote javascript="UtilityDwr">	          
+	        <dwr:include method="existsError"/>
+	        <dwr:include method="removeFromHashMapSession"/>
+	    </dwr:remote>    
+	</bean>
+	
+	<!-- Configure the multipart resolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<!-- <property name="maxUploadSize" value="100000"/> -->
+	</bean>
+	
+	<!-- Service & Dao -->
+	
+	<!-- Common -->
+	<bean id="commonDao" class="it.giustizia.smp.dao.CommonDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="commonService" class="it.giustizia.smp.service.CommonServiceImpl">
+		<property name="commonDao" ref="commonDao" />
+	</bean>
+
+	<!-- Login -->
+	<bean id="loginDao" class="it.giustizia.smp.dao.LoginDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="loginService" class="it.giustizia.smp.service.LoginServiceImpl">
+		<property name="loginDao" ref="loginDao" />
+	</bean>
+	
+	<!-- Home -->
+	<bean id="homeDao" class="it.giustizia.smp.dao.HomeDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="homeService" class="it.giustizia.smp.service.HomeServiceImpl">
+		<property name="homeDao" ref="homeDao" />
+	</bean>
+	
+	<!-- Procedimento -->
+	<bean id="procedimentoDao" class="it.giustizia.smp.dao.ProcedimentoDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="procedimentoService" class="it.giustizia.smp.service.ProcedimentoServiceImpl">
+		<property name="procedimentoDao" ref="procedimentoDao" />
+		<property name="commonDao" ref="commonDao" />
+		<property name="beneDao" ref="beneDao" />
+		<property name="beneService" ref="beneService" />
+		<property name="attoDao" ref="attoDao" />
+	</bean>
+
+	<!-- Bene -->
+	<bean id="beneDao" class="it.giustizia.smp.dao.BeneDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="beneService" class="it.giustizia.smp.service.BeneServiceImpl">
+		<property name="beneDao" ref="beneDao" />
+	</bean>
+	<bean id="ricercaBeneBDCClient" class="it.giustizia.smp.webservice.client.bdc.ricerca.bene.RicercaBeneBDCClient">
+	</bean>
+	
+	<!-- Misura -->
+	<bean id="misuraDao" class="it.giustizia.smp.dao.MisuraDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="misuraService" class="it.giustizia.smp.service.MisuraServiceImpl">
+		<property name="misuraDao" ref="misuraDao" />
+	</bean>	
+	
+	<!-- Flussi -->
+	<bean id="flussiDao" class="it.giustizia.smp.dao.FlussiDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="flussiService" class="it.giustizia.smp.service.FlussiServiceImpl">
+		<property name="flussiDao" ref="flussiDao" />
+	</bean>	
+	
+	<bean id="wsService" class="it.giustizia.smp.service.webservices.BDCService">
+
+	</bean>
+	
+	<!-- Atto -->
+	<bean id="attoDao" class="it.giustizia.smp.dao.AttoDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="attoService" class="it.giustizia.smp.service.AttoServiceImpl">
+		<property name="attoDao" ref="attoDao" />
+	</bean>
+
+	<!-- Notifiche -->
+	<bean id="notificheDao" class="it.giustizia.smp.dao.NotificheDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="notificheService" class="it.giustizia.smp.service.NotificheServiceImpl">
+		<property name="notificheDao" ref="notificheDao" />
+	</bean>
+	<bean id="trasmissioneAmministratoriService" class="it.giustizia.smp.service.TrasmissioneAmministratoriServiceImpl">
+		
+	</bean>
+
+
+	<!-- Soggetto -->
+	<bean id="soggettoDao" class="it.giustizia.smp.dao.SoggettoDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="soggettoService" class="it.giustizia.smp.service.SoggettoServiceImpl">
+		<property name="soggettoDao" ref="soggettoDao" />
+	</bean>
+
+	<!-- Fug -->
+	<bean id="fugDao" class="it.giustizia.smp.dao.FugDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="fugService" class="it.giustizia.smp.service.FugServiceImpl">
+	    <property name="fugDao" ref="fugDao" />
+	</bean>
+	
+	<!-- Anbsc -->
+	<bean id="anbscDao" class="it.giustizia.smp.dao.AnbscDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="anbscService" class="it.giustizia.smp.service.AnbscServiceImpl">
+	    <property name="anbscDao" ref="anbscDao" />
+	</bean>
+	
+	<!-- Statistiche -->
+	<bean id="statisticheDao" class="it.giustizia.smp.dao.StatisticheDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="statisticheService" class="it.giustizia.smp.service.StatisticheServiceImpl">
+		<property name="statisticheDao" ref="statisticheDao" />
+	</bean>
+	
+	<!-- Funzioni di Amministrazione -->
+	<bean id="amministrazioneDao" class="it.giustizia.smp.dao.AmministrazioneDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="amministrazioneService" class="it.giustizia.smp.service.AmministrazioneServiceImpl">
+		<property name="amministrazioneDao" ref="amministrazioneDao" />
+	</bean>
+	<!-- SpeseProcessuali -->
+	<bean id="speseProcessualiDao" class="it.giustizia.smp.dao.SpeseProcessualiDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="speseService" class="it.giustizia.smp.service.SpeseServiceImpl">
+	</bean>
+	<!-- Conservatorie -->
+	<bean id="conservatorieDao" class="it.giustizia.smp.dao.ConservatorieDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="conservatorieService" class="it.giustizia.smp.service.ConservatorieServiceImpl">
+		<property name="conservatorieDao" ref="conservatorieDao" />
+	</bean>
+	
+	
+	<!-- Cameralini Inizio -->
+	<bean id="procedimentoDaoCam" class="it.giustizia.smp.dao.cameralini.ProcedimentoDaoCamImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="procedimentoServiceCam" class="it.giustizia.smp.service.cameralini.ProcedimentoServiceCamImpl">
+		<property name="procedimentoDaoCam" ref="procedimentoDaoCam" />
+		<property name="procedimentoDao" ref="procedimentoDao" />
+		<property name="commonDao" ref="commonDao" />
+		<property name="beneDao" ref="beneDao" />
+		<property name="beneService" ref="beneService" />
+		<property name="attoDao" ref="attoDao" />
+	</bean>
+	<!-- Cameralini Fine -->
+	
+	<bean class="it.giustizia.smp.exception.GlobalExceptionResolver"
+		p:defaultErrorView="error/defaultError" />
+
+	<!-- Udienza -->
+	<bean id="udienzaDao" class="it.giustizia.smp.dao.UdienzaDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="udienzaService" class="it.giustizia.smp.service.UdienzaServiceImpl">
+		<property name="udienzaDao" ref="udienzaDao" />
+	</bean>
+	
+	<!-- Report -->
+	<bean id="reportDao" class="it.giustizia.smp.dao.ReportDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="reportService" class="it.giustizia.smp.service.ReportServiceImpl">
+		<property name="reportDao" ref="reportDao" />
+	</bean>
+	
+	<!-- GC 14/07/2020: Nuova sezione AllineamentoFascPdoc -->
+	<!-- AllineamentoFascPdoc -->
+	<bean class="it.giustizia.smp.dao.AllineaFascPdocDaoImpl" id="AllineaFascPdocDao">
+		<property name="sessionFactory" ref="mySessionFactory"/>
+	</bean>
+	<!-- <bean class="it.giustizia.smp.service.SpeseServiceImpl" id="speseService"> </bean> -->
+	<!-- GC 14/07/2020: Fine Nuova sezione AllineamentoFascPdoc -->
+	
+   <!-- Gestione web service client ALBO -->
+    <bean id="alboMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
+          p:contextPath="it.giustizia.smp.webservice.client.albo" />
+     
+    <bean id="alboServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<!-- <bean class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>-->
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"/>
+		</property>
+        <property name="marshaller" ref="alboMarshaller"></property>
+        <property name="unmarshaller" ref="alboMarshaller"></property>
+        <!--<property name="defaultUri" value="http://156.54.180.59:8080/AlboAmministratori/services" /> -->
+        <!-- <property name="defaultUri" value="http://10.6.218.134:8080/AlboAmministratori/services" /> -->
+    </bean>
+    
+    <bean id="alboServiceClient" class="it.giustizia.smp.webservice.client.albo.AlboWSService"/>
+        
+	<!-- Fine Client WS Albo -->
+	<bean id="alboService" class="it.giustizia.smp.service.webservices.AlboService" />
+	
+	<!-- Gestione web service client FUG -->
+    <bean id="fugMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
+          p:contextPath="it.giustizia.smp.webservice.client.fug" />
+     
+    <bean id="fugServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+    		 <bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"/>
+		</property>
+        <property name="marshaller" ref="fugMarshaller"></property>
+        <property name="unmarshaller" ref="fugMarshaller"></property>
+        <!-- <property name="defaultUri" value="http://AC-RCatalani:8088/mockinvioFUGbinding" /> -->
+		<!-- <property name="defaultUri" value="http://localhost:8080/NodoCentrale/http/Proxy_Routed/FugWS" /> -->
+		<!--<property name="defaultUri" value="http://localhost:8080/WSEquitalia/services/invioFUG?wsdl" /> -->
+		<!--   <property name="defaultUri" value="http://156.54.180.59:8080/WSEquitalia/InvioFUG?wsdl" /> -->
+        <!-- <property name="defaultUri" value="http://ac-asquillace:8080/WSEquitalia/InvioFUG?wsdl" />-->
+        <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+ 		<!-- <property name="defaultUri" value="http://ministerogiustizia.spcoop.gov.it/openspcoop/PD/EQU_COLL_invioFUG" /> -->
+    </bean>
+    
+    <bean id="fugServiceClient" class="it.giustizia.smp.webservice.client.FugWSClient"/>
+        
+	<!-- Fine Client WS FUG -->
+	<bean id="fugWsService" class="it.giustizia.smp.service.webservices.FugWsService" />
+	
+	<!-- ********************************************************************************
+	 *		    INIZIO web service client Casellario - ESECUZIONE (Redazione Scheda)   	*
+ 	 ********************************************************************************   -->	
+	<!-- Gestione web service client Casellario (Sippi 1.4) -->
+    <bean id="casellarioMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"  p:contextPath="it.giustizia.smp.webservice.client.casellario" />
+    <bean id="casellarioServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<!-- <bean class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>-->
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"/>
+		</property>
+        <property name="marshaller" ref="casellarioMarshaller"></property>
+        <property name="unmarshaller" ref="casellarioMarshaller"></property>
+        <!--<property name="defaultUri" value="http://localhost:8181/casellario/services" /> 
+        TUNNEL VERSO CASELLARIO DA COLLAUDO 
+        <property name="defaultUri" value="http://localhost:80/SippiWeb/invioProvvedimento" /> -->
+        <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+        <!-- <property name="defaultUri" value="http://10.6.44.102:11001/SippiWeb/invioProvvedimento?WSDL" /> -->
+    </bean>
+    <bean id="casellarioServiceClient" class="it.giustizia.smp.webservice.client.casellario.CasellarioServiceClient"/>
+	<bean id="casellarioService" class="it.giustizia.smp.service.webservices.CasellarioService" />
+	<!-- Fine web service client Calsellario (Sippi 1.4) -->
+	
+	
+	<!-- ************************************************************************************************
+	 *		    INIZIO web service client Casellario - ESECUZIONE PROVVEDIMENTO (Foglio Complementare) 	*
+ 	 ****************************************************************************************************   -->	
+	<!-- Gestione web service client Casellario (Sippi 1.4) -->
+    <bean id="casellarioEsecuzioneMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"  p:contextPath="it.giustizia.smp.webservice.client.casellario.esecuzione" />
+    <bean id="casellarioServiceTemplateFC" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<!-- <bean class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>-->
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"/>
+		</property>
+        <property name="marshaller" ref="casellarioEsecuzioneMarshaller"></property>
+        <property name="unmarshaller" ref="casellarioEsecuzioneMarshaller"></property>
+        <!-- 
+        MOCK LOCALE
+        http://localhost:8181/mockInvioProvvedimentoEsecuzioneBinding
+        TUNNEL VERSO CASELLARIO DA COLLAUDO 
+        http://localhost:80/SippiWeb/invioProvvedimentoEsecuzione 
+        COLLAUDO
+        http://10.6.44.102:11001/SippiWeb/invioProvvedimentoEsecuzione?WSDL
+        -->
+        <!-- <property name="defaultUri" value="http://localhost:8181/mockInvioProvvedimentoEsecuzioneBinding" />-->
+       <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+       <!-- <property name="defaultUri" value="http://10.6.44.102:11001/SippiWeb/invioProvvedimentoEsecuzione?WSDL" />  --> 
+    </bean>
+    <bean id="casellarioServiceClientFC" class="it.giustizia.smp.webservice.client.casellario.esecuzione.CasellarioServiceClientFC"/>
+	<bean id="casellarioServiceFC" class="it.giustizia.smp.service.webservices.CasellarioServiceFC" />
+	<!-- Fine web service client Calsellario (Sippi 1.4) -->
+	
+	
+	<!-- ********************************************************************************
+		 *		    INIZIO web service client Casellario - Ricerca certificato       		*
+	 	 ********************************************************************************   -->	
+	<!-- Gestione web service client Casellario Ricerca (sippi_certificato_1.5.wsdl) -->
+    <bean id="casellarioRicercaMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"  p:contextPath="it.giustizia.smp.webservice.client.casellario.ricerca" />
+    <bean id="casellarioRicercaServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<!-- <bean class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>-->
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"/>
+		</property>
+        <property name="marshaller" ref="casellarioRicercaMarshaller"></property>
+        <property name="unmarshaller" ref="casellarioRicercaMarshaller"></property>
+        <!--  TUNNEL VERSO CASELLARIO DA COLLAUDO 
+        <property name="defaultUri" value="http://localhost:80/SippiWeb/RichiestaCertificato" /> -->
+        <!--  <property name="defaultUri" value="http://localhost:8181/casellarioRicerca/services" />  -->
+        <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+       <!-- <property name="defaultUri" value="http://10.6.44.102:11001/SippiWeb/RichiestaCertificato?WSDL" /> -->
+    </bean>
+    <bean id="casellarioRicercaServiceClient" class="it.giustizia.smp.webservice.client.casellario.ricerca.CasellarioRicercaServiceClient"/>
+	<bean id="casellarioRicercaService" class="it.giustizia.smp.service.webservices.CasellarioRicercaService" />
+	<!-- Fine  web service client Calsellario Ricerca (sippi_certificato_1.5.wsdl) -->
+	
+	
+	<!-- ********************************************************************************************************
+		 *		    INIZIO web service client Notifiche - Servizi Trasmissione  (ServiziTrasmissione.wsdl		*
+	 	 ********************************************************************************************************   -->				
+	<bean id="serviziTrasmissioneMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"  p:contextPath="it.giustizia.smp.webservice.client.glmp.servizitrasmissione" />
+    <bean id="serviziTrasmissioneServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<!-- <bean class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>-->
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<!--  <bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender" ></bean>-->
+			<bean class="it.giustizia.smp.webservice.client.glmp.serviziodepositi.HttpUrlConnectionMassageSenderWithAuth">
+				<property name="username" value="ADMIN"/>
+				<property name="password" value="admin"/>
+			</bean>
+		</property>
+        <property name="marshaller" ref="serviziTrasmissioneMarshaller"></property>
+        <property name="unmarshaller" ref="serviziTrasmissioneMarshaller"></property>
+          
+        <!--
+        AMBIENTE DI TEST DI .NET SU INTERNET: http://93.57.107.106:10080/GL/InvioAtti/ServiziTrasmissione?wsdl
+        AMBIENTE DI TEST SOAP UI LOCALE: 	  http://localhost:8181/ServiziTrasmissione/services
+        AMBIENTE DI COLLAUDO IN GIUSTIZIA:    http://10.3.205.194:8080/GL/InvioAtti/ServiziTrasmissione?WSDL
+        -->
+        
+        <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+       <!-- <property name="defaultUri" value="http://10.3.205.194:8080/GL/InvioAtti/ServiziTrasmissione?WSDL" /> -->
+        
+    </bean>
+	<bean id="serviziTrasmissioneServiceClient" class="it.giustizia.smp.webservice.client.glmp.servizitrasmissione.ServiziTrasmissioneServiceClient"/>
+	<bean id="serviziTrasmissioneService" class="it.giustizia.smp.service.webservices.ServiziTrasmissioneService" />
+	<!-- *		    FINE web service client Notifiche - Servizi Trasmissione  		*
+	 	 ********************************************************************************   -->
+	
+	<!-- ************************************************************************************************************
+	 *		    INIZIO web service client Notifiche - Servizi Depositi (ConsultazioneEsiti.wsdl)					*
+ 	 ****************************************************************************************************************   -->				
+	<bean id="serviziDepositiMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"  >
+		<!--  p:contextPath="it.giustizia.smp.webservice.client.glmp.servizitrasmissione"  -->
+		<property name="contextPaths">
+             <list>
+                  <value>it.giustizia.smp.webservice.client.glmp.servizitrasmissione</value>
+                  <value>it.giustizia.gestorelocale.accettazione</value>
+                  <value>it.giustizia.gestorelocale.accettazione.esiti</value>
+                  <value>it.giustizia.gestorelocale.accettazione.servizi</value>
+             </list>
+        </property>
+	</bean>
+    <bean id="serviziDepositiServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<!-- <bean class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>-->
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+			
+		</property>
+		<property name="messageSender">
+			<!-- <bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"></bean>  -->
+			<bean class="it.giustizia.smp.webservice.client.glmp.serviziodepositi.HttpUrlConnectionMassageSenderWithAuth">
+				<property name="username" value="ADMIN"/>
+				<property name="password" value="admin"/>
+			</bean>
+		</property>
+        <property name="marshaller" ref="serviziDepositiMarshaller"></property>
+        <property name="unmarshaller" ref="serviziDepositiMarshaller"></property>
+          
+        <!--
+        AMBIENTE DI TEST DI .NET SU INTERNET: http://93.57.107.106:10080/GL/InvioAtti/serviziDepositi?wsdl
+        AMBIENTE DI TEST SOAP UI LOCALE: 	  http://localhost:8181/ServiziRicezione?wsdl
+        AMBIENTE DI COLLAUDO IN GIUSTIZIA:    http://10.3.205.194:8080/GL/Accettazione/ConsultazioneEsiti?wsdl
+        -->
+        
+       <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+       <!--  <property name="defaultUri" value="http://10.3.205.194:8080/GL/Accettazione/ConsultazioneEsiti?wsdl" /> -->
+        								   
+    </bean>
+	<bean id="serviziDepositiServiceClient" class="it.giustizia.smp.webservice.client.glmp.serviziodepositi.ServiziDepositiServiceClient"/>
+	<!-- *		    FINE web service client Notifiche - Servizi Depositi  		*
+	 	 ********************************************************************************   -->
+	
+	<!-- ********************************************************************************************************
+	 *		    INIZIO web service client Notifiche - Servizi Accettazione (ServiziAccettazione.wsdl) 			*
+ 	 ************************************************************************************************************   -->				
+	<bean id="servizioAccettazioneDepositiMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"  >
+		<!--  p:contextPath="it.giustizia.smp.webservice.client.glmp.servizitrasmissione"  -->
+		<property name="contextPaths">
+             <list>
+             	  <!-- value>it.giustizia.smp.webservice.client.glmp.servizioaccettazione</value>  -->
+                  <value>it.giustizia.gl.accettazione</value>
+                  <value>it.giustizia.gestorelocale.accettazione</value>
+                  <value>it.giustizia.gestorelocale.accettazione.esiti</value>
+                  <value>it.giustizia.gestorelocale.accettazione.servizi</value>
+             </list>
+        </property>
+	</bean>
+    <bean id="serviziAccettazioneServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<!-- <bean class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>-->
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<!-- <bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"></bean>  -->
+			<bean class="it.giustizia.smp.webservice.client.glmp.serviziodepositi.HttpUrlConnectionMassageSenderWithAuth">
+				<property name="username" value="ADMIN"/>
+				<property name="password" value="admin"/>
+			</bean>
+		</property>
+        <property name="marshaller" ref="servizioAccettazioneDepositiMarshaller"></property>
+        <property name="unmarshaller" ref="servizioAccettazioneDepositiMarshaller"></property>
+        <!--
+        AMBIENTE DI TEST DI .NET SU INTERNET: http://93.57.107.106:10080/GL/Accettazione/ServiziAccettazione?wsdl
+        AMBIENTE DI TEST SOAP UI LOCALE: 	  http://localhost:8181/AccettaDeposito?wsdl
+        AMBIENTE DI COLLAUDO IN GIUSTIZIA:    http://10.3.205.194:8080/GL/Accettazione/ServiziAccettazione?wsdl
+        -->
+        <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+       <!-- <property name="defaultUri" value="http://10.3.205.194:8080/GL/Accettazione/ServiziAccettazione?wsdl" /> -->
+    </bean>
+	<bean id="serviziAccettazioneServiceClient" class="it.giustizia.gestorelocale.accettazione.servizi.ServiziAccettazioneServiceClient"/>
+	<!-- *		    FINE web service client Notifiche -  Servizi Accettazione	 		*
+	 	 ********************************************************************************   -->
+	
+	
+	<!-- ******************************************************
+		  Gestione web service client Ricorso Cassazione 
+		 ****************************************************** -->
+	<bean id="ricorsoCassazioneMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"  p:contextPath="it.giustizia.smp.webservice.client.ricorsocassazione" />
+    <bean id="ricorsoCassazioneServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<!-- <bean class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>-->
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"/>
+		</property>
+        <property name="marshaller" ref="ricorsoCassazioneMarshaller"></property>
+        <property name="unmarshaller" ref="ricorsoCassazioneMarshaller"></property>
+        <!-- 
+       PRODUZIONE "http://10.3.205.187:8080/sit-cassazione/endpoints/RicorsoService" 
+        MOCK	   "http://localhost:8181/ricorsoCassazione/services" 
+        COLLAUDO   "http://10.3.205.177:8080/sit-cassazione/endpoints/RicorsoService
+        COLLAUDO BALDUINA  "http://10.6.199.145:8080/sit-cassazione/endpoints/RicorsoService
+        -->
+       <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+       <!-- <property name="defaultUri" value="http://10.6.199.145:8080/sit-cassazione/endpoints/RicorsoService" /> --> 
+        
+    </bean>
+    <bean id="ricorsoCassazioneServiceClient" class="it.giustizia.smp.webservice.client.ricorsocassazione.RicorsoCassazioneServiceClient"/>
+	<bean id="ricorsoCassazioneService" class="it.giustizia.smp.service.webservices.RicorsoCassazioneService" />
+	<!-- Fine  web service client Ricorso Cassazione  -->
+	
+	<!-- ******************************************************
+		 Gestione web service client Agenzia Entrate 
+		 ****************************************************** -->
+    <bean id="agenziaEntrateMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"  p:contextPath="it.giustizia.smp.webservice.client.agenziaentrate" />
+    <bean id="agenziaEntrateServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<!-- <bean class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>-->
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"/>
+		</property>
+        <property name="marshaller" ref="agenziaEntrateMarshaller"></property>
+        <property name="unmarshaller" ref="agenziaEntrateMarshaller"></property>
+        <!-- 
+		MOCK: http://localhost:8181/agenziaEntrate/services  
+		COLLAUDO: http://xxxxxxx/agenziaEntrate/services  
+		PRODUZIONE: http://xxxxxxx/agenziaEntrate/services  
+		-->
+        <!-- <property name="defaultUri" value="http://localhost:8181/agenziaEntrate/services" />-->
+        <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+       <!-- <property name="defaultUri" value="http://10.5.20.201:8181/agenziaEntrate/services" /> -->  
+    </bean>
+    <bean id="agenziaEntrateServiceClient" class="it.giustizia.smp.webservice.client.agenziaentrate.AgenziaEntrateServiceClient"/>
+	<bean id="agenziaEntrateServiceService" class="it.giustizia.smp.service.webservices.AgenziaEntrateService" />
+	<!-- Fine  web service client Agenzia Entrate  -->
+	
+	
+	
+	<!-- Gestione web service client REGINDE -->
+    <bean id="regindeMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
+          p:contextPath="it.giustizia.smp.webservice.client.reginde" />
+     
+    <bean id="regindeServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<!-- <bean class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>-->
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"/>
+		</property>
+        <property name="marshaller" ref="regindeMarshaller"></property>
+        <property name="unmarshaller" ref="regindeMarshaller"></property>
+        <!-- <property name="defaultUri" value="http://ac-rcatalani:8088/mockWsServiziInterrogazioneSoggettoBinding" />-->
+        <!-- <property name="defaultUri" value="https://10.6.212.30/ServiziInterrogazioneRegindeExt/ServiziInterrogazioneSoggetto" /> -->
+        <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+        <!-- <property name="defaultUri" value="http://reginde.processotelematicotest.giustizia.it/ServiziInterrogazioneRegindeExt/ServiziInterrogazioneSoggetto" /> -->
+    </bean>
+    
+    <!-- Fine Client WS Reginde -->
+	<bean id="regindeService" class="it.giustizia.smp.service.webservices.RegindeService" />
+	
+	<!-- Gestione web service client Anbsc -->
+    <bean id="anbscMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
+          p:contextPath="it.giustizia.smp.webservice.client.anbsc" />
+     
+    <bean id="anbscServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"/>
+		</property>
+        <property name="marshaller" ref="anbscMarshaller"></property>
+        <property name="unmarshaller" ref="anbscMarshaller"></property>
+        <!--<property name="defaultUri" value="http://ac-ccamicozzi:8080/ScambioDatiMPWS/ScambioDatiMPWS" />-->
+        <!-- <property name="defaultUri" value="http://10.100.203.137:8080/ScambioDatiMPWS/ScambioDatiMPWS" />-->
+        <!-- <property name="defaultUri" value="http://172.18.180.12:8080/ScambioDatiMPWS/ScambioDatiMPWS" /> -->
+        <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+       <!-- <property name="defaultUri" value="https://ministerogiustizia.spcoop.gov.it/openspcoop/PD/ANBSC_SequestroWS" /> -->
+    </bean>
+    
+    <!-- Fine Client WS Anbsc -->
+	<bean id="anbscServiceWS" class="it.giustizia.smp.service.webservices.AnbscWsService" />
+    
+    
+	<!-- Gestione web service client Polizia -->
+    <bean id="poliziaMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller"
+          p:contextPath="it.giustizia.smp.webservice.client.polizia" />
+     
+    <bean id="poliziaServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+    	<property name="messageFactory">
+			<bean class="org.springframework.ws.soap.axiom.AxiomSoapMessageFactory"/>
+		</property>
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.http.HttpUrlConnectionMessageSender"/>
+		</property>
+        <property name="marshaller" ref="poliziaMarshaller"></property>
+        <property name="unmarshaller" ref="poliziaMarshaller"></property>
+        <!-- <property name="defaultUri" value="http://156.54.180.59:8080/WSPoliziaServer/TrasmissioneSITMP" />-->
+        <!-- <property name="defaultUri" value="http://ac-rcatalani:8088/mockTrasmissioneSITMPSOAP" />-->
+        <!-- GC 18/04/2018: Gli uri in questo file sono inutili; quelli utilizzati sono contenuti nel file properties-service.xml dell'istanza Jboss -->
+       <!-- <property name="defaultUri" value="http://10.5.20.201:8088/mockTrasmissioneSITMPSOAP" /> -->
+    </bean>
+    
+    <bean id="poliziaServiceWS" class="it.giustizia.smp.service.webservices.PoliziaWsService" />
+    <!-- Fine Client WS Polizia -->
+	
+	
+	
+	<!-- Stralcio -->
+	<bean id="stralcioDao" class="it.giustizia.smp.dao.StralcioDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="stralcioService" class="it.giustizia.smp.service.StralcioServiceImpl">
+	    <property name="stralcioDao" ref="stralcioDao" />
+	</bean>	
+	<!-- Riunione -->
+	<bean id="riunioneDao" class="it.giustizia.smp.dao.RiunioneDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="riunioneService" class="it.giustizia.smp.service.RiunioneServiceImpl">
+	    <property name="riunioneDao" ref="riunioneDao" />
+	</bean>	
+	
+	<!-- Annullamento Soggetto -->
+	<bean id="annullamentoDuplicatiDao" class="it.giustizia.smp.dao.AnnullamentoDuplicatiDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="annullamentoDuplicatoService" class="it.giustizia.smp.service.AnnullamentoDuplicatoServiceImpl">
+	    <property name="annullamentoDuplicatiDao" ref="annullamentoDuplicatiDao" />
+	</bean>	
+	
+	<!-- Polizia -->
+  	<bean id="poliziaDao" class="it.giustizia.smp.dao.PoliziaDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="poliziaService" class="it.giustizia.smp.service.PoliziaServiceImpl">
+	    <property name="poliziaDao" ref="poliziaDao" />
+	</bean>
+	
+	<!-- Specifiche Intervento-006-SpeseProces-NumAtto -->
+	<!-- Numero Atto -->
+	<bean id="numeroAttoDao" class="it.giustizia.smp.dao.NumeroAttoDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="numeroAttoService" class="it.giustizia.smp.service.NumeroAttoServiceImpl">
+		<property name="numeroAttoDao" ref="numeroAttoDao" />
+	</bean>
+
+	<!-- Mev 2020/48 Inizio -->
+	<bean id="amministratoreDao" class="it.giustizia.smp.dao.AmministratoreDaoImpl">
+		<property name="sessionFactory" ref="mySessionFactory" />
+	</bean>
+	<bean id="amministratoreService" class="it.giustizia.smp.service.AmministratoreServiceImpl">
+		<property name="amministratoreDao" ref="amministratoreDao" />
+	</bean>
+	<!-- Mev 2020/48 Fine -->
+
+	<task:scheduled-tasks>
+	    <!-- 20200709 [SG]: nuovo job per allineamento fascicoli PDoc andati in errore col documentaleJob -->
+		<task:scheduled ref="allineamentoFascicoliPDocJob" method="scheduledMethod" cron = "0 0/59 2-3 * * ?"/> <!-- scheduler ogni giorno dalle 2 alle 3 ogni 59 minuti -->
+	    <task:scheduled ref="documentaleJob" method="scheduledMethod" cron = "0 0/59 6-23 * * ?"/> <!-- scheduler ogni giorno dalle 06 alle 23 ogni 59 minuti -->
+	    <task:scheduled ref="invioCassazioneJob" method="scheduledMethod" cron = "0 0/50 1-2 * * ?"/> <!-- scheduler ogni giorno dalle 06 alle 23 ogni 50 minuti -->
+	    <task:scheduled ref="anbscJob" method="scheduledMethod" cron="0 0/50 1-2 * * ?"/> <!-- scheduler ogni giorno dalle 06 alle 23 ogni 50 minuti -->
+	    <task:scheduled ref="notificheRicezioneRicevuteJob" method="scheduledMethod" cron = "0 0/50 1-2 * * ?"/> <!-- scheduler ogni giorno dalle 01 alle 23 ogni 5 minuti -->
+	    <task:scheduled ref="notificheRicezioneRappTrasmJob" method="scheduledMethod" cron = "0 0/50 1-2 * * ?"/> <!-- scheduler ogni giorno dalle 01 alle 23 ogni 5 minuti -->
+	    <task:scheduled ref="ricezioneDepositiJob" method="scheduledMethod" cron = "0 0/50 1-2 * * ?"/> <!-- scheduler ogni giorno dalle 01 alle 23 ogni 7 minuti -->
+	    <task:scheduled ref="poliziaJob" method="scheduledMethod" cron = "0 0/50 1-2 * * ?"/> <!-- scheduler ogni giorno dalle 01 alle 02 ogni 50 minuti -->
+	</task:scheduled-tasks>
+	
+	<!-- Scheduler 	-->
+	<bean id="documentaleJob" class="it.giustizia.smp.scheduler.DocumentaleJob">
+	</bean>
+	<bean id="invioCassazioneJob" class="it.giustizia.smp.scheduler.InvioCassazioneJob">
+	</bean>
+	<bean id="anbscJob" class="it.giustizia.smp.scheduler.AnbscJob"> 
+	</bean>
+	<bean id="notificheRicezioneRicevuteJob" class="it.giustizia.smp.scheduler.NotificheRicezioneRicevuteJob">
+	</bean>
+	<bean id="notificheRicezioneRappTrasmJob" class="it.giustizia.smp.scheduler.NotificheRicezioneRappTrasmJob">
+	</bean>	
+	<bean id="ricezioneDepositiJob" class="it.giustizia.smp.scheduler.RicezioneDepositiJob">
+	</bean>
+	<bean id="poliziaJob" class="it.giustizia.smp.scheduler.PoliziaJob">
+	</bean>
+ 	<!-- 20200709 [SG]: nuovo job per allineamento fascicoli PDoc andati in errore col documentaleJob -->
+	<bean id="allineamentoFascicoliPDocJob" class="it.giustizia.smp.scheduler.AllineamentoFascicoliPDocJob">
+	</bean>
+<!-- ====================== JMS Config BEGIN ====================== -->	
+
+ <bean id="jmsMessage" class="it.giustizia.smp.jms.JmsMessage">
+		<property name="jmsPayloadFieldsLength" ref="fieldslength"/>
+	</bean>
+
+	<bean id="fieldslength" class="it.giustizia.smp.jms.JmsPayloadFieldsLength">
+		<property name="idFascicolo" value="${len.idFascicolo}"/>
+		<property name="tipoFascicolo" value="${len.tipoFascicolo}"/>
+		<property name="codIdUfficio" value="${len.codIdUfficio}"/>
+		<property name="descUfficio" value="${len.descUfficio}"/>
+		<property name="schema" value="${len.schema}"/>
+		<property name="idUtente" value="${len.idUtente}"/>
+	</bean>
+
+    <bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>${jboss.server.config.url}queue.properties</value>
+            </list>
+        </property>
+    </bean>
+
+	<bean id="jmsService" class="it.giustizia.smp.jms.JmsMessageProducer">
+		<property name="jmsTemplate">
+			<ref bean="jmsTemplate" />
+		</property>
+	</bean>
+
+    <bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate">
+        <property name="environment">
+            <props>
+                <prop key="java.naming.provider.url">${java.naming.provider.url}</prop>
+                <prop key="java.naming.factory.url.pkgs">org.jnp.interfaces:org.jboss.naming</prop>
+                <prop key="java.naming.factory.initial">org.jnp.interfaces.NamingContextFactory</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="connectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiTemplate">
+            <ref bean="jndiTemplate"/>
+        </property>
+        <property name="jndiName">
+            <value>${jca.connector.jndiname}</value>
+        </property>
+    </bean>
+
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination">
+            <ref bean="sendDestination"/>
+        </property>
+    </bean>
+
+    <bean id="sendDestination" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiTemplate">
+            <ref bean="jndiTemplate"/>
+        </property>
+        <property name="jndiName">
+            <value>${queue.name}</value>
+        </property>
+    </bean>
+
+<!-- ====================== JMS Config END ====================== -->	
+
+
+</beans>

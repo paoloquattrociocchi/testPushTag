@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/ubicazione" targetNamespace="http://anbsc.almaviva.it/schema/ubicazione" elementFormDefault="qualified">
+	<complexType name="ubicazione">
+		<choice>
+			<element name="italia" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="identificativoComuneUbicazione" type="string"/>
+						<element name="identificativoProvinciaUbicazione" type="string"/>
+						<element name="identificativoRegioneBene" type="integer" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="estero" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="identificativoStatoEsteroUbicazione" type="integer"/>
+						<element name="descrizioneComuneEstero" type="string" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</choice>
+	</complexType>
+</schema>

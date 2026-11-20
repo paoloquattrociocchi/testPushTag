@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/procedimenti" targetNamespace="http://anbsc.almaviva.it/schema/procedimenti" elementFormDefault="qualified">
+	<complexType name="procedimenti">
+		<sequence>
+			<element name="identificativoProcedimentoOrigine" type="integer"/>
+			<element name="identificativoProcedimentoDestinazione" type="integer" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

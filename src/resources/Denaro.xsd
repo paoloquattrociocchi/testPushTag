@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/denaro" targetNamespace="http://anbsc.almaviva.it/schema/denaro" elementFormDefault="qualified">
+	<complexType name="denaro">
+		<sequence>
+			<element name="descrizioneEnteDepositario" type="string"/>
+			<element name="indirizzo" type="string" minOccurs="0"/>
+			<element name="numeroCivico" type="string" minOccurs="0"/>
+			<element name="descrizioneComuneEsteroEnteDepositario" type="string" minOccurs="0"/>
+			<element name="descrizioneFiliale" type="string"/>
+			<element name="descrizioneDirettore" type="string" minOccurs="0"/>
+			<element name="numeroEnte" type="string"/>
+			<element name="descrizioneIntestatario" type="string" minOccurs="0"/>
+			<element name="identificativoTipoValuta" type="string" minOccurs="0"/>
+			<element name="importoValuta" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,13}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="importoEuro" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,13}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="volturatoFug" type="boolean" minOccurs="0"/>
+			<element name="abi" type="string" minOccurs="0"/>
+			<element name="cab" type="string" minOccurs="0"/>
+			<element name="iban" type="string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

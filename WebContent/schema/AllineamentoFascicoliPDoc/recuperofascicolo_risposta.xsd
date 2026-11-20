@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified">
+	<xs:include schemaLocation="messaggiorisposta.xsd"></xs:include>
+	<xs:include schemaLocation="security.xsd"></xs:include>
+	<xs:element name="risposta">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="messaggio" />
+				<xs:element ref="fascicolo" minOccurs="0" maxOccurs="1" ></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="fascicolo" nillable="true">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="codicefascicolo" nillable="false">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"></xs:minLength>
+						<xs:maxLength value="2048"></xs:maxLength>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="codicefascicolopadre">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2048"></xs:maxLength>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="datacreazione" type="xs:dateTime"></xs:element>
+			<xs:element name="oggetto">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="500"></xs:maxLength>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="idufficiocreatore" type="xs:integer"></xs:element>
+			<xs:element name="idutentecreatore" type="xs:integer"></xs:element>
+			<xs:element name="stato" type="xs:string"></xs:element>
+                <xs:element ref="security"></xs:element>
+            </xs:sequence>
+	</xs:complexType>
+	</xs:element>
+</xs:schema>

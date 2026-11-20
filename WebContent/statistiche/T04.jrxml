@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
+<!-- 2015-02-12T15:20:02 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="T04" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21f6857d-daf1-4bf4-8d14-4f34563f88e3">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP_GIU2"/>
+	<subDataset name="DatasetTitolo" uuid="1c94561d-a4a8-4daf-93bc-012b639c6a6e">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP2"/>
+		<parameter name="DS_UFFICIO" class="java.lang.Integer"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT TRIM( UPPER( T_TP_TIPO_UFFICIO.DESC_TIPO_UFF)) AS DESC_TIPO_UFFICIO,
+	"T_AN_COMUNI"."DESC_COMUNE",
+	TRIM( UPPER( T_AN_UFFICIO.DESC_UFFICIO)) AS NEW_DESC_UFFICIO 
+FROM "T_AN_COMUNI",
+	"T_AN_UFFICIO",
+	"T_TP_TIPO_UFFICIO"
+WHERE 
+	 "T_AN_COMUNI"."CODI_K_ID_COMUNE" = "T_AN_UFFICIO"."CODI_FK_ID_COM_SEDE" 
+	 AND "T_AN_UFFICIO"."CODI_FK_ID_TIPO_UFF" = "T_TP_TIPO_UFFICIO"."CODI_K_ID_TIPO_UFF" 
+	 AND ( 
+	 "T_AN_UFFICIO"."CODI_K_ID_UFFICIO" =$P{DS_UFFICIO})]]>
+		</queryString>
+		<field name="DESC_TIPO_UFFICIO" class="java.lang.String"/>
+		<field name="DESC_COMUNE" class="java.lang.String"/>
+		<field name="NEW_DESC_UFFICIO" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="UFFICIO" class="java.lang.Integer"/>
+	<parameter name="DATA_FINE" class="java.util.Date"/>
+	<queryString language="plsql">
+		<![CDATA[{ call PG_STATISTICHE.T04_01( $P{DATA_FINE}, $P{UFFICIO},  $P{ORACLE_REF_CURSOR}) }]]>
+	</queryString>
+	<field name="CODI_FK_ID_TIPO_PROC" class="java.math.BigDecimal"/>
+	<field name="NUMERO" class="java.math.BigDecimal"/>
+	<field name="CODI_K_ID_PROC" class="java.math.BigDecimal"/>
+	<field name="ANNO" class="java.math.BigDecimal"/>
+	<field name="DATA_ISCRIZIONE" class="java.sql.Timestamp"/>
+	<field name="DESC_TIPO_PREVEN" class="java.lang.String"/>
+	<field name="FLG_ORDINARIA" class="java.lang.String"/>
+	<field name="FLG_ANTIMAFIA" class="java.lang.String"/>
+	<field name="FLG_ANTITERRORISMO" class="java.lang.String"/>
+	<field name="DESC_TIPO_PROC" class="java.lang.String"/>
+	<field name="ANNO_NUMERO" class="java.lang.String"/>
+	<field name="PROPOSTO" class="java.lang.String"/>
+	<field name="PROPONENTE" class="java.lang.String"/>
+	<field name="GIUDICE_RELATORE" class="java.lang.String"/>
+	<variable name="variableMapName" class="java.util.HashMap">
+		<initialValueExpression><![CDATA[new java.util.HashMap()]]></initialValueExpression>
+	</variable>
+	<variable name="RecordCount" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="83" splitType="Stretch">
+			<componentElement>
+				<reportElement x="-4" y="0" width="560" height="30" uuid="44ccb5f8-61c5-4180-85f0-a687e945d217"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="DatasetTitolo" uuid="ddf5c2c8-289b-4a6a-8290-d00f8106bc2f">
+						<datasetParameter name="DS_UFFICIO">
+							<datasetParameterExpression><![CDATA[$P{UFFICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="560">
+						<textField>
+							<reportElement x="0" y="0" width="554" height="30" uuid="3ab73f3e-a53a-47e0-9738-6fc9c71c42ce"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="14" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{NEW_DESC_UFFICIO}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField>
+				<reportElement x="-5" y="32" width="560" height="20" uuid="ddf58391-e244-44d3-b82e-d816b9937b91"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["T04. Dettaglio procedimenti pendenti al " + DATEFORMAT($P{DATA_FINE},"dd/MM/yyy")]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="-4" y="55" width="560" height="20" uuid="5c8a651e-3e0a-4731-9307-b71f1e1f0827"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Numero totale procedimenti pendenti elencati " + $V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="-10" y="0" width="59" height="34" forecolor="#FFFFFF" backcolor="#336699" uuid="22ef22a5-8d3a-4370-9ede-f179ae1c7816"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Procedimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="49" y="0" width="75" height="34" forecolor="#FFFFFF" backcolor="#336699" uuid="d60294db-d57b-40ca-ba85-9f04755288f8"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Tipo Procedimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="124" y="0" width="115" height="34" forecolor="#FFFFFF" backcolor="#336699" uuid="2d53f9fa-44c7-464b-b73b-f6e4942d13c1"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Proposto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="239" y="0" width="120" height="34" forecolor="#FFFFFF" backcolor="#336699" uuid="2e2cbbda-fc8c-446e-8468-eefa670ebd9f"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Giudice Relatore]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="359" y="0" width="60" height="34" forecolor="#FFFFFF" backcolor="#336699" uuid="a76264e3-2983-4884-9eb2-1ca6fdb70565"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Data di registrazione procedimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="419" y="0" width="62" height="34" forecolor="#FFFFFF" backcolor="#336699" uuid="5fcadc4e-2a17-42a3-a784-505a3eb99b37"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Tipo di prevenzione]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="481" y="0" width="82" height="34" forecolor="#FFFFFF" backcolor="#336699" uuid="246c9f97-f50c-4798-97dc-feacbd9e7e89"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Autorità proponente]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="-10" y="0" width="58" height="25" uuid="6d917857-3aeb-47bf-bf83-99d493db5e6a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANNO_NUMERO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="123" y="0" width="116" height="25" uuid="fd52f958-28f5-414d-a6b0-0ad62c7fbf6c"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROPOSTO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="239" y="0" width="120" height="25" uuid="e8dea013-fca0-4f12-9893-677bb15022cf"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GIUDICE_RELATORE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="359" y="0" width="59" height="25" uuid="fef19bbf-983d-49db-b04d-12ec499e6cfb"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DATEFORMAT($F{DATA_ISCRIZIONE},"dd/MM/yyy")]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="418" y="0" width="62" height="25" uuid="cd5e0af2-a182-458c-971a-f2d34b9ec5df"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESC_TIPO_PREVEN}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="49" y="0" width="74" height="25" uuid="f8a8be46-f350-43d5-a955-c82270a648c6"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESC_TIPO_PROC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="480" y="0" width="80" height="25" uuid="280cca85-7395-4ace-9f5d-9bfd99733313"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROPONENTE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="27" splitType="Stretch">
+			<textField pattern="d/M/yy h:mm a">
+				<reportElement x="485" y="4" width="76" height="17" uuid="ccb9dfbf-e31b-4ff7-b912-01189c65b4df"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DATEFORMAT(new java.util.Date(),"dd/MM/yyy")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="392" y="4" width="93" height="17" uuid="1e536c28-c246-4893-bc52-20c0e9467e34">
+					<property name="local_mesure_unity" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Data Stampa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="-7" y="5" width="42" height="17" uuid="97f71a88-5618-475c-b5b6-ee3b23fd4a3b"/>
+				<textElement textAlignment="Left">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="35" y="5" width="55" height="17" uuid="0bf4070b-c8a2-4ed3-ba3d-c1b7547d61b8"/>
+				<textElement textAlignment="Left">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["di " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

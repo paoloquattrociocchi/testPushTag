@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ 	<sql-query callable="true" name="PG_FLUSSI_flussi_da_elaborare">{ call PG_FLUSSI.FLUSSI_DA_ELABORARE(?,:vidUffOwn) }</sql-query>
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoProposta">
+		{ call PG_FLUSSI.processFlussoProposta(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito,:dataRicezione,:documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoFascicoloCauzione">
+		{ call PG_FLUSSI.processFlussoFascicoloCauzione(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito,:dataRicezione,:documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoSequestro">
+		{ call PG_FLUSSI.processFlussoSequestro(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito,:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>	
+	
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoIstanzaSoggDiff">
+		{ call PG_FLUSSI.processFlussoIstanzaSoggDiff(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query> 
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoIncompRestAtti">{ call PG_FLUSSI.processFlussoIncompRestAtti(?, :idFlusso, :descUtente, :idUffOwn) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoDefinitivita">{ call PG_FLUSSI.processFlussoDefinitivita(?, :idFlusso, :descUtente, :idUffOwn) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoDecisorioIGrado">
+		{ call PG_FLUSSI.processFlussoDecisorioIGrado(?, :idFlusso, :descUtente, :idUffOwn, 
+												:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	<return-scalar column="MESSAGGIO" type="string"/>
+	</sql-query>
+		<sql-query callable="true" name="PG_FLUSSI_processFlussoDecretoUdienza">
+		{ call PG_FLUSSI.processFlussoUdienza(?, :idFlusso, :descUtente, :idUffOwn, 
+												:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	<return-scalar column="MESSAGGIO" type="string"/>
+	</sql-query>
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoVerbaleUdienza">
+		{ call PG_FLUSSI.processFlussoVerUdienza(?, :idFlusso, :descUtente, :idUffOwn, 
+												:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+    <sql-query callable="true" name="PG_FLUSSI_processFlussoRemAssRuoloUdienza">
+		{ call PG_FLUSSI.processFlussoRemAssUdienza(?, :idFlusso, :descUtente, :idUffOwn, 
+												:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoDecretoConvalidaSequestro">
+		{ call PG_FLUSSI.processFlussoConvalidaSeq(?, :idFlusso, :descUtente, :idUffOwn, 
+												:dataDeposito,:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoPerditaEfficaciaSequestro">
+		{ call PG_FLUSSI.processFlussoPerdEffSeq(?, :idFlusso, :descUtente, :idUffOwn, 
+												:dataDeposito,:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+		
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoDecretoRevocaSequestro">
+		{ call PG_FLUSSI.processFlussoRevocaSeq(?, :idFlusso, :descUtente, :idUffOwn, 
+												:dataDeposito,:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoDecretoRigettoTotaleSequestro">
+		{ call PG_FLUSSI.processFlussoRigettoTotSeq(?, :idFlusso, :descUtente, :idUffOwn, 
+												:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoOpposizioneDissequestro">
+		{ call PG_FLUSSI.processFlussoOpposizDisseq(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoRevocaOpposizioneDissequestro">
+		{ call PG_FLUSSI.processFlussoRevOpposizDisseq(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>	
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoRevocazioneConfisca">
+		{ call PG_FLUSSI.processFlussoRevocazConfisca(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>	
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoSentenzaOpposizioneDissequestro">
+		{ call PG_FLUSSI.processFlussoSentOpposizDisseq(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoSentenzaRevocazioneConfisca">
+		{ call PG_FLUSSI.processFlussoSentRevocazConf(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>	
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoRicorsoInAppello">
+		{ call PG_FLUSSI.processFlussoRicorsoInAppello(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito, :documento, :tipoDocumento, :nomeDocumento,:idProcedimentoCda) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>	
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoAttoRifiutato">
+		{ call PG_FLUSSI.processFlussoAttoRifiutato(?, :idFlusso, :descUtente, :idUffOwn) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>	
+	
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoDecDecisorioIIGrado">
+		{ call PG_FLUSSI.processFlussoDecIIGrado(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito,:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>	
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoProvvIstFascicolo">
+		{ call PG_FLUSSI.processFlussoProvvIstFascicolo(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito,:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>	
+	</sql-query>	
+	
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoParere">
+		{ call PG_FLUSSI.processFlussoParere(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>	
+	<return-scalar column="MESSAGGIO" type="string"/>
+	
+	</sql-query>	
+
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoVersionamento">
+		{ call PG_FLUSSI.processFlussoVersionamento(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>	
+	</sql-query>	
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoRicorsoInCassazione">
+		{ call PG_FLUSSI.processFlussoRicorsoInCass(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }									
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>	
+	</sql-query>		
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoProrogaSequestro">
+		{ call PG_FLUSSI.processFlussoProrogaSequestro(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }									
+		<return-scalar column="CODI_K_ID_PROC" type="long"/>
+		<return-scalar column="CODI_K_ID_ATTO" type="long"/>	
+	</sql-query>		
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoSospensioneTemporanea">
+		{ call PG_FLUSSI.processFlussoSospensione(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito,:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>		
+
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoProrogaSospensioneTemporanea">
+		{ call PG_FLUSSI.processFlussoProrogaSospTemp(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>	
+
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoSequestroSospensioneTemporanea">
+		{ call PG_FLUSSI.processFlussoSeqSospTemp(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>		
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoApplicazioneProvv">
+		{ call PG_FLUSSI.processFlussoApplicazioneProvv(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito,:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>		
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoSentenzaCassazione">
+		{ call PG_FLUSSI.processFlussoSentenza(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito,:dataRicezione, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	</sql-query>		
+	
+	<sql-query callable="true" name="PG_FLUSSI_dettaglioFlussoSentenza">
+		{ call PG_FLUSSI.DettaglioFlussoSentenza(?, :idFlusso, :idUffOwn, :descUtente) }
+	</sql-query>	
+
+	<sql-query callable="true" name="PG_FLUSSI_ricercaTFlussiIn">
+		 <return alias="FLUSSIIN" class="it.giustizia.smp.model.TFlussiIn"/>
+		{ call PG_FLUSSI.RICERCATFLUSSIIN(?, :IDUFFOWN, :TIPOFLUSSO, :IDATTO) }
+	</sql-query>
+	
+		
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoProcCDAdaCass">
+		{ call PG_FLUSSI.processFlussoProcCDAdaCass(?, :idFlusso, :descUtente, :idUffOwn) }
+		<return-scalar column="CODI_K_ID_PROC" type="long"/>
+		<return-scalar column="CODI_K_ID_ATTO" type="long"/>	
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoProcTridaCass">
+		{ call PG_FLUSSI.processFlussoProcTridaCass(?, :idFlusso, :descUtente, :idUffOwn) }
+		<return-scalar column="CODI_K_ID_PROC" type="long"/>
+		<return-scalar column="CODI_K_ID_ATTO" type="long"/>	
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoProcTridaCdA">
+		{ call PG_FLUSSI.processFlussoProcTridaCdA(?, :idFlusso, :descUtente, :idUffOwn) }
+		<return-scalar column="CODI_K_ID_PROC" type="long"/>
+		<return-scalar column="CODI_K_ID_ATTO" type="long"/>	
+	</sql-query>	
+			
+
+<sql-query callable="true" name="PG_FLUSSI_processFlussoParereFascicolo">
+		{ call PG_FLUSSI.processFlussoParereFascicolo(?, :idFlusso, :descUtente, :idUffOwn, 
+											:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	<return-scalar column="MESSAGGIO" type="string"/>	
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoUdienzaFascicolo">
+		{ call PG_FLUSSI.processFlussoUdienzaFascicolo(?, :idFlusso, :descUtente, :idUffOwn, 
+												:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	<return-scalar column="MESSAGGIO" type="string"/>
+	</sql-query>	
+	
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoDecIGFascicolo">
+		{ call PG_FLUSSI.processFlussoDecIGFascicolo(?, :idFlusso, :descUtente, :idUffOwn, 
+												:dataDeposito, :documento, :tipoDocumento, :nomeDocumento) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	<return-scalar column="MESSAGGIO" type="string"/>
+	</sql-query>
+	
+	
+	<sql-query callable="true" name="PG_FLUSSI_generateFlussoNotifiche">
+		{ call PG_FLUSSI.generateFlussoNotifiche(?, :idProc, :idAtto, :idUffMitt, :idUffDest, 
+												 :numePDOC, :numeCopiaPDOC, :nomeDocumento, 
+												 :tipoDocumento, :descUtente) }
+
+	</sql-query>
+	
+ 	<sql-query callable="true" name="PG_FLUSSI_listaFlussiToolAmministratori">{ call PG_FLUSSI.flussiToolAmministratori(?,:vidUffOwn) }</sql-query>
+
+	<sql-query callable="true" name="PG_FLUSSI_listaDepositoByProc">{ call PG_FLUSSI.listaDepositoByProc(?,:idProcedimento, :idUffOwn, :flag) }</sql-query>
+
+	<sql-query callable="true" name="PG_FLUSSI_processFlussoNRGCassazione">
+		{ call PG_FLUSSI.processFlussoNRGSentenza(?, :idFlusso, :descUtente, :idUffOwn) }
+	<return-scalar column="CODI_K_ID_PROC" type="long"/>
+	<return-scalar column="CODI_K_ID_ATTO" type="long"/>
+	<!-- P.Q. MEV 2021/10 Inizio -->
+	<return-scalar column="CODI_K_ID_ATTO_SENTENZA" type="long"/>
+	<!-- P.Q. MEV 2021/10 Fine -->	
+	<return-scalar column="MESSAGGIO" type="string"/>
+	</sql-query>
+
+</hibernate-mapping>

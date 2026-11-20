@@ -1,0 +1,1225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="PG_ATTO_inserisciFonte" callable="true" >
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_ATTO.INSERISCI_FONTE_ATTO(?,:idUffOwn, :descUtente, :idProcedimento, :idStatoProc, :idFonte, :idOrgano, :altroOrgano, :numeroRiferimento, :dataInformativa, :note, :dataRicezione, :documento, :tipoDocumento, :nomeDocumento ) }
+	</sql-query>
+	<sql-query name="PG_ATTO_modificaFonte" callable="true" >
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_ATTO.MODIFICA_FONTE_ATTO(?,:idUffOwn, :idAtto, :codiceUtente, :idFonte, :idOrgano, :altroOrgano, :numeroRiferimento, :dataInformativa, :note, :dataRicezione, :documento, :tipoDocumento, :nomeDocumento ) }
+	</sql-query>
+	<sql-query name="PG_ATTO_rimuoviDocumentoAllegato" callable="true" >
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_ATTO.RIMUOVI_DOC_DA_ATTO(?,:idUffOwn,:idAtto,:idProcedimento) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_contaInvioMsgCassazione" callable="true" >
+		<return-scalar column="CONTA_INVIO" type="long"/>
+	 	{ call PG_ATTO.CTRL_INVIO_MSG_CASSAZIONE(?,:idProc,:idAtto,:idUffOwn) }
+	</sql-query>
+
+	
+	<sql-query name="PG_ATTO_associaSoggettoDirettoInteressato" callable="true" >		
+	 	{ call PG_ATTO.ASSOCIA_SOGINT_FONTE(?,:idUffOwn, :idProcedimento, :idSoggetto, :idFonte) }
+	</sql-query>	
+	
+	<sql-query name="PG_ATTO_dissociaSoggettoDirettoInteressato" callable="true" >		
+	 	{ call PG_ATTO.DISSOCIA_SOGINT_FONTE(?,:idUffOwn, :idProcedimento, :idSoggetto) }
+	</sql-query>
+	          	
+	<sql-query name="PG_ATTO_aggiornaPropostaAtto" callable="true" >
+	 	<return-scalar column="IDATTO" type="long"/>
+		 { call PG_ATTO.AGGIORNA_PROPOSTA_ATTO(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,
+		 :dataEmissione,:dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:numeroRif,:contDett,:descUtente) }
+    </sql-query>
+  
+    
+    <sql-query name="PG_ATTO_dettaglioPropostaAtto" callable="true" >
+	 	<return alias="atto" class="it.giustizia.smp.model.TAtto"/>
+	 	<return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+	 	<return alias="istanza" class="it.giustizia.smp.model.TIstanza"/>	
+		 { call PG_ATTO.DETTAGLIO_PROPOSTA_ATTO(?,:idUffOwn, :idProc, :idAtto) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_listaAttiByProcedimento" callable="true" >
+	 	 <return alias="atto" class="it.giustizia.smp.model.TAtto"/>	
+    	 <return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	 <return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+		 { call PG_ATTO.ATTI_PER_PROCEDIMENTO(?,:idProcedimento,:tipologiaAtto,:listaCategoriaAtto) }
+    </sql-query>
+
+    <sql-query name="PG_ATTO_listaAttiOpposizioneDissequestro" callable="true" >
+	 	 <return alias="atto" class="it.giustizia.smp.model.TAtto"/>	
+    	 <return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	 <return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+		 { call PG_ATTO.ATTI_OPPOSIZ_DISSEQ(?,:idProcedimento) }
+    </sql-query>
+    
+    
+    <sql-query name="PG_ATTO_listaAttiPerditaEfficaciaSequestro" callable="true" >
+	 	 <return alias="atto" class="it.giustizia.smp.model.TAtto"/>	
+    	 <return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	 <return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+		 { call PG_ATTO.ATTI_PERDITA_EFF_SEQ(?,:idProcedimento) }
+    </sql-query>    
+
+    
+    
+    <sql-query name="PG_ATTO_listaAttiRevocaOpposizioneDissequestro" callable="true" >
+	 	 <return alias="atto" class="it.giustizia.smp.model.TAtto"/>	
+    	 <return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	 <return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+		 { call PG_ATTO.ATTI_REVOCA_OPPOSIZ_DISSEQ(?,:idProcedimento) }
+    </sql-query>    
+        
+    <sql-query name="PG_ATTO_listaAttiRevocazioneConfisca" callable="true" >
+	 	 <return alias="atto" class="it.giustizia.smp.model.TAtto"/>	
+    	 <return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	 <return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+		 { call PG_ATTO.ATTI_REVOCAZ_CONF(?,:idProcedimento) }
+    </sql-query>      
+    
+     <sql-query name="PG_ATTO_listaAttiParere" callable="true" >
+	 	 <return alias="atto" class="it.giustizia.smp.model.TAtto"/>	
+    	 <return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	 <return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+		 { call PG_ATTO.ATTI_PARERE(?,:idProcedimento) }
+    </sql-query>      
+        
+    <sql-query name="PG_ATTO_salvaUdienza" callable="true" >
+		<return-scalar column="IDCURRENTUDIENZA" type="long"/>
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_ATTO.SALVA_UDIENZA_ATTO(?, :idUffOwn, :descUtente, :idProcedimento, :idTipoAtto, :idCatAtto, :dataUdienza, :oraInizioUdienza, :indirizzoAula, :cognomeCanc, :nomeCanc, :aula, :documento, :tipoDocumento, :nomeDocumento ) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_salvaUdienzaDecretoSeqConv" callable="true" >
+		<return-scalar column="IDCURRENTUDIENZA" type="long"/>
+	 	{ call PG_ATTO.SALVA_UDIENZA_DECRETO_SEQCONV(?, :idUffOwn, :descUtente, :idProcedimento, :codAtto, :dataUdienza, :oraInizioUdienza, :indirizzoAula, :aula, :idUdienzaFiss, :idUdienzaVerbRis ) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_elimina_udienza_seq_conv" callable="true" >
+		{ call PG_ATTO.ELIMINA_UDIENZA_SEQ_CONV(?, :vidUdienza, :vidAtto, :vidUffOwn) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_modificaUdienza" callable="true" >
+		<return-scalar column="IDCURRENTUDIENZA" type="long"/>
+	 	{ call PG_ATTO.MODIFICA_UDIENZA_ATTO(?, :idUdienza, :idUffOwn, :idAtto, :dataUdienza, :oraInizioUdienza, :indirizzoAula, :cognomeCanc, :nomeCanc, :aula,:documento, :tipoDocumento, :nomeDocumento, :dataEmissione, :dataDeposito ) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_insDecretoAnticipazioneRinvioUdienza" callable="true" >
+		<return-scalar column="IDCURRENTUDIENZA" type="long"/>
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_ATTO.INS_DECR_ANTICIP_RINV_UDIENZA(?, :idUffOwn, :descUtente, :idUdienzaPrecedente, :idProcedimento, :idTipoAtto, :idCatAtto, :dataUdienza, :oraInizioUdienza, :indirizzoAula, :cognomeCanc, :nomeCanc, :aula, :documento, :tipoDocumento, :nomeDocumento ) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_inviaAtto_fissUdienza" callable="true" >
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_ATTO.INVIA_ATTO_FISS_UDIENZA(?, :idAtto, :idUffOwn, :idProc, :idUdienza, :idDestinatario, :descUtente, :dataEmissione, :dataDeposito, :dataRegistrazione, :idStatoAtto ) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_aggDecretoAnticipazioneRinvioUdienza" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_ATTO.AGG_DECR_ANTICIP_RINV_UDIENZA(?,:idUffOwn,:idMittente,:idProcInUdienza,:idUdienza,:dataUdienza,:oraInizioUdienza,:indirizzoAula,:cognomeCanc,:nomeCanc,
+													:aula,:idUdienzaPrecedente,:idProc,:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+													:nomeDocumento,:idAtto,:idTipoAtto,:idCategoriaAtto,:descUtente) }
+    </sql-query> 
+	
+	<sql-query name="PG_ATTO_soggettiInteressatiSenzaDifensore" callable="true" >
+		{ call PG_ATTO.SOGINT_WITH_NO_DIFENSORI(?,:idProcedimento,:idUffOwn) }
+    </sql-query>
+    
+	<sql-query name="PG_ATTO_inserisciAttoDecretoProcStato" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INSERISCI_ATTO_DECR_PROC_STATO(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idCatAtto,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,:nomeDocumento) }	 	
+	</sql-query>  
+	
+	<sql-query name="PG_ATTO_salvaAttoDecretoConMagistrato" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.SALVA_ATTO_DECR_CON_MAGISTRATO(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idCatAtto,:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,:nomeDocumento) }	 	
+	</sql-query>  	
+	
+	<sql-query name="PG_ATTO_inserisciDecretoDecisorio" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INSERISCI_DECRETO_DECISORIO(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigineMisure,:idCatAtto,:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,:nomeDocumento) }	 	
+	</sql-query>  	
+	
+	
+	<sql-query name="PG_ATTO_modificaAttoProc" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.MODIFICA_ATTO_PROC(?,:idAtto, :idUffOwn ,:idTipoAtto,:idCatAtto,:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,:nomeDocumento) }	 	
+	</sql-query>  
+  
+	<sql-query name="PG_ATTO_dettaglioAtto" callable="true" >
+	 	{ call PG_ATTO.DETTAGLIO_ATTO(?,:idAtto,:idProcedimento,:descUtente,:idUffOwner) }	 	
+	</sql-query>   
+
+	<sql-query name="PG_ATTO_copiaMisBeneAtto" callable="true" >	
+	 	{ call PG_ATTO.COPIA_MIS_BENE_ATTO(?,:idUffOwn,:descUtente,:idProcedimento,:idBene,:idAttoDecreto, :flagRevoca, :nomeMetodo) }	 	
+	</sql-query>  	
+
+	<sql-query name="PG_ATTO_eliminaMisBeneAtto" callable="true" >	
+	 	{ call PG_ATTO.ELIMINA_MIS_BENE_ATTO(?,:idUffOwn,:idProcedimento,:idBene,:idAtto,:idPersona,:idTitoloInt) }	 	
+	</sql-query>  
+  	
+	<sql-query name="PG_ATTO_inviaDecretoIncompetenza" callable="true" >
+		<return-scalar column="IDFLUSSO" type="long"/>		
+	 	{ call PG_ATTO.INVIA_DECRETO_INCOMPETENZA(?, :idProcedimento, :idAtto, :idMittente, :idDestinatario, :idDestinatario2, :idDestinatario3, :descUtente, :idUffOwn, :categoriaAtto, :nomeMetodo) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_lista_Beni_No_Tit_Dir" callable="true" >
+	 	<return alias="proc_bene" class="it.giustizia.smp.model.TRelProcBene"/>	
+	 	<return alias="bene" class="it.giustizia.smp.model.TBene"/>			
+	 	{ call PG_ATTO.LISTA_BENI_NO_TIT_DIR(?,:idUffOwn,:idProcedimento,:idAtto) }
+	</sql-query>	
+
+	<sql-query name="PG_ATTO_inviaDecretoIncompetenzaProcura" callable="true" >
+		<return-scalar column="IDFLUSSO" type="long"/>		
+	 	{ call PG_ATTO.INVIA_DECRETO_INCOMPETENZA(?, :idProcedimento, :idAtto, :idMittente, :idDestinatario, :idDestinatario2, :idDestinatario3, :descUtente, :idUffOwn, :categoriaAtto, :nomeMetodo) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_ufficiDestIncompetenzaProcura" callable="true">
+		<return alias="ufficio" class="it.giustizia.smp.model.TAnUfficio"/>
+   		{ call PG_ATTO.UFFICI_DEST_INCOMP_PROCURA(?,:idProcedimento) }
+ 	</sql-query>
+
+	<sql-query name="PG_ATTO_lista_Beni_No_Mis_Patr" callable="true" >
+	 	<return alias="bene" class="it.giustizia.smp.model.TBene"/>			
+	 	{ call PG_ATTO.LISTA_BENI_NO_MIS_PATR(?,:idUffOwn,:idProcedimento,:idAtto) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_invia_atto_decreto_seq" callable="true" >
+	 	{ call PG_ATTO.INVIA_ATTO_DECRETO_SEQ(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+										      :idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,
+										      :idMagistrato,:giudiceDelegato) } 	
+	</sql-query>	
+
+	<sql-query name="PG_ATTO_aggiorna_atto_decreto_seq" callable="true" >
+	 	{ call PG_ATTO.AGGIORNA_ATTO_DECRETO_SEQ(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:noteRestituzione) } 	
+	</sql-query>	
+	
+	<sql-query name="PG_ATTO_applicaDefinitivita" callable="true" >
+		<return-scalar column="IDFLUSSO" type="long"/>		
+	 	{ call PG_ATTO.APPLICA_DEFINITIVITA(?, :idAtto, :idTipoAtto, :idProcedimento, :numeProc, :annoProc, :idMittente, :idUffProcProp, :idDestinatario, :descUtente, :dataDefinitivita) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_magistrati_per_atto" callable="true" >
+	   <return alias="rel" class="it.giustizia.smp.model.TRelMagAtto"/>
+	   <return alias="mag" class="it.giustizia.smp.model.TAnMagistrati"/>
+		{ call PG_ATTO.MAGISTRATI_PER_ATTO (?,:idUffOwn,:vidatto,:ruoloMag) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_elimina_mag_per_Atto" callable="true" >
+		{ call PG_ATTO.ELIMINA_MAG_PER_ATTO(?,:idUffOwn,:idAtto,:idMagistrato,:idRuolo) }
+	</sql-query>	
+	
+	<sql-query name="PG_ATTO_dettaglio_magistrato_per_atto" callable="true" >
+	   <return alias="rel" class="it.giustizia.smp.model.TRelMagAtto"/>
+	   <return alias="mag" class="it.giustizia.smp.model.TAnMagistrati"/>
+		{ call PG_ATTO.DETTAGLIO_MAGISTRATO_PER_ATTO(?,:idUffOwn,:idAtto,:idMagistrato,:idRuolo) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_modifica_magistrato_per_atto" callable="true" >
+		{ call PG_ATTO.MODIFICA_MAGISTRATO_PER_ATTO(?,:idUffOwn,:idAtto,:idMagistrato,:idRuolo,:descNuovoRuolo,:flgRelatore) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_inserisci_magistrato_per_atto" callable="true" >
+		{ call PG_ATTO.INSERISCI_MAGISTRATO_PER_ATTO(?,:idUffOwn,:idAtto,:idMagistrato,:idRuolo,:flgRelatore,:codiUtente) }
+	</sql-query>			
+
+  	<sql-query name="PG_ATTO_listaAttiOrdineCronologico" callable="true" >
+	 	<return alias="atto" class="it.giustizia.smp.model.TAtto"/>
+	 	<return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	<return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>	
+		 { call PG_ATTO.ATTI_ORDINE_CRONOLOGICO(?,:idProcedimento) }
+    </sql-query>   
+    <sql-query name="PG_ATTO_aggiornaIstanzaSoggettoDiffidato" callable="true" >
+	 	<return-scalar column="IDATTO" type="long"/>
+		 { call PG_ATTO.AGGIORNA_ISTANZA_SOGG_DIFFID(?,:idUffOwn,:idMittente,:idDestinatario,:idProc,:dataPresentazione,:dataDeposito,
+		 :modalitaTrasmissione,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,:nomeDocumento,:descUtente,:descAltroMod) }
+    </sql-query>
+   
+	   <sql-query callable="true"
+	   name="PG_ATTO_inserisciAttoDecretoApplicazioneProvvisoria">{ call
+			PG_ATTO.INSERISCI_DECRETO_APP_PROV(?,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,:nomeDocumento,:idStatoAtto,
+			:idMisureCaricate,:idProc,:idAtto,:idUffOwn,:idSoggInt,
+			:idTipoMisura, :idNormativa,:durataAnni,:durataMesi,:durataGiorni,
+			:descLoc,:descUltPresc,:cauzione,:articolo67,
+			:idEsito1,:idEsito2,:idEsito3,:idEsitoFin,:descAltro1,:descAltro2,
+			:descAltro3,:flgValido,:codiMotivo,:idTipoAtto,:descUtente,:idPrescrizioni,:importoCauzione,:articolo9c1)
+			}
+	 </sql-query>
+	 
+   
+    <sql-query name="PG_ATTO_esecuzione_atto_registrato" callable="true" >
+		 { call PG_ATTO.ESECUZIONE_ATTO_REGISTRATO(?,:dataEsecuzione,:idBene,:idSoggetto,:idInteresse,
+		 :idProcedimento,:idUfficioUtente,:idAtto,:descUtente) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_definitivita_atto_registrato_mis_patr_salva" callable="true" >
+		 { call PG_ATTO.DEFINITIVITA_MIS_PATR_SALVA(?,:dataDefinitivita,:idBene,:idSoggetto,:idInteresse,
+		 :idProcedimento,:idUfficioUtente,:idAtto,:descUtente,:tipoMisura,:tipoAtto) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_definitivita_atto_registrato_mis_pers_salva" callable="true" >
+		 { call PG_ATTO.DEFINITIVITA_MIS_PERS_SALVA(?,:dataDefinitivita,:idMisura,:idProcedimento,
+		 :idUfficioUtente,:idAtto,:descUtente,:tipoMisura,:tipoAtto) }
+    </sql-query>
+    
+  
+    <sql-query name="PG_ATTO_definitivita_mis_patr_cancella" callable="true" >
+		 { call PG_ATTO.DEFINITIVITA_MIS_PATR_CANCELLA(?,:idBene,:idSoggetto,:idInteresse,
+		 :idProcedimento,:idUfficioUtente,:idAtto,:descUtente,:tipoMisura,:tipoAtto) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_definitivita_mis_pers_cancella" callable="true" >
+		 { call PG_ATTO.DEFINITIVITA_MIS_PERS_CANCELLA(?,:idMisura,:idProcedimento,
+		 :idUfficioUtente,:idAtto,:descUtente,:tipoMisura,:tipoAtto) }
+    </sql-query>    
+    
+
+    <sql-query name="PG_ATTO_definitivita_atto_registrato_conf_invia" callable="true" >
+		 { call PG_ATTO.DEFINITIVITA_CONFERMA_INVIA(?,:idProcedimento,:idAtto,:idUfficioUtente,:idProcUdi,:idProcProp,:idProcGen,:descUtente,:aggiornaStatoProc) }
+    </sql-query>
+
+    <sql-query name="PG_ATTO_definitivita_atto_registrato_conf_invia_DATA" callable="true" >
+		 { call PG_ATTO.DEFINITIVITA_CONFERMA_INVIA(?,:idProcedimento,:idAtto,:idUfficioUtente,:idProcUdi,:idProcProp,:idProcGen,:descUtente,:aggiornaStatoProc,:data_definitivita) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_definitivita_revocazione_confisca" callable="true" >
+		 { call PG_ATTO.DEFIN_REVOC_CONF_CONF_INVIA(?,:idProcedimento,:idAtto,:idUffOwn,:idDest1,:idDest2,:idDest3,:descUtente,:aggiornaStatoProc) }
+    </sql-query>
+
+    <sql-query name="PG_ATTO_definitivita_II_grado" callable="true" >
+		 { call PG_ATTO.DEFINITIVITA_II_GRADO(?,:idProcedimento,:idAtto,:idUffOwn,:idDest1,:idDest2,:idDest3,:descUtente,:aggiornaStatoProc) }
+    </sql-query>
+        
+    <sql-query name="PG_ATTO_aggiornaDecisorioIGradoIstanzaSoggDiffidato" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_ATTO.AGGIORNA_DEC_I_GRADO_SOGG_DIFF(?,:idUffOwn,:idMittente,:idProcInUdienza,:idProcGenerale,:idProc,
+		:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+		:nomeDocumento,:idAtto,:idEsitoOpposizione,:descUtente) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_aggiornaDecisorioIGradoPrevenzione" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_ATTO.AGGIORNA_DEC_I_GRADO_PREVENZ(?,:idUffOwn,:idMittente,:idProcInUdienza,:idProcGenerale,:idProcProponente,:idProc,
+		:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+		:nomeDocumento,:idAtto,:descUtente,:idMagistrato,:giudiceDelegato) }
+    </sql-query> 
+    
+    <sql-query name="PG_ATTO_aggiornaDecisorioIIGradoMerito" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_ATTO.AGGIORNA_DEC_II_GRADO_MERITO(?,:idUffOwn,:idMittente,:idProcInUdienza,:idProcGenerale,:idProcProponente,:idProc,
+		:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+		:nomeDocumento,:idAtto,:descUtente,:idMagistrato,:giudiceDelegato) }
+    </sql-query> 
+    
+    <sql-query name="PG_ATTO_aggiornaSentenzaOpposizioneDissequestro" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_ATTO.AGGIORNA_SENT_OPPOSIZ_DISSEQ(?,:idUffOwn,:idMittente,:idUff1,:idUff2,:idUff3,:idProc,
+		:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+		:nomeDocumento,:idAtto,:descUtente) }
+    </sql-query>     
+
+    <sql-query name="PG_ATTO_aggiornaSentenzaRevocazioneConfisca" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_ATTO.AGGIORNA_SENT_REVOCAZ_CONF(?,:idUffOwn,:idMittente,:idUff1,:idUff2,:idUff3,:idProc,
+		:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+		:nomeDocumento,:idAtto,:descUtente) }
+    </sql-query>         
+    
+	<sql-query name="PG_ATTO_soggettiMisPersDefinitivita" callable="true" >
+		 { call PG_ATTO.SOGGETTI_MIS_PERS_DEFINITIVITA(?,:idUffOwn,:idProcedimento,:idAtto) }
+    </sql-query>
+
+	<sql-query name="PG_ATTO_soggettiMisPersDefinitivitaFiltrati" callable="true" >
+		 { call PG_ATTO.SOGG_MIS_PERS_DEFINITIVITA_F(?,:idUffOwn,:idProcedimento,:idAtto,:idSoggettoDiretto) }
+    </sql-query>
+	
+	<sql-query name="PG_ATTO_misPersPerSoggettoDefinitivita" callable="true" >
+	 	<return alias="relam" class="it.giustizia.smp.model.TRelAttoMisPers"/>	
+	 	<return alias="mis" class="it.giustizia.smp.model.TMisuraPers"/>
+	 	<return alias="cauz" class="it.giustizia.smp.model.TCauzione"/>
+	 	{ call PG_ATTO.MISURE_PERS_SOGG_DEFINITIVITA(?,:idUffOwn,:idProcedimento,:idAtto,:idSoggetto) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_aggiornaAccertamento" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_ATTO.AGGIORNA_ACCERTAMENTO (?,:idUffOwn,:idCodUtente,:idProc,:idStatoProc,:idAtto,:numeroRiferimento,
+		:dataInformativa,:note,:dataRicezione,:documento,:tipoDocumento,:nomeDocumento) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_esisteDecretoFissazioneUdienza" callable="true" >
+		 { call PG_ATTO.ESISTE_ATTO_FISS_UDIENZA(?,:idProcedimento,:idUffOwn) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_inserisciDecretoConvalidaSequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DECRETO_CONVALIDA_SEQUESTR(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 
+	
+    <sql-query name="PG_ATTO_inserisciDecretoPerditaEfficacia" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DECRETO_PERDITA_EFFICACIA(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 	
+	
+	
+	
+	 <sql-query name="PG_ATTO_inserisciDecretoRevocaSequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DECRETO_REVOCA_SEQUESTRO(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 
+	
+    <sql-query name="PG_ATTO_inserisciDecretoOpposizioneDissequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_IMPUGN_OPPOSIZ_DISSEQ(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 	
+
+    <sql-query name="PG_ATTO_inserisciRevocaDecretoOpposizioneDissequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DEC_REV_OPPOSIZ_DISSEQ(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 	
+	
+    <sql-query name="PG_ATTO_inserisciRevocazioneConfisca" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DECRETO_REVOCAZ_CONFISCA(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 	
+		
+    <sql-query name="PG_ATTO_inserisciSentenzaOpposizioneDissequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_IMPUGN_OPPOSIZ_DISSEQ(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 		
+	
+    <sql-query name="PG_ATTO_inserisciAttoSentenzaRevocazioneConfisca" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DECRETO_REVOCAZ_CONFISCA(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 	
+		
+	<sql-query name="PG_ATTO_inviaDecretoConvalidaRevocaSequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INVIA_DEC_CONVALIDA_REVOCA_SEQ(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+										      :idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,:convalidaRevoca,:nomeMetodo) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_inviaDecretoPerditaEfficaciaSequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+			 	{ call PG_ATTO.INVIA_DEC_PERD_EFFICACIA_SEQ(?,:idUffOwn,:idProc,:idMittente,:dataEmissione,
+					      :dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,
+					      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+					      :idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,:nomeMetodo) }
+	</sql-query>	
+	
+	
+			
+ 	<sql-query name="PG_ATTO_inviaDecretoOpposizioneDissequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INVIA_IMP_OPPOSIZ_DISSEQ(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto, :nomeMetodo) }
+	</sql-query>
+
+ 	<sql-query name="PG_ATTO_inviaDecretoRevocaOpposizioneDissequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INVIA_DEC_REV_OPPOSIZ_DISSEQ(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto, :nomeMetodo) }
+	</sql-query>	
+
+ 	<sql-query name="PG_ATTO_inviaRevocazioneConfisca" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INVIA_IST_REVOCAZ_CONFISCA(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto, :nomeMetodo) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_inviaDefinitivitaDecisorioIGradoRiesame" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.DEFINITIVITA_DECISORIO_RIESAME(?,:idAtto,:idTipoAtto,:idProcedimento,:numeProc,:annoProc,:idMittente,
+										      :idProcGenerale,:idProcUdienza,:descUtente,:dataDefinitivita) }
+	</sql-query>	
+		<sql-query name="PG_ATTO_insDecretoAsseRemNuovoRuolo" callable="true" >
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_ATTO.INS_DECR_ASS_REM_NUOVO_RUOLO(?, :idUffOwn, :descUtente, :idUdienzaPrecedente, :idProcedimento, :idTipoAtto, :idCatAtto) }
+	</sql-query>
+
+    <sql-query name="PG_ATTO_inserisciDecretoAssegnazioneNuovoRuolo" callable="true" >
+      <return-scalar column="IDATTO" type="long"/>
+      { call PG_ATTO.INVIA_DECRETO_ASS_NUOVO_RUOLO(?,:idUffOwn, :idProc, :idMittente, :idProcInUdienza, :dataEmissione, :dataDeposito, :dataRegistrazione,     
+      :documento, :tipoDocumento, :nomeDocumento, :descUtente, :idAtto, :idTipoAtto, :idCatAtto, :idStatoAtto, :idUdienza)}
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_salvaUdienzaDecretoRemSuRuolo" callable="true" >
+		<return-scalar column="IDCURRENTUDIENZA" type="long"/>
+	 	{ call PG_ATTO.SALVA_UDI_DECRETO_REM_RUOLO(?, :idUffOwn, :descUtente, :idProcedimento, :codAtto, :dataUdienza, :oraInizioUdienza, :indirizzoAula, :aula, :cognomeCanc, :nomeCanc, :documento, :tipoDocumento, :nomeDocumento) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_inserisciDecretoRemissioneSuRuolo" callable="true" >
+      <return-scalar column="IDATTO" type="long"/>
+      { call PG_ATTO.INVIA_DECRETO_REM_SU_RUOLO(?,:idUffOwn, :idProc, :idMittente, :idProcInUdienza, :dataEmissione, :dataDeposito, :dataRegistrazione,     
+      :descUtente, :idAtto, :idTipoAtto, :idCatAtto, :idStatoAtto, :idUdienzaPrec, :idUdienzaNew)}
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_inserisci_atto_generico" callable="true" >
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_ATTO.INSERISCI_ATTO_GENERICO(?,:idUffOwn, :descUtente, :idProcedimento,:idTipoAtto, :idCatAtto, :idStatoAtto, :nomeMetodo) }
+	</sql-query>
+	
+    <!--INIZIO GESTIONE DOCUMENTALE -->  
+	<sql-query name="PG_ATTO_eseguitoFirmaRemota" callable="true">
+		<return-scalar column="ID_DOC" type="long" />
+		{ call PG_ATTO.ESEGUITO_FIRMA_REMOTA (?, :vIdDocumento) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_inserisciDocumentoPDoc" callable="true">
+		<return-scalar column="ID_DOC" type="long" />
+		{ call PG_ATTO.INSERISCI_DOCUMENTO_PDOC (?, :vIdDocumentoPDoc, :vCodiKIdAtto, :vCodiKIdUffOwn, :vTipoDocumento , :vFileName, :str_codugna) }
+	</sql-query>
+	<!--FINE GESTIONE DOCUMENTALE -->  
+    <sql-query name="PG_ATTO_cancellaAtto" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CANCELLA_ATTO(?,:idUffOwn,:idAtto,:descUtente,:nomeMetodo) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_listaRelAtti" callable="true" >
+		{ call PG_ATTO.GET_REL_ATTI (?,:idAttoOrigine,:idUffOwnOrigine,:idAttoFinale,:idUffOwnFinale,:descUtente,:nomeMetodo) }
+		<return alias="relAtti" class="it.giustizia.smp.model.TRelAtti" />
+	</sql-query>  
+	
+    <sql-query name="PG_ATTO_listaRelAttoIstGen" callable="true" >
+		{ call PG_ATTO.SOG_NO_DEC_ERRORE_MAT (?,:IDUFFOWN,:IDPROC,:IDATTO,:DESC_ATTO) }
+		<return alias="ist" class="it.giustizia.smp.model.TRelAttoIstGen" />
+	</sql-query>
+		
+	<sql-query callable="true"  name="PG_ATTO_isEsisteDecretoSequestroProcedimento">
+	    { call PG_ATTO.IS_ESISTE_SEQUESTRO_PROC(?,:idProc, :idUffOwn, :descUtente, :nomeMetodo) }
+		<return-scalar column="MESSAGGIO" type="string"/>
+		<return-scalar column="STATUS" type="string"/>
+ 	 </sql-query>
+	 <sql-query name="PG_ATTO_insDecretoRigettoTotaleSequestro" callable="true" >
+			{ call PG_ATTO.INS_DECRETO_RIGETTO_TOT_SEQ(?, :idUffOwn,
+       :descUtente, :idProcedimento, :idTipoAtto, :idCatAtto, :idStatoAtto,
+       :dataEmissione, :dataDeposito, :dataRegistrazione, :documento, :tipoDocumento,
+       :nomeDocumento, :nomeMetodo) }
+        <return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+	 </sql-query>
+	 
+	 <sql-query name="PG_ATTO_inviaDecretoRigettoTotaleSequestro" callable="true" >
+	 	{ call PG_ATTO.INVIA_DECRETO_RIGETTO_TOT(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,:dataEmissione,
+						      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+						      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+						      :idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,:nomeMetodo) }
+	<return-scalar column="IDATTO" type="long"/>
+	</sql-query>
+	
+	 <sql-query name="PG_ATTO_registraAttoGenerico" callable="true" >
+	 	{ call PG_ATTO.REGISTRA_ATTO_GENERICO(?,:idUffOwn,:idProc,:dataEmissione,:dataRegistrazione,:dataRicezione,:documento,
+	 						  :tipoDocumento, :nomeDocumento, :descUtente, :idAtto, :tipoAtto, :categoriaAtto, :idStatoAtto,
+	 						  :idUffMittente, :descNote, :flgSpedRic, :descNumeRif, :descOrgano, :descSedeOrgano, :nomeMetodo) }
+	<return-scalar column="IDATTO" type="long"/>
+	</sql-query>
+	
+	 <sql-query name="PG_ATTO_registraOrdinanazaArt15Antimafia" callable="true" >
+	 	{ call PG_ATTO.REGISTRA_ORD_ART15_ANTIMAFIA(?,:idUffOwn,:idProc,:idAtto,:dataDeposito,:dataCessazioneMisura,:dataRicezione,:documento,
+	 						  :tipoDocumento, :nomeDocumento, :descUtente,:idStatoAtto,:idUffMittente,:descNote, :flgSpedRic, :descNumeRif, :descOrgano, :descSedeOrgano, :nomeMetodo) }
+	<return-scalar column="IDATTO" type="long"/>
+	</sql-query>	
+
+	 <sql-query name="PG_ATTO_registraIntercettazioniTelefoniche" callable="true" >
+	 	{ call PG_ATTO.REGISTRA_INTERCET_TELEFONICHE(?,:idUffOwn,:idProc,:idAtto,:dataEmissione,:dataDeposito,:idMagistrato,:documento,
+	 						  :tipoDocumento, :nomeDocumento, :descUtente, :idStatoAtto,:idUffMittente,:descNote, :flgSpedRic,:descOrgano, :descSedeOrgano,:nomeMetodo) }
+	<return-scalar column="IDATTO" type="long"/>
+	</sql-query>		
+	
+	 <sql-query name="PG_ATTO_registraOrdinanazaArt14Antimafia" callable="true" >
+	 	{ call PG_ATTO.REGISTRA_ORD_ART14_ANTIMAFIA(?,:idUffOwn,:idProc,:idAtto,:dataEmissione,:dataDeposito,:idMagistrato,:dataRipresaMisura,:dataCessazioneMisura,:documento,
+	 						  :tipoDocumento, :nomeDocumento, :descUtente, :idStatoAtto, :descNote,:nomeMetodo) }
+	<return-scalar column="IDATTO" type="long"/>
+	</sql-query>	
+	
+
+	 <sql-query name="PG_ATTO_ricercaSoggettoAtto" callable="true" >
+	 	{ call PG_ATTO.RICERCA_SOGGETTO_ATTO(?,:idProcedimento,:idatto,:iduff,:descruolo,:flagvalido) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_ricercaSoggettoAttoSpeseProc" callable="true" >
+	 	{ call PG_ATTO.RICERCA_SOGG_ATTO_SPESE_PROC(?,:idProcedimento,:idatto,:iduff,:descruolo,:flagvalido) }
+	</sql-query>	
+
+	 <sql-query name="PG_ATTO_ricercaSoggettoRicorso" callable="true" >
+	 	{ call PG_ATTO.RICERCA_SOGGETTO_RICORSO(?,:idProcedimento,:idatto,:iduff,:descruolo) }
+	</sql-query>	
+	
+	 <sql-query name="PG_ATTO_ricercaAvvRicorso" callable="true" >
+	 	{ call PG_ATTO.RICERCA_AVV_RICORSO(?,:idProcedimento,:idatto,:iduff) }
+	 		 	<return alias="avvocati" class="it.giustizia.smp.model.TAvvocati"/>
+	</sql-query>	
+	
+	<!-- MODIFICA 01/2014 - CONTROLLO NUOVO ATTO PRESIDENZIALE/COLLEGIALE -->  
+    <sql-query name="PG_ATTO_gestioneCollegioAtto" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.PRC_CTRL_COLLEGIO_X_ATTO(?,:idProc,:idCatAtto,:descUtente,:idUffOwn,:nomeMetodo) }
+    </sql-query>
+    <!-- MODIFICA 01/2014 - CONTROLLO INVIO ATTO PRESIDENZIALE/COLLEGIALE -->  
+    <sql-query name="PG_ATTO_gestioneCollegioAttoInvio" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.PRC_CTRL_COLLEGIO_X_ATTO_REG(?,:idProc,:idAtto,:descUtente,:idUfficio,:nomeMetodo) }
+    </sql-query>
+    
+    
+  <!-- PROCEDURA PER LA RICERCA DELLE MISURE PERSONALE E PATRIMONIALI PER ATTO E PROCEDIMENTO -->
+     <sql-query name="PG_ATTO_ricercaMisureAtto" callable="true" >
+		{ call PG_ATTO.RICERCA_MISURE_ATTO(?,:idAtto,:idProcedimento,:idUfficio,:idMisure,:idSoggettiInt,:idSoggettiTit,
+		  										  									:idTipoBene,:idCatBene,:idSctgBene,:flgValido,:categoriaAtto,:stato) }
+</sql-query>  
+   <!-- PROCEDURA DI INSERIMENTO DEL RICORSO IN APPELLO E AZIONE --> 
+ 	<sql-query name="PG_ATTO_inserisciRicorso" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INSERISCI_RICORSO(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigineMisure,:idCatAtto,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,:nomeDocumento) }	 	
+	</sql-query>  	
+
+  <!-- PROCEDURA PER LA RICERCA DELLE MISURE PERSONALE E PATRIMONIALI PER ATTO E PROCEDIMENTO RICORSO CASSAZIONE-->
+     <sql-query name="PG_ATTO_ricercaMisureAttoCass" callable="true" >
+		{ call PG_ATTO.RICERCA_MISURE_ATTO_CASS(?,:idAtto,:idProcedimento,:idUfficio,:idMisure,:idSoggettiInt,:idSoggettiTit,
+		  										  									:idTipoBene,:idCatBene,:idSctgBene,:flgValido,:categoriaAtto,:stato) }
+</sql-query>  
+
+     <sql-query name="PG_ATTO_imposta_ricorso_cass_mis_patr" callable="true" >
+		{ call PG_ATTO.IMPOSTA_RIC_CASS_MIS_PATR(?,:ID_PROCEDIMENTO,:ID_ATTO,:ID_UFF_OWNER,:ID_BENE,:ID_SOGG_INT,:ID_SOGG_TIT,:ID_TIPO_BENE,:ID_CAT_BENE,:ID_SCTG_BENE,:FLG_VALIDO,:IJ_UTENTE,:ID_CAT_ATTO) }	
+	</sql-query>  
+	<sql-query name="PG_ATTO_imposta_ricorso_cass_soggetto" callable="true" >
+		{ call PG_ATTO.IMPOSTA_RIC_CASS_SOGGETTO(?,:ID_PROCEDIMENTO,:ID_ATTO,:ID_UFF_OWNER,:ID_SOGG_INT,:ID_BENE,:ID_SOGG_TIT,:IDS_MIS,:ID_TIPO_BENE,:ID_CAT_BENE,:ID_SCTG_BENE,:FLG_VALIDO,:IJ_UTENTE,:ID_CAT_ATTO) }	
+	</sql-query> 
+	 <sql-query name="PG_ATTO_imposta_ricorso_mis_cass_pers" callable="true" >
+		{ call PG_ATTO.IMPOSTA_RIC_CASS_MIS_PERS(?,:ID_PROCEDIMENTO,:ID_ATTO,:ID_UFF_OWNER,:ID_SOGG_INT,:ID_MISURA_PERS,:FLG_VALIDO,:IJ_UTENTE,:ID_CAT_ATTO) }	
+	</sql-query>  
+
+
+ 	<sql-query name="PG_ATTO_registraRicorsoInAppello" callable="true" >
+	<return-scalar column="IDATTO" type="long"/> 	
+ 	{ call PG_ATTO.REGISTRA_RICORSO_IN_APPELLO(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:dataEmissione,
+									      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+									      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+									      :codiFkIdUffDep,:flgUffDep,:dataDepImp,:oraDepImp,:dataRegImp,:oraRegImp,:codiKIdModPerv,
+									      :dataSpedizione,:descProvPosta,:dataPervImp,:oraPervImp,:flaTipoParte,:descTipoProp,:listaIdSoggetti,
+									      :codiKIdAvvocato,:descCognFunz,:descNomeFunz,:codiFkIdIstDet,:descAltroMod,:descCognAvv,:descNomeAvv, :codiKIdAmministratore,:idIntestatario) }
+	                
+	</sql-query>
+	
+ 	<sql-query name="PG_ATTO_registraRicorsoInCassazione" callable="true" >
+	<return-scalar column="IDATTO" type="long"/> 	
+ 	{ call PG_ATTO.REGISTRA_RICORSO_IN_CASSAZIONE(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:dataEmissione,
+									      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+									      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+									      :codiFkIdUffDep,:flgUffDep,:dataDepImp,:oraDepImp,:dataRegImp,:oraRegImp,:codiKIdModPerv,
+									      :dataSpedizione,:descProvPosta,:dataPervImp,:oraPervImp,:flaTipoParte,:descTipoProp,:listaIdSoggetti,:codiKIdAvvocato,
+									      :descCognFunz,:descNomeFunz,:codiFkIdIstDet,:descAltroMod,:descCognAvv,:descNomeAvv,:codiKIdAmministratore) }
+	                
+	</sql-query> 	   
+    
+    
+    <!-- RICORSO IN APPELLO PARTE PATRIMONIALE -->
+    
+     <sql-query name="PG_ATTO_imposta_ricorso_mis_patr" callable="true" >
+		{ call PG_ATTO.IMPOSTA_RICORSO_MIS_PATR(?,:VID_PROCEDIMENTO,:VID_ATTO,:VID_UFF_OWNER,:VID_SOGG_INT,:VID_BENE,:VID_SOGG_TIT,:VID_TIPO_BENE,:VID_CAT_BENE,:VID_SCTG_BENE,:VFLG_VALIDO,:IJ_UTENTE,:VID_CAT_ATTO) }	
+	</sql-query>  
+	<sql-query name="PG_ATTO_imposta_ricorso_soggetto" callable="true" >
+		{ call PG_ATTO.IMPOSTA_RICORSO_SOGGETTO(?,:VID_PROCEDIMENTO,:VID_ATTO,:VID_UFF_OWNER,:VID_SOGG_INT,:VID_BENE,:VID_SOGG_TIT,:VIDS_MIS,:VID_TIPO_BENE,:VID_CAT_BENE,:VID_SCTG_BENE,:VFLG_VALIDO,:IJ_UTENTE,:VID_CAT_ATTO) }	
+	</sql-query> 
+	<sql-query name="PG_ATTO_elencoSoggettiDifensori" callable="true" >
+		{ call PG_ATTO.list_sogint_difensori(?,:idUffOwn,:idProcedimento, :idAvvocato) }	
+	</sql-query>  
+	 	
+	
+	<sql-query name="PG_ATTO_elencoSoggettiDifensoriProcura" callable="true" >
+		{ call PG_ATTO.list_sogint_difensori_procura(?,:idUffOwn,:idProcedimento) }	
+	</sql-query> 
+	 <sql-query name="PG_ATTO_imposta_ricorso_mis_pers" callable="true" >
+		{ call PG_ATTO.IMPOSTA_RICORSO_MIS_PERS(?,:VID_PROCEDIMENTO,:VID_ATTO,:VID_UFF_OWNER,:VID_SOGG_INT,:VID_MISURA_PERS,:VFLG_VALIDO,:IJ_UTENTE,:VID_CAT_ATTO) }	
+	</sql-query>  
+		
+	
+
+  	<sql-query name="PG_ATTO_ricercaAttiRicorso" callable="true" >
+	 	<return alias="atto" class="it.giustizia.smp.model.TAtto"/>
+	 	<return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	<return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+	 	<return alias="impugnazione" class="it.giustizia.smp.model.TImpugnazione"/>	
+		 { call PG_ATTO.RICERCA_ATTI_RICORSO(?,:idProcedimento,:idUffOwner) }
+    </sql-query> 
+    
+  	<sql-query name="PG_ATTO_inviaRicorsoInAppello" callable="true" >
+		 { call PG_ATTO.INVIA_RICORSO_IN_APPELLO(?,:iduffown,:idproc,:iddestinatario,:datatrasmCda,:descutente) }
+    </sql-query> 
+    
+   	<sql-query name="PG_ATTO_ricercaRicorsiInLavorazione" callable="true" >
+	 	<return alias="atto" class="it.giustizia.smp.model.TAtto"/>
+		 { call PG_ATTO.RICERCA_RICORSI_IN_LAVORAZIONE(?,:idProcedimento,:iduffown) }
+    </sql-query>     
+   
+    <sql-query name="PG_ATTO_controllaMisureDefinitivitaIGrado" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CNTR_PRESENZA_DEF_SU_MISURE(?,:I_ID_PROCEDIMENTO,:I_ID_ATTO,:I_ID_UFFICIO,:I_ID_UTENTE,:I_TIPO_FUNZIONE,:I_NOME_METODO) }	
+    </sql-query>
+    <sql-query name="PG_ATTO_controllaMisureDefinitivitaIIGrado" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CNTR_PRESENZA_DEC_RICORSO(?,:I_ID_PROCEDIMENTO,:I_ID_ATTO,:I_ID_UFFICIO,:I_ID_UTENTE,:I_TIPO_FUNZIONE,:I_NOME_METODO) }	
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_controllaDefinitivitaIIGradoSuMisure" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CNTR_PRESENZA_DEF_II_SU_MISURE(?,:I_ID_PROCEDIMENTO,:I_ID_ATTO,:I_ID_UFFICIO,:I_ID_UTENTE,:I_TIPO_FUNZIONE,:I_NOME_METODO) }	
+    </sql-query>    
+    
+    <sql-query name="PG_ATTO_inserisciParere" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_PARERE(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 							 :idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 							 :tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 	 
+	
+ 	<sql-query name="PG_ATTO_aggiornaInviaParere" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.AGGIORNA_INVIA_PARERE(?,:isRichiesta,:idUffOwn,:idProc,:idMittente,:idDestinatario,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto, :nomeMetodo) }
+	</sql-query>	
+	
+    <sql-query name="PG_ATTO_controllaRegImpugnazione" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CNTR_REG_IMPUGNAZIONE(?,:I_ID_PROCEDIMENTO,:I_ID_ATTO,:I_ID_UFFICIO,:I_ID_UTENTE,:I_NOME_METODO) }	
+    </sql-query>	
+    
+       <sql-query name="PG_ATTO_controllaImpugnazioneArt67Cauz" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CNTR_IMPUGNAZIONE_CAU_ART67(?,:I_ID_PROCEDIMENTO,:I_ID_ATTO,:I_ID_UFFICIO,:I_ID_UTENTE,:I_NOME_METODO) }	
+    </sql-query>	   
+    
+    
+    <sql-query name="PG_ATTO_controllaInsertDefinitivita" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CNTR_INSERT_DEFINITIVITA(?,:I_ID_PROCEDIMENTO,:I_ID_MISURA_PERS,:ID_BENE,:ID_MIS_TIPO_INT,:ID_MIS_ID_SOGG,
+		 									      :I_ID_UFFICIO,:I_ID_UTENTE,:I_TIPO_FUNZIONE,:I_NOME_METODO) }	
+    </sql-query>    
+ 
+    <sql-query name="PG_ATTO_controllaUpdEsitoMisPers" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CNTR_UPD_ESITO_MIS_PERS(?,:I_ID_PROCEDIMENTO,:I_ID_ATTO,:I_ID_SOGGETTO,:I_ID_ESITO,:CAUZIONE,:ART67,
+		 									     :I_TIPO_FUNZIONE,:I_ID_UFFICIO,:I_ID_UTENTE,:I_NOME_METODO) }	
+    </sql-query>
+    
+    
+        
+ 	<sql-query name="PG_ATTO_inserisciDecretoIncompetenza" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INSERISCI_DECRETO_INCOMP(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idCatAtto,:idStatoAtto,:nomeMetodo) }	 	
+	</sql-query>     
+
+	 <sql-query name="PG_ATTO_inserisciDecretoOrdRestBeni" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DECR_ORD_REST_BENI(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idCatAtto,
+	 													:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 
+	
+	<sql-query name="PG_ATTO_inviaDecretoRestituzioneBeni" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INVIA_DEC_RESTITUZIONE_BENI(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+										      :nomeMetodo,:noteRestituzione) }
+	</sql-query>	
+
+	<sql-query name="PG_ATTO_revocaDefSelMisPers" callable="true" >
+		 { call PG_ATTO.REVOCA_DEF_SEL_MIS_PERS(?,:idProcedimento,:idAtto,:idUfficio,:idUtente,:tipoFunzione,:nomeMetodo) }
+    </sql-query>   
+
+	<sql-query name="PG_ATTO_revocaDefSelMisPersFiltrati" callable="true" >
+		 { call PG_ATTO.REVOCA_DEF_SEL_MIS_PERS_F(?,:idProcedimento,:idAtto,:idUfficio,:idUtente,:tipoFunzione,:nomeMetodo,:idSoggettoDiretto) }
+    </sql-query>   
+    
+	 <sql-query name="PG_ATTO_revocaDefSelMisPatr" callable="true" >
+		 { call PG_ATTO.REVOCA_DEF_SEL_MIS_PATR(?,:idProcedimento,:idAtto,:idUfficio,:idUtente,:tipoFunzione,:nomeMetodo) }
+		 <return alias="procBene" class="it.giustizia.smp.model.TRelProcBene" />
+    </sql-query>   
+
+	 <sql-query name="PG_ATTO_revocaDefSelMisPatrFiltrati" callable="true" >
+		 { call PG_ATTO.REVOCA_DEF_SEL_MIS_PATR_F(?,:idProcedimento,:idAtto,:idUfficio,:idUtente,:tipoFunzione,:nomeMetodo,:idSoggettoDiretto,:idSoggettoTitolare,:idTipologia,:idCategoria,:idSottocategoria) }
+		 <return alias="bene" class="it.giustizia.smp.model.TBene" />
+		 <return alias="rel" class="it.giustizia.smp.model.TRelBeneAtto" />
+ 		 <return alias="mis" class="it.giustizia.smp.model.TRelAttoMisPatr" />
+    </sql-query>   
+	
+	 <sql-query name="PG_ATTO_defSelMisPatr" callable="true" >
+		 { call PG_ATTO.DEF_SEL_MIS_PATR(?,:idProcedimento,:idAtto,:idUfficio,:idUtente,:tipoFunzione,:nomeMetodo) }
+		 <return alias="procBene" class="it.giustizia.smp.model.TRelProcBene" />
+    </sql-query>   
+
+	 <sql-query name="PG_ATTO_defSelMisPatrFiltrati" callable="true" >
+		 { call PG_ATTO.DEF_SEL_MIS_PATR_F(?,:idProcedimento,:idAtto,:idUfficio,:idUtente,:tipoFunzione,:nomeMetodo,:idSoggettoDiretto,:idSoggettoTitolare,:idTipologia,:idCategoria,:idSottocategoria) }
+ 		 <return alias="bene" class="it.giustizia.smp.model.TBene" />
+		 <return alias="rel" class="it.giustizia.smp.model.TRelBeneAtto" />
+ 		 <return alias="mis" class="it.giustizia.smp.model.TRelAttoMisPatr" />
+    </sql-query>   
+	
+	<sql-query name="PG_ATTO_misPersPerSoggettoRevocaDefinitivita" callable="true" >
+	 	<return alias="relam" class="it.giustizia.smp.model.TRelAttoMisPers"/>	
+	 	<return alias="mis" class="it.giustizia.smp.model.TMisuraPers"/>
+	 	<return alias="cauz" class="it.giustizia.smp.model.TCauzione"/>
+	 	{ call PG_ATTO.MISURE_PERS_SOGG_REVOCA_DEF(?,:idUffOwn,:idProcedimento,:idAtto,:idSoggetto,:tipoFunzione) }
+	</sql-query>   
+	
+		<sql-query name="PG_ATTO_revocaDefMisPersSalva" callable="true" >
+		 { call PG_ATTO.REVOCA_DEF_MIS_PERS_SALVA(?,:idProcedimento,:idAtto,:idMisura,:idUfficio,:tipoFunzione,:idUtente,:nomeMetodo) }
+    </sql-query>  
+    <sql-query name="PG_ATTO_revocaDefMisPatrSalva" callable="true" >
+		 { call PG_ATTO.REVOCA_DEF_MIS_PATR_SALVA(?,:idProcedimento,:idAtto,:idBene,:idSoggetto,:idTipoInt,:idUfficio,:tipoFunzione,:idUtente,:nomeMetodo) }
+    </sql-query>  
+    <sql-query name="PG_ATTO_revocaDefinitivitaInvio" callable="true" >
+		 { call PG_ATTO.REVOCA_DEFINITIVITA_INVIO(?,:idProcedimento,:idAtto,:idUfficio,:tipoFunzione,:idUtente,:nomeMetodo) }
+    </sql-query>  
+    
+    <sql-query name="PG_ATTO_controllaRegistrazioneDecisorio" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CNTR_REG_DECISORIO(?,:I_ID_PROCEDIMENTO,:I_ID_ATTO,:I_ID_UFFICIO,:I_ID_UTENTE,:I_TIPO_FUNZIONE,:I_NOME_METODO) }	
+    </sql-query> 
+    
+    <sql-query name="PG_ATTO_listaRelAttoProcByIdProcAndCat" callable="true" >
+	 	 <return alias="relAttoProc" class="it.giustizia.smp.model.TRelAttoProc"/>	
+		 { call PG_ATTO.LISTA_REL_ATTO_PROC(?,:idProcedimento,:idCategoria) }
+    </sql-query> 
+    <sql-query name="PG_ATTO_listaAvvocatiDifensori" callable="true" >
+	 	 <return alias="avvocati" class="it.giustizia.smp.model.TAvvocati"/>	
+		 { call PG_ATTO.LISTA_AVVOCATI_DIFENSORI(?,:idProcedimento,:idUfficio,:idAvvocato) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_getDocumentiJobDocumentale" callable="true" >
+		{ call PG_ATTO.GET_DOC_JOB_DOCUMENTALE (?) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_controlloIncompetenzaProcura" callable="true">
+		<return-scalar column="RESPONSE" type="string"/>		
+   		{ call PG_ATTO.UFFICI_CONTR_INCOMP_PROCURA(?,:idProcedimento) }
+ 	</sql-query>
+	   
+	<sql-query name="PG_ATTO_listaRedazioneScheda" callable="true" >
+		{ call PG_ATTO.LISTA_REDAZIONE_SCHEDA (?,:idProcedimento,:idUfficio) }
+	</sql-query>
+	<sql-query name="PG_ATTO_listaRedazioneSchedaFC" callable="true" >
+		{ call PG_ATTO.LISTA_REDAZIONE_SCHEDA_FC (?,:idProcedimento,:idUfficio) }
+	</sql-query>
+	<sql-query name="PG_ATTO_listaRedazioneSchedaFCEM" callable="true" >
+		{ call PG_ATTO.LISTA_REDAZIONE_SCHEDA_FCEM (?,:idProcedimento,:idUfficio) }
+	</sql-query>
+	<sql-query name="PG_ATTO_lista_Terzi_No_Tit_Dir" callable="true" >
+	 	{ call PG_ATTO.LISTA_TERZI_NO_TIT_DIR(?,:idUffOwn,:idProcedimento,:idAtto) }
+	</sql-query>		
+	<sql-query name="PG_ATTO_inserisciArchiviazione" callable="true" >
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_ATTO.INSERISCI_ARCHIVIAZIONE_ATTO(?,:idUffOwn, :descUtente, :idProcedimento, :idStatoProc, :idCatAtto, :idTipoAtto, :idOrgano, :altroOrgano, :numeroRiferimento, :dataInformativa, :note, :dataRicezione, :documento, :tipoDocumento, :nomeDocumento ) }
+	</sql-query>
+	<sql-query name="PG_ATTO_inserisciRedazioneScheda" callable="true" >
+		<return-scalar column="IDATTO" type="long"/>
+	 	{ call PG_ATTO.INSERISCI_ATTO_REDAZ_SCHEDA(?,:idUffOwn, :idTipoProc, :dataRedazioneScheda, :descUtente, :descSedeOrgano, :descOrgano, :idAttoMisura, :idMisuraPersonale, :idProcedimento ) }
+	</sql-query>
+		<sql-query name="PG_ATTO_inserisciRedazioneSchedaFC" callable="true" >
+		<return-scalar column="IDATTO" type="long"/>
+	 	{ call PG_ATTO.INSERISCI_ATTO_REDAZ_SCHEDA_FC(?,:idUffOwn, :idTipoProc, :dataRedazioneScheda, :descUtente, :descSedeOrgano, :descOrgano, :idAttoMisura, :idMisuraPersonale, :idProcedimento,:idSogInt ) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_inserisciAttoVerSoggetto" callable="true" >
+		<return-scalar column="IDATTO" type="long"/>
+	 	{ call PG_ATTO.INSERISCI_ATTO_VERS_SOGGETTO(?,:idUffOwn, :descUtente, :idProcedimento, :idTipoAtto, :idCatAtto, :idMagistrato, 
+													  :idPersFis,:idVersione,:cognome,:nome,:dataNascita,:idStatoNasc,:ComuneEsteroNasc,:idComuneNasc,:codiceFiscale,:cui,
+													  :idPersGiur,:tipoSoggetto,:ragioneSociale,:tipoSocieta,:piva,:idStatoSede,:idComuneSede,:desComuneEsteroSede,
+													  :sesso,:statoDecesso,:comuneDecesso,:comuneEsteroDecesso,:dataDecesso,:cognomePadre,:nomePadre,:cognomeMadre,:nomeMadre,
+													  :cciaa,:tipoStradaSede,:indirizzoSede,:civicoSede,:rappresentante,:amministratore,:capitaleSociale,:settoreAttivita,:annotazioni,
+													  :dataDeposito,:dataEmissione,:documento,:tipoDocumento,:nomeDocumento	             
+													   ) }
+													  													 
+	</sql-query>
+		
+	<sql-query name="PG_ATTO_invioCasellario" callable="true" >
+		<return-scalar column="STATOUPDATE" type="string"/>
+	 	{ call PG_ATTO.INVIO_CASELLARIO(?,:idUffOwn, :idAttoComunicazione, :dataInvio, :idComunicazione, :idProcedimento, :numSoggettoCasellario, :descUtente, :xmlComunicazione, :fileEstrattoCertif, :moduloElettorale, :flagStatoInvio ) }
+	</sql-query>
+	<sql-query name="PG_ATTO_cancellaCasellario" callable="true" >
+		<return-scalar column="STATOUPDATE" type="string"/>
+	 	{ call PG_ATTO.CANCELLA_CASELLARIO(?,:idUffOwn, :idComunicazione, :descUtente) }
+	</sql-query>
+	
+	<sql-query callable="true"  name="PG_ATTO_cntr_EsitoFinale">
+	    { call PG_ATTO.CNTR_ESITO_FINALE(?,:IDUFFOWN, :IDPROCEDIMENTO, :IDATTO, :ICATATTO) }
+		<return-scalar column="MESSAGGIO" type="string"/>
+		<return-scalar column="STATUS" type="string"/>
+ 	 </sql-query>
+ 	<sql-query callable="true"  name="PG_ATTO_listaImpugnazioniGradoPrec">
+	    { call PG_ATTO.LISTA_IMPUGNAZIONI_GRADO_PREC(?, :IDPROCEDIMENTO, :ID_UFF_OWNER, :ID_MISURA_PERS, :ID_ATTO ) }
+ 	 </sql-query>
+
+	<sql-query name="PG_ATTO_inserisciCertificatoPenale" callable="true" >
+		<return-scalar column="IDATTO" type="long"/>
+	 	{ call PG_ATTO.INSERISCI_ATTO_CERT_PEN(?, :idProcedimento, :idUffOwn,  :descUtente, :descSedeOrgano, :descOrgano, :idSoggetto, :flagStatoInvio, :xmlRichiesta, :xmlRisposta ) }
+	</sql-query>
+	
+    <sql-query name="PG_ATTO_listaAttiProrogaSequestro" callable="true" >
+	 	 <return alias="atto" class="it.giustizia.smp.model.TAtto"/>	
+    	 <return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	 <return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+		 { call PG_ATTO.ATTI_PROROGA_SEQUESTRO(?,:idProcedimento, :idUffOwn) }
+    </sql-query>	
+
+   <sql-query name="PG_ATTO_listaAttiProrogaSequestroCdA" callable="true" >
+	 	 <return alias="atto" class="it.giustizia.smp.model.TAtto"/>	
+    	 <return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	 <return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+		 { call PG_ATTO.ATTI_PROROGA_SEQUESTRO_CDA(?,:idProcedimento, :idUffOwn) }
+    </sql-query>	
+
+    <sql-query name="PG_ATTO_inserisciDecretoProrogaSequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DEC_PROROGA_SEQ(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 
+	
+	<sql-query name="PG_ATTO_inviaDecretoProrogaSequestro" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INVIA_DEC_PROROGA_SEQ(?,:idUffOwn,:idProc,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+										      :nomeMetodo) }
+	</sql-query>		
+	
+	<sql-query name="PG_ATTO_controllaInserimentoDecretoSospensioneTemporanea" callable="true" >
+		<return-scalar column="MESSAGGIO" type="string"/>
+		<return-scalar column="STATUS" type="string"/>
+	 	{ call PG_ATTO.CNTR_INS_DEC_SOSP_TEMP(?,:idProcedimento,:idUffOwn) }
+	</sql-query>			
+
+    <sql-query name="PG_ATTO_inserisciDecretoSospensioneTemporanea" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DEC_SOSP_TEMP(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query> 
+	
+		<sql-query name="PG_ATTO_inviaDecretoSospensioneTemporanea" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INVIA_DEC_SOSP_TEMP(?,:idUffOwn,:idProc,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+										      :nomeMetodo) }
+	</sql-query>
+	
+	
+	<sql-query name="PG_ATTO_controllaAmministratoriSenzaBeni" callable="true">
+		<return-scalar column="MESSAGGIO" type="string"/>
+		<return-scalar column="STATUS" type="string"/>		
+   		{ call PG_ATTO.CNTR_PRESENZA_AMM_SENZA_BENI(?,:IDUFFOWN, :IDPROCEDIMENTO, :IDATTO  ) }
+ 	</sql-query>
+
+	<sql-query name="PG_ATTO_controllaAmministratoriSenzaBeniDecisorio" callable="true">
+   		{ call PG_ATTO.CNTR_PRES_AMM_SENZA_BENI_DEC(?,:IDUFFOWN, :IDPROCEDIMENTO, :IDATTO  ) }
+ 	</sql-query>
+
+<!-- P.Q. MEV 2020/48 Inizio -->
+	<sql-query name="PG_ATTO_controllaAmministratoriSenzaBeniDecisorioSecondoGrado" callable="true">
+   		{ call PG_ATTO.CNTR_PRES_AMM_SENZA_BENI_DEC_2(?,:IDUFFOWN, :IDPROCEDIMENTO, :IDATTO, :IDFASC_GEST  ) }
+ 	</sql-query>
+<!-- P.Q. MEV 2020/48 Fine -->
+
+	<sql-query name="PG_ATTO_controllaBeniSenzaAmministratore" callable="true">
+   		{ call PG_ATTO.CNTR_PRES_BENI_SENZA_AMM(?,:IDUFFOWN, :IDPROCEDIMENTO, :IDATTO  ) }
+ 	</sql-query> 	
+ 	 	
+    <sql-query name="PG_ATTO_inserisciDecretoProrogaSospensioneTemporanea" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DEC_PROROGA_SOSP_TEMP(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query>  	
+ 	
+	<sql-query name="PG_ATTO_inviaDecretoProrogaSospensioneTemporanea" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INVIA_DEC_PROROGA_SOSP_TEMP(?,:idUffOwn,:idProc,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+										      :nomeMetodo) }
+	</sql-query>	
+
+    <sql-query name="PG_ATTO_listaAttiSospensioneTemporanea" callable="true" >
+	 	 <return alias="atto" class="it.giustizia.smp.model.TAtto"/>	
+    	 <return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	 <return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+		 { call PG_ATTO.ATTI_SOSP_TEMP(?,:idProcedimento, :idUffOwn) }
+    </sql-query>
+
+    <sql-query name="PG_ATTO_inserisciDecretoSequestroSospensioneTemporanea" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DEC_SEQ_SOSP_TEMP(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query>  	
+ 	
+	<sql-query name="PG_ATTO_inviaDecretoSequestroSospensioneTemporanea" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INVIA_DEC_SEQ_SOSP_TEMP(?,:idUffOwn,:idProc,:dataEmissione,
+										      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,
+										      :nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,
+										      :nomeMetodo) }
+	</sql-query>	
+	
+    <sql-query name="PG_ATTO_listaAttiApplicazioneProvvisoria" callable="true" >
+	 	 <return alias="atto" class="it.giustizia.smp.model.TAtto"/>	
+    	 <return alias="cat_atto" class="it.giustizia.smp.model.TTpCatAtto"/>	 	
+	 	 <return alias="stato_atto" class="it.giustizia.smp.model.TTpStatoAtto"/>
+		 { call PG_ATTO.ATTI_APPL_PROVV(?,:idProcedimento, :idUffOwn) }
+    </sql-query>
+    
+    <sql-query name="PG_ATTO_inserisciAttoDecretoRevocaApplicazioneProvvisoria" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_DEC_REV_APPL_PROVV(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query>  	    
+    
+	   <sql-query callable="true"
+	   name="PG_ATTO_salvaAttoDecretoRevocaApplicazioneProvvisoria">{ call
+			PG_ATTO.SALVA_DEC_REV_APP_PROV(?,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,:nomeDocumento,:idStatoAtto,
+			:idMisureCaricate,:idProc,:idAtto,:idUffOwn,:idSoggInt,
+			:idTipoMisura, :idNormativa,:durataAnni,:durataMesi,:durataGiorni,
+			:descLoc,:descUltPresc,:cauzione,:articolo67,
+			:idEsito1,:idEsito2,:idEsito3,:idEsitoFin,:descAltro1,:descAltro2,
+			:descAltro3,:flgValido,:codiMotivo,:idTipoAtto,:descUtente,:idPrescrizioni,:importoCauzione,:articolo9c1)
+			}
+	 </sql-query>
+	 
+	   
+    <sql-query name="PG_ATTO_aggiornaIstanzaMP" callable="true" >
+	 	<return-scalar column="IDATTO" type="long"/>
+		 { call PG_ATTO.AGGIORNA_ISTANZA_MP(?,:idUffOwn,:idProc,:dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:contDett,
+		  :codiFkIdUffDep,:flgUffDep,:dataDepIst,:oraDepIst,:dataRegIst,:oraRegIst,:codiKIdModPerv,
+									      :dataSpedizione,:descProvPosta,:dataPervIst,:oraPervIst,:flaTipoParte,:descTipoProp,:listaIdSoggetti,
+									      :codiKIdAvvocato,:descCognFunz,:descNomeFunz,:codiFkIdIstDet,:descAltroMod,:descCognAvv,:descNomeAvv,:codiKIdAmministratore,:descUtente) }
+    </sql-query>
+	 
+	  <sql-query name="PG_ATTO_salvaIstanzaFascicoloGestione" callable="true" >
+	 	<return-scalar column="IDATTO" type="long"/>
+		 { call PG_ATTO.salvaIstanzaFascicoloGestione(?, :idUffOwn, :idProc, :idAmministratore, :codAtto, :statoAtto, :idTipoAtto, :idCategoriaAtto, :dataRicezione, 
+		 		:note, :numeroRiferimento, :tipoProponente, :cognomeProp, :nomeProp, :descrEnteAltro, :documento, :tipoDocumento,
+				:nomeDocumento, :dalPeriodoRif, :alPeriodoRif, :descUtente, :nomeMetodo) }
+    </sql-query>  
+	 
+	   <sql-query name="PG_ATTO_ricercaMisureIstanza" callable="true" >
+		{ call PG_ATTO.RICERCA_MISURE_ISTANZA(?,:idAtto,:idProcedimento,:idUfficio,:idsMis,:idsSoggInt,:idsSoggTit,:flgValido,:categoriaAtto,:stato) }
+       </sql-query>  
+      
+       <sql-query name="PG_ATTO_ricercaSoggettoIstanza" callable="true" >
+	 	{ call PG_ATTO.RICERCA_SOGGETTO_ISTANZA(?,:idProcedimento,:idatto,:iduff,:descruolo) }
+	</sql-query>
+	
+	 <sql-query name="PG_ATTO_ricercaAvvIstanza" callable="true" >
+	 	{ call PG_ATTO.RICERCA_AVV_ISTANZA(?,:idProcedimento,:idatto,:iduff) }
+	 		 	<return alias="avvocati" class="it.giustizia.smp.model.TAvvocati"/>
+	</sql-query>
+	 <sql-query name="PG_ATTO_imposta_istanza_mis_patr" callable="true" >
+		{ call PG_ATTO.IMPOSTA_ISTANZA_MIS_PATR(?,:VID_PROCEDIMENTO,:VID_ATTO,:VID_UFF_OWNER,:VID_SOGG_INT,:VID_BENE,:VID_SOGG_TIT,:VFLG_VALIDO,:IJ_UTENTE,:VID_CAT_ATTO) }	
+	</sql-query>  
+	<sql-query name="PG_ATTO_imposta_istanza_soggetto" callable="true" >
+		{ call PG_ATTO.IMPOSTA_ISTANZA_SOGGETTO(?,:VID_PROCEDIMENTO,:VID_ATTO,:VID_UFF_OWNER,:VID_SOGG_INT,:VID_BENE,:VID_SOGG_TIT,:VIDS_MIS,:VFLG_VALIDO,:IJ_UTENTE,:VID_CAT_ATTO) }	
+	</sql-query> 
+	<sql-query name="PG_ATTO_imposta_istanza_mis_pers" callable="true" >
+		{ call PG_ATTO.IMPOSTA_ISTANZA_MIS_PERS(?,:VID_PROCEDIMENTO,:VID_ATTO,:VID_UFF_OWNER,:VID_SOGG_INT,:VID_MISURA_PERS,:VFLG_VALIDO,:IJ_UTENTE,:VID_CAT_ATTO) }	
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_elencoSoggettiDifensoriRicorso" callable="true" >
+		{ call PG_ATTO.LIST_SOGINT_DIFENSORI_RICORSO(?,:ID_PROC,:ID_IMPUGNAZIONE,:IDUFFOWN, :IDAVVOCATO,:COGNOME_AVV,:NOME_AVV,:DESCUTENTE) }	
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_elencoSoggettiDifensoriIstanza" callable="true" >
+		{ call PG_ATTO.LIST_SOGINT_DIFENSORI_ISTANZA(?,:ID_ISTANZA,:IDUFFOWN, :IDAVVOCATO,:COGNOME_AVV,:NOME_AVV,:DESCUTENTE) }	
+	</sql-query>	
+   	     	
+    <sql-query name="PG_ATTO_inserisciProvvedimentoFascicoloGestione" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_PROVV_FASC_GEST(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idAttoOrigine,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query>    	     	
+
+    <sql-query name="PG_ATTO_salvaProvvedimentoFascicoloGestione" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+		{ call PG_ATTO.SALVA_PROVV_FASC_GEST(? ,:IDATTO ,:IDUFFOWN,:IDPROC,:NOTE,:DESCUTENTE,        
+        :DATAEMISSIONE,:DATADEPOSITO, :DATAUDIENZA, :DESCESITO, :VESITO, :FLG_IMP, :DESC_ESITO_IMP, 
+        :FLG_CAS,:DESC_ESITO_CAS, :DESCNOTE, :DOCUMENTO,:TIPODOCUMENTO,:NOMEDOCUMENTO,:DATAREGISTRAZIONE,:IDSTATOATTO) }	 	
+	</sql-query>   
+	
+    <sql-query name="PG_ATTO_inserisciOrdinanzaAntimafia" callable="true" >
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_ATTO.INS_ORDI_ANTIMAFIA(?,:idUffOwn, :descUtente, :idProcedimento,:idTipoAtto, :idCatAtto, :idStatoAtto, :nomeMetodo,:idSoggetto) }
+	</sql-query>	    	     	
+
+
+	<sql-query name="PG_ATTO_sogAntimafia" callable="true" >
+		{ call PG_ATTO.SOG_ANTIMAFIA_ATTO(?, :IDPROC,:IDUFFOWN, :IDATTO) }
+	</sql-query> 
+
+    <sql-query name="PG_ATTO_inserisciProvvedimentoNominaAmministratori" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_PROVV_NOMINA_AMM(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo) }	 	
+	</sql-query>   
+
+    <sql-query name="PG_ATTO_salvaProvvedimentoNominaAmministratori" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+		{ call PG_ATTO.SALVA_PROVV_NOMINA_AMM(? ,:IDATTO ,:IDUFFOWN,:IDPROC,:DESCUTENTE,        
+        :DATAEMISSIONE,:DATADEPOSITO, :DOCUMENTO,:TIPODOCUMENTO,:NOMEDOCUMENTO,:DATAREGISTRAZIONE,:IDSTATOATTO) }	 	
+	</sql-query>   
+	
+    <sql-query name="PG_ATTO_inserisciProvvedimentoRevocaAmministratori" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_ATTO.INS_PROVV_REVOCA_AMM(?,:idUffOwn ,:descUtente,:idProcedimento,:idTipoAtto,:idCatAtto,
+	 													:idUdienza,:idStatoAtto,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,
+	 													:tipoDocumento,:nomeDocumento,:nomeMetodo,:idAttoOrigine) }	 	
+	</sql-query>   
+
+    <sql-query name="PG_ATTO_salvaProvvedimentoRevocaAmministratori" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+		{ call PG_ATTO.SALVA_PROVV_REVOCA_AMM(? ,:IDATTO ,:IDUFFOWN,:IDPROC,:DESCUTENTE,        
+        :DATAEMISSIONE,:DATADEPOSITO, :DOCUMENTO,:TIPODOCUMENTO,:NOMEDOCUMENTO,:DATAREGISTRAZIONE,:IDSTATOATTO) }	 	
+	</sql-query>   
+
+    <sql-query name="PG_ATTO_revocaAmministratore" callable="true" >
+		{ call PG_ATTO.REVOCA_AMM(? ,:IDUFFOWN, :IDPROC, :IDATTO, :IDSAMM, :DATADEPOSITO, :DESCUTENTE) }	 	
+	</sql-query>   	
+	
+	<sql-query name="PG_ATTO_amministratoriRevocabili" callable="true" >
+	   <return alias="rel" class="it.giustizia.smp.model.TRelProcAttoAmm"/>
+	   <return alias="amm" class="it.giustizia.smp.model.TAmministratori"/>
+	   <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+		{ call PG_ATTO.AMM_REVOCABILI (?,:IDUFFOWN,:IDPROC) }
+	</sql-query>	
+	
+	<sql-query name="PG_ATTO_amministratoriRevocati" callable="true" >
+	   <return alias="rel" class="it.giustizia.smp.model.TRelProcAttoAmm"/>
+	   <return alias="amm" class="it.giustizia.smp.model.TAmministratori"/>
+	   <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+		{ call PG_ATTO.AMM_REVOCATI (?,:IDUFFOWN,:IDPROC,:IDATTO) }
+	</sql-query>		
+
+	<sql-query name="PG_ATTO_MAX_DATA_EMIS_PROPOSTA" callable="true" >
+		<return-scalar column="MAX_DATA_EMISSIONE" type="date"/> 		
+  		{ call PG_ATTO.MAX_DATA_EMIS_PROPOSTA (?, :IDUFFOWN, :IDPROC) }
+	</sql-query>	
+	
+    <sql-query name="PG_ATTO_aggiornaDecisorioIIIGrado" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_ATTO.AGGIORNA_DEC_III_GRADO_CC(?,:idUffOwn,:idMittente,:idProc,
+		:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+		:nomeDocumento,:idAtto,:descUtente) }
+    </sql-query> 	
+   
+     <sql-query name="PG_ATTO_getCodiceEsitoNSCPerFoglioComplementare" callable="true" >
+		{ call PG_ATTO.GET_ESITO_NSC_PER_FC(?,:idProc, :idUffOwn, :idAtto, :idMisura) }
+		<return-scalar column="COD_ESITO" type="string"/>
+	</sql-query>	
+	   
+	<sql-query name="PG_ATTO_ricercaIstanza" callable="true" >
+	   <return alias="istanza" class="it.giustizia.smp.model.TIstanza"/>
+		{ call PG_ATTO.RICERCA_ISTANZA (?,:IDPROCEDIMENTO,:IDUFFOWNER,:IDTIPOATTO,:IDCATEATTO) }
+	</sql-query>    
+	
+	<sql-query name="PG_ATTO_salvaDecErroreMateriale" callable="true" >
+		{ call PG_ATTO.SALVA_DEC_ER_MAT(?,:idAtto,:idProcedimento,:idUfficio,:idDecisione,:descUtente,:descDecisorio,
+		:DESC_ALTRO_1,:DESC_ALTRO_3, :tipsoggetto, :DESC_NOME, :DESC_COGNOME, :FLG_SESSO, :DESC_CODICE_FISCALE, :DATA_NASCITA, :CODI_FK_ID_COM_NASC, :CODI_FK_ID_STATO_NASC,
+		:DESC_COM_ESTERO_NASC,:CODI_FK_ID_TIPO_SOC,:CODI_FK_ID_STATO_SEDE,:CODI_FK_ID_COM_SEDE,:DESC_COM_ESTERO_SEDE,:DESC_INDIRIZZO_SEDE,
+		:DESC_RAGIONE_SOC,:DESC_PARTITA_IVA,:DESC_NUME_CCIAA,:DESC_CIVICO,:DESC_CAP,:CODI_FK_ID_TIPO_STRADA,:CODI_K_ID_INTESTATARIO,
+		:dataRicezione,:numeAnnoSentenza,:numeSentenza) }
+	</sql-query>	
+
+     <sql-query name="PG_ATTO_ordinanzaVenditaBene" callable="true" >
+        <return-scalar column="IDATTO" type="long"/>
+         { call PG_ATTO.ORDINANZA_VENDITA_BENE(?, :vidUffOwn,:vdescUtente,:vtipo,:vcategoria,:vsottocategoria,:vidstatocons,
+		                                          :vidprocedimento,:vidstato,:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,
+		                                          :vnumcap,:vdesccomuneestero,:vflagcostazienda,:vnote,:vflaggravame,:vdescente,
+		                                          :vdescindirizzoDen,:vdirettEnte,:vnumident,:vvalutaest,:vtipoval,:vvalutaeur,
+		                                          :vcodabi,:vcodcab,:vcodiban,:vcodswift,:vintestatario,:vnummodtrib,:vbollettino, :vidBene,
+		                                          :dataEmissione, :dataDeposito, :dataRegistrazione, :documento, :tipoDocumento, :nomeDocumento) }
+    </sql-query>   	
+	
+    <sql-query name="PG_ATTO_inserisciAttoRelazioneAmminstratore" callable="true" >
+	 	<return-scalar column="IDATTO" type="long"/>
+		 { call PG_ATTO.INSERT_ATTO_REL_AMM(?, :idUffOwn, :idProc, :idStatoAtto, :idTipoAtto, :idCategoriaAtto, :dataRicezione, 
+		 		:numPDOC, :documento, :tipoDocumento, :nomeDocumento, :dataInizio, :dataFine, :idAmm, :cognomeAmm, :nomeAmm, :descUtente, :numeroRiferimento) }
+    </sql-query>  
+    
+    <sql-query name="PG_ATTO_cleanBlobDocumentale" callable="true" >
+	     <return-scalar column="ESITO" type="string"/>
+			{ call PG_ATTO.CLEAN_BLOB_DOCUMENTALE (?) }
+	</sql-query>
+	
+	<sql-query name="PG_ATTO_controllaPresenzaRicorsi" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CNTR_PRESENZA_RICORSI(?,:I_ID_PROCEDIMENTO,:I_ID_UFFICIO,:I_TIPO_FUNZIONE,:I_ID_UTENTE) }	
+ 	</sql-query>
+ 	
+ 	<sql-query name="PG_ATTO_impostaGiudizioDefinitivoI" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_ATTO.CNTR_GIU_DEFINITIVO_I(?,:I_ID_PROCEDIMENTO,:I_ID_UFFICIO,:I_TIPO_FUNZIONE,:I_ID_UTENTE) }	
+ 	</sql-query>
+
+</hibernate-mapping>

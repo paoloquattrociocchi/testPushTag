@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
+<!-- 2015-05-08T16:49:53 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="C30" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="faafedc0-46ec-4b68-bd4d-3246ef593977">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP_GIU2"/>
+	<subDataset name="DatasetTitolo" uuid="87d03f27-fa39-4fae-b627-db24ef3d977c">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP2"/>
+		<parameter name="DS_UFFICIO" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT DISTINCT
+   TRIM(UPPER(T_TP_TIPO_UFFICIO.DESC_TIPO_UFF)) AS DESC_TIPO_UFFICIO
+  ,T_AN_COMUNI.DESC_COMUNE
+  ,TRIM(UPPER(T_AN_UFFICIO.DESC_UFFICIO)) AS NEW_DESC_UFFICIO
+FROM
+  T_AN_COMUNI,
+  T_TP_TIPO_UFFICIO,
+  T_AN_UFFICIO
+WHERE
+  T_AN_COMUNI.CODI_K_ID_COMUNE       = T_AN_UFFICIO.CODI_FK_ID_COM_SEDE
+AND T_AN_UFFICIO.CODI_FK_ID_TIPO_UFF = T_TP_TIPO_UFFICIO.CODI_K_ID_TIPO_UFF
+AND T_AN_UFFICIO.codi_k_id_ufficio   =$P{DS_UFFICIO}]]>
+		</queryString>
+		<field name="NEW_DESC_UFFICIO" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="UFFICIO" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="DATA_INIZIO" class="java.util.Date"/>
+	<parameter name="DATA_FINE" class="java.util.Date"/>
+	<queryString language="plsql">
+		<![CDATA[{ call PG_STATISTICHE.C30_01($P{DATA_INIZIO}, $P{DATA_FINE}, $P{UFFICIO},  $P{ORACLE_REF_CURSOR}) }]]>
+	</queryString>
+	<field name="CODI_K_ID_MAGISTRATO" class="java.lang.Integer"/>
+	<field name="MAGISTRATO" class="java.lang.String"/>
+	<field name="TOTALERIGAPRESIDENTE" class="java.lang.Integer"/>
+	<field name="TOTALERIGAGIUDICE" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="4" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="79" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="2" width="555" height="31" uuid="af438085-d208-4845-a6ab-2cd1c6c63480"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="DatasetTitolo" uuid="7fd32ebf-b2da-4497-8d3f-09e82836e6e4">
+						<datasetParameter name="DS_UFFICIO">
+							<datasetParameterExpression><![CDATA[$P{UFFICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="31" width="555">
+						<textField>
+							<reportElement x="0" y="0" width="555" height="31" uuid="082d2ec7-b4b9-43da-893f-ca8641fc18d6"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="14" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{NEW_DESC_UFFICIO}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="36" width="555" height="20" uuid="f81c6ae5-2a09-4882-afdb-3cf09c3950c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[C30. Riepilogo comparativo udienze per magistrato]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="59" width="555" height="17" uuid="85fbd5b6-9058-4a6d-89e0-ab9368a9bd7f">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+					<paragraph firstLineIndent="0" leftIndent="0"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dal " + DATEFORMAT($P{DATA_INIZIO},"dd/MM/yyy") + " Al " + DATEFORMAT($P{DATA_FINE},"dd/MM/yyy")]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="64" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="19" width="555" height="45" backcolor="#61A3E8" uuid="29f904a6-02c4-4612-ad9a-20444e97a411"/>
+				<staticText>
+					<reportElement mode="Transparent" x="2" y="0" width="223" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="19c2230f-0802-44df-a725-3ac403bef922">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Magistrato]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="225" y="0" width="165" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="0c08bec3-7cc6-4b46-a30e-7f0c18d2a528">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Numero Udienze tenute nel ruolo di Presidente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="390" y="0" width="165" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="8e2ceeea-8d79-45e4-91f0-fd13affaada2"/>
+					<box>
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Numero Udienze tenute nel ruolo di Giudice a Latere]]></text>
+				</staticText>
+			</frame>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="2" width="555" height="5" backcolor="#336699" uuid="3628405c-1745-4ffe-b5dc-7e165e2d32c7">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="3" width="554" height="32" uuid="58030e15-06a0-40de-ba4e-0d59f9e4267a"/>
+				<textField>
+					<reportElement x="2" y="0" width="223" height="30" uuid="d62d0ce7-07f0-40a6-883e-ab563ed38411"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{MAGISTRATO}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="225" y="0" width="165" height="30" uuid="f4be75e6-73dd-4b49-9039-e0a600b0144e"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TOTALERIGAPRESIDENTE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="390" y="0" width="164" height="30" uuid="19bc3091-75d0-48d6-983b-c14bc3bb8125">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TOTALERIGAGIUDICE}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField pattern="d/M/yy h:mm a">
+				<reportElement x="458" y="2" width="93" height="17" uuid="727d340d-3205-4f1d-a97a-7dca1df42e18"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="356" y="2" width="93" height="17" uuid="39e4f668-37d9-4b56-b0f4-6ce262985a52">
+					<property name="local_mesure_unity" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Data Stampa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="3" width="70" height="17" uuid="e9599363-1cfa-4110-b562-6d1d8ed26bf7"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="75" y="3" width="70" height="17" uuid="71587693-0ae5-48c3-b70e-139370474df5"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" di " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="4" splitType="Stretch"/>
+	</summary>
+</jasperReport>

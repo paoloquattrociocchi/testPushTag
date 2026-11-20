@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/provvedimentiOld" xmlns:misura="http://anbsc.almaviva.it/schema/misura" targetNamespace="http://anbsc.almaviva.it/schema/provvedimentiOld" elementFormDefault="qualified">
+	<import namespace="http://anbsc.almaviva.it/schema/misura" schemaLocation="Misura.xsd"/>
+	<complexType name="provvedimentiOld">
+		<sequence>
+						<element name="identificativoProvvedimento" type="integer"/>
+						<element name="misura" type="misura:misura" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+</schema>

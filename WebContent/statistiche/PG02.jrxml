@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
+<!-- 2015-10-12T11:50:35 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PG02" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c14ac90a-cc23-4b25-93d5-42584961d566">
+	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP"/>
+	<subDataset name="DatasetTitolo" whenResourceMissingType="Empty" uuid="fe271683-8250-48a4-be1c-5522781c25be">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP2"/>
+		<parameter name="UFFICIO" class="java.lang.Integer"/>
+		<queryString language="plsql">
+			<![CDATA[SELECT PG_STATISTICHE.TESTATA($P{UFFICIO})  AS NEW_DESC_UFFICIO FROM "DUAL" DUAL]]>
+		</queryString>
+		<field name="NEW_DESC_UFFICIO" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="UFFICIO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1419]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_INIZIO" class="java.util.Date"/>
+	<parameter name="DATA_FINE" class="java.util.Date"/>
+	<parameter name="ORACLE_REF_CURSOR" class="java.sql.ResultSet" isForPrompting="false"/>
+	<queryString language="plsql">
+		<![CDATA[{ call PG_STATISTICHE.PG02_01($P{DATA_INIZIO}, $P{DATA_FINE}, $P{UFFICIO}, $P{ORACLE_REF_CURSOR}) }]]>
+	</queryString>
+	<field name="TIPI_MISURA" class="java.lang.String"/>
+	<field name="TIPI_IMPUGRAZIONE" class="java.lang.String"/>
+	<field name="MISURE_IMPUGNATE" class="java.lang.Integer"/>
+	<sortField name="TIPI_IMPUGRAZIONE"/>
+	<sortField name="TIPI_MISURA" order="Descending"/>
+	<variable name="TIPI_IMPUGRAZIONE1" class="java.lang.Integer" resetType="Group" resetGroup="Gruppo1" calculation="Sum">
+		<variableExpression><![CDATA[$F{MISURE_IMPUGNATE}]]></variableExpression>
+	</variable>
+	<variable name="TotaleMisureImpugnate" class="java.lang.Integer" incrementType="Group" incrementGroup="Gruppo1" calculation="Sum">
+		<variableExpression><![CDATA[$V{TIPI_IMPUGRAZIONE1}]]></variableExpression>
+	</variable>
+	<group name="Gruppo1">
+		<groupExpression><![CDATA[$F{TIPI_IMPUGRAZIONE}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="325" height="37" uuid="49a50ec8-6784-43f6-989f-6ac86a30cabf">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="15" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TIPI_IMPUGRAZIONE}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Auto" pattern="##########" isBlankWhenNull="true">
+					<reportElement mode="Transparent" x="610" y="0" width="170" height="37" forecolor="#000000" backcolor="#FFFFFF" uuid="dc24ad70-5a77-45d0-85ee-a17660d68e95">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="15" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph leftIndent="3" rightIndent="3"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TIPI_IMPUGRAZIONE1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Gruppo2">
+		<groupExpression><![CDATA[$V{TotaleMisureImpugnate}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="92" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="84" width="780" height="8" backcolor="#336699" uuid="dec2a740-f0e1-4572-9e5e-d61e8ba82c98">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<componentElement>
+				<reportElement x="0" y="-1" width="802" height="30" uuid="923a38f5-c8de-47be-b264-34c488f32f7f">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="DatasetTitolo" uuid="8583883c-3b35-4ceb-8533-e7162ef09043">
+						<datasetParameter name="ORACLE_REF_CURSOR">
+							<datasetParameterExpression><![CDATA[$P{ORACLE_REF_CURSOR}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="UFFICIO">
+							<datasetParameterExpression><![CDATA[$P{UFFICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="802">
+						<textField>
+							<reportElement x="0" y="0" width="802" height="30" uuid="e495e9e1-902f-474a-992a-13dee2e2a743"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="14" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{NEW_DESC_UFFICIO}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="29" width="802" height="26" uuid="7fec7aec-531d-4d2b-8cff-f51c1a1077fd">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+					<paragraph lineSpacingSize="2.0"/>
+				</textElement>
+				<text><![CDATA[PG02. Misure impugnate da altri proponenti]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="57" width="802" height="20" uuid="9bc66e19-3df4-4a72-9665-352c8a95b515"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dal " + DATEFORMAT($P{DATA_INIZIO},"dd/MM/yyy") + " al " + DATEFORMAT($P{DATA_FINE},"dd/MM/yyy")]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="780" height="45" backcolor="#59B8EB" uuid="433a1658-9505-48c0-83b7-23649f15b56e">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="0" width="325" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="4c8b1388-d2ca-4f0b-94d2-681f9e59d2fc"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Tipi impugnazioni]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="325" y="0" width="285" height="45" forecolor="#000000" backcolor="#FFFFFF" uuid="2220b1e5-0297-469c-9172-57fc261f53cb"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Tipi misure]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="610" y="0" width="170" height="45" uuid="b87080d7-6872-4649-a824-a1b1c5577a38">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="16" isBold="true"/>
+						<paragraph lineSpacing="Single" leftIndent="3" rightIndent="3" tabStopWidth="40"/>
+					</textElement>
+					<text><![CDATA[Misure impugnate nel periodo]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="325" y="0" width="285" height="34" backcolor="#F5BB51" uuid="095bf00d-54a1-406b-bc00-a37e800928df"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIPI_MISURA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##########" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="610" y="0" width="170" height="34" forecolor="#000000" backcolor="#FFFFFF" uuid="091a0f14-4a99-499b-97b2-1ac370e496b3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph leftIndent="3" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MISURE_IMPUGNATE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField pattern="d/M/yy h:mm a">
+				<reportElement x="677" y="1" width="100" height="20" uuid="7be67b05-16ee-455a-a5c4-8ae240577890"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="575" y="1" width="100" height="20" uuid="65897763-a26b-4e5a-9327-13af5e5bcadc">
+					<property name="local_mesure_unity" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Data Stampa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="45" y="2" width="20" height="20" uuid="905d4d75-2f61-4a50-922d-b4f2af868b0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="70" y="2" width="22" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="e3285c7b-4e67-4173-b1ce-7812672c5eb7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="10" y="2" width="40" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="27e05721-c432-4b2d-9cdf-e3376a3fd989">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Pagina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="56" y="2" width="20" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="e9d7cfd8-3260-41f6-882f-506894cd616c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[di]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="35" splitType="Stretch">
+			<textField evaluationTime="Report" pattern="##########" isBlankWhenNull="true">
+				<reportElement x="610" y="0" width="169" height="35" uuid="a57983f7-db6f-4569-93da-53f0f4f834eb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TotaleMisureImpugnate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="375" y="0" width="234" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="5d28aeb3-73c4-4a42-a1b4-8396229b462c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="13" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Totale misure impugnate]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

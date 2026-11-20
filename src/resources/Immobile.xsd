@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/immobile" targetNamespace="http://anbsc.almaviva.it/schema/immobile" elementFormDefault="qualified">
+	<complexType name="immobile">
+		<sequence>
+			<element name="indirizzo" type="string" minOccurs="0"/>
+			<element name="numeroCivico" type="string" minOccurs="0"/>
+			<element name="edificio" type="string" minOccurs="0"/>
+			<element name="scala" type="string" minOccurs="0"/>
+			<element name="piano" type="string" minOccurs="0"/>
+			<element name="interno" type="string" minOccurs="0"/>
+			<element name="volume" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,6}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="vani" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,4}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="lotto" type="string" minOccurs="0"/>
+			<element name="superficie" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+						<pattern value="\d{1,6}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="ettari" type="integer" minOccurs="0"/>
+			<element name="are" type="integer" minOccurs="0"/>
+			<element name="centiare" type="integer" minOccurs="0"/>
+			<element name="datiCatastali" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="tipoCatasto" type="string" minOccurs="0"/>
+						<element name="identificativoComuneCatasto" type="string" minOccurs="0"/>
+						<element name="sezioneCatasto" type="string" minOccurs="0"/>
+						<element name="foglioCatasto" type="string" minOccurs="0"/>
+						<element name="particellaCatasto" type="string" minOccurs="0"/>
+						<element name="subparticellaCatasto" type="string" minOccurs="0"/>
+						<element name="identificativoCategoriaCatastale" type="integer" minOccurs="0"/>
+						<element name="importoRenditaCatastale" minOccurs="0">
+							<simpleType>
+								<restriction base="decimal">
+									<pattern value="\d{1,13}(\.\d{1,2})?"/>
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="importoRenditaDominicale" minOccurs="0">
+							<simpleType>
+								<restriction base="decimal">
+										<pattern value="\d{1,13}(\.\d{1,2})?"/>
+								</restriction>
+							</simpleType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="tipoDomandaAccatastamento" type="string" minOccurs="0"/>
+			<element name="numeroDomandaAccatastamento" type="string" minOccurs="0"/>
+			<element name="annoDomandaAccatastamento" type="integer" minOccurs="0"/>
+			<element name="dataDomandaAccatastamento" type="dateTime" minOccurs="0"/>
+			<element name="appartenenzaaFabbricatoConfiscato" type="string" minOccurs="0"/>
+			<element name="tipoFondo" type="string" minOccurs="0"/>
+			<element name="identificativoTipoVincolo" type="integer" minOccurs="0"/>
+			<element name="identificativoTipoDisponibilita" type="integer" minOccurs="0"/>
+			<element name="identificativoTipoOccupante" type="integer" minOccurs="0"/>
+			<element name="identificativoStatoManutenzione" type="integer" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

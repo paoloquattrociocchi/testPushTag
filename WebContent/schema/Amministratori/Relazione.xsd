@@ -1,0 +1,1264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSPY v2004 rel. 4 U (http://www.xmlspy.com) by Claudia Cipriani (FINSIEL SPA) -->
+<xs:schema targetNamespace="http://www.giustizia.it/tool/amministratori/schema/trasmissione" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ts="http://www.giustizia.it/tool/amministratori/schema/trasmissione">
+	<xs:element name="TrasmissioneRelazione">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="procedimento" type="ts:procedimentoType"/>
+				<xs:element name="provvedimento" type="ts:provvedimentoTrasmissioneType"/>
+				<xs:element name="bene" type="ts:beneType" maxOccurs="unbounded"/>
+				<xs:element name="soggetto" type="ts:soggettoType" maxOccurs="unbounded"/>
+				<xs:element name="misura" type="ts:misuraType" maxOccurs="unbounded"/>
+				<xs:element name="amministrazione" type="ts:amministrazioneType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="RicezioneRelazione">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="procedimento" type="ts:procedimentoType"/>
+				<xs:element name="provvedimento" type="ts:provvedimentoRicezioneType"/>
+				<xs:element name="bene" type="ts:beneExtType" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--Oggetti relativi ai documenti in trasmissione-->
+	<xs:complexType name="provvedimentoTrasmissioneType">
+		<xs:sequence>
+			<xs:element name="identificativoProvvedimento" type="ts:integer15" nillable="false"/>
+			<xs:element name="annoProvvedimento" type="ts:integer4"/>
+			<xs:element name="numProvvedimento" type="ts:integer15"/>
+			<xs:element name="dataDepositoProvv" type="xs:dateTime"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="beneType">
+		<xs:sequence>
+			<xs:element name="identificativoBene" type="ts:integer15"/>
+			<xs:element name="tipologia" type="ts:tipoBeneType" minOccurs="0"/>
+			<xs:element name="categoria" type="ts:categoriaBeneType" minOccurs="0"/>
+			<xs:element name="sottoCategoria" type="ts:sottoCategoriaBeneType" minOccurs="0"/>
+			<xs:element name="ubicazione" type="ts:ubicazioneType" minOccurs="0"/>
+			<xs:element name="descBene" type="ts:string250" minOccurs="0"/>
+			<xs:element name="datiSpecificiBene">
+				<xs:complexType>
+					<xs:choice minOccurs="0">
+						<xs:element name="altriOggetti" type="ts:altriOggettiType"/>
+						<xs:element name="animali" type="ts:animaliType"/>
+						<xs:element name="azienda" type="ts:aziendaType"/>
+						<xs:element name="finanziario">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="ts:finanziarioType">
+										<xs:attribute name="tipoFinanziario" type="ts:tipoFinanziarioType" use="required"/>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="immateriale" type="ts:immaterialeType"/>
+						<xs:element name="immobile" type="ts:immobileType"/>
+						<xs:element name="collezioni" type="ts:collezioniType"/>
+						<xs:element name="veicolo" type="ts:veicoloType"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gravatoDaPegnoIpoteca" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="soggettoType">
+		<xs:sequence>
+			<xs:element name="identificativo" type="ts:integer15"/>
+			<xs:choice>
+				<xs:element name="personaGiuridica" type="ts:personaGiuridicaType" minOccurs="0"/>
+				<xs:element name="personaFisica" type="ts:personaFisicaType" minOccurs="0"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="personaFisicaType">
+		<xs:sequence>
+			<xs:element name="cognome" type="ts:string35" minOccurs="0"/>
+			<xs:element name="nome" type="ts:string35" minOccurs="0"/>
+			<xs:element name="sesso" type="ts:string1" minOccurs="0"/>
+			<xs:element name="dataNascita" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="luogoNascita" type="ts:ubicazioneType" minOccurs="0"/>
+			<xs:element name="codiceFiscale" type="ts:string16" minOccurs="0"/>
+			<xs:element name="cui" type="ts:string7" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="personaGiuridicaType">
+		<xs:sequence>
+			<xs:element name="denominazione" type="ts:string200" minOccurs="0"/>
+			<xs:element name="partitaIVA" type="ts:string14" minOccurs="0"/>
+			<xs:element name="tipologia" type="ts:tipoSocietaType" minOccurs="0"/>
+			<xs:element name="sedeLegale" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ubicazione" type="ts:ubicazioneType" minOccurs="0"/>
+						<xs:element name="indirizzoSedeLegale" type="ts:string150" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="misuraType">
+		<xs:sequence>
+			<xs:element name="identificativoBene" type="ts:integer15" minOccurs="0"/>
+			<xs:element name="tipoInteresse" type="ts:string1" minOccurs="0"/>
+			<xs:element name="identificativoSoggettoTitolare" type="ts:integer15" minOccurs="0"/>
+			<xs:element name="quota" type="ts:decimal10_2" minOccurs="0"/>
+			<xs:element name="identificativoSoggettoProposto" type="ts:integer15" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="identificativoNormativa" type="ts:integer6" minOccurs="0"/>
+			<xs:element name="decisione" type="ts:decisioneType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="amministrazioneType">
+		<xs:sequence>
+			<xs:element name="codiceFiscale" type="ts:string16"/>
+			<xs:element name="identificativoBene" type="ts:integer15" maxOccurs="unbounded"/>
+			<xs:element name="dataInizioIncarico" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="dataFineIncarico" type="xs:dateTime" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="amministratoreType">
+		<xs:sequence>
+			<xs:element name="identificativoAmministratore" type="ts:integer15"/>
+			<xs:element name="cognome" type="ts:string35"/>
+			<xs:element name="nome" type="ts:string35"/>
+			<xs:element name="codiceFiscale" type="ts:string16" minOccurs="0"/>
+			<xs:element name="partitaIVA" type="ts:string14" minOccurs="0"/>
+			<xs:element name="dataNascita" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="luogoNascita" type="ts:ubicazioneType" minOccurs="0"/>
+			<xs:element name="indirizzoStudio" type="ts:string35" minOccurs="0"/>
+			<xs:element name="numeroIscrizioneAlbo" type="ts:string14" minOccurs="0"/>
+			<xs:element name="pec" type="ts:string256" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Oggetti relativi ai documenti in ricezione-->
+	<xs:complexType name="provvedimentoRicezioneType">
+		<xs:sequence>
+			<xs:element name="codiceFiscale" type="ts:string16"/>
+			<xs:element name="dataInizioPeriodo" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="dataFinePeriodo" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="dataPresentazioneRelazione" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="numeroRiferimento" type="ts:string20" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="beneExtType">
+		<xs:sequence>
+			<xs:element name="identificativoBene" type="ts:integer15" minOccurs="0"/>
+			<xs:element name="tipologia" type="ts:tipoBeneType"/>
+			<xs:element name="categoria" type="ts:categoriaBeneType"/>
+			<xs:element name="sottoCategoria" type="ts:sottoCategoriaBeneType" minOccurs="0"/>
+			<xs:element name="ubicazione" type="ts:ubicazioneType" minOccurs="0"/>
+			<xs:element name="descBene" type="ts:string250" minOccurs="0"/>
+			<xs:element name="datiSpecificiBene">
+				<xs:complexType>
+					<xs:choice minOccurs="0">
+					
+						<xs:element name="altriOggetti" type="ts:altriOggettiExtType"/>
+						<xs:element name="animali" type="ts:animaliExtType"/>
+						<xs:element name="azienda" type="ts:aziendaExtType"/>
+						<xs:element name="finanziario">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="ts:finanziarioExtType">
+										<xs:attribute name="tipo" type="ts:tipoFinanziarioType" use="required"/>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="immateriale" type="ts:immaterialeExtType"/>
+						<xs:element name="immobile" type="ts:immobileExtType"/>
+						<xs:element name="collezioni" type="ts:collezioniExtType"/>
+						<xs:element name="veicolo" type="ts:veicoloExtType"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="gravatoDaPegnoIpoteca" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="altriOggettiExtType">
+		<xs:sequence>
+			<xs:element name="altriOggetti" type="ts:altriOggettiType"/>
+			<xs:element name="datiMobileGest" type="ts:datiMobileGestType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="animaliExtType">
+		<xs:sequence>
+			<xs:element name="animali" type="ts:animaliType"/>
+			<xs:element name="datiMobileGest" type="ts:datiMobileGestType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="aziendaExtType">
+		<xs:sequence>
+			<xs:element name="azienda" type="ts:aziendaType"/>
+			<xs:element name="datiAziendaGest" type="ts:datiAziendaGestType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="collezioniExtType">
+		<xs:sequence>
+			<xs:element name="collezioni" type="ts:collezioniType"/>
+			<xs:element name="datiMobileGest" type="ts:datiMobileGestType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="denaroExtType">
+		<xs:sequence>
+			<xs:element name="denaro" type="ts:denaroType"/>
+			<xs:element name="datiMobileGest" type="ts:datiMobileGestType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="denaroContanteExtType">
+		<xs:sequence>
+			<xs:element name="denaroContante" type="ts:denaroContanteType"/>
+			<xs:element name="datiMobileGest" type="ts:datiMobileGestType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="finanziarioExtType">
+		<xs:sequence>
+			<xs:element name="finanziario" type="ts:finanziarioType"/>
+			<xs:element name="datiFinanzGest" type="ts:datiFinanzGestType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="veicoloExtType">
+		<xs:sequence>
+			<xs:element name="veicolo" type="ts:veicoloType"/>
+			<xs:element name="datiVeicoloGest" type="ts:datiVeicoloGestType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="immaterialeExtType">
+		<xs:sequence>
+			<xs:element name="immateriale" type="ts:immaterialeType"/>
+			<xs:element name="datiImmaterialeGest" type="ts:datiImmaterialeGestType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="immobileExtType">
+		<xs:sequence>
+			<xs:element name="immobile" type="ts:immobileType"/>
+			<xs:element name="datiImmobileGest" type="ts:datiImmobileGestType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="datiAziendaGestType">
+		<xs:sequence>
+			<xs:element name="stima" type="ts:decimal12_2" nillable="false"/>
+			<xs:element name="dataStima" type="xs:dateTime" nillable="false"/>
+			<xs:element name="dirittiTerzi" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="descDirittiTerzi" type="ts:string2000" minOccurs="0"/>
+			<xs:element name="trascrizioneSequestro" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="dataTrascrizioneSequestro" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="descStatoAttivitaAziendale" type="ts:string2000" minOccurs="0"/>
+			<xs:element name="prospettivaProsecuzioneAttivita" type="ts:string2000" minOccurs="0"/>
+			<xs:element name="descDestinazioneImpresa" type="ts:string120" minOccurs="0"/>
+			<xs:element name="tipoOrganoAmministrativo" type="ts:string120" minOccurs="0"/>
+			<xs:element name="nominativoAmministratore" type="ts:string120" minOccurs="0"/>
+			<xs:element name="dataNominaAmministratore" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="nominativoRappresentanteLegale" type="ts:string120" minOccurs="0"/>
+			<xs:element name="dataNominaRappresentante" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="liquidazioneSociale" type="ts:string120" minOccurs="0"/>
+			<xs:element name="dataLiquidazione" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="nominativoLiquidatore" type="ts:string120" minOccurs="0"/>
+			<xs:element name="tipoOrganoControllo" type="ts:string120" minOccurs="0"/>
+			<xs:element name="revisioneLegaleConti" type="ts:string120" minOccurs="0"/>
+			<xs:element name="nominativoRevisore" type="ts:string120" minOccurs="0"/>
+			<xs:element name="dataUltimoBilancioApprovato" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="saldoUltimoBilancio" type="ts:decimal12_2" minOccurs="0"/>
+			<xs:element name="luogoScrittureContabili" type="ts:string120" minOccurs="0"/>
+			<xs:element name="nominativaDetentoreScritture" type="ts:string120" minOccurs="0"/>
+			<xs:element name="numeroDipendenti" type="xs:integer" minOccurs="0"/>
+			<xs:element name="ccnl" type="ts:string120" minOccurs="0"/>
+			<xs:element name="tipoContrattoLavoro" type="ts:string120" minOccurs="0"/>
+			<xs:element name="ammortizzatoreSociale" type="ts:string2000" minOccurs="0"/>
+			<xs:element name="contenziosi" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="rispettoNormeSicurezza" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="lavoratoriStranieri" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="addettiIrregolari" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="lavoratoriFormazione" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="posizioneSocio" type="ts:string120" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="datiFinanzGestType">
+		<xs:sequence>
+			<xs:element name="stima" type="ts:decimal12_2" nillable="false"/>
+			<xs:element name="dataStima" type="xs:dateTime" nillable="false"/>
+			<xs:element name="dirittiTerzi" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="descDirittiTerzi" type="ts:string2000" minOccurs="0"/>
+			<xs:element name="beneRinvenuto" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="dataPossesso" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="dataPerditaPossesso" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="descAltriVincoli" type="ts:string2000" minOccurs="0"/>
+			<xs:choice>
+				<xs:element name="finanziario">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="descIntestatarioOriginale" type="ts:string120" minOccurs="0"/>
+							<xs:element name="descIntestatarioAttuale" type="ts:string120" minOccurs="0"/>
+							<xs:element name="comunicazioneFUG" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="dataComunicazioneFug" type="xs:dateTime" minOccurs="0"/>
+							<xs:element name="saldoPrimaComunicazione" type="ts:decimal12_2" minOccurs="0"/>
+							<xs:element name="saldoPrimaRelazione" type="ts:decimal12_2" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="mobile">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="oneriCustodia" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="valoreOneriCustodia" type="ts:decimal12_2" minOccurs="0"/>
+							<xs:element name="dataOneriCustodia" type="xs:dateTime" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="datiImmaterialeGestType">
+		<xs:sequence>
+			<xs:element name="stima" type="ts:decimal12_2" nillable="false"/>
+			<xs:element name="dataStima" type="xs:dateTime" nillable="false"/>
+			<xs:element name="dirittiTerzi" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="descDirittiTerzi" type="ts:string2000" minOccurs="0"/>
+			<xs:element name="trascrizioneSequestro" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="dataTrascrizioneSequestro" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="descCustode" type="ts:string120" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="datiImmobileGestType">
+		<xs:sequence>
+			<xs:element name="stima" type="ts:decimal12_2" nillable="false"/>
+			<xs:element name="dataStima" type="xs:dateTime" nillable="false"/>
+			<xs:element name="dirittiTerzi" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="descDirittiTerzi" type="ts:string2000" nillable="true" minOccurs="0"/>
+			<xs:element name="dataPossesso" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="stimaOneriRistrutturazione" type="ts:decimal12_2" nillable="true" minOccurs="0"/>
+			<xs:element name="confiscaParziale" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="beneDivisibile" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="utilizzoAutonomoQuota" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="vocazioneTuristica" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="fabbricatoInteramenteConfiscato" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="immobileOccupato" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="descTipoOccupazione" type="ts:string40" nillable="true" minOccurs="0"/>
+			<xs:element name="descAltroTipoOccupazione" type="ts:string80" nillable="true" minOccurs="0"/>
+			<xs:element name="dataStipulaContratto" type="xs:dateTime" nillable="false" minOccurs="0"/>
+			<xs:element name="dataScadenzaContratto" type="xs:dateTime" nillable="false" minOccurs="0"/>
+			<xs:element name="canoneAnnuoLocazione" type="ts:decimal12_2" nillable="true" minOccurs="0"/>
+			<xs:element name="mensilePattuito" type="ts:decimal12_2" nillable="true" minOccurs="0"/>
+			<xs:element name="mensileVersato" type="ts:decimal12_2" nillable="true" minOccurs="0"/>
+			<xs:element name="regolaritaPagamenti" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="descrizionePagamenti" type="ts:string200" nillable="true" minOccurs="0"/>
+			<xs:element name="importoDovuto" type="ts:decimal12_2" nillable="true" minOccurs="0"/>
+			<xs:element name="importoDovutoDal" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="importoDovutoAl" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="condominioArretrato" type="ts:decimal12_2" nillable="true" minOccurs="0"/>
+			<xs:element name="condominioArretratoDal" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="condominioArretratoAl" type="xs:dateTime" nillable="true" minOccurs="0"/>
+			<xs:element name="condominioInScadenza" type="ts:decimal12_2" nillable="true" minOccurs="0"/>
+			<xs:element name="descTipoOccupanti" type="ts:string40" nillable="true" minOccurs="0"/>
+			<xs:element name="presenzaServitu" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="usiCivici" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="altriVincoli" type="xs:boolean" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="datiMobileGestType">
+		<xs:sequence>
+			<xs:element name="stima" type="ts:decimal12_2" nillable="false"/>
+			<xs:element name="dataStima" type="xs:dateTime" nillable="false"/>
+			<xs:element name="dirittiTerzi" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="descDirittiTerzi" type="ts:string2000" minOccurs="0"/>
+			<xs:element name="beneRinvenuto" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="dataPossesso" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="dataPerditaPossesso" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="oneriCustodia" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="valoreOneriCustodia" type="ts:decimal12_2" minOccurs="0"/>
+			<xs:element name="dataOneriCustodia" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="descAltriVincoli" type="ts:string2000" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="datiVeicoloGestType">
+		<xs:sequence>
+			<xs:element name="stima" type="ts:decimal12_2" nillable="false"/>
+			<xs:element name="dataStima" type="xs:dateTime" nillable="false"/>
+			<xs:element name="dirittiTerzi" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="descDirittiTerzi" type="ts:string2000" minOccurs="0"/>
+			<xs:element name="beneRinvenuto" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="dataPossesso" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="dataPerditaPossesso" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="descStatoManutenzione" type="ts:string2000" minOccurs="0"/>
+			<xs:element name="trascrizioneSequestro" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="dataTrascrizioneSequestro" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="descCustode" type="ts:string120" minOccurs="0"/>
+			<xs:element name="oneriCustodia" type="xs:boolean" nillable="true" minOccurs="0"/>
+			<xs:element name="valoreOneriCustodia" type="ts:decimal12_2" minOccurs="0"/>
+			<xs:element name="dataOneriCustodia" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="descAltriVincoli" type="ts:string2000" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="decimal10_2">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="10"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="decimal12_2">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="12"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="decimal15_2">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="15"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="integer1">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="integer3">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="integer4">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="integer5">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="integer6">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="integer10">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="integer12">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="integer15">
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="stringInteger5">
+		<xs:restriction base="xs:string">
+			<xs:length value="5"/>
+			<xs:pattern value="\d+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string12char">
+		<xs:restriction base="xs:string">
+			<xs:length value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string1">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string2">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string3">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string4">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string5">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string6">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string7">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string10">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string11">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string14">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string16">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string20">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string30">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string34">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="34"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string35">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string40">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string50">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string64">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string80">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="80"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string120">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="120"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string150">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="150"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string200">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string250">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string256">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string2000">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="procedimentoType">
+		<xs:sequence>
+			<xs:element name="identificativoProcedimento" type="ts:integer15" nillable="false"/>
+			<xs:element name="ufficioCompetente" type="ts:integer6" nillable="false"/>
+			<xs:element name="annoProcedimento" type="ts:integer4" minOccurs="0"/>
+			<xs:element name="numeroProcedimento" type="ts:integer12" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="altriOggettiType">
+		<xs:sequence>
+			<xs:element name="descrizione" type="ts:string200" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="animaliType">
+		<xs:sequence>
+			<xs:element name="descrizione" type="ts:string200" minOccurs="0"/>
+			<xs:element name="numeroAnimali" type="ts:integer15" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="aziendaType">
+		<xs:sequence>
+			<xs:element name="ragioneSociale" type="ts:string200" minOccurs="0"/>
+			<xs:element name="partitaIva" type="ts:string14" minOccurs="0"/>
+			<xs:element name="numerocciaa" type="ts:string30" minOccurs="0"/>
+			<xs:element name="codiceFiscale" type="ts:string11" minOccurs="0"/>
+			<xs:element name="capitaleSociale" type="ts:integer15" minOccurs="0"/>
+			<xs:element name="descrizioneRappresentanteSocieta" type="ts:string200" minOccurs="0"/>
+			<xs:element name="descrizioneAmministratore" type="ts:string200" minOccurs="0"/>
+			<xs:element name="numeroDipendenti" type="ts:integer15" minOccurs="0"/>
+			<xs:element name="settoreAttivita" type="ts:settoreAttivitaType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="denaroType">
+		<xs:sequence>
+			<xs:element name="descrizioneEnteDepositario" type="ts:string200" minOccurs="0"/>
+			<xs:element name="descrizioneFiliale" type="ts:string200" minOccurs="0"/>
+			<xs:element name="descrizioneDirettore" type="ts:string200" minOccurs="0"/>
+			<xs:element name="numeroRegistrazioneEnte" type="ts:string20" minOccurs="0"/>
+			<xs:element name="importoValuta" type="ts:decimal15_2" minOccurs="0"/>
+			<xs:element name="importoEuro" type="ts:decimal15_2" minOccurs="0"/>
+			<xs:element name="iban" type="ts:string34" minOccurs="0"/>
+			<xs:element name="swift" type="ts:string11" minOccurs="0"/>
+			<xs:element name="tipoValuta" type="ts:tipoValutaType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="denaroContanteType">
+		<xs:sequence>
+			<xs:element name="descrizioneEnteDepositario" type="ts:string200"/>
+			<xs:element name="descrizioneIntestatario" type="ts:string200" minOccurs="0"/>
+			<xs:element name="iban" type="ts:string34" minOccurs="0"/>
+			<xs:element name="swift" type="ts:string11" minOccurs="0"/>
+			<xs:element name="importoValuta" type="ts:decimal15_2" minOccurs="0"/>
+			<xs:element name="importoEuro" type="ts:decimal15_2" minOccurs="0"/>
+			<xs:element name="tipoValuta" type="ts:tipoValutaType" minOccurs="0"/>
+			<xs:element name="numeroLibretto" type="ts:string20" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="finanziarioType">
+		<xs:sequence>
+			<xs:element name="descEnte" type="ts:string200" minOccurs="0"/>
+			<xs:element name="filialeModulo" type="ts:string200" minOccurs="0"/>
+			<xs:element name="direttoreIntestatario" type="ts:string200" minOccurs="0"/>
+			<xs:choice>
+				<xs:element name="ente">
+					<xs:annotation>
+						<xs:documentation>Banca, Posta...</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="swift" type="ts:string11" minOccurs="0"/>
+							<xs:sequence>
+								<xs:element name="iban" type="ts:string34" nillable="true"/>
+								<xs:sequence>
+									<xs:element name="abi" type="ts:stringInteger5" nillable="true"/>
+									<xs:element name="cab" type="ts:stringInteger5" nillable="true"/>
+									<xs:element name="numeroContoCorrente" type="ts:string12char" nillable="true"/>
+								</xs:sequence>
+							</xs:sequence>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="assicurazione">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="codFiscaleEnte" type="ts:string16"/>
+							<xs:element name="numeroPolizza" type="ts:string34"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="tipoValuta" type="ts:tipoValutaType" minOccurs="0"/>
+			<xs:element name="importoValuta" type="ts:decimal15_2" minOccurs="0"/>
+			<xs:element name="importoEuro" type="ts:decimal15_2" minOccurs="0"/>
+			<xs:element name="ident" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="collezioniType">
+		<xs:sequence>
+			<xs:element name="descrizioneCollezione" type="ts:string200" minOccurs="0"/>
+			<xs:element name="numeroPezzi" type="ts:integer10" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="immaterialeType">
+		<xs:sequence>
+			<xs:element name="numeroRegistrazione" type="ts:string20" minOccurs="0"/>
+			<xs:element name="dataRegistrazione" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="dataScadenza" type="xs:dateTime" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="immobileType">
+		<xs:sequence>
+			<xs:element name="edificio" type="ts:string2" minOccurs="0"/>
+			<xs:element name="scala" type="ts:string3" minOccurs="0"/>
+			<xs:element name="piano" type="ts:string3" minOccurs="0"/>
+			<xs:element name="interno" type="ts:string3" minOccurs="0"/>
+			<xs:element name="volume_int" type="ts:integer3" minOccurs="0"/>
+			<xs:element name="volume_dec" type="ts:integer1" minOccurs="0"/>
+			<xs:element name="vani_int" type="ts:integer3" minOccurs="0"/>
+			<xs:element name="vani_dec" type="ts:integer1" minOccurs="0"/>
+			<xs:element name="lotto" type="ts:string2" minOccurs="0"/>
+			<xs:element name="superficie_int" type="ts:integer3" minOccurs="0"/>
+			<xs:element name="superficie_dec" type="ts:integer1" minOccurs="0"/>
+			<xs:element name="ettari" type="ts:integer5" minOccurs="0"/>
+			<xs:element name="are" type="ts:integer5" minOccurs="0"/>
+			<xs:element name="centiare" type="ts:integer5" minOccurs="0"/>
+			<xs:element name="datiCatastali">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="tipoCatasto" type="ts:tipoCatastoType" minOccurs="0"/>
+						<xs:element name="identificativoComuneCatasto" type="ts:string4" minOccurs="0"/>
+						<xs:element name="sezioneCatasto" type="ts:string4" minOccurs="0"/>
+						<xs:element name="foglioCatasto" type="ts:string4" minOccurs="0"/>
+						<xs:element name="particellaCatasto1" type="ts:string5" minOccurs="0"/>
+						<xs:element name="particellaCatasto2" type="ts:string4" minOccurs="0"/>
+						<xs:element name="subparticellaCatasto1" type="ts:string4" minOccurs="0"/>
+						<xs:element name="subparticellaCatasto2" type="ts:string3" minOccurs="0"/>
+						<xs:element name="identificativoCategoriaCatastale" type="ts:categoriaCatastaleType" minOccurs="0"/>
+						<xs:element name="importoRenditaCatastale" type="ts:decimal15_2" minOccurs="0"/>
+						<xs:element name="importoRenditaDominicale" type="ts:decimal15_2" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="numeroDomandaAccatastamento" type="ts:string10" minOccurs="0"/>
+			<xs:element name="dataDomandaAccatastamento" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="appartenenzaaFabbricatoConfiscato" type="ts:string1" minOccurs="0"/>
+			<xs:element name="tipoFondo" type="ts:tipoFondoType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="veicoloType">
+		<xs:sequence>
+			<xs:element name="numeroRegistro" type="ts:string10" minOccurs="0"/>
+			<xs:element name="dataRegistrazione" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="numeroIdentificativo" type="ts:string10" minOccurs="0"/>
+			<xs:element name="codiceImmatricolazione" type="ts:string10" minOccurs="0"/>
+			<xs:element name="descrizioneModello" type="ts:string40" minOccurs="0"/>
+			<xs:element name="numeroTarga" type="ts:string10" minOccurs="0"/>
+			<xs:element name="numeroTelaio" type="ts:string30" minOccurs="0"/>
+			<xs:element name="descrizioneColore" type="ts:string30" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ubicazioneType">
+		<xs:sequence>
+			<xs:element name="idStato" type="xs:integer"/>
+			<xs:choice>
+				<xs:element name="idComuneItaliano" type="ts:string6"/>
+				<xs:element name="descrizioneComuneEstero" type="xs:string"/>
+			</xs:choice>
+			<xs:element name="tipoStrada" type="ts:tipoStradaType" minOccurs="0"/>
+			<xs:element name="indirizzo" type="ts:string120" minOccurs="0"/>
+			<xs:element name="civico" type="ts:string6" minOccurs="0"/>
+			<xs:element name="cap" type="ts:string5" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="tipoProvvedimentoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Notifica"/>
+			<xs:enumeration value="Relata di notifica"/>
+			<xs:enumeration value="Decreto"/>
+			<xs:enumeration value="Impugnazione"/>
+			<xs:enumeration value="Istanza"/>
+			<xs:enumeration value="Ricorso"/>
+			<xs:enumeration value="Indagine"/>
+			<xs:enumeration value="Certificato"/>
+			<xs:enumeration value="Proposta"/>
+			<xs:enumeration value="Esterno"/>
+			<xs:enumeration value="Informativa"/>
+			<xs:enumeration value="Fonte"/>
+			<xs:enumeration value="Giudiziario generico"/>
+			<xs:enumeration value="Atto generico"/>
+			<xs:enumeration value="Archiviazione"/>
+			<xs:enumeration value="Verbale"/>
+			<xs:enumeration value="Atto esecutivo"/>
+			<xs:enumeration value="Decreto II grado"/>
+			<xs:enumeration value="Impugnazione II grado"/>
+			<xs:enumeration value="Sentenza di Cassazione"/>
+			<xs:enumeration value="Sentenza di Cassazione da CDA"/>
+			<xs:enumeration value="Atti in archivio"/>
+			<xs:enumeration value="Ordinanza di trasformazione"/>
+			<xs:enumeration value="Versionamento soggetto"/>
+			<xs:enumeration value="Istanza"/>
+			<xs:enumeration value="Accertamento"/>
+			<xs:enumeration value="Provvedimento"/>
+			<xs:enumeration value="Ricevuta"/>
+			<xs:enumeration value="Relazione dell'Amministratore"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipoStradaType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Notifica"/>
+				<xs:enumeration value="ALZAIA"/>
+				<xs:enumeration value="ALZATA"/>
+				<xs:enumeration value="ANDRONA"/>
+				<xs:enumeration value="ARCHIVOLTO"/>
+				<xs:enumeration value="ARCO"/>
+				<xs:enumeration value="ASCENSORE"/>
+				<xs:enumeration value="ATRIO"/>
+				<xs:enumeration value="BACINO"/>
+				<xs:enumeration value="BAGLIO"/>
+				<xs:enumeration value="BANCHINA"/>
+				<xs:enumeration value="BASTIONI"/>
+				<xs:enumeration value="BORGATA"/>
+				<xs:enumeration value="BORGHETTO"/>
+				<xs:enumeration value="BORGO"/>
+				<xs:enumeration value="CALATA"/>
+				<xs:enumeration value="CALLE"/>
+				<xs:enumeration value="CALLESELLA"/>
+				<xs:enumeration value="CAMPASSO"/>
+				<xs:enumeration value="CAMPAZZO"/>
+				<xs:enumeration value="CAMPIELLO"/>
+				<xs:enumeration value="CAMPO"/>
+				<xs:enumeration value="CASALE"/>
+				<xs:enumeration value="CASE"/>
+				<xs:enumeration value="CAVA"/>
+				<xs:enumeration value="CAVALCAVIA"/>
+				<xs:enumeration value="CHIASSO"/>
+				<xs:enumeration value="CIRCONVALLAZIONE"/>
+				<xs:enumeration value="CLIVIO"/>
+				<xs:enumeration value="CONTRADA"/>
+				<xs:enumeration value="CORSETTO"/>
+				<xs:enumeration value="CORSO"/>
+				<xs:enumeration value="CORTE"/>
+				<xs:enumeration value="CORTICELLA"/>
+				<xs:enumeration value="CORTILE"/>
+				<xs:enumeration value="CUPA"/>
+				<xs:enumeration value="DIRAMAZIONE"/>
+				<xs:enumeration value="DISCESA"/>
+				<xs:enumeration value="FONDACO"/>
+				<xs:enumeration value="FONDAMENTA"/>
+				<xs:enumeration value="FONDO"/>
+				<xs:enumeration value="FORO"/>
+				<xs:enumeration value="FRAZIONE"/>
+				<xs:enumeration value="GALLERIA"/>
+				<xs:enumeration value="GIARDINO"/>
+				<xs:enumeration value="GRADINI"/>
+				<xs:enumeration value="GRADONI"/>
+				<xs:enumeration value="LARGO"/>
+				<xs:enumeration value="LISTA"/>
+				<xs:enumeration value="LOCALITA`"/>
+				<xs:enumeration value="LOGGE"/>
+				<xs:enumeration value="LUNGADIGE"/>
+				<xs:enumeration value="LUNGARGINE"/>
+				<xs:enumeration value="LUNGARNO"/>
+				<xs:enumeration value="LUNGODORA"/>
+				<xs:enumeration value="LUNGOMARE"/>
+				<xs:enumeration value="LUNGOPO"/>
+				<xs:enumeration value="LUNGOSTURA"/>
+				<xs:enumeration value="LUNGOTEVERE"/>
+				<xs:enumeration value="MASSERIA"/>
+				<xs:enumeration value="MERCATO"/>
+				<xs:enumeration value="MOLO"/>
+				<xs:enumeration value="MULATTIERA"/>
+				<xs:enumeration value="MURA"/>
+				<xs:enumeration value="PARCO"/>
+				<xs:enumeration value="PASSAGGIO"/>
+				<xs:enumeration value="PASSEGGIATA"/>
+				<xs:enumeration value="PASSETTO"/>
+				<xs:enumeration value="PASSO"/>
+				<xs:enumeration value="PIAZZA"/>
+				<xs:enumeration value="PIAZZALE"/>
+				<xs:enumeration value="PIAZZETTA"/>
+				<xs:enumeration value="PISCINA"/>
+				<xs:enumeration value="PONTE"/>
+				<xs:enumeration value="PONTILE"/>
+				<xs:enumeration value="PORTA"/>
+				<xs:enumeration value="PORTICO"/>
+				<xs:enumeration value="PORTO"/>
+				<xs:enumeration value="PROLUNGAMENTO"/>
+				<xs:enumeration value="QUARTIERE"/>
+				<xs:enumeration value="RACCORDO"/>
+				<xs:enumeration value="RAMI"/>
+				<xs:enumeration value="RAMO"/>
+				<xs:enumeration value="RAMPA"/>
+				<xs:enumeration value="RAMPE"/>
+				<xs:enumeration value="RECINTO"/>
+				<xs:enumeration value="RIONE"/>
+				<xs:enumeration value="RIPA"/>
+				<xs:enumeration value="RIVA"/>
+				<xs:enumeration value="RIVIERA"/>
+				<xs:enumeration value="ROTONDA"/>
+				<xs:enumeration value="RUA"/>
+				<xs:enumeration value="SALITA"/>
+				<xs:enumeration value="SALIZZATA"/>
+				<xs:enumeration value="SCALA"/>
+				<xs:enumeration value="SCALE"/>
+				<xs:enumeration value="SCALEA"/>
+				<xs:enumeration value="SCALETTA"/>
+				<xs:enumeration value="SCALETTE"/>
+				<xs:enumeration value="SCALI"/>
+				<xs:enumeration value="SCALINATA"/>
+				<xs:enumeration value="SCALONE"/>
+				<xs:enumeration value="SDRUCCIOLO"/>
+				<xs:enumeration value="SENTIERO"/>
+				<xs:enumeration value="SESTRIERI"/>
+				<xs:enumeration value="SITO"/>
+				<xs:enumeration value="SL"/>
+				<xs:enumeration value="SOBBORGO"/>
+				<xs:enumeration value="SOTTOPORTICO"/>
+				<xs:enumeration value="SOTTOVIA"/>
+				<xs:enumeration value="SPALTO"/>
+				<xs:enumeration value="SPIANATA"/>
+				<xs:enumeration value="STRADA"/>
+				<xs:enumeration value="STRADALE"/>
+				<xs:enumeration value="STRADONE"/>
+				<xs:enumeration value="SUPPORTICO"/>
+				<xs:enumeration value="SVINCOLO"/>
+				<xs:enumeration value="TRATTO"/>
+				<xs:enumeration value="TRAVERSA"/>
+				<xs:enumeration value="TRAVERSAVIA"/>
+				<xs:enumeration value="TRESANDA"/>
+				<xs:enumeration value="TRONCO"/>
+				<xs:enumeration value="VALLONE"/>
+				<xs:enumeration value="VARCO"/>
+				<xs:enumeration value="VIA"/>
+				<xs:enumeration value="VIADOTTO"/>
+				<xs:enumeration value="VIALE"/>
+				<xs:enumeration value="VIALETTO"/>
+				<xs:enumeration value="VICO"/>
+				<xs:enumeration value="VICOLETTO"/>
+				<xs:enumeration value="VICOLO"/>
+				<xs:enumeration value="VILLAGGIO"/>
+				<xs:enumeration value="VIOTTOLO"/>
+				<xs:enumeration value="VIUZZO"/>
+				<xs:enumeration value="VO"/>
+				<xs:enumeration value="VOLTA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="tipoBeneType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IMMOBILE"/>
+			<xs:enumeration value="MOBILE"/>
+			<xs:enumeration value="MOBILE REGISTRATO"/>
+			<xs:enumeration value="FINANZIARIO"/>
+			<xs:enumeration value="AZIENDA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="categoriaBeneType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="UNITA` IMMOBILIARE PER USO DI ABITAZIONE E ASSIMILABILE"/>
+			<xs:enumeration value="UNITA` IMMOBILIARE PER ALLOGGIO E USI COLLETTIVI"/>
+			<xs:enumeration value="UNITA` IMMOBILIARE A DESTINAZIONE COMMERCIALE E INDUSTRIALE"/>
+			<xs:enumeration value="ALTRA UNITA` IMMOBILIARE"/>
+			<xs:enumeration value="TERRENO"/>
+			<xs:enumeration value="DENARO"/>
+			<xs:enumeration value="COLLEZIONE"/>
+			<xs:enumeration value="ANIMALI"/>
+			<xs:enumeration value="ALTRI OGGETTI"/>
+			<xs:enumeration value="VEICOLO"/>
+			<xs:enumeration value="BENE IMMATERIALE"/>
+			<xs:enumeration value="TITOLO CAMBIARIO"/>
+			<xs:enumeration value="TITOLO OBBLIGAZIONARIO O DI PRESTITO"/>
+			<xs:enumeration value="TITOLO DI PARTECIPAZIONE"/>
+			<xs:enumeration value="TITOLO RAPPRESENTATIVO DI MERCI"/>
+			<xs:enumeration value="ALTRI BENI FINANZIARI"/>
+			<xs:enumeration value="IMPRESA INDIVIDUALE"/>
+			<xs:enumeration value="SOCIETA` A RESPONSABILITA` LIMITATA"/>
+			<xs:enumeration value="SOCIETA` COOPERATIVA"/>
+			<xs:enumeration value="SOCIETA` DI FATTO"/>
+			<xs:enumeration value="SOCIETA` IN ACCOMANDITA PER AZIONI"/>
+			<xs:enumeration value="SOCIETA` IN ACCOMANDITA SEMPLICE"/>
+			<xs:enumeration value="SOCIETA` IN NOME COLLETTIVO"/>
+			<xs:enumeration value="SOCIETA` PER AZIONI"/>
+			<xs:enumeration value="SOCIETA` SEMPLICE"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="SOCIETA` COOPERATIVA A RESPONSABILITA` LIMITATA"/>
+			<xs:enumeration value="ASSOCIAZIONE"/>
+			<xs:enumeration value="CONSORZIO"/>
+			<xs:enumeration value="SOCIETA` NON DEFINITA"/>
+			<xs:enumeration value="ALTRE FORME TECNICHE DI RAPPORTI FINANZIARI"/>
+			<xs:enumeration value="POLIZZE ASSICURATIVE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="sottoCategoriaBeneType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="APPARTAMENTO IN CONDOMINIO"/>
+			<xs:enumeration value="ABITAZIONE INDIPENDENTE"/>
+			<xs:enumeration value="PALAZZO DI PREGIO ARTISTICO E STORICO, CASTELLO"/>
+			<xs:enumeration value="VILLA"/>
+			<xs:enumeration value="BOX, GARAGE, AUTORIMESSA, POSTO AUTO"/>
+			<xs:enumeration value="TETTOIA CHIUSA O APERTA"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="COLLEGIO E CONVITTO,EDUCANDATO,RICOVERO, ORFANOTROFIO,OSPIZIO,CONVENTO,SEMINARIO"/>
+			<xs:enumeration value="CASA DI CURA, OSPEDALE"/>
+			<xs:enumeration value="UFFICIO PUBBLICO"/>
+			<xs:enumeration value="SCUOLA, LABORATORIO SCIENTIFICO"/>
+			<xs:enumeration value="BIBLIOTECA, MUSEO, GALLERIA"/>
+			<xs:enumeration value="CAPPELLA, ORATORIO"/>
+			<xs:enumeration value="OPIFICIO"/>
+			<xs:enumeration value="ALBERGO, PENSIONE"/>
+			<xs:enumeration value="TEATRO, CINEMATOGRAFO, SALA PER CONCERTI, SPETTACOLI E SIMILI"/>
+			<xs:enumeration value="ISTITUTO DI CREDITO, CAMBIO ED ASSICURAZIONE"/>
+			<xs:enumeration value="FABBRICATO ANNESSO A SPECIALI ESIGENZE COMMERCIALI"/>
+			<xs:enumeration value="EDIFICIO GALLEGGIANTE O SOSPESO, PONTE PRIVATO SOGGETTO A PEDAGGIO"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="NEGOZIO, BOTTEGA"/>
+			<xs:enumeration value="MAGAZZINO, LOCALE DI DEPOSITO"/>
+			<xs:enumeration value="LABORATORIO PER ARTI E MESTIERI"/>
+			<xs:enumeration value="STABILIMENTO BALNEARE, STABILIMENTO DI ACQUE CURATIVE"/>
+			<xs:enumeration value="STALLA, SCUDERIA"/>
+			<xs:enumeration value="FABBRICATO/LOCALE PER ESERCIZI SPORTIVI"/>
+			<xs:enumeration value="FABBRICATO INDUSTRIALE"/>
+			<xs:enumeration value="MAGAZZINO SOTTERRANEO PER DEPOSITO DI DERRATE"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="FABBRICATO IN CORSO DI COSTRUZIONE INDIVISIBILE"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="TERRENO AGRICOLO"/>
+			<xs:enumeration value="TERRENO CON FABBRICATO RURALE"/>
+			<xs:enumeration value="TERRENO EDIFICABILE"/>
+			<xs:enumeration value="CONTANTE"/>
+			<xs:enumeration value="LIBRETTO POSTALE"/>
+			<xs:enumeration value="LIBRETTO BANCARIO"/>
+			<xs:enumeration value="CONTO CORRENTE POSTALE"/>
+			<xs:enumeration value="CONTO CORRENTE BANCARIO"/>
+			<xs:enumeration value="FRANCOBOLLI"/>
+			<xs:enumeration value="LIBRI"/>
+			<xs:enumeration value="MONETE"/>
+			<xs:enumeration value="QUADRI"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="ANIMALI ESOTICI"/>
+			<xs:enumeration value="BOVINI"/>
+			<xs:enumeration value="CAVALLO DA CORSA"/>
+			<xs:enumeration value="EQUINI"/>
+			<xs:enumeration value="OVINI"/>
+			<xs:enumeration value="SUINI"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="APPARECCHIATURE ELETTRONICHE"/>
+			<xs:enumeration value="ARREDI PER USO ABITATIVO"/>
+			<xs:enumeration value="ARREDI PER USO PROFESSIONALE/COMMERCIALE"/>
+			<xs:enumeration value="CASSETTA DI SICUREZZA"/>
+			<xs:enumeration value="MACCHINE ARTIGIANALI"/>
+			<xs:enumeration value="OGGETTI ARTISTICI"/>
+			<xs:enumeration value="PREZIOSI E GIOIELLI"/>
+			<xs:enumeration value="SCORTE DI MAGAZZINO"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="AEROMOBILE"/>
+			<xs:enumeration value="ELICOTTERO"/>
+			<xs:enumeration value="AUTOBUS"/>
+			<xs:enumeration value="AUTOMEZZO FURGONATO"/>
+			<xs:enumeration value="AUTOMEZZO PESANTE"/>
+			<xs:enumeration value="AUTOCARAVAN, CAMPER"/>
+			<xs:enumeration value="AUTOVETTURA"/>
+			<xs:enumeration value="CICLOMOTORE"/>
+			<xs:enumeration value="FUORISTRADA"/>
+			<xs:enumeration value="MOTOVEICOLO"/>
+			<xs:enumeration value="MOTOFURGONE"/>
+			<xs:enumeration value="NATANTE"/>
+			<xs:enumeration value="NAVE"/>
+			<xs:enumeration value="IMBARCAZIONE"/>
+			<xs:enumeration value="QUADRICICLO"/>
+			<xs:enumeration value="RIMORCHIO"/>
+			<xs:enumeration value="VEICOLO AGRICOLO"/>
+			<xs:enumeration value="VEICOLO INDUSTRIALE"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="MARCHIO"/>
+			<xs:enumeration value="BREVETTO"/>
+			<xs:enumeration value="MODELLO INDUSTRIALE"/>
+			<xs:enumeration value="ASSEGNO BANCARIO"/>
+			<xs:enumeration value="ASSEGNO CIRCOLARE"/>
+			<xs:enumeration value="CAMBIALE/TRATTA"/>
+			<xs:enumeration value="TITOLO DI STATO (BOT, CCT, BTP, CTE, BTZ E BTE)"/>
+			<xs:enumeration value="CERTIFICATO DI DEPOSITO"/>
+			<xs:enumeration value="OBBLIGAZIONE"/>
+			<xs:enumeration value="AZIONI"/>
+			<xs:enumeration value="STRUMENTI FINANZIARI PARTECIPATIVI"/>
+			<xs:enumeration value="TITOLI ATIPICI"/>
+			<xs:enumeration value="FEDE DI DEPOSITO"/>
+			<xs:enumeration value="NOTA DI PEGNO"/>
+			<xs:enumeration value="POLIZZA DI CARICO"/>
+			<xs:enumeration value="CONTRATTO LEASING"/>
+			<xs:enumeration value="CREDITI VARI"/>
+			<xs:enumeration value="POLIZZA ASSICURATIVA"/>
+			<xs:enumeration value="PRESTITI, FIDI"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="EX FABBRICATO RURALE"/>
+			<xs:enumeration value="LICENZA, AUTORIZZAZIONE"/>
+			<xs:enumeration value="UNITA` USO ABIT. E ASSIMIL. - NON DEFINITO"/>
+			<xs:enumeration value="UNITA` PER ALLOG. E USI COLL. - NON DEFINITO"/>
+			<xs:enumeration value="UNITA` A DEST. COMM. E IND. - NON DEFINITO"/>
+			<xs:enumeration value="ALTRA UNITA` IMMOBIL. - NON DEFINITO"/>
+			<xs:enumeration value="TERRENO - NON DEFINITO"/>
+			<xs:enumeration value="DENARO - NON DEFINITO"/>
+			<xs:enumeration value="COLLEZIONE - NON DEFINITO"/>
+			<xs:enumeration value="ANIMALI - NON DEFINITO"/>
+			<xs:enumeration value="ALTRI OGGETTI - NON DEFINITO"/>
+			<xs:enumeration value="VEICOLO - NON DEFINITO"/>
+			<xs:enumeration value="BENE IMMATERIALE - NON DEFINITO"/>
+			<xs:enumeration value="TITOLO CAMBIARIO - NON DEFINITO"/>
+			<xs:enumeration value="TITOLO OBBLIGAZ. O DI PRESTITO - NON DEFINITO"/>
+			<xs:enumeration value="TITOLO DI PARTECIPAZIONE - NON DEFINITO"/>
+			<xs:enumeration value="TITOLO RAPPR. DI MERCI - NON DEFINITO"/>
+			<xs:enumeration value="ALTRI BENI FINANZIARI - NON DEFINITO"/>
+			<xs:enumeration value="CARTE DI CREDITO"/>
+			<xs:enumeration value="CASSETTE DI SICUREZZA"/>
+			<xs:enumeration value="CONTRATTI DERIVATI"/>
+			<xs:enumeration value="FONDI PENSIONE"/>
+			<xs:enumeration value="GESTIONE COLLETTIVA DEL RISPARMIO"/>
+			<xs:enumeration value="GESTIONE PATRIMONIALE"/>
+			<xs:enumeration value="DENARO RICAVATO DA VENDITA"/>
+			<xs:enumeration value="POLIZZA ASSICURAZIONE VITA 'TEMPORANEA CASO MORTE'"/>
+			<xs:enumeration value="POLIZZA ASSICURAZIONE VITA 'CASO VITA'"/>
+			<xs:enumeration value="POLIZZA ASSICURAZIONE VITA 'CASO MORTE A VITA INTERA' "/>
+			<xs:enumeration value="POLIZZA ASSICURAZIONE VITA 'CASO VITA CON CONTROASSICURAZIONE'"/>
+			<xs:enumeration value="POLIZZA ASSICURAZIONE VITA 'MISTA'"/>
+			<xs:enumeration value="CONTRATTO DI CAPITALIZZAZIONE"/>
+			<xs:enumeration value="CONTRATTO DI ADESIONE A FONDI PENSIONE APERTI"/>
+			<xs:enumeration value="ALTRA POLIZZA/CONTRATTO"/>
+			<xs:enumeration value="POLIZZA ASSICURATIVA GESTITA DA BANCA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="settoreAttivitaType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AGRICOLTURA, CACCIA E SILVICOLTURA"/>
+			<xs:enumeration value="PESCA, PISCICOLTURA E SERVIZI CONNESSI"/>
+			<xs:enumeration value="ESTRAZIONE DI MINERALI"/>
+			<xs:enumeration value="ATTIVITA` MANIFATTURIERE"/>
+			<xs:enumeration value="PRODUZIONE E DISTRIBUZIONE DI ENERGIA ELETTRICA, GAS E ACQUA"/>
+			<xs:enumeration value="COSTRUZIONI"/>
+			<xs:enumeration value="COMMERCIO INGROSSO-DETTAGLIO, RIPARAZIONE VEICOLI, BENI PERSONALI, CASA"/>
+			<xs:enumeration value="ALBERGHI E RISTORANTI"/>
+			<xs:enumeration value="TRASPORTI, MAGAZZINAGGIO E COMUNICAZIONI"/>
+			<xs:enumeration value="ATTIVITA` FINANZIARIE"/>
+			<xs:enumeration value="ATTIVITA` IMMOBILIARI, NOLEGGIO, INFORMATICA, RICERCA, SERVIZI ALLE IMPRESE"/>
+			<xs:enumeration value="AMMINISTRAZIONE PUBBLICA"/>
+			<xs:enumeration value="ISTRUZIONE"/>
+			<xs:enumeration value="SANITA` E ASSISTENZA SOCIALE"/>
+			<xs:enumeration value="ALTRI SERVIZI PUBBLICI, SOCIALI E PERSONALI"/>
+			<xs:enumeration value="ATTIVITA` SVOLTE DA FAMIGLIE E CONVIVENZE"/>
+			<xs:enumeration value="ORGANIZZAZIONI ED ORGANISMI EXTRATERRITORIALI"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipoCatastoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="T"/>
+			<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipoValutaType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CAD"/>
+			<xs:enumeration value="CHF"/>
+			<xs:enumeration value="CNY"/>
+			<xs:enumeration value="GBP"/>
+			<xs:enumeration value="JPY"/>
+			<xs:enumeration value="RUB"/>
+			<xs:enumeration value="USD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipoFinanziarioType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Finanziario"/>
+			<xs:enumeration value="DenaroContante"/>
+			<xs:enumeration value="Denaro"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipoFondoType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="categoriaCatastaleType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A1"/>
+			<xs:enumeration value="A2"/>
+			<xs:enumeration value="A3"/>
+			<xs:enumeration value="A4"/>
+			<xs:enumeration value="A5"/>
+			<xs:enumeration value="A6"/>
+			<xs:enumeration value="A7"/>
+			<xs:enumeration value="A8"/>
+			<xs:enumeration value="A9"/>
+			<xs:enumeration value="A10"/>
+			<xs:enumeration value="A11"/>
+			<xs:enumeration value="B1"/>
+			<xs:enumeration value="B2"/>
+			<xs:enumeration value="B3"/>
+			<xs:enumeration value="B4"/>
+			<xs:enumeration value="B5"/>
+			<xs:enumeration value="B6"/>
+			<xs:enumeration value="B7"/>
+			<xs:enumeration value="B8"/>
+			<xs:enumeration value="C1"/>
+			<xs:enumeration value="C2"/>
+			<xs:enumeration value="C3"/>
+			<xs:enumeration value="C4"/>
+			<xs:enumeration value="C5"/>
+			<xs:enumeration value="C6"/>
+			<xs:enumeration value="C7"/>
+			<xs:enumeration value="D1"/>
+			<xs:enumeration value="D2"/>
+			<xs:enumeration value="D3"/>
+			<xs:enumeration value="D4"/>
+			<xs:enumeration value="D5"/>
+			<xs:enumeration value="D6"/>
+			<xs:enumeration value="D7"/>
+			<xs:enumeration value="D8"/>
+			<xs:enumeration value="D9"/>
+			<xs:enumeration value="E1"/>
+			<xs:enumeration value="E2"/>
+			<xs:enumeration value="E3"/>
+			<xs:enumeration value="E4"/>
+			<xs:enumeration value="E5"/>
+			<xs:enumeration value="E6"/>
+			<xs:enumeration value="E7"/>
+			<xs:enumeration value="E8"/>
+			<xs:enumeration value="E9"/>
+			<xs:enumeration value="AP"/>
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="F"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="tipoSocietaType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IMPRESA INDIVIDUALE"/>
+			<xs:enumeration value="SOCIETA` IN ACCOMANDITA PER AZIONI"/>
+			<xs:enumeration value="SOCIETA` IN ACCOMANDITA SEMPLICE"/>
+			<xs:enumeration value="SOCIETA` IN NOME COLLETTIVO"/>
+			<xs:enumeration value="SOCIETA` SEMPLICE"/>
+			<xs:enumeration value="SOCIETA` PER AZIONI"/>
+			<xs:enumeration value="SOCIETA` A RESPONSABILITA` LIMITATA"/>
+			<xs:enumeration value="SOCIETA` COOPERATIVA"/>
+			<xs:enumeration value="SOCIETA` DI FATTO"/>
+			<xs:enumeration value="ALTRO"/>
+			<xs:enumeration value="SOCIETA` COOPERATIVA A RESP. LIMITATA"/>
+			<xs:enumeration value="ASSOCIAZIONE"/>
+			<xs:enumeration value="CONSORZIO"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="decisioneType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Perdita efficacia sequestro"/>
+			<xs:enumeration value="Sequestro non convalidato"/>
+			<xs:enumeration value="Sospensione del passaporto o documenti equipollenti"/>
+			<xs:enumeration value="Sorveglianza speciale della P.S."/>
+			<xs:enumeration value="Sorveglianza speciale della P.S. con obbligo di soggiorno"/>
+			<xs:enumeration value="Sorveglianza speciale della P.S. con divieto di soggiorno"/>
+			<xs:enumeration value="Sorveglianza speciale della P.S."/>
+			<xs:enumeration value="Sorveglianza speciale della P.S. con obbligo di soggiorno"/>
+			<xs:enumeration value="Sorveglianza speciale della P.S. con divieto di soggiorno"/>
+			<xs:enumeration value="Cauzione (art. 31 D.Lgs. 159/2011)"/>
+			<xs:enumeration value="Art. 67 D.Lgs. 159/2011"/>
+			<xs:enumeration value="Prescrizioni previste dall'art. 8 comma 3 D.Lgs. 159/2011"/>
+			<xs:enumeration value="Prescrizioni previste dall'art. 8 comma 4 D.Lgs. 159/2011"/>
+			<xs:enumeration value="Ulteriori prescriz. previste dall'art.8 c. 5 D.Lgs. 159/2011"/>
+			<xs:enumeration value="Prescrizioni previste dall'art. 8 comma 6 D.Lgs. 159/2011"/>
+			<xs:enumeration value="Confisca previo sequestro"/>
+			<xs:enumeration value="Sequestro"/>
+			<xs:enumeration value="Sequestro urgente"/>
+			<xs:enumeration value="Sospensione temporanea dall'amministrazione dei beni"/>
+			<xs:enumeration value="Confisca"/>
+			<xs:enumeration value="Confisca previo sequestro urgente"/>
+			<xs:enumeration value="Confisca previo sequestro anticipato"/>
+			<xs:enumeration value="Sequestro anticipato"/>
+			<xs:enumeration value="Revoca sequestro"/>
+			<xs:enumeration value="Opposizione ai divieti del questore (art.3 c.6 D.Lgs. 159/2011)"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

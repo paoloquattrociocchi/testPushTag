@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<sql-query name="PG_ANNUL_DUPLICATI_fnc_annulla_main" callable="true" >
+	   { call PG_ANNUL_DUPLICATI.FNC_ANNULLA_MAIN (?, :IJ_ID_PROCEDIMENTO, :IJ_ID_SOGG1_ANN, :IJ_ID_SOGG2, :IJ_UFF_OWNER, :IJ_UTENTE, :IJ_NOMEMETODO) }
+	    <return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+	</sql-query>
+	
+</hibernate-mapping>

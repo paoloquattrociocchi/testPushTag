@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by CristinaM (EMBRACE) --><wsdl:definitions name="FUGInvio" targetNamespace="http://equitalia.spcoop.gov.it/servizi/serviziCoopFUG" xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://equitalia.spcoop.gov.it/servizi/serviziCoopFUG" xmlns:typ="http://fug.type.ws.mg.it/FUGtypes" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://fug.type.ws.mg.it/FUGtypes" schemaLocation="FUGtypes.xsd"/>
+		</xsd:schema>
+        <xsd:schema targetNamespace="http://equitalia.spcoop.gov.it/servizi/serviziCoopFUG">
+        </xsd:schema>
+    </wsdl:types>
+	<wsdl:message name="AcquisisciModelloARequest">
+		<wsdl:part element="typ:AcquisisciModelloA" name="richiestaAcquisisciModelloA"/>
+	</wsdl:message>
+	<wsdl:message name="RispostaModelloA">
+		<wsdl:part element="typ:RispostaModelloA" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloERequest">
+		<wsdl:part element="typ:AcquisisciModelloE" name="richiestaAcquisisciModelloE"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloEResponse">
+		<wsdl:part element="typ:RispostaModelloE" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloE2Request">
+		<wsdl:part element="typ:AcquisisciModelloE2" name="richiestaAcquisisciModelloE2"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloE2Response">
+		<wsdl:part element="typ:RispostaModelloE2" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloBRequest">
+		<wsdl:part element="typ:AcquisisciModelloB" name="richiestaAcquisisciModelloB"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloBResponse">
+		<wsdl:part element="typ:RispostaModelloB" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloB2Request">
+		<wsdl:part element="typ:AcquisisciModelloB2" name="richiestaAcquisisciModelloB2"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloB2Response">
+		<wsdl:part element="typ:RispostaModelloB2" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloCRequest">
+		<wsdl:part element="typ:AcquisisciModelloC" name="richiestaAcquisisciModelloC"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloCResponse">
+		<wsdl:part element="typ:RispostaModelloC" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloC2Request">
+		<wsdl:part element="typ:AcquisisciModelloC2" name="richiestaAcquisisciModelloC2"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloC2Response">
+		<wsdl:part element="typ:RispostaModelloC2" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloC3Request">
+		<wsdl:part element="typ:AcquisisciModelloC3" name="richiestaAcquisisciModelloC3"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloC3Response">
+		<wsdl:part element="typ:RispostaModelloC3" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloC4Request">
+		<wsdl:part element="typ:AcquisisciModelloC4" name="richiestaAcquisisciModelloC4"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloC4Response">
+		<wsdl:part element="typ:RispostaModelloC4" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloDRequest">
+		<wsdl:part element="typ:AcquisisciModelloD" name="richiestaAcquisisciModelloD"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloDResponse">
+		<wsdl:part element="typ:RispostaModelloD" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloC5Request">
+		<wsdl:part element="typ:AcquisisciModelloC5" name="richiestaAcquisisciModelloC5"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloC5Response">
+		<wsdl:part element="typ:RispostaModelloC5" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloC6Request">
+		<wsdl:part element="typ:AcquisisciModelloC6" name="richiestaAcquisisciModelloC6"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloC6Response">
+		<wsdl:part element="typ:RispostaModelloC6" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloD2Request">
+		<wsdl:part element="typ:AcquisisciModelloD2" name="richiestaAcquisisciModelloD2"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloD2Response">
+		<wsdl:part element="typ:RispostaModelloD2" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloHRequest">
+		<wsdl:part element="typ:AcquisisciModelloH" name="richiestaAcquisisciModelloH"/>
+	</wsdl:message>
+	<wsdl:message name="AcquisisciModelloHResponse">
+		<wsdl:part element="typ:RispostaModelloH" name="return"/>
+	</wsdl:message>
+	<wsdl:message name="RichiestaAnnullamentoModelloRequest">
+		<wsdl:part element="typ:RichiestaAnnullamentoModello" name="richiestaRichiestaAnnullamentoModello"/>
+	</wsdl:message>
+	<wsdl:message name="RichiestaAnnullamentoModelloResponse">
+		<wsdl:part element="typ:RispostaRichiestaAnnullamentoModello" name="return"/>
+	</wsdl:message>
+	<wsdl:portType name="invioFUG">
+		<wsdl:operation name="AcquisisciModelloA">
+			<wsdl:input message="tns:AcquisisciModelloARequest"/>
+			<wsdl:output message="tns:RispostaModelloA"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloE">
+			<wsdl:input message="tns:AcquisisciModelloERequest"/>
+			<wsdl:output message="tns:AcquisisciModelloEResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloH">
+			<wsdl:input message="tns:AcquisisciModelloHRequest"/>
+			<wsdl:output message="tns:AcquisisciModelloHResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloE2">
+			<wsdl:input message="tns:AcquisisciModelloE2Request"/>
+			<wsdl:output message="tns:AcquisisciModelloE2Response"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloB">
+			<wsdl:input message="tns:AcquisisciModelloBRequest"/>
+			<wsdl:output message="tns:AcquisisciModelloBResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloB2">
+			<wsdl:input message="tns:AcquisisciModelloB2Request"/>
+			<wsdl:output message="tns:AcquisisciModelloB2Response"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC">
+			<wsdl:input message="tns:AcquisisciModelloCRequest"/>
+			<wsdl:output message="tns:AcquisisciModelloCResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC2">
+			<wsdl:input message="tns:AcquisisciModelloC2Request"/>
+			<wsdl:output message="tns:AcquisisciModelloC2Response"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC3">
+			<wsdl:input message="tns:AcquisisciModelloC3Request"/>
+			<wsdl:output message="tns:AcquisisciModelloC3Response"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC4">
+			<wsdl:input message="tns:AcquisisciModelloC4Request"/>
+			<wsdl:output message="tns:AcquisisciModelloC4Response"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloD">
+			<wsdl:input message="tns:AcquisisciModelloDRequest"/>
+			<wsdl:output message="tns:AcquisisciModelloDResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC5">
+			<wsdl:input message="tns:AcquisisciModelloC5Request"/>
+			<wsdl:output message="tns:AcquisisciModelloC5Response"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC6">
+			<wsdl:input message="tns:AcquisisciModelloC6Request"/>
+			<wsdl:output message="tns:AcquisisciModelloC6Response"/>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloD2">
+			<wsdl:input message="tns:AcquisisciModelloD2Request"/>
+			<wsdl:output message="tns:AcquisisciModelloD2Response"/>
+		</wsdl:operation>
+		<wsdl:operation name="RichiestaAnnullamentoModello">
+			<wsdl:input message="tns:RichiestaAnnullamentoModelloRequest"/>
+			<wsdl:output message="tns:RichiestaAnnullamentoModelloResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="invioFUGbinding" type="tns:invioFUG">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="AcquisisciModelloA">
+			<soap:operation soapAction="AcquisisciModelloA"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloE">
+			<soap:operation soapAction="AcquisisciModelloE"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloE2">
+			<soap:operation soapAction="AcquisisciModelloE2"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloB">
+			<soap:operation soapAction="AcquisisciModelloB"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloB2">
+			<soap:operation soapAction="AcquisisciModelloB2"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC">
+			<soap:operation soapAction="AcquisisciModelloC"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC2">
+			<soap:operation soapAction="AcquisisciModelloC2"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC3">
+			<soap:operation soapAction="AcquisisciModelloC3"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC4">
+			<soap:operation soapAction="AcquisisciModelloC4"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloD">
+			<soap:operation soapAction="AcquisisciModelloD"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC5">
+			<soap:operation soapAction="AcquisisciModelloC5"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloC6">
+			<soap:operation soapAction="AcquisisciModelloC6"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloD2">
+			<soap:operation soapAction="AcquisisciModelloD2"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="AcquisisciModelloH">
+			<soap:operation soapAction="AcquisisciModelloH"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RichiestaAnnullamentoModello">
+			<soap:operation soapAction="RichiestaAnnullamentoModello"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="invioFUGservice">
+		<wsdl:port binding="tns:invioFUGbinding" name="invioFUG">
+			<soap:address location="http://localhost:9083/serviziCoopFUG/services/invioFUG"/>
+		</wsdl:port>
+	</wsdl:service>
+	
+	<!-- #################### -->
+	<!-- #####  TYPES  ###### -->
+	<!-- #################### -->
+	<!-- ####################### -->
+	<!-- #####  MESSAGES  ###### -->
+	<!-- ####################### -->
+	<!-- ######################### -->
+	<!-- #####  PORT TYPES  ###### -->
+	<!-- ######################### -->
+	<!-- ####################### -->
+	<!-- #####  BINDINGS  ###### -->
+	<!-- ####################### -->
+	<!-- ####################### -->
+	<!-- #####  SERVICES  ###### -->
+	<!-- ####################### -->
+</wsdl:definitions>

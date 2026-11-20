@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping wildcard="false">
+		<class-a>it.giustizia.smp.form.MagistratoForm</class-a>
+		<class-b>it.giustizia.smp.model.TRelMagProc</class-b>
+		<field>
+			<a>dataAssegnazioneFascicolo</a>
+			<b>id.codiKIdDataAss</b>
+		</field>
+		<field>
+			<a>dataFineAssegnazione</a>
+			<b>dataFineAssegn</b>
+		</field>
+		<field>
+			<a>tipoSostituzione</a>
+			<b>descMotivoSost</b>
+		</field>
+		<field>
+			<a>ruolo.descrizione</a>
+			<b>TTpTipoRuoloMag.descRuolo</b>
+		</field>
+		<field>
+			<a>ruolo.id</a>
+			<b>TTpTipoRuoloMag.codiKIdRuoloMag</b>
+		</field>
+		<field>
+			<a>ruolo</a>
+			<b>TTpTipoRuoloMag</b>
+		</field>
+		<field>
+			<a>ordineDiVisualizzazione</a>
+			<b>prgVisual</b>
+		</field>
+		<field>
+			<a>relatore</a>
+			<b>flgRelatore</b>
+		</field>
+		<field>
+			<a>altroMotivo</a>
+			<b>descAltroMotivo</b>
+		</field>
+	</mapping>
+	
+	<mapping wildcard="false">
+		<class-a>it.giustizia.smp.form.MagistratoForm</class-a>
+		<class-b>it.giustizia.smp.model.TRelMagAtto</class-b>
+		<field>
+			<a>ruolo.id</a>
+			<b>TTpTipoRuoloMag.codiKIdRuoloMag</b>
+		</field>
+		<field>
+			<a>ruolo.descrizione</a>
+			<b>TTpTipoRuoloMag.descRuolo</b>
+		</field>
+		<field>
+			<a>ruolo</a>
+			<b>TTpTipoRuoloMag</b>
+		</field>
+		<field>
+			<a>id</a>
+			<b>id.codiKIdMagistrato</b>
+		</field>		
+
+		<field>
+			<a>relatore</a>
+			<b>flgRelatore</b>
+		</field>
+	</mapping>	
+
+	<mapping wildcard="false">
+		<class-a>it.giustizia.smp.form.MagistratoForm</class-a>
+		<class-b>it.giustizia.smp.model.TAnMagistrati</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdMagistrato</b>
+		</field>
+		<field>
+			<a>nome</a>
+			<b>descNomeMag</b>
+		</field>
+		<field>
+			<a>cognome</a>
+			<b>descCognomeMag</b>
+		</field>
+		<field>
+			<a>numeMatricola</a>
+			<b>numeMatricola</b>
+		</field>
+		<field>
+			<a>dataNascita</a>
+			<b>dataNascita</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.MagistratoForm</class-a>
+		<class-b>it.giustizia.smp.dto.pg_udienza.UdienzaProcedimentoDto</class-b>
+		<field>
+			<a>id</a>
+			<b>CODI_K_ID_MAGISTRATO</b>
+		</field>
+		<field>
+			<a>nome</a>
+			<b>DESC_NOME_MAG</b>
+		</field>
+		<field>
+			<a>cognome</a>
+			<b>DESC_COGNOME_MAG</b>
+		</field>
+		<field>
+			<a>ruolo.descrizione</a>
+			<b>DESC_RUOLO_MAG</b>
+		</field>
+		<field>
+			<a>ruolo.id</a>
+			<b>ID_RUOLO_MAG</b>
+		</field>
+	</mapping>
+
+</mappings>

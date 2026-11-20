@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  JBoss Server Configuration                                           -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- $Id: oracle-ds.xml 63175 2007-05-21 16:26:06Z rrajesh $ -->
+<!-- ==================================================================== -->
+<!--  Datasource config for Oracle originally from Steven Coy             -->
+<!-- ==================================================================== -->
+
+
+<datasources>
+  <local-tx-datasource>
+    <jndi-name>JmsDS</jndi-name>
+<!-- modificato il 18 aprile 2016 -->
+<!-- <connection-url>jdbc:oracle:thin:@10.3.205.142:1521:smpdb01</connection-url>   -->
+<!--	<connection-url>jdbc:oracle:thin:@10.6.199.96:1521:smppal</connection-url> -->
+		<connection-url>jdbc:oracle:thin:@161.27.213.183:1521:smpdb</connection-url>
+    
+<!-- <connection-url>jdbc:oracle:thin:@10.6.199.132:1521:smpmigra</connection-url> -->    
+	<driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+    <user-name>SOAUSER</user-name>
+    <password>SOAUSER</password>
+    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+    <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>
+    <min-pool-size>1</min-pool-size>
+    <max-pool-size>5</max-pool-size>
+    <prepared-statement-cache-size>50</prepared-statement-cache-size>
+    <share-prepared-statements>true</share-prepared-statements>
+    <metadata>
+       <type-mapping>Oracle9i</type-mapping>
+    </metadata>
+  </local-tx-datasource>
+</datasources>

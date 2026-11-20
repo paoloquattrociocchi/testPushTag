@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="PG_PROCEDIMENTO_magistrati_per_proc" callable="true" >
+	   <return alias="rel" class="it.giustizia.smp.model.TRelMagProc"/>
+	   <return alias="mag" class="it.giustizia.smp.model.TAnMagistrati"/>
+		{ call PG_PROCEDIMENTO.MAGISTRATI_PER_PROC (?,:vidUffOwn,:vidprocedimento,:ruoloMag) }
+	</sql-query>
+
+
+	<sql-query name="PG_PROCEDIMENTO_dettaglio_magistrato_per_proc" callable="true" >
+	   <return alias="rel" class="it.giustizia.smp.model.TRelMagProc"/>
+	   <return alias="mag" class="it.giustizia.smp.model.TAnMagistrati"/>
+		{ call PG_PROCEDIMENTO.DETTAGLIO_MAGISTRATO_PER_PROC(?,:vidUffOwn,:vidprocedimento,:vidmagistrato) }
+	</sql-query>
+
+
+	<sql-query name="PG_PROCEDIMENTO_listaMagistrati" callable="true" >
+	   <return alias="mag" class="it.giustizia.smp.model.TAnMagistrati"/>
+		{ call PG_PROCEDIMENTO.LISTAMAGISTRATI (?,:vidUffOwn,:vcognomeMag,:vnomeMag) }
+	</sql-query>	
+	
+	<sql-query name="PG_PROCEDIMENTO_listaProcedimenti_criteria" callable="true" >
+	    { call PG_PROCEDIMENTO.LISTAPROCEDIMENTI_CRITERIA (?, :vidUffOwn, :vannoProc, :vnumProcDa, 
+	    :vnumProcA, :vdataIscrDa, :vdataIscrA, :vidStatoProc, :vcognSogg, :vnomeSogg, :vragSociale, :vidPMAssegn, 
+	    :vidTipoProc, :vannoDecreto, :vnumDecreto, :vidTipoProcedente, :vidProcedente, :vantimafia, 
+	    :vantiTerrorismo, :vordinaria, :vtipoFascicolo, :IDTPUFFRIC, :IDUFFRIC) }
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_listaProcedimenti_criteria_difensore" callable="true" >
+	    { call PG_PROCEDIMENTO.LISTAPROC_CRITERIA_DIFENSORI (?, :vidUffOwn, :vannoProc, :vnumProcDa, 
+	    :vnumProcA, :vdataIscrDa, :vdataIscrA, :vidStatoProc, :vcognSogg, :vnomeSogg, :vragSociale, :vidPMAssegn, 
+	    :vidTipoProc, :vannoDecreto, :vnumDecreto, :vidTipoProcedente, :vidProcedente, :vantimafia, 
+	    :vantiTerrorismo, :vordinaria, :vtipoFascicolo, :IDTPUFFRIC, :IDUFFRIC, :COGNDIFEN, :NOMEDIFEN, :CFDIFEN) }
+	</sql-query>
+
+	<sql-query name="PG_PROCEDIMENTO_RelProc_TRIB_CDA" callable="true" >
+	    <return-scalar column="RELPROC" type="string"/>
+	    { call PG_PROCEDIMENTO.RELPROC_TRIB_CDA (?,:IDPROC, :IDUFFOWN) }
+	</sql-query>	
+	
+	<sql-query name="PG_PROCEDIMENTO_listaCdaTrib" callable="true" >
+	 <return alias="rel" class="it.giustizia.smp.model.TRelProcProc"/>	   
+	    { call PG_PROCEDIMENTO.LISTA_REL_PROC_PROC_CDA_TRIB (?,:IDUFFOWN,:IDPROC) }
+	</sql-query>	
+	
+	
+    <sql-query name="PG_PROCEDIMENTO_listaTribCda" callable="true" >
+	 <return alias="rel" class="it.giustizia.smp.model.TRelProcProc"/>	   
+	    { call PG_PROCEDIMENTO.LISTA_REL_PROC_PROC_TRIB_CDA (?,:IDUFFOWN,:IDPROC) }
+	</sql-query>	
+	
+	
+	<sql-query name="PG_PROCEDIMENTO_dettaglioProcedimento" callable="true" >
+	   <return alias="proced" class="it.giustizia.smp.model.TProcedimento"/>
+       <return alias="procedente" class="it.giustizia.smp.model.TAnProcedente"/>
+       <return alias="statoProc" class="it.giustizia.smp.model.TTpStatoProc"/>
+       <return alias="tipoProc" class="it.giustizia.smp.model.TTpTipoProc"/>
+       <return alias="tipoFasc" class="it.giustizia.smp.model.TTpTipoFascicolo"/>
+	   { call PG_PROCEDIMENTO.DETTAGLIOPROCEDIMENTO (?, :vidProc) }
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_sogInt_dettaglioProcedimento" callable="true" >
+	   { call PG_PROCEDIMENTO.SOGINT_DETTAGLIOPROCEDIMENTO (?, :vidProc, :descRuolo, :flagValido) }
+	</sql-query>	
+
+	<sql-query name="PG_PROCEDIMENTO_sogIntInv_dettaglioProcedimento" callable="true" >
+	   { call PG_PROCEDIMENTO.SOGINT_DETTAGLIOPROC_INV (?, :idProc, :idSogInv) }
+	</sql-query>	
+	
+	<sql-query name="PG_PROCEDIMENTO_lista_sogInt_dec_appl_prov" callable="true" >
+	   { call PG_PROCEDIMENTO.LISTA_SOGINT_DEC_APPL_PROV (?, :vidProc, :idUffOwn, :descUtente) }
+	</sql-query>
+
+	<sql-query name="PG_PROCEDIMENTO_sogInt_dettaglioProcedimentoVer" callable="true" >
+	   { call PG_PROCEDIMENTO.SOGINT_DETTAGLIOPROC_VER (?, :vidProc, :descRuolo, :flagValido, :idUffOwn, :idSogg, :idVer) }
+	</sql-query>	
+	
+	<sql-query name="PG_PROCEDIMENTO_sogTit_dettaglioProcedimento" callable="true" >
+	   { call PG_PROCEDIMENTO.SOGTIT_DETTAGLIOPROCEDIMENTO (?, :vidProc) }
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_ricercaIdProcedimento" callable="true" >
+	 <return-scalar column="CODI_K_ID_PROC" type="long"/>
+	 { call PG_PROCEDIMENTO.RICERCAIDPROCEDIMENTO(?, :vidUffOwn,:vnumProc,:vannoProc,:idTipoFasc) }
+    </sql-query>
+
+	<sql-query name="PG_PROCEDIMENTO_inserisciProcedimento" callable="true" >
+		<return-scalar column="IDPROC" type="long"/>
+		{ call PG_PROCEDIMENTO.INSERISCIPROCEDIMENTO(?,:idUffOwn,:descUtente,:dataAperFasc,
+		    :idStatoProc,:idTipoProc,:idProcedente,:flgOrdinaria,:flgAntimafia,:flgAntiterrorismo,:dataUltAggiornamento, :idTipoFascicolo) } 	
+	</sql-query>	
+
+	<sql-query name="PG_PROCEDIMENTO_aggiornaProcedimento" callable="true" >
+		<return-scalar column="IDPROC" type="long"/>
+		{ call PG_PROCEDIMENTO.AGGIORNAPROCEDIMENTO(?,:idProc,:idUffOwn,:descUtente,
+		:idTipoProc,:flgOrdinaria,:flgAntimafia,:flgAntiterrorismo,:dataUltAggiornamento) } 	
+	</sql-query>		
+
+	<sql-query name="PG_PROCEDIMENTO_elencoDirettiInteressatiNonAssociati" callable="true" >	  
+		{ call PG_PROCEDIMENTO.LIST_SOGINT_NONASSOCIATI (?,:idUffOwn,:idProcedimento) }
+	</sql-query>	
+	
+	<sql-query name="PG_PROCEDIMENTO_elencoDirettiInteressatiAssociati" callable="true" >	  
+		{ call PG_PROCEDIMENTO.LIST_SOGINT_ASSOCIATI (?,:idUffOwn,:idProcedimento, :idFonte) }
+	</sql-query>	    
+
+	<sql-query name="PG_PROCEDIMENTO_listaProcedenti" callable="true" >	
+		<return alias="procedente" class="it.giustizia.smp.model.TAnProcedente"/>
+		{ call PG_PROCEDIMENTO.LISTA_PROCEDENTI_NEW(?, :idUffOwn, :idTipoPrev, :idTipoFasc) }
+	</sql-query>	
+	
+	<sql-query name="PG_PROCEDIMENTO_difensoriAssociati_sogg_proc" callable="true" >
+		{ call PG_PROCEDIMENTO.LISTA_DIFENSORIASSOCIATI(?,:idProc,:idUffOwn,:idSoggetto) }
+    </sql-query>
+    
+    <sql-query name="PG_PROCEDIMENTO_carica_difensoreAssociato" callable="true" >
+     	<return alias="rel" class="it.giustizia.smp.model.TRelProcSogintAvv"/>
+	   	<return alias="avv" class="it.giustizia.smp.model.TAvvocati"/>
+		{ call PG_PROCEDIMENTO.CARICA_DIFENSOREASSOCIATO(?,:idProc,:idUffOwn,:idSoggetto, :idAvvocato) }
+    </sql-query>
+    
+    <sql-query name="PG_PROCEDIMENTO_carica_difensoreIntestatari" callable="true" >
+     	<return alias="rel" class="it.giustizia.smp.model.TRelProcIntestatariAvv"/>
+	   	<return alias="avv" class="it.giustizia.smp.model.TAvvocati"/>
+		{ call PG_PROCEDIMENTO.CARICA_DIFENSOREINTESTATARI(?,:idProc,:idUffOwn,:idSoggetto, :idAvvocato) }
+    </sql-query>
+    
+    <sql-query name="PG_PROCEDIMENTO_insert_update_difensoreAssociato" callable="true" >
+		<return-scalar column="IDAVVOCATO" type="long"/>
+		{ call PG_PROCEDIMENTO.INSERT_UPDATE_DIFENSORE(?,:idProc,:idUffOwn,:idSoggetto,:idAvvocato,:cognomeAvv,
+				:nomeAvv,:dataNascita,:luogoNascita,:provinciaNascita,:codiceFiscale,:pec,:indirizzoResidenza,
+				:capResidenza,:comuneResidenza,:provinciaResidenza,:telResidenza,:faxResidenza,:emailResidenza,
+				:indirizzoDomicilioLegale,:capDomicilioLegale,:comuneDomicilioLegale,:provinciaDomicilioLegale,
+				:telDomicilioLegale,:faxDomicilioLegale,:emailDomicilioLegale,:dataNomina,:dataRevoca,:tipoNomina,
+				:idReginde,:codiceUtente)} 	
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_insert_update_difensoreIntestatario" callable="true" >
+		<return-scalar column="IDAVVOCATO" type="long"/>
+		{ call PG_PROCEDIMENTO.INSERT_UPDATE_DIFENSORE_INTEST(?,:idProc,:idUffOwn,:idSoggetto,:idAvvocato,:cognomeAvv,
+				:nomeAvv,:dataNascita,:luogoNascita,:provinciaNascita,:codiceFiscale,:pec,:indirizzoResidenza,
+				:capResidenza,:comuneResidenza,:provinciaResidenza,:telResidenza,:faxResidenza,:emailResidenza,
+				:indirizzoDomicilioLegale,:capDomicilioLegale,:comuneDomicilioLegale,:provinciaDomicilioLegale,
+				:telDomicilioLegale,:faxDomicilioLegale,:emailDomicilioLegale,:dataNomina,:dataRevoca,:tipoNomina,
+				:idReginde,:codiceUtente)} 	
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_aggiorna_stato_proc" callable="true" >
+		{ call PG_PROCEDIMENTO.AGGIORNA_STATO_PROC(?,:idProc,:idStatoProc,:idAtto,:idUffOwn,:descUtente) }
+    </sql-query>
+    
+    <sql-query name="PG_PROCEDIMENTO_associa_aggravamento" callable="true" >
+		<return-scalar column="IDPROC" type="long"/>
+		{ call PG_PROCEDIMENTO.ASSOCIA_AGGRAVAMENTO(?,:idAggravamento,:idPadre,:numeroPadre,:annoPadre,:idUffOwn,
+				:descUtente)} 	
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_aggiorna_tipoProc_Prev_Proc" callable="true" >
+		<return-scalar column="IDPROC" type="long"/>
+		{ call PG_PROCEDIMENTO.AGGIORNA_TIPOPROC_PREV_PROC(?, :idProc, :idUffOwn, :descUtente)} 	
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_getAccertamentiSogg" callable="true" >
+		<return alias="accertamenti" class="it.giustizia.smp.model.TProcedimento"/>
+		{ call PG_PROCEDIMENTO.GET_ACCERTAMENTI_SOGG(?, :idUffOwn, :idProced, :listaIdSoggetti)} 	
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_insTRelProcProc" callable="true" >
+		<return-scalar column="IDPROC" type="long"/>
+		{ call PG_PROCEDIMENTO.INS_T_REL_PROC_PROC(?, :idProc1, :idProc2, :idUffOwn, :descUtente, :idTipoAtto, :idCatAtto, :codiTipoRel)} 	
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_verifica_cancella_difAss" callable="true" >
+		{ call PG_PROCEDIMENTO.VERIFICA_CANC_DIF_ASS(?,:idProc,:idUffOwn,:idDifensore) }
+    </sql-query>
+    
+   	<sql-query name="PG_PROCEDIMENTO_verifica_data_revoca_difAss" callable="true" >
+		<return-scalar column="ESITO" type="long"/>
+		{ call PG_PROCEDIMENTO.VERIFICA_DATA_REVOCA_DIF_ASS(?,:idProc,:idUffOwn,:idDifensore,:dataRevoca) }
+    </sql-query>
+	
+	<!--INIZIO GESTIONE DOCUMENTALE -->   	
+   	<sql-query name="PG_PROCEDIMENTO_inserisciFascicoloPDoc" callable="true">
+		<return-scalar column="ID_PROC" type="long" />
+		{ call PG_PROCEDIMENTO.INSERISCI_FASCICOLO_PDOC (?, :vIdProcedimento, :vCodiceFascicoloPDoc) }
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_associaDocFascicoloPDoc" callable="true">
+		<return-scalar column="ID_PROC" type="long" />
+		{ call PG_PROCEDIMENTO.ASSOCIA_DOC_FASCICOLO_PDOC (?, :vCodiKIdUffOwn, :vIdDocumento, :vIdProcedimento) }
+	</sql-query>
+	<!--FINE GESTIONE DOCUMENTALE -->  
+	
+	<sql-query name="PG_ATTO_listaRelProcProcByProc1" callable="true">
+	    <return alias="relProcProc" class="it.giustizia.smp.model.TRelProcProc" />
+		{ call PG_PROCEDIMENTO.GET_REL_PROC_PROC_BY_PROC1 (?, :idProc1, :flagValido, :descUtente, :nomeMetodo) }
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_listaProcedimentiRelProcProc" callable="true" >
+	   <return alias="PROC" class="it.giustizia.smp.model.TProcedimento"/>
+	    { call PG_PROCEDIMENTO.LISTA_PROC_REL_PROC_PROC (?, :IDUFFMITT, :IDUFFOWN, :IDPROC,:FUNZIONE) }
+	</sql-query>	
+
+	<sql-query name="PG_PROCEDIMENTO_getProcByIdAttoIdTipoFasc" callable="true" >
+	   <return alias="attoProc" class="it.giustizia.smp.model.TRelAttoProc"/>
+	    { call PG_PROCEDIMENTO.GETPROCBYIDATTOIDTIPOFASC (?, :IDATTO, :IDUFFOWN, :IDTIPOFASC) }
+	</sql-query>		
+
+	<sql-query name="PG_PROCEDIMENTO_misurePersonali_iscrizione_aggravamento" callable="true" >
+	   <return alias="misPers" class="it.giustizia.smp.model.TRelAttoMisPers"/>
+	    { call PG_PROCEDIMENTO.MISUREPERS_ISCR_AGGRAVAMENTO(?, :IDPROC, :IDUFFOWN, :IDSOGGINT) }
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_getProcedimentiJobDocumentale" callable="true" >
+		{ call PG_PROCEDIMENTO.GET_PROC_JOB_DOCUMENTALE (?) }
+	</sql-query>	
+	
+	<sql-query name="PG_PROCEDIMENTO_copiaAttoAccertamentoInProcMerito" callable="true" >
+		<return-scalar column="IDPROC" type="long"/>
+		{ call PG_PROCEDIMENTO.copiaAttoAccertInProcMerito(?, :IDPROCACCERT, :IDPROCMERITO, :IDUFFOWN, :CODUTENTE) }						
+	</sql-query>
+
+	<sql-query name="PG_PROCEDIMENTO_sostituisciGiudiceDelegato" callable="true" >
+		<return-scalar column="ID_PROC" type="long" />
+		{ call PG_PROCEDIMENTO.SOSTITUISCI_GIUDICE_DELEGATO(?, :IDUFFOWN, :VIDMAGISTRATOOUT, :VIDMAGISTRATOIN, :VIDPROCEDIMENTO, :TIPOSOSTITUZIONE, :DESCUTENTE) }
+    </sql-query>
+
+	<sql-query name="PG_PROCEDIMENTO_aggiornaMagistratoProcedimento" callable="true" >
+		{ call PG_PROCEDIMENTO.UPDATE_MAG_INTO_PROC(?, :TIPOMAG, :IDMAGSOST, :IDMAGSUB, :MOTIVO,
+			:IDUFFOWN, :ID_PROC, :DATAFINEASS, :DESCUTENTE) }
+    </sql-query>
+
+	<sql-query name="PG_PROCEDIMENTO_listaProcedimenti_Sogg" callable="true" >
+	    { call PG_PROCEDIMENTO.LISTAPROCEDIMENTI_SOGG (?, :IDUFFOWN, :TIPOFASCICOLO, :IDSOGG) }
+	</sql-query>
+
+	<sql-query name="PG_PROCEDIMENTO_listaProcedimenti_Sogg_multiFascicolo" callable="true" >
+	    { call PG_PROCEDIMENTO.LISTAPROCEDIMENTI_SOGG (?, :IDUFFOWN, :TIPIFASCICOLO, :IDSOGG) }
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_misurePatr_Sogg" callable="true" >
+	    { call PG_PROCEDIMENTO.MISUREPATR_SOGG(?, :IDUFFOWN, :IDPROC, :IDSOGGINT, :IDSOGGTIT) }
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_listaDifensoriNonAssociati" callable="true" >	
+		<return alias="avvocato" class="it.giustizia.smp.model.TAvvocati"/>  
+		{ call PG_PROCEDIMENTO.LISTADIFENSORINONASSOC (?,:COGNOME,:IDSOGG,:IDPROC,:IDUFFOWN) }
+	</sql-query>    
+
+	<sql-query name="PG_PROCEDIMENTO_dettaglioProcedimento_Num" callable="true" >	
+		{ call PG_PROCEDIMENTO.DETTAGLIOPROCEDIMENTO_NUM (?, :IDUFFOWN, :IDPROC) }
+	</sql-query>   	
+
+	<sql-query name="PG_PROCEDIMENTO_getProcAggravamento" callable="true" >
+	   <return alias="proc" class="it.giustizia.smp.model.TProcedimento"/>
+	    { call PG_PROCEDIMENTO.GET_PROC_AGGRAVAM(?, :IDUFFOWN, :IDPROC, :IDSOGG) }
+	</sql-query>
+
+	<sql-query name="PG_PROCEDIMENTO_getProcCamere" callable="true" >
+	   <return alias="proc" class="it.giustizia.smp.model.TProcedimento"/>
+	    { call PG_PROCEDIMENTO.GET_PROC_CAMERE(?, :IDUFFOWN, :IDPROC, :IDSOGG) }
+	</sql-query>
+		
+	<sql-query name="PG_PROCEDIMENTO_aggiorna_fasc_gestione" callable="true" >
+		{ call PG_PROCEDIMENTO.aggiorna_fasc_gestione(?, :idProc, :idAtto, :idUffOwn, :dataDeposito, :descUtente) }
+	</sql-query>   
+	
+	<sql-query name="PG_PROCEDIMENTO_listSogAntimafia" callable="true" >
+		{ call PG_PROCEDIMENTO.LIST_SOG_ANTIMAFIA(?, :IDUFFOWN, :IDPROC) }
+	</sql-query>   
+
+	<sql-query name="PG_PROCEDIMENTO_listaProcSogg" callable="true" >
+		{ call PG_PROCEDIMENTO.LISTA_PROC_SOGG (?, :IDSOGG, :IDUFFOWN) }
+	</sql-query>   
+	
+	<sql-query name="PG_PROCEDIMENTO_salvaCoadiutori" callable="true" >
+		<return-scalar column="ID_PROGR_COAD" type="short" />
+		{ call PG_PROCEDIMENTO.SALVA_COADIUTORI(?,:IDPROC,:IDUFFOWN,:ID_AMM,:ID_PROGR_COAD     
+			,:COGNOME,:NOME, :DATA_NASC,:CODICE_FISCALE,:LUOGO_NASCITA,:RECAPITO			
+			,:DATA_INIZIO_INC,:DATA_FINE_INC,:DESC_UT) }
+    </sql-query>	
+
+	<sql-query name="PG_PROCEDIMENTO_listaCoadiutori" callable="true" >
+		<return alias="coadiutore" class="it.giustizia.smp.model.TRelProcCoadiutori"/>
+		{ call PG_PROCEDIMENTO.LISTA_COADIUTORI(?,:IDPROC,:IDUFFOWN,:ID_AMM) }
+    </sql-query>	
+
+	<sql-query name="PG_PROCEDIMENTO_dettaglioCoadiutore" callable="true" >
+		<return alias="coadiutore" class="it.giustizia.smp.model.TRelProcCoadiutori"/>
+		{ call PG_PROCEDIMENTO.DETTAGLIO_COADIUTORE(?,:IDPROC,:IDUFFOWN,:ID_AMM,:ID_PROGR_COAD) }
+    </sql-query>	
+    
+	<sql-query name="PG_PROCEDIMENTO_eliminaCoadiutori" callable="true" >
+		<return-scalar column="ID_PROGR_COAD" type="short" />
+		{ call PG_PROCEDIMENTO.ELIMINA_COADIUTORE(?,:IDPROC,:IDUFFOWN,:ID_AMM,:ID_PROGR_COAD) }
+    </sql-query>	
+	<sql-query name="PG_PROCEDIMENTO_sogTit_Procedimento" callable="true" >
+	   { call PG_PROCEDIMENTO.getSoggettiTit_Procedimento(?, :vidProc) }
+	</sql-query>
+		<sql-query name="PG_PROCEDIMENTO_sogTit_ProcedimentoAtto" callable="true" >
+	   { call PG_PROCEDIMENTO.getTitolari_ProcedimentoAtto(?, :idProc, :idAtto) }
+	</sql-query>
+	
+	<sql-query name="PG_PROCEDIMENTO_lista_Beni_Decisorio_Filtrata" callable="true" >
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+		<return alias="rel" class="it.giustizia.smp.model.TRelBeneAtto" />
+		<return alias="mis" class="it.giustizia.smp.model.TRelAttoMisPatr" />
+	   { call PG_PROCEDIMENTO.LISTA_BENI_DECISORIO_FILTRATA(?, :idProcedimento,:idAtto,:idUfficioUtente,
+												  :idSoggettoDiretto,:idSoggettoTitolare,:idTipologia,:idCategoria,:idSottocategoria) }
+	</sql-query>
+    	
+	<sql-query name="PG_PROCEDIMENTO_eliminaSogInv" callable="true" >
+		<return-scalar column="MESSAGE" type="string" />
+		{ call PG_PROCEDIMENTO.ELIMINA_SOGINV(?, :IDPROC,:IDUFFOWN,:IDSOGINV) }
+    </sql-query>    	
+	
+	<sql-query name="PG_PROCEDIMENTO_intervenientiNonAssociati" callable="true" >
+		{ call PG_PROCEDIMENTO.INTERV_NON_ASSOCIATI(?, :IDPROC, :IDUFFOWN) }
+    </sql-query>  
+    
+	<sql-query name="PG_PROCEDIMENTO_listaIntervenientiNonAssociati" callable="true" >
+		<return-scalar column="NOME_SOGGETTO" type="string" />
+		{ call PG_PROCEDIMENTO.NOME_INTERV_NON_ASSOCIATI(?, :IDPROC, :IDUFFOWN) }
+    </sql-query>
+                              	
+</hibernate-mapping>

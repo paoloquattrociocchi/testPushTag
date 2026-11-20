@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
+<!-- 2015-07-30T18:46:12 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="P20" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21f6857d-daf1-4bf4-8d14-4f34563f88e3">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP2"/>
+	<subDataset name="DatasetTitolo" uuid="1c94561d-a4a8-4daf-93bc-012b639c6a6e">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP2"/>
+		<parameter name="DS_UFFICIO" class="java.lang.Integer"/>
+		<parameter name="MAGISTRATO" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[1576]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[SELECT TRIM( UPPER( T_TP_TIPO_UFFICIO.DESC_TIPO_UFF)) AS DESC_TIPO_UFFICIO,
+	"T_AN_COMUNI"."DESC_COMUNE",
+	TRIM( UPPER( T_AN_UFFICIO.DESC_UFFICIO)) AS NEW_DESC_UFFICIO ,
+	(SELECT DESC_COGNOME_MAG || ' ' || DESC_NOME_MAG from T_AN_MAGISTRATI WHERE CODI_K_ID_MAGISTRATO = $P{MAGISTRATO} ) as DESC_MAG
+	
+FROM "T_AN_COMUNI",
+	"T_AN_UFFICIO",
+	"T_TP_TIPO_UFFICIO"
+WHERE 
+	 "T_AN_COMUNI"."CODI_K_ID_COMUNE" = "T_AN_UFFICIO"."CODI_FK_ID_COM_SEDE" 
+	 AND "T_AN_UFFICIO"."CODI_FK_ID_TIPO_UFF" = "T_TP_TIPO_UFFICIO"."CODI_K_ID_TIPO_UFF" 
+	 AND ( 
+	 "T_AN_UFFICIO"."CODI_K_ID_UFFICIO" =$P{DS_UFFICIO})]]>
+		</queryString>
+		<field name="DESC_TIPO_UFFICIO" class="java.lang.String"/>
+		<field name="DESC_COMUNE" class="java.lang.String"/>
+		<field name="NEW_DESC_UFFICIO" class="java.lang.String"/>
+		<field name="DESC_MAG" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="UFFICIO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1419]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_FINE" class="java.util.Date"/>
+	<parameter name="MAGISTRATO" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1576]]></defaultValueExpression>
+	</parameter>
+	<parameter name="UTENTE" class="java.lang.String"/>
+	<queryString language="plsql">
+		<![CDATA[{ call PG_STATISTICHE.P20_01(  $P{DATA_FINE}, $P{UFFICIO}, $P{MAGISTRATO}, $P{ORACLE_REF_CURSOR}) }]]>
+	</queryString>
+	<field name="ANNO_NUMERO" class="java.lang.String"/>
+	<field name="DATA_ISCRIZIONE" class="java.sql.Timestamp"/>
+	<field name="DESC_TIPO_PREVEN" class="java.lang.String"/>
+	<field name="DESC_TIPO_PROC" class="java.lang.String"/>
+	<field name="MAGISTRATO" class="java.lang.String"/>
+	<field name="PROPOSTO" class="java.lang.String"/>
+	<variable name="variableMapName" class="java.util.HashMap">
+		<initialValueExpression><![CDATA[new java.util.HashMap()]]></initialValueExpression>
+	</variable>
+	<variable name="RecordCount" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="111" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="30" uuid="44ccb5f8-61c5-4180-85f0-a687e945d217"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="DatasetTitolo" uuid="ddf5c2c8-289b-4a6a-8290-d00f8106bc2f">
+						<datasetParameter name="DS_UFFICIO">
+							<datasetParameterExpression><![CDATA[$P{UFFICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="30" width="555">
+						<textField>
+							<reportElement x="0" y="0" width="554" height="30" uuid="3ab73f3e-a53a-47e0-9738-6fc9c71c42ce"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="14" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{NEW_DESC_UFFICIO}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField>
+				<reportElement x="0" y="32" width="555" height="20" uuid="ddf58391-e244-44d3-b82e-d816b9937b91"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["P20. Dettaglio procedimenti pendenti alla data " + DATEFORMAT($P{DATA_FINE},"dd/MM/yyy")  + " per magistrato "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="62" width="555" height="20" uuid="5c8a651e-3e0a-4731-9307-b71f1e1f0827"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Numero totale procedimenti pendenti " + $V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="52" width="555" height="8" forecolor="#FFFFFF" backcolor="#336699" uuid="fbcf6919-266e-4a2d-add4-f3cef7cc2af5"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="0" y="84" width="555" height="20" uuid="10d5c15f-2c0f-4a54-837f-8127ff421444"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="DatasetTitolo" uuid="176a90d2-7d6c-47da-b230-c0bd6c9bc4e4">
+						<datasetParameter name="DS_UFFICIO">
+							<datasetParameterExpression><![CDATA[$P{UFFICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="MAGISTRATO">
+							<datasetParameterExpression><![CDATA[$P{MAGISTRATO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="555">
+						<textField evaluationTime="Report">
+							<reportElement x="0" y="0" width="555" height="20" uuid="8ee71a22-ea45-43e0-bafd-8affd2069cc0"/>
+							<textElement textAlignment="Center">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Magistrato: " + $F{DESC_MAG}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="2" width="70" height="25" forecolor="#FFFFFF" backcolor="#336699" uuid="22ef22a5-8d3a-4370-9ede-f179ae1c7816"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Anno/Numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="70" y="2" width="125" height="25" forecolor="#FFFFFF" backcolor="#336699" uuid="d60294db-d57b-40ca-ba85-9f04755288f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Tipo Procedimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="195" y="2" width="190" height="25" forecolor="#FFFFFF" backcolor="#336699" uuid="2d53f9fa-44c7-464b-b73b-f6e4942d13c1">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Proposto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="385" y="2" width="170" height="25" forecolor="#FFFFFF" backcolor="#336699" uuid="2e2cbbda-fc8c-446e-8468-eefa670ebd9f">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Tipo Prevenzione]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="1" forecolor="#FFFFFF" backcolor="#919191" uuid="6686b799-496a-488d-a30c-d5aeae37d6ed">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="70" height="27" uuid="6d917857-3aeb-47bf-bf83-99d493db5e6a">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANNO_NUMERO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="195" y="0" width="190" height="27" uuid="fd52f958-28f5-414d-a6b0-0ad62c7fbf6c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROPOSTO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="70" y="0" width="125" height="27" uuid="f8a8be46-f350-43d5-a955-c82270a648c6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESC_TIPO_PROC}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="385" y="0" width="170" height="27" uuid="84326d7a-0f09-4cd1-9261-a661d5dc21e5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESC_TIPO_PREVEN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField pattern="d/M/yy h:mm a">
+				<reportElement x="488" y="4" width="66" height="17" uuid="ccb9dfbf-e31b-4ff7-b912-01189c65b4df"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DATEFORMAT(new java.util.Date(),"dd/MM/yyy")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="404" y="4" width="83" height="17" uuid="1e536c28-c246-4893-bc52-20c0e9467e34">
+					<property name="local_mesure_unity" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Data Stampa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="5" width="42" height="17" uuid="97f71a88-5618-475c-b5b6-ee3b23fd4a3b"/>
+				<textElement textAlignment="Left">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="42" y="5" width="55" height="17" uuid="0bf4070b-c8a2-4ed3-ba3d-c1b7547d61b8"/>
+				<textElement textAlignment="Left">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["di " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by mazuki (darksiderg) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/amministratore" targetNamespace="http://anbsc.almaviva.it/schema/amministratore" elementFormDefault="qualified">
+	<complexType name="amministratore">
+		<sequence>
+			<element name="identificativoAmministratore" type="integer"/>
+			<element name="cognome" type="string"/>
+			<element name="nome" type="string"/>
+			<element name="codiceFiscale" type="string" minOccurs="0"/>
+			<element name="partitaIVA" type="string" minOccurs="0"/>
+			<element name="dataNascita" type="dateTime" minOccurs="0"/>
+			<element name="luogoNascita" minOccurs="0">
+				<complexType>
+					<choice>
+						<element name="comuneNascitaItalia" type="string" minOccurs="0"/>
+						<element name="statoNascitaEstero" type="string" minOccurs="0"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="indirizzoStudio" type="string" minOccurs="0"/>
+			<element name="numeroIscrizioneAlbo" type="string" minOccurs="0"/>
+			<element name="specializzazioneAlbo" type="integer" minOccurs="0"/>
+			<element name="pec" type="string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

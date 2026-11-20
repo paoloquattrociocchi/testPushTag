@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
+<!-- 2015-09-04T17:44:52 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="P32" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b3f56e86-e757-4fd7-9049-bf9d87bfff7a">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP_COLL"/>
+	<subDataset name="DatasetTitolo" whenResourceMissingType="Empty" uuid="f1f2c8db-282e-45d7-95b9-da1e54c1b6dc">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SMP_GIU2"/>
+		<parameter name="UFFICIO" class="java.lang.Integer"/>
+		<queryString language="plsql">
+			<![CDATA[SELECT PG_STATISTICHE.TESTATA($P{UFFICIO})  AS NEW_DESC_UFFICIO FROM "DUAL" DUAL]]>
+		</queryString>
+		<field name="NEW_DESC_UFFICIO" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="UFFICIO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1419]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_INIZIO" class="java.util.Date">
+		<defaultValueExpression><![CDATA[DATE(2014,1,12)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_FINE" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[DATE(2014,12,16)]]></defaultValueExpression>
+	</parameter>
+	<queryString language="plsql">
+		<![CDATA[{ call PG_STATISTICHE.P32_01($P{DATA_INIZIO}, $P{DATA_FINE}, $P{UFFICIO}, $P{ORACLE_REF_CURSOR}) }]]>
+	</queryString>
+	<field name="PROCEDIMENTO" class="java.lang.String"/>
+	<field name="TIPOPREVEN" class="java.lang.String"/>
+	<field name="DEFINIZIONE" class="java.lang.String"/>
+	<field name="GIORNI_DEFINIZIONE" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="1" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="83" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="-1" width="802" height="33" uuid="8d26e8e7-8c65-4059-85a1-f5ecadb31fa6"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="DatasetTitolo" uuid="667296fa-dc54-4795-b10b-0cad7d925bea">
+						<datasetParameter name="UFFICIO">
+							<datasetParameterExpression><![CDATA[$P{UFFICIO}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="ORACLE_REF_CURSOR">
+							<datasetParameterExpression><![CDATA[$P{ORACLE_REF_CURSOR}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="33" width="802">
+						<textField isStretchWithOverflow="true">
+							<reportElement x="0" y="0" width="800" height="30" uuid="90b9bfaa-84b4-4fcf-847e-9dd16457b247"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font size="16" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{NEW_DESC_UFFICIO}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="32" width="802" height="22" uuid="bac0002d-ae88-4ac6-8f46-dac287e8cc03"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+					<paragraph leftIndent="0" rightIndent="10"/>
+				</textElement>
+				<text><![CDATA[P32. Tempi di definizione procedimenti di Procura nel periodo]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="54" width="802" height="24" forecolor="#000000" backcolor="#FFFFFF" uuid="2a68d2b8-f250-4eb1-bb8b-48b950c47747">
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dal " + DATEFORMAT($P{DATA_INIZIO},"dd/MM/yyyy") + " al " + DATEFORMAT($P{DATA_FINE},"dd/MM/yyyy")]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="90" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="50" width="802" height="40" backcolor="#61A3E8" uuid="b7e45382-6ca6-4158-8352-29f7ca8a2594">
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="local_mesure_unity" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="local_mesure_unitwidth" value="pixel"/>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Transparent" x="0" y="1" width="146" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="88debace-9f02-40af-805b-4da90d205166">
+						<property name="local_mesure_unity" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Anno/Numero]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="146" y="1" width="190" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="2343b0fb-771c-4a53-b8c7-8fcadf47ddf2">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Tipologia di prevenzione]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="336" y="1" width="243" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="59a0e969-56b0-4ff7-8576-00390b7d00e5">
+						<property name="local_mesure_unitwidth" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					</textElement>
+					<text><![CDATA[Modalità di definizione]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Transparent" x="579" y="1" width="223" height="39" forecolor="#000000" backcolor="#FFFFFF" uuid="61eb8420-ffbb-4c88-abae-a95aceeecadd"/>
+					<box padding="0" topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+						<topPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="SansSerif" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" lineSpacingSize="1.0" firstLineIndent="0" leftIndent="2" rightIndent="2" spacingBefore="0" spacingAfter="0" tabStopWidth="40"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tempi di definizione in giorni\n(data defi. - data iscr.)"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="2" width="802" height="8" backcolor="#336699" uuid="90cd1f2f-14c2-459a-8f1f-7b146d78cc44">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineColor="#FFFFFF"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="3" y="16" width="297" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="813fa1c7-cf28-488f-a716-01c5d867d229"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Numero totale procedimenti definiti:]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="300" y="16" width="502" height="30" uuid="0f944cd6-dfa7-434a-a9ea-921b42e6f3f5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="145" height="30" uuid="cf996a31-a24a-4483-a6db-e1aef1410eba"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROCEDIMENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="1" width="189" height="30" uuid="883499b3-cc74-4396-bcb1-c93bb932fda7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIPOPREVEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="336" y="1" width="243" height="30" uuid="792890b1-4cb2-4e46-9811-4e5cc23b31b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DEFINIZIONE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="579" y="1" width="223" height="30" uuid="275bca36-30b4-42a1-950d-5954807b9072"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GIORNI_DEFINIZIONE}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="146" y="0" width="1" height="33" uuid="ebf28da2-92ca-4771-a1f2-449c1ab638b4">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="local_mesure_unitx" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="d/M/yy h:mm a">
+				<reportElement x="706" y="2" width="93" height="17" uuid="c2eaad6a-49c3-40a5-b42a-d7d39ddbec60"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="604" y="2" width="93" height="17" uuid="26c492b6-7a4f-4598-8927-1265be99c556">
+					<property name="local_mesure_unity" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<paragraph rightIndent="3"/>
+				</textElement>
+				<text><![CDATA[Data Stampa]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="3" width="70" height="17" uuid="e2ee8cf2-4039-464d-b4a4-1716d96bca8d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="75" y="3" width="70" height="17" uuid="c9b23a95-9b0e-4169-91ea-49912b82f6b2"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" di " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="3" splitType="Stretch"/>
+	</summary>
+</jasperReport>

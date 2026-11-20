@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 rel. 2 sp2 (http://www.altova.com) by cate (loi) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/sogg" xmlns:soggettoPersonaFisica="http://anbsc.almaviva.it/schema/soggettoPersonaFisica" xmlns:soggettoPersonaGiuridica="http://anbsc.almaviva.it/schema/soggettoPersonaGiuridica" targetNamespace="http://anbsc.almaviva.it/schema/sogg" elementFormDefault="qualified">
+	<import namespace="http://anbsc.almaviva.it/schema/soggettoPersonaFisica" schemaLocation="SoggettoPersonaFisica.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/soggettoPersonaGiuridica" schemaLocation="SoggettoPersonaGiuridica.xsd"/>
+	<complexType name="soggetto">
+		<sequence>
+			<element name="identificativoSoggetto" type="integer"/>
+			<element name="tipoPersona" type="string"/>
+			<element name="soggettoPersonaFisica" type="soggettoPersonaFisica:soggettoPersonaFisica" minOccurs="0"/>
+			<element name="soggettoPersonaGiuridica" type="soggettoPersonaGiuridica:soggettoPersonaGiuridica" minOccurs="0"/>
+			<element name="tipoSoggetto" type="integer"/>
+			<element name="numeroVersione" type="integer"/>
+			<element name="identificativoNormativa" type="integer" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

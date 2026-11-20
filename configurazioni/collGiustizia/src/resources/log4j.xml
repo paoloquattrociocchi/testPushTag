@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	
+	<!-- STDOUT: Outputs log information to the standard output/console -->
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="DEBUG"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p - [%C{1}] %m%n"/>
+		</layout>
+	</appender>
+	
+	<!-- ERROR_DAILY: Outputs log information to a file -->
+	<!--  <appender name="ERROR_DAILY" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="ERROR"/>
+		<param name="File" value="${jboss.server.home.dir}/logs/SMP_error.log"/>
+		<param name="DatePattern" value=".yyyy-MM-dd"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p - [%C{1}] %m%n"/>
+		</layout>
+	</appender> -->
+	
+	<!-- EVENT_DAILY: Outputs log information to a file -->
+	<!--  <appender name="EVENT_DAILY" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Threshold" value="DEBUG"/>
+		<param name="File" value="${jboss.server.home.dir}/logs/SMP_debug.log"/>
+		<param name="DatePattern" value=".yyyy-MM-dd"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p - [%C{1}] %m%n"/>
+		</layout>
+	</appender> -->
+
+
+	<appender name="MONITOR_UTENTI_FASCICOLI_APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${jboss.server.home.dir}/logs/utenti_fascicoli/monitor.log"/>
+		<param name="DatePattern" value=".yyyy-MM-dd"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{HH:mm:ss,SSS} - %m%n"/>
+		</layout>
+	</appender>
+
+	<logger name="MONITOR_UTENTI_FASCICOLI" additivity="false">
+        <appender-ref ref="MONITOR_UTENTI_FASCICOLI_APPENDER" /> 
+    </logger>
+	
+
+	
+	<logger name="it.giustizia.smp">
+		<level value="DEBUG"/>
+		<appender-ref ref="EVENT_DAILY"/>
+		<appender-ref ref="ERROR_DAILY"/>
+		<appender-ref ref="STDOUT"/>
+	</logger>
+	<logger name="org.springframework">
+		<level value="DEBUG"/>
+		<appender-ref ref="ERROR_DAILY"/>
+		<appender-ref ref="EVENT_DAILY"/>
+	</logger>
+	<logger name="org.hibernate">
+		<level value="ERROR"/>
+		<appender-ref ref="ERROR_DAILY"/>
+	    <appender-ref ref="EVENT_DAILY"/>  
+	</logger>
+	
+	
+	<!-- 
+	<root>
+		<level value="WARN"/>
+		<appender-ref ref="STDOUT"/>
+	</root>-->
+	
+	
+</log4j:configuration>

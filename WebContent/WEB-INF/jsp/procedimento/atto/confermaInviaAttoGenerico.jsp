@@ -1,0 +1,407 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<%
+	String fromMenuAtti = (String) request.getSession().getAttribute(
+			"fromMenuAtti");
+%>
+<tiles:insertDefinition name="base.definition">
+	<tiles:putAttribute name="body-content">
+		<spring:url var="azione" value="/procedimento/atto/confermaInviaAttoGenerico.htm" />
+		<form:form method="post" id="id_formConfermaInvia" action="${azione}" commandName="attoForm" enctype="multipart/form-data">
+			<form:hidden path="codAtto" />
+			<form:hidden path="categoriaAtto.id" />
+			<form:hidden path="tipoAtto.id" />
+			<form:hidden path="idProcedimentoDestinatario" /> 
+			<p class="titolo_page">
+				<spring:message code="atto.generico" /> 
+			</p>
+
+			<jsp:include page="/WEB-INF/jsp/procedimento/intestazione.jsp" />
+			<br />
+			<jsp:include page="/WEB-INF/jsp/procedimento/atto/intestazioneAtto.jsp" />
+			<br />
+		
+			<table class="tb_form">
+			<colgroup>
+		       <col id="tb_form_col_label" span="1">
+		       <col id="tb_form_col_value" span="1">
+		       <col id="tb_form_col_label" span="1">
+		       <col id="tb_form_col_value" span="1">
+		    </colgroup>
+<c:if test="${attoForm.categoriaAtto.id != 374}">
+				<tr>
+					<td class="td_titolo" colspan="4"></td>
+				</tr>
+
+		<c:if test="${attoForm.statoAtto.id != 3}">
+					<tr>
+						<td><form:label path="flagSpedRic.id" cssClass="required">
+								<spring:message code="atto.generico.tipo" />
+							</form:label>
+						</td>
+						<td><form:select path="flagSpedRic.id" size="1">
+								<form:option value="-1" label="--Seleziona Tipo--" />
+								<form:option value="S" id="id" label="Spedito" />
+								<form:option value="R" id="id" label="Ricevuto" />
+						    </form:select><form:errors path="flagSpedRic.id" class="testoRosso" />
+						</td>
+						<td>
+							<form:label path="dataRicezione" cssClass="required">
+								<spring:message code="atto.generico.dataRicezioneNew" />
+							</form:label>
+						</td>
+						<td>
+							<form:input path="dataRicezione" maxlength="10" id="id_dataRicezione" />
+							<form:errors path="dataRicezione" class="testoRosso" />
+						</td>
+					</tr>
+					<tr>
+						<td><form:label path="numeroRiferimento">
+								<spring:message code="atto.generico.descNumRif" />
+							</form:label></td>
+						<td><form:input path="numeroRiferimento" maxlength="20" size="25" /></td>
+						<td>
+							<form:label  path="dataEmissione">
+								<spring:message code="atto.generico.dataEmissioneNew" />
+							</form:label>
+						</td>
+						<td>
+							<form:input id="id_dataEmissione" path="dataEmissione" maxlength="10" />
+							<form:errors path="dataEmissione" class="testoRosso" />
+						</td>
+					</tr>
+					
+					<!--  Organo già predefinito sul DB -->
+						<tr>
+							<td><form:label path="fonteAttoGenerico.id" cssClass="required">
+									<spring:message code="atto.generico.mittDest" />
+								</form:label></td>
+							<td>
+							<form:select class="nonModificabile" id="id_fonte" path="fonteAttoGenerico.id" size="1" onchange="pulisciCombo(); this.form.submit();">
+								<form:option value="-1" label="----------------- Seleziona Mittente/Destinatario -----------------" />
+								<form:options items="${fontiAttoGenerico}" itemValue="id" itemLabel="descrizione" />
+							</form:select>
+							<form:errors path="fonteAttoGenerico.id" class="testoRosso" />
+							</td>
+							<c:if test="${(attoForm.fonteAttoGenerico.id !=null && attoForm.fonteAttoGenerico.id!=12)}">
+								<td><form:label path="organo" cssClass="required">
+										<spring:message code="atto.organo" />
+									</form:label></td>
+								<td><form:select class="nonModificabile" path="organo.id" size="1" onchange="pulisciCombo(); this.form.submit()">
+										<form:option value="-1" label="-------------------------Seleziona Organo-----------------------" />
+										<form:options items="${organi}" itemValue="id" itemLabel="descrizione" />
+									</form:select> <form:errors path="organo.id" class="testoRosso" /></td>
+							</c:if>
+							<c:if test="${attoForm.fonteAttoGenerico.id==12 || attoForm.indirizzoOrgano.id==null}">
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</c:if>
+						</tr>
+						<c:if test="${(attoForm.fonteAttoGenerico.id !=null && attoForm.fonteAttoGenerico.id!=12)}">
+						<tr>
+							<td><form:label path="provinciaOrgano" cssClass="required">
+									<spring:message code="provincia" />
+								</form:label></td>
+							<td><form:select class="nonModificabile" path="provinciaOrgano.id" size="1" onchange="pulisciComboIndirizzo(); this.form.submit()">
+									<form:option value="-1" label="-------------------------Seleziona Provincia-----------------------" />
+									<form:options items="${province}" itemValue="id" itemLabel="descrizione" />
+								</form:select> <form:errors path="provinciaOrgano.id" class="testoRosso" /></td>
+							<td><form:label path="comuneOrgano" cssClass="required">
+									<spring:message code="comune" />
+								</form:label></td>
+							<td><form:select class="nonModificabile" path="comuneOrgano.id" size="1" onchange="this.form.submit()">
+									<form:option value="-1" label="-------------------------Seleziona Comune-----------------------" />
+									<form:options items="${comuni}" itemValue="id" itemLabel="descrizione" />
+								</form:select> <form:errors path="comuneOrgano.id" class="testoRosso" /></td>
+						</tr>
+						<tr>
+							<td><form:label path="indirizzoOrgano" cssClass="required">
+									<spring:message code="indirizzo" />
+								</form:label></td>
+							<td colspan="3"><form:select class="nonModificabile" path="indirizzoOrgano.id" size="1" onchange="this.form.submit()">
+									<form:option value="-1" label="-------------------------Seleziona Indirizzo-----------------------" />
+									<form:options items="${indirizziSede}" itemValue="id" itemLabel="descrizione" />
+							</form:select> <form:errors path="indirizzoOrgano.id" class="testoRosso" />
+							</td>
+						</tr> 
+					 </c:if>
+					<!-- Altro Organo -->					
+					<c:if test="${attoForm.fonteAttoGenerico.id==12 || attoForm.indirizzoOrgano.id==null}"> 
+						<tr>
+							<td><form:label path="altroOrgano">
+									<spring:message code="atto.generico.altro" />
+								</form:label></td>
+							<td colspan="3"><form:input path="altroOrgano" maxlength="60" size="100%" /></td>
+						</tr>
+						<tr>
+							<td><form:label path="sedeOrgano">
+									<spring:message code="atto.generico.sedeOrgano" />
+								</form:label></td>
+							<td colspan="3"><form:input path="sedeOrgano" maxlength="200"  size="100%" /></td>
+						</tr>	
+					</c:if>
+					
+					<tr>
+						<td><form:label path="note">
+								<spring:message code="note" />
+							</form:label>
+						</td>
+						<td colspan="3"><form:textarea id="id_note" path="note" rows="3" cssStyle="width:98%" /></td>
+					</tr>
+			</c:if>
+				<c:if test="${attoForm.statoAtto.id == 3}">
+					<tr>
+						<td><form:label path="flagSpedRic.id">
+								<spring:message code="atto.generico.tipo" />
+							</form:label>
+						</td>
+						<td><c:out value="${attoForm.flagSpedRic.descrizione}"/></td>
+						<td>
+							<form:label path="dataRicezione" >
+								<spring:message code="atto.generico.dataRicezioneNew" />
+							</form:label>
+						</td>
+						<td>
+							<fmt:formatDate value="${attoForm.dataRicezione}" type="date" pattern="dd/MM/yyyy" />
+						</td>
+					</tr>
+					<tr>
+						<td><form:label path="numeroRiferimento">
+								<spring:message code="atto.generico.descNumRif" />
+							</form:label></td>
+						<td><c:out value="${attoForm.numeroRiferimento}" /></td>
+						<td>
+							<form:label  path="dataEmissione">
+								<spring:message code="atto.generico.dataEmissioneNew" />
+							</form:label>
+						</td>
+						<td>
+							<fmt:formatDate value="${attoForm.dataEmissione}" type="date" pattern="dd/MM/yyyy" />
+						</td>
+						
+					</tr>
+					
+					<!--  Organo già predefinito sul DB -->
+					<tr>
+						<td><form:label path="fonteAttoGenerico.id">
+									<spring:message code="atto.generico.mittDest" />
+								</form:label></td>
+						<td>
+						<form:select class="nonModificabile" id="id_fonte" path="fonteAttoGenerico.id" size="1" onchange="pulisciCombo(); this.form.submit();">
+							<form:option value="-1" label="----------------- Seleziona Mittente/Destinatario -----------------" />
+							<form:options items="${fontiAttoGenerico}" itemValue="id" itemLabel="descrizione" />
+						</form:select>
+						</td>
+					<c:if test="${(attoForm.fonteAttoGenerico.id !=null && attoForm.fonteAttoGenerico.id!=12)}">
+						<td><form:label path="organo">
+								<spring:message code="atto.organo" />
+							</form:label></td>
+						<td><form:select class="nonModificabile" path="organo.id" size="1" onchange="pulisciCombo(); this.form.submit()">
+								<form:option value="-1" label="-------------------------Seleziona Organo-----------------------" />
+								<form:options items="${organi}" itemValue="id" itemLabel="descrizione" />
+							</form:select></td>
+					</c:if>
+					<c:if test="${attoForm.fonteAttoGenerico.id==12 || attoForm.indirizzoOrgano.id==null}">
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</c:if>
+						</tr>
+						<c:if test="${(attoForm.fonteAttoGenerico.id !=null && attoForm.fonteAttoGenerico.id!=12)}">
+						<tr>
+							<td><form:label path="provinciaOrgano">
+									<spring:message code="provincia" />
+								</form:label></td>
+							<td><form:select class="nonModificabile" path="provinciaOrgano.id" size="1" onchange="pulisciComboIndirizzo(); this.form.submit()">
+									<form:option value="-1" label="-------------------------Seleziona Provincia-----------------------" />
+									<form:options items="${province}" itemValue="id" itemLabel="descrizione" />
+								</form:select></td>
+							<td><form:label path="comuneOrgano">
+									<spring:message code="comune" />
+								</form:label></td>
+							<td><form:select class="nonModificabile" path="comuneOrgano.id" size="1" onchange="this.form.submit()">
+									<form:option value="-1" label="-------------------------Seleziona Comune-----------------------" />
+									<form:options items="${comuni}" itemValue="id" itemLabel="descrizione" />
+								</form:select></td>
+						</tr>
+						<tr>
+							<td><form:label path="indirizzoOrgano">
+									<spring:message code="indirizzo" />
+								</form:label></td>
+							<td colspan="3"><form:select class="nonModificabile" path="indirizzoOrgano.id" size="1" onchange="this.form.submit()">
+									<form:option value="-1" label="-------------------------Seleziona Indirizzo-----------------------" />
+									<form:options items="${indirizziSede}" itemValue="id" itemLabel="descrizione" />
+							</form:select>
+							</td>
+						</tr> 
+				</c:if>
+					<!-- Altro Organo -->					
+				<c:if test="${attoForm.fonteAttoGenerico.id==12 || attoForm.indirizzoOrgano.id==null}"> 
+					<tr>
+						<td><form:label path="altroOrgano">
+								<spring:message code="atto.generico.altro" />
+							</form:label></td>
+						<td colspan="3"><c:out value="${attoForm.altroOrgano}" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="sedeOrgano">
+								<spring:message code="atto.generico.sedeOrgano" />
+							</form:label></td>
+						<td colspan="3"><c:out value="${attoForm.sedeOrgano}" /></td>
+					</tr>	
+				</c:if>
+					<tr>
+						<td><form:label path="dataCessazioneMisura">
+								Data evento
+							</form:label>
+						</td>
+						<td>
+							<fmt:formatDate value="${attoForm.dataCessazioneMisura}" type="date" pattern="dd/MM/yyyy" />
+						</td>	
+						<c:if test="${attoForm.categoriaAtto.id==375 || attoForm.categoriaAtto.id==29 }">			
+						    <td><label>Parere</label></td>
+							<td>
+								<c:out value="${attoForm.flgParere}" />
+							</td>
+						</c:if>	
+						<c:if test="${attoForm.categoriaAtto.id!=375 || attoForm.categoriaAtto.id!=29 }">			
+						    <td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</c:if>
+					</tr>
+					<tr>
+						<td><form:label path="note">
+								<spring:message code="note" />
+							</form:label>
+						</td>
+						<td colspan="3"><c:out value="${attoForm.note}" /></td>
+					</tr>
+					<tr>
+						<td><form:label path="dataRegistrazione">
+								<spring:message code="atto.dataregistrazione" />
+							</form:label></td>
+						<td><fmt:formatDate value="${attoForm.dataRegistrazione}" type="date" pattern="dd/MM/yyyy" /></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</c:if>
+			</table>
+</c:if>
+
+
+
+
+
+
+
+
+
+
+
+			
+			<br />
+			<jsp:include page="/WEB-INF/jsp/procedimento/atto/documentoAllegato.jsp" />
+			<br />
+<c:if test="${attoForm.categoriaAtto.id == 374}">
+	<table class="tb_form">
+		<tr>		
+			<td>
+				<form:label path="dataEmissione">
+					<spring:message code="atto.dataemissione" />
+				</form:label>
+			</td>
+			<td>
+				<form:input path="dataEmissione" maxlength="10" id="id_dataEmissione" /> 
+	            <form:errors path="dataEmissione" class="testoRosso" />					
+			</td>
+			<td>
+				<form:label path="dataDeposito">
+					<spring:message code="atto.datadeposito" />
+				</form:label>
+			</td>
+			<td>
+				<form:input path="dataDeposito" maxlength="10" id="id_dataDeposito" /> 
+			    <form:errors path="dataDeposito" class="testoRosso" />
+			</td>
+		</tr>
+	</table>
+</c:if>
+<br />
+<br />			
+			
+			
+			<table class="tb_bottoni" align="center">
+				<tr>
+
+					<c:if test="${attoForm.statoAtto.id != 3 }">
+		
+						<td class="td_tasto"><input type="button" value="Salva" onclick="inserisciAtto('Salva', '${attoForm.allegato.documentoFirmato}')" title="Salva" class="nowait" /></td>
+						<input id="Salva" type="submit" name="Salva" value="" style="display: none" />					
+						<td class="td_tasto">
+							<input type="button" value="Registra" onclick="inserisciAtto('Registra', '${attoForm.allegato.documentoFirmato}')" title="Registra" class="nowait" />
+						</td>
+						<input id="Registra" type="submit" name="Registra" value="" style="display: none" />
+					</c:if>
+			<!-- 
+					<c:if test="${attoForm.statoAtto.id == 3}">
+						<c:if test="${sessionScope.procedimento.tipoProcedimento.id!=12}" >
+							<td class="td_tasto"><input type="button" value="Copia" onclick="submitCopiaSposta('C')" title="Copia" class="nowait" /></td>
+							<td class="td_tasto"><input type="button" value="Sposta" onclick="submitCopiaSposta('S')" title="Sposta" class="nowait" /></td>
+						</c:if>
+						<input id="idSubmitGestioneAttiGenerici" type="submit" name="confermaCopiaSposta" value="" style="display: none" />
+					</c:if>
+			-->
+          			<td class="td_tasto">
+						<c:if test="${fromMenuAtti=='elenco'}">
+							<input type="button" value="Indietro" onClick="indietro('/procedimento/atti/elenco.htm')">
+						</c:if>
+						<c:if test="${fromMenuAtti=='ordine'}">
+						<input type="button" value="Indietro" onClick="indietro('/procedimento/atti/elencoAttiOrdineCronologico.htm')">
+						</c:if>
+						<c:if test="${fromMenuAtti=='nuovo'}">
+						<input type="button" value="Indietro" onClick="indietro('/procedimento/atti/nuovo.htm')">
+						</c:if>	          			          			
+          			</td>
+				</tr>
+			</table>
+		</form:form>
+
+
+		<%@taglib prefix="smp" uri="/WEB-INF/smp.tld"%>
+		<smp:back buttonId="id_buttonIndietro"></smp:back>
+
+		<script type="text/javascript">
+			
+			$(document).ready(function() {
+				prendiData("#id_dataRicezione",true);
+				prendiData("#id_dataEmissione",true);
+				prendiData("#id_dataDeposito",true);
+			});
+
+
+			function pulisciCombo(){
+				if(document.getElementsByName("provinciaOrgano.id").length != 0)
+					document.getElementsByName("provinciaOrgano.id")[0].selectedIndex = -1;
+				}
+
+			function pulisciComboIndirizzo(){
+				if(document.getElementsByName("indirizzoOrgano.id").length != 0)
+					document.getElementsByName("indirizzoOrgano.id")[0].selectedIndex = -1;
+				}
+
+			function submitCopiaSposta(name){
+
+				$('#id_formConfermaInvia').attr('action', '${pageContext.request.contextPath}/procedimento/stralcio/gestioneStralcioAttoGenerici?copiaSposta='+name);
+
+				$('#idSubmitGestioneAttiGenerici').click();
+				
+			}
+			
+			</script>
+	</tiles:putAttribute>
+</tiles:insertDefinition>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/amministrazione" targetNamespace="http://anbsc.almaviva.it/schema/amministrazione" elementFormDefault="qualified">
+	<complexType name="amministrazione">
+		<sequence>
+			<element name="identificativoAmministratore" type="integer"/>
+			<element name="identificativoBene" type="integer" maxOccurs="unbounded"/>
+			<element name="dataInizioIncarico" type="dateTime"/>
+			<element name="dataFineIncarico" type="dateTime" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

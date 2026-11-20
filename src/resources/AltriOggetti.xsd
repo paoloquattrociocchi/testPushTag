@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/altriOggetti" targetNamespace="http://anbsc.almaviva.it/schema/altriOggetti" elementFormDefault="qualified">
+	<complexType name="altriOggetti">
+		<sequence>
+			<sequence>
+				<element name="indirizzo" type="string" minOccurs="0"/>
+				<element name="numeroCivico" type="string" minOccurs="0"/>
+				<element name="descrizione" type="string" minOccurs="0"/>
+			</sequence>
+		</sequence>
+	</complexType>
+</schema>

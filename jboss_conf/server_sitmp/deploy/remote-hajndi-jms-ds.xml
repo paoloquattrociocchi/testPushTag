@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<connection-factories>
+
+  <!-- ==================================================================== -->
+  <!-- JMS                                                             -->
+  <!-- ==================================================================== -->
+
+  <!-- The JMS provider loader -->
+  <mbean code="org.jboss.jms.jndi.JMSProviderLoader"
+	 name="jboss.mq:service=JMSProviderLoader,name=HAJNDIJMSProvider">
+    <attribute name="ProviderName">SITJMSProvider</attribute>
+    <attribute name="ProviderAdapterClass">
+      org.jboss.jms.jndi.JNDIProviderAdapter
+    </attribute>
+    <!-- The combined connection factory -->
+    <attribute name="FactoryRef">/ConnectionFactory</attribute>
+    <!-- The queue connection factory -->
+    <attribute name="QueueFactoryRef">/ClusteredConnectionFactory</attribute>
+    <!-- The topic factory -->
+    <attribute name="TopicFactoryRef">/ClusteredConnectionFactory</attribute>
+    <!-- Access JMS via HAJNDI -->
+    <attribute name="Properties">
+       java.naming.factory.initial=org.jnp.interfaces.NamingContextFactory
+       java.naming.factory.url.pkgs=org.jboss.naming:org.jnp.interfaces
+<!-- Modifica Salini. Commentata. Mettere l'ESB di Collaudo o di produzione? -->
+       <!-- java.naming.provider.url=jnp://10.6.199.136:1100,10.6.199.137:1100 -->
+<!-- Modifica Pongetti. Commentata. Mettere l'ESB di Collaudo -->
+<!--	java.naming.provider.url=jnp://10.6.199.136:1100,10.6.199.137:1100  -->
+       
+	   java.naming.provider.url=jnp://161.27.213.37:8280 <!-- localhost:1100,localhost:1100 161.27.213.37:1299 -->
+	   jnp.disableDiscovery=true
+    </attribute>
+  </mbean>
+<!-- jnp.discoveryPort=1102 jnp.discoveryTTL=16
+jnp.discoveryTimeout=10000
+jnp.maxRetries=1 -->
+  <!-- JMS XA Resource adapter, use this to get transacted JMS in beans -->
+  <tx-connection-factory>
+    <jndi-name>RemoteClusteredConnectionFactory</jndi-name>
+    <xa-transaction/>
+    <rar-name>jms-ra.rar</rar-name>
+    <use-java-context>false</use-java-context>
+    <connection-definition>org.jboss.resource.adapter.jms.JmsConnectionFactory</connection-definition>
+    <config-property name="SessionDefaultType" type="java.lang.String">javax.jms.Queue</config-property>
+    <config-property name="JmsProviderAdapterJNDI" type="java.lang.String">java:/SITJMSProvider</config-property>
+    <max-pool-size>20</max-pool-size>
+    <!-- security-domain-and-application>JmsXARealm</security-domain-and-application -->
+  </tx-connection-factory>
+
+</connection-factories>

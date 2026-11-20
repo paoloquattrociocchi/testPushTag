@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+	<tlib-version>1.0</tlib-version>
+	<short-name>permissionsControl</short-name>
+	<tag>
+		<name>displayOnPermission</name>
+		<tag-class>it.giustizia.smp.permissions.DisplayOnPermission</tag-class>
+		<!-- description>Visualizza il body content racchiuso se l'utente ha tutti i permessi elencati e il contesto lo consente</description  -->
+		<body-content>scriptless</body-content>	
+		<attribute>
+			<name>requiredPermissions</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>useContext</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

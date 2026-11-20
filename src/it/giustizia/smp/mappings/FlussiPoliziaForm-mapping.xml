@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.FlussiPoliziaForm</class-a>
+		<class-b>it.giustizia.smp.dto.pg_flussi.FlussiPoliziaDto</class-b>	
+		
+		<field>
+			<a>idFlusso</a>
+			<b>ID_FLUSSO</b>
+		</field>
+		
+		<field>
+			<a>dataFlusso</a>
+			<b>DATA_FLUSSO</b>
+		</field>
+		
+		<field>
+			<a>idProcedimento</a>
+			<b>ID_PROCEDIMENTO</b>
+		</field>
+		
+		<field>
+			<a>idAtto</a>
+			<b>ID_ATTO</b>
+		</field>
+		
+		<field>
+			<a>idServizio</a>
+			<b>ID_SERVIZIO</b>
+		</field>
+		
+		<field>
+			<a>descTipoFlusso</a>
+			<b>DESC_TIPO_FLUSSO</b>
+		</field>
+		
+		<field>
+			<a>idStato</a>
+			<b>ID_STATO</b>
+		</field>
+		
+		<field>
+			<a>descStato</a>
+			<b>DESC_STATO</b>
+		</field>
+		
+		<field>
+			<a>idUffMittente</a>
+			<b>ID_UFF_MITTENTE</b>
+		</field>
+		
+		<field>
+			<a>descTipoUffMittente</a>
+			<b>DESC_TIPO_UFF_MIT</b>
+		</field>
+		
+		<field>
+			<a>descSedeUffMittente</a>
+			<b>DESC_SEDE_UFF_MIT</b>
+		</field>
+		
+		<field>
+			<a>descUffMittente</a>
+			<b>DESC_UFF_MIT</b>
+		</field>
+		
+		<field>
+			<a>idUffDestinatario</a>
+			<b>ID_UFF_DESTINATARIO</b>
+		</field>
+		
+		<field>
+			<a>descTipoUffDestinatario</a>
+			<b>DESC_TIPO_UFF_DEST</b>
+		</field>
+		
+		<field>
+			<a>descSedeUffDestinatario</a>
+			<b>DESC_SEDE_UFF_DEST</b>
+		</field>
+		
+		<field>
+			<a>descUffDestinatario</a>
+			<b>DESC_UFF_DEST</b>
+		</field>
+		
+		<field>
+			<a>flgDirezione</a>
+			<b>FLG_DIREZIONE</b>
+		</field>
+		
+		<field>
+			<a>numProc</a>
+			<b>NUM_PROC</b>
+		</field>
+		
+		<field>
+			<a>idCatAtto</a>
+			<b>ID_CAT_ATTO</b>
+		</field>
+		
+		<field>
+			<a>descCatAtto</a>
+			<b>DESC_CAT_ATTO</b>
+		</field>
+	</mapping>
+
+	<mapping>
+		<class-a>it.giustizia.smp.form.FlussiPoliziaForm</class-a>
+		<class-b>it.giustizia.smp.webservice.server.polizia.DatiComunicazioneType</class-b>	
+		<field>
+			<a>descrNumCominic</a>
+			<b>DESCR_NUM_COMUNIC</b>
+		</field>
+		<field>
+			<a>dataEmissioneComunic</a>
+			<b>DATA_EMISSIONE</b>
+		</field>
+		<field>
+			<a>idTipoComunic</a>
+			<b>ID_TIPO_COMUNIC</b>
+		</field>
+		<field>
+			<a>dataEventoComunic</a>
+			<b>DATA_EVENTO</b>
+		</field>
+		<field>
+			<a>descrNoteComunic</a>
+			<b>DESCR_NOTE</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.FlussiPoliziaForm</class-a>
+		<class-b>it.giustizia.smp.webservice.server.polizia.DatiEsitoIndagatiType</class-b>	
+		<field>
+			<a>descrNumEsito</a>
+			<b>DESCR_NUM_ESITO</b>
+		</field>
+		<field>
+			<a>dataEmissioneEsito</a>
+			<b>DATA_EMISSIONE</b>
+		</field>
+		<field>
+			<a>descrNoteEsito</a>
+			<b>DESCR_NOTE</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.FlussiPoliziaForm</class-a>
+		<class-b>it.giustizia.smp.webservice.server.polizia.DatiRichiestaAggravamentoType</class-b>	
+		<field>
+			<a>descrNumAggr</a>
+			<b>DESCR_NUM_PROPOSTA</b>
+		</field>
+		<field>
+			<a>dataEmissioneAggr</a>
+			<b>DATA_EMISSIONE</b>
+		</field>
+		<field>
+			<a>descrPropostaAggr</a>
+			<b>DESCR_PROPOSTA</b>
+		</field>
+		<field>
+			<a>descrNoteAggr</a>
+			<b>DESCR_NOTE</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.FlussiPoliziaForm</class-a>
+		<class-b>it.giustizia.smp.webservice.server.polizia.DatiParereType</class-b>	
+		<field>
+			<a>descrNumParere</a>
+			<b>DESCR_NUM_PARERE</b>
+		</field>
+		<field>
+			<a>dataEmissioneParere</a>
+			<b>DATA_EMISSIONE</b>
+		</field>
+		<field>
+			<a>flgParere</a>
+			<b>FLG_PARERE</b>
+		</field>
+		<field>
+			<a>descrNoteParere</a>
+			<b>DESCR_NOTE</b>
+		</field>
+	</mapping>
+	
+</mappings>

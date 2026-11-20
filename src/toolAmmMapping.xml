@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	<configuration>
+		<custom-converters>
+			<converter type="it.giustizia.smp.utility.XmlGC2xmlGC">
+			<class-a>javax.xml.datatype.XMLGregorianCalendar</class-a>
+			<class-b>javax.xml.datatype.XMLGregorianCalendar</class-b>
+			</converter>
+		</custom-converters>
+	</configuration>
+</mappings>

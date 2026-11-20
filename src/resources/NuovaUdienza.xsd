@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/nuovaUdienza" targetNamespace="http://anbsc.almaviva.it/schema/nuovaUdienza" elementFormDefault="qualified">
+	<complexType name="nuovaUdienza">
+		<sequence>
+			<element name="idUdienza" type="integer"/>
+			<element name="statoUdienza" type="string" maxOccurs="unbounded"/>
+			<element name="dataFissazione" type="dateTime" minOccurs="0"/>
+			<element name="indirizzo" type="string" minOccurs="0"/>
+			<element name="aula" type="string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

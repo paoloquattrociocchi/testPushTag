@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- Specifiche Intervento-006-SpeseProces-NumAtto -->
+    <sql-query name="PG_NUMERO_ATTO_generaNumeroAtto" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO(?, :idUffOwn, :idMittente, :idProcInUdienza, :idProcGenerale,
+			:idProcProponente, :idProc, :dataEmissione, :dataDeposito, :dataRicezioneDoc, :dataRegistrazione,
+			:documento, :tipoDocumento, :nomeDocumento,:idAtto,:descUtente,:idMagistrato,:giudiceDelegato) }
+    </sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoIGrado" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_IG(?, :idUffOwn, :idMittente, :idProcInUdienza, :idProcGenerale,
+			:idProcProponente, :idProc, :dataEmissione, :dataDeposito, :dataRicezioneDoc, :dataRegistrazione, :documento,
+			:tipoDocumento, :nomeDocumento, :idAtto, :descUtente, :idMagistrato, :giudiceDelegato) }
+    </sql-query>
+
+    <sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoIIGrado" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_IIG(?,:idUffOwn,:idMittente,:idProcInUdienza,:idProcGenerale,
+			:idProcProponente,:idProc,:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,
+			:documento,:tipoDocumento,:nomeDocumento,:idAtto,:descUtente,:idMagistrato,:giudiceDelegato) }
+    </sql-query> 
+
+    <sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDI" callable="true" >
+		<return-scalar column="IDFLUSSO" type="long"/>		
+	 	{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DI(?, :idProcedimento, :idAtto, :idMittente, :idDestinatario, :idDestinatario2,
+	 		:idDestinatario3, :descUtente, :idUffOwn, :categoriaAtto, :nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDIP" callable="true" >
+		<return-scalar column="IDFLUSSO" type="long"/>		
+	 	{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DI(?, :idProcedimento, :idAtto, :idMittente, :idDestinatario, :idDestinatario2,
+	 		:idDestinatario3, :descUtente, :idUffOwn, :categoriaAtto, :nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDI" callable="true" >
+		<return-scalar column="IDFLUSSO" type="long"/>		
+	 	{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_ATTO_DI(?, :idProcedimento, :idAtto, :idMittente, :idDestinatario,
+	 		:idDestinatario2, :idDestinatario3, :descUtente, :idUffOwn, :categoriaAtto, :nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDIP" callable="true" >
+		<return-scalar column="IDFLUSSO" type="long"/>		
+	 	{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_ATTO_DI(?, :idProcedimento, :idAtto, :idMittente, :idDestinatario,
+	 		:idDestinatario2, :idDestinatario3, :descUtente, :idUffOwn, :categoriaAtto, :nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDS" callable="true" >
+	 	{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DS(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,:dataEmissione,
+		      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,:idAtto,
+		      :tipoAtto,:categoriaAtto,:idStatoAtto,:idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,
+		      :idMagistrato,:giudiceDelegato) } 	
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDRTS" callable="true" >
+	 	{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DRTS(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,:dataEmissione,
+		      :dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,:idAtto,:tipoAtto,
+		      :categoriaAtto,:idStatoAtto,:idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,:nomeMetodo) }
+		<return-scalar column="IDATTO" type="long"/>
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDS" callable="true" >
+	 	{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_ATTO_DS(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,
+	 		:dataEmissione,:dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,
+	 		:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,
+			:idMagistrato,:giudiceDelegato) } 	
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDRTS" callable="true" >
+	 	{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_DRTS(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,
+	 		:dataEmissione,:dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,
+	 		:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,
+	 		:nomeMetodo) }
+		<return-scalar column="IDATTO" type="long"/>
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDAP" callable="true" >
+	   { call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DAP(?,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,
+			:nomeDocumento,:idStatoAtto,:idMisureCaricate,:idProc,:idAtto,:idUffOwn,:idSoggInt,:idTipoMisura, :idNormativa,:durataAnni,
+			:durataMesi,:durataGiorni,:descLoc,:descUltPresc,:cauzione,:articolo67,:idEsito1,:idEsito2,:idEsito3,:idEsitoFin,:descAltro1,
+			:descAltro2,:descAltro3,:flgValido,:codiMotivo,:idTipoAtto,:descUtente,:idPrescrizioni,:importoCauzione,:articolo9c1)}
+	 </sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDAP" callable="true" >
+	   { call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_DAP(?,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,
+			:nomeDocumento,:idStatoAtto,:idMisureCaricate,:idProc,:idAtto,:idUffOwn,:idSoggInt,:idTipoMisura, :idNormativa,:durataAnni,
+			:durataMesi,:durataGiorni,:descLoc,:descUltPresc,:cauzione,:articolo67,:idEsito1,:idEsito2,:idEsito3,:idEsitoFin,:descAltro1,
+			:descAltro2,:descAltro3,:flgValido,:codiMotivo,:idTipoAtto,:descUtente,:idPrescrizioni,:importoCauzione,:articolo9c1)}
+	 </sql-query>
+
+	<sql-query callable="true" name="PG_NUMERO_ATTO_generaNumeroAttoDRAP">
+		{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DRAP(?,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,
+			:nomeDocumento,:idStatoAtto,:idMisureCaricate,:idProc,:idAtto,:idUffOwn,:idSoggInt,:idTipoMisura, :idNormativa,:durataAnni,
+			:durataMesi,:durataGiorni,:descLoc,:descUltPresc,:cauzione,:articolo67,:idEsito1,:idEsito2,:idEsito3,:idEsitoFin,:descAltro1,
+			:descAltro2,:descAltro3,:flgValido,:codiMotivo,:idTipoAtto,:descUtente,:idPrescrizioni,:importoCauzione,:articolo9c1)}
+	 </sql-query>
+
+	<sql-query callable="true" name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDRAP">
+		{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_DRAP(?,:dataEmissione,:dataDeposito,:dataRegistrazione,:documento,:tipoDocumento,
+			:nomeDocumento,:idStatoAtto,:idMisureCaricate,:idProc,:idAtto,:idUffOwn,:idSoggInt,:idTipoMisura, :idNormativa,:durataAnni,
+			:durataMesi,:durataGiorni,:descLoc,:descUltPresc,:cauzione,:articolo67,:idEsito1,:idEsito2,:idEsito3,:idEsitoFin,:descAltro1,
+			:descAltro2,:descAltro3,:flgValido,:codiMotivo,:idTipoAtto,:descUtente,:idPrescrizioni,:importoCauzione,:articolo9c1)}
+	 </sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDCRS" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DCRS(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,
+	 		:dataEmissione,:dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,
+	 		:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,
+	 		:convalidaRevoca,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDCRS" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_DCRS(?,:idUffOwn,:idProc,:idMittente,:idDestinatario,:idUltDestinatario,
+	 		:dataEmissione,:dataDeposito,:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,
+	 		:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,
+	 		:convalidaRevoca,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDPES" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DPES(?,:idUffOwn,:idProc,:idMittente,:dataEmissione,:dataDeposito,
+	 		:dataRegistrazione,:documento,:tipoDocumento,:nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,
+	 		:idStatoAtto,:idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDPES" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_DPES(?,:idUffOwn,:idProc,:idMittente,:dataEmissione,:dataDeposito,
+	 		:dataRegistrazione,:documento,:tipoDocumento,:nomeDocumento,:descUtente,:idAtto,:tipoAtto,:categoriaAtto,
+	 		:idStatoAtto,:idUdienzaAtto,:idUdienzaFiss,:idUdienzaRip,:idUdienzaRim,:statoUdienzaOld,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDPS" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DPS(?,:idUffOwn,:idProc,:dataEmissione,:dataDeposito,
+	 		:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,:idAtto,
+	 		:tipoAtto,:categoriaAtto,:idStatoAtto,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDPS" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_DPS(?,:idUffOwn,:idProc,:dataEmissione,:dataDeposito,
+	 		:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,:idAtto,
+	 		:tipoAtto,:categoriaAtto,:idStatoAtto,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDST" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DST(?,:idUffOwn,:idProc,:dataEmissione,:dataDeposito,
+	 		:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,
+	 		:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDST" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_DST(?,:idUffOwn,:idProc,:dataEmissione,:dataDeposito,
+	 		:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,
+	 		:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDSST" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DSST(?,:idUffOwn,:idProc,:dataEmissione,:dataDeposito,
+	 		:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,
+	 		:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDSST" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_DSST(?,:idUffOwn,:idProc,:dataEmissione,:dataDeposito,
+	 		:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,
+	 		:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDPST" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DPST(?,:idUffOwn,:idProc,:dataEmissione,:dataDeposito,
+	 		:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,
+	 		:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:nomeMetodo) }
+	</sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDPST" callable="true" >
+		<return-scalar column="IDATTO" type="long"/> 	
+	 	{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_DPST(?,:idUffOwn,:idProc,:dataEmissione,:dataDeposito,
+	 		:dataRegistrazione,:dataRicezioneDoc,:documento,:tipoDocumento,:nomeDocumento,:descUtente,
+	 		:idAtto,:tipoAtto,:categoriaAtto,:idStatoAtto,:nomeMetodo) }
+	</sql-query>
+
+    <sql-query name="PG_NUMERO_ATTO_generaNumeroAttoSRC" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_SRC(?,:idUffOwn,:idMittente,:idUff1,:idUff2,:idUff3,:idProc,
+			:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+			:nomeDocumento,:idAtto,:descUtente) }
+    </sql-query> 
+
+    <sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoSRC" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_SRC(?,:idUffOwn,:idMittente,:idUff1,:idUff2,:idUff3,:idProc,
+			:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+			:nomeDocumento,:idAtto,:descUtente) }
+    </sql-query>
+
+    <sql-query name="PG_NUMERO_ATTO_generaNumeroAttoSOD" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_SOD(?,:idUffOwn,:idMittente,:idUff1,:idUff2,:idUff3,:idProc,
+			:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+			:nomeDocumento,:idAtto,:descUtente) }
+    </sql-query>
+
+    <sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoSOD" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_AT_SOD(?,:idUffOwn,:idMittente,:idUff1,:idUff2,:idUff3,:idProc,
+			:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,:tipoDocumento,
+			:nomeDocumento,:idAtto,:descUtente) }
+    </sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaNumeroAttoDO" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_NUMERO_ATTO.GENERA_NUMERO_ATTO_DO(?,:idUffOwn,:idMittente,:idProcInUdienza,:idProcGenerale,
+			:idProc,:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,:documento,
+			:tipoDocumento,:nomeDocumento,:idAtto,:idEsitoOpposizione,:descUtente) }
+    </sql-query>
+
+	<sql-query name="PG_NUMERO_ATTO_generaFlussoDopoNumeroAttoDO" callable="true" >
+    	<return-scalar column="IDATTO" type="long"/>
+		{ call PG_NUMERO_ATTO.GENERA_FLUSSO_DOPO_NUM_ATTO_DO(?,:idUffOwn,:idMittente,:idProcInUdienza,
+			:idProcGenerale,:idProc,:dataEmissione,:dataDeposito,:dataRicezioneDoc,:dataRegistrazione,
+			:documento,:tipoDocumento,:nomeDocumento,:idAtto,:idEsitoOpposizione,:descUtente) }
+    </sql-query>
+    <!-- FINE Specifiche Intervento-006-SpeseProces-NumAtto -->
+</hibernate-mapping>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.FlussiForm</class-a>
+		<class-b>it.giustizia.smp.dto.pg_flussi.FlussiInDto</class-b>	
+		
+		<field>
+			<a>idFlusso</a>
+			<b>CODI_K_ID_FLUSSO_IN</b>
+		</field>
+		
+		<field>
+			<a>idUffMittente</a>
+			<b>CODI_FK_ID_UFF_MITT</b>
+		</field>
+		
+		<field>
+			<a>descTipoMessaggio</a>
+			<b>DESC_TIPO_FLUSSO</b>
+		</field>
+		
+		<field>
+			<a>dataFlusso</a>
+			<b>DATA_FLUSSO</b>
+		</field>
+		
+		<field>
+			<a>descUffMittente</a>
+			<b>DESC_TIPO_UFFICIO</b>
+		</field>
+		
+		<field>
+			<a>descSedeUffMittente</a>
+			<b>DESC_SEDE_UFFICIO</b>
+		</field>
+
+	</mapping>
+
+</mappings>

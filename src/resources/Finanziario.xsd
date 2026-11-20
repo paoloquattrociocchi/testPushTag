@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/finanziario" targetNamespace="http://anbsc.almaviva.it/schema/finanziario" elementFormDefault="qualified">
+	<complexType name="finanziario">
+		<sequence>
+			<element name="descrizioneBene" type="string"/>
+			<element name="descrizioneEnteDepositario" type="string"/>
+			<element name="indirizzo" type="string" minOccurs="0"/>
+			<element name="numeroCivico" type="string" minOccurs="0"/>
+			<element name="descrizioneFilialeEnte" type="string" minOccurs="0"/>
+			<element name="descrizioneDirettoreEnte" type="string" minOccurs="0"/>
+			<element name="quota" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,5}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="abi" type="string" minOccurs="0"/>
+			<element name="cab" type="string" minOccurs="0"/>
+			<element name="numConto" type="string" minOccurs="0"/>
+			<element name="iban" type="string" minOccurs="0"/>
+			<element name="identificativoTipoValuta" type="string" minOccurs="0"/>
+			<element name="importoValuta" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,13}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="importoEuro" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,13}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

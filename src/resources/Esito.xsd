@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/esito" targetNamespace="http://anbsc.almaviva.it/schema/esito" elementFormDefault="qualified">
+	<complexType name="esito">
+		<sequence>
+			<element name="esito" type="boolean"/>
+			<element name="errordescription" type="string" minOccurs="0"/>
+			<element name="errordetails" minOccurs="0">
+				<complexType>
+					<sequence maxOccurs="unbounded">
+						<element name="item" type="string"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TAnStato</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdStato</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descStato</b>
+		</field>		
+	</mapping>	
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TAnComuni</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdComune</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descComune</b>
+		</field>		
+	</mapping>	
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpStatoAtto</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdStatoAtto</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descStatoAtto</b>
+		</field>		
+	</mapping>	
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TAnProvincia</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdIstatProv</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descProvincia</b>
+		</field>		
+	</mapping>
+
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpStatoProc</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdStatoProc</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descStatoProc</b>
+		</field>		
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TAnProcedente</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdProced</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descProced</b>
+		</field>		
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpTipoProc</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdTipoProc</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descTipoProc</b>
+		</field>		
+	</mapping>		
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpTipoPrevProc</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdTipoNorm</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descTipoNorm</b>
+		</field>		
+	</mapping>		
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpTipoStrada</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdTipoStrada</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descTipoStrada</b>
+		</field>			
+	</mapping>	
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpSettoreAtt</class-b>
+	
+		<field>
+			<a>id</a>
+			<b>codiKIdSettoreAtt</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descSettoreAtt</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpProfessione</class-b>
+	
+		<field>
+			<a>id</a>
+			<b>codiKIdProfessione</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descProfessione</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpCondGiur</class-b>
+	
+		<field>
+			<a>id</a>
+			<b>codiKIdCondGiur</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descCondGiur</b>
+		</field>
+	</mapping>	
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TAnIstitutoDet</class-b>
+	
+		<field>
+			<a>id</a>
+			<b>codiKIdIstituto</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descIstituto</b>
+		</field>
+	</mapping>		
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpTipoPrevenzione</class-b>
+	
+		<field>
+			<a>id</a>
+			<b>codiKIdTipoPrev</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descTipoPrev</b>
+		</field>
+	</mapping>	
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpTipoAtto</class-b>
+	
+		<field>
+			<a>id</a>
+			<b>codiKIdTipoAtto</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descTipoAtto</b>
+		</field>
+	</mapping>		
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpCatAtto</class-b>
+	
+		<field>
+			<a>id</a>
+			<b>codiKIdCatAtto</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descCatAtto</b>
+		</field>
+	</mapping>		
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpTipoUfficio</class-b>	
+		<field>
+			<a>id</a>
+			<b>codiKIdTipoUff</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descTipoUff</b>
+		</field>
+	</mapping>
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TAnUfficio</class-b>	
+		<field>
+			<a>id</a>
+			<b>codiKIdUfficio</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descIndirizzoSede</b>
+		</field>
+	</mapping>				
+		
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpTipoInteresse</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdTipoInt</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descTipoInt</b>
+		</field>		
+	</mapping>	
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TAnNormative</class-b>
+	
+		<field>
+			<a>id</a>
+			<b>codiKIdNormativa</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descNormativa</b>
+		</field>
+	</mapping>	
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpTipoMisura</class-b>
+	
+		<field>
+			<a>id</a>
+			<b>codiKIdTipoMisura</b>
+		</field>	
+		<field>
+			<a>descrizione</a>
+			<b>descTipoMisura</b>
+		</field>
+	</mapping>	
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpEsito</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdEsito</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>descEsito</b>
+		</field>		
+	</mapping>	
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ComboForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpSpeseProcessuali</class-b>
+		<field>
+			<a>id</a>
+			<b>codiKIdSpeseProcessuali</b>
+		</field>
+		<field>
+			<a>descrizione</a>
+			<b>importoSpese</b>
+		</field>		
+	</mapping>	
+</mappings>

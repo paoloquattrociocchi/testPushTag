@@ -1,0 +1,16 @@
+Correzione da TT:
+/* Riportare Num TT, Num JIRA e breve descrizione */
+- Ticket#202507300140 - Non si riesce a registrare il permesso
+- Ticket#20250807017 - SITMP-Tribunale-Impossibile acquisire flusso.
+
+/* Correzione di Sviluppo o derivanti da altre segnalazioni */
+- versione sw base 6.0.12
+
+/* MEV */
+- 
+
+/* DB */
+- 
+
+/* PACKAGE */
+- PG_FLUSSI

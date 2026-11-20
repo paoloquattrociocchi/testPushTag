@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/immateriale" targetNamespace="http://anbsc.almaviva.it/schema/immateriale" elementFormDefault="qualified">
+	<complexType name="immateriale">
+		<sequence>
+			<element name="numeroRegistrazione" type="string"/>
+			<element name="dataRegistrazione" type="dateTime"/>
+			<element name="dataScadenza" type="dateTime"/>
+		</sequence>
+	</complexType>
+</schema>

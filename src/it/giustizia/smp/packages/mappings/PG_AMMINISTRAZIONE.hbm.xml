@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<sql-query name="PG_AMMINISTRAZIONE_lista_magistrati_non_associati" callable="true" >
+	   <return alias="mag" class="it.giustizia.smp.model.TAnMagistrati" />
+	   {call PG_AMMINISTRAZIONE.LISTA_MAGISTRATI_NON_ASSOC(?,:vidUffOwn,:vcognome,:vnome,:vmatricola)}
+	</sql-query>
+	
+	<sql-query name="PG_AMMINISTRAZIONE_lista_magistrati_subentranti" callable="true" >
+	   <return alias="mag" class="it.giustizia.smp.model.TAnMagistrati" />
+	   {call PG_AMMINISTRAZIONE.LISTA_MAGISTRATI_SUBENTRANTI(?,:vidUffOwn)}
+	</sql-query>
+
+	<sql-query name="PG_AMMINISTRAZIONE_aggiornamento_anag_uffici" callable="true" >
+		<return-scalar column="STATUS" type="string"/>
+	   {call PG_AMMINISTRAZIONE.AGGIORNAMENTO_ANAG_UFFICI(?,:vSQL)}
+	</sql-query>
+	
+	<sql-query name="PG_AMMINISTRAZIONE_associa_mag_uff" callable="true" >
+<!-- 		<return-scalar column="STATUS" type="string"/> -->
+	   {call PG_AMMINISTRAZIONE.ASSOCIA_MAG_UFF(?,:idMag,:idUffOwn,:descUtente)}
+	</sql-query>
+			
+</hibernate-mapping>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping>
+		<class-a>it.giustizia.smp.form.SpeseSoggettoForm</class-a>
+		<class-b>it.giustizia.smp.dto.pg_procedimento.SogSpesePDettaglioProcedimentoDto
+		</class-b>										
+
+		<field>
+			<a>descrizioneTipoInteresse</a>
+			<b>DESC_TIPO_INT</b>
+		</field>
+		<field>
+			<a>idTipoInteresse</a>
+			<b>CODI_K_ID_TIPO_INT</b>
+		</field>
+		<field>
+			<a>quotaInteresse</a>
+			<b>NUME_QUOTA</b>
+		</field>
+		
+		<field>
+			<a>numeratoreFrazioneQuota</a>
+			<b>NUME_FRAZIONE_NUM</b>
+		</field>
+		
+		<field>
+			<a>denominatoreFrazioneQuota</a>
+			<b>NUME_FRAZIONE_DEN</b>
+		</field>
+		
+		<field>
+			<a>idSpeseProcessuali</a>
+			<b>ID_SPESE_PROCESSUALI</b>
+		</field>
+		
+	</mapping>
+
+</mappings>

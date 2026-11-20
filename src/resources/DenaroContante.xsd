@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/denaroContante" targetNamespace="http://anbsc.almaviva.it/schema/denaroContante" elementFormDefault="qualified">
+	<complexType name="denaroContante">
+		<sequence>
+			<element name="descrizioneEnteDepositario" type="string"/>
+			<element name="numeroLibretto" type="string"/>
+			<element name="numeroIdentificativoEnte" type="string" minOccurs="0"/>
+			<element name="descrizioneIntestatario" type="string" minOccurs="0"/>
+			<element name="identificativoTipoValuta" type="string" minOccurs="0"/>
+			<element name="importoValuta" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,13}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="importoEuro" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,13}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="numeroModelloTribunale" type="integer" minOccurs="0"/>
+			<element name="volturatoFug" type="boolean" minOccurs="0"/>
+			<element name="abi" type="string" minOccurs="0"/>
+			<element name="cab" type="string" minOccurs="0"/>
+			<element name="iban" type="string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

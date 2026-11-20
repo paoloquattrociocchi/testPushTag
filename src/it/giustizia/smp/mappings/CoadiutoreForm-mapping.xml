@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping>
+		<class-a>it.giustizia.smp.form.CoadiutoreForm</class-a>
+		<class-b>it.giustizia.smp.model.TRelProcCoadiutori</class-b>
+		<field>	
+			<a>idProcedimento</a>
+			<b>id.codiKIdProc</b>
+		</field>
+
+		<field>
+			<a>idUfficio</a>
+			<b>id.codiKIdUffOwner</b>
+		</field>
+
+		<field>
+			<a>idAmministratore</a>
+			<b>id.codiKIdAmm</b>
+		</field>
+
+		<field>	
+			<a>idProgrCoad</a>
+			<b>id.codiKIdProgrCoad</b>
+		</field>
+
+		<field>	
+			<a>cognome</a>
+			<b>descCognome</b>
+		</field>
+
+		<field>
+			<a>nome</a>
+			<b>descNome</b>
+		</field>
+
+		<field>
+			<a>dataNascita</a>
+			<b>dataNascita</b>
+		</field>
+
+		<field>
+			<a>codiceFiscale</a>
+			<b>descCodiceFiscale</b>
+		</field>
+
+		<field>
+			<a>luogoNascita</a>
+			<b>descLuogoNascita</b>
+		</field>
+
+		<field>
+			<a>recapito</a>
+			<b>descRecapito</b>
+		</field>
+
+		<field>
+			<a>inizioIncarico</a>
+			<b>dataInizioIncarico</b>
+		</field>
+
+		<field>
+			<a>fineIncarico</a>
+			<b>dataFineIncarico</b>
+		</field>
+		
+		<field>
+			<a>descUtente</a>
+			<b>descUtente</b>
+		</field>		
+
+	</mapping>
+    
+</mappings>

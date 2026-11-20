@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE server>
+<!-- $Id: properties-service.xml 16662 2003-08-27 04:38:22Z patriot1burke $ -->
+
+<server>
+
+  <!-- ==================================================================== -->
+  <!-- PropertyEditorManager Service                                        -->
+  <!-- ==================================================================== -->
+
+  <!--
+     | Allows access to the PropertyEditorManager, which is used when setting
+     | MBean attribute values from configuration.
+   -->
+
+  <mbean code="org.jboss.varia.property.PropertyEditorManagerService"
+	 name="jboss:type=Service,name=PropertyEditorManager">
+
+    <!--
+       | Register and editor for each of the type_name=editor_type_name listed
+       | in properties file style convetion.
+
+    <attribute name="Editors">
+      java.net.URL=my.project.editors.URLPropertyEditor
+    </attribute>
+
+    -->
+
+  </mbean>
+
+
+  <!-- ==================================================================== -->
+  <!-- System Properties Service                                            -->
+  <!-- ==================================================================== -->
+
+  <!-- | Allows rich access to system properties.  -->
+
+  <mbean code="org.jboss.varia.property.SystemPropertiesService"
+	 name="jboss:type=Service,name=SystemProperties">
+
+    <!--
+       | Load properties from each of the given comma seperated URLs
+
+    <attribute name="URLList">
+      http://somehost/some-location.properties,
+      ./conf/somelocal.properties
+    </attribute>
+
+    -->
+
+    <!-- | Set raw properties file style properties. -->
+	
+    <!-- <attribute name="Properties"> -->
+
+    <!--  my.project.property=This is the value of my property -->
+    <!--  my.project.anotherProperty=This is the value of my other property -->
+
+    <!-- </attribute> -->
+    <!--  smp.ws.casellario=http://10.6.44.208:11001/SippiWeb/invioProvvedimento?WSDL -->
+    <!--  smp.ws.casellario.FC=http://localhost:8181/mockInvioProvvedimentoEsecuzioneBinding -->
+    <!--  smp.ws.casellario.ricerca=http://10.6.44.208:11001/SippiWeb/RichiestaCertificato?WSDL -->
+    
+	<!--  CASELLARIO TUNNEL -->
+	<!--  smp.ws.casellario=http://localhost:80/SippiWeb/invioProvvedimento?WSDL -->
+    <!--  smp.ws.casellario.FC=http://localhost:80/SippiWeb/invioProvvedimentoEsecuzione?WSDL -->
+    <!--  smp.ws.casellario.ricerca=http://localhost:80/SippiWeb/RichiestaCertificato?WSDL -->
+     
+	<!--  CASELLARIO MOCK -->
+	<!--  smp.ws.casellario=http://localhost:80/SippiWeb/invioProvvedimento?WSDL -->
+    <!--  smp.ws.casellario.FC=http://localhost:8181/mockInvioProvvedimentoEsecuzioneBinding -->
+    <!--  smp.ws.casellario.ricerca=http://localhost:8181/casellarioRicerca/services -->
+      
+	 
+	<!--  NOTIFICHE WS  MOCK SOAPUI -->
+	<!--  smp.ws.servizi.trasmissione=http://localhost:8181/ServiziTrasmissione/services -->
+	  
+	<!--  NOTIFICHE WS MOCK -->
+    <!--  smp.ws.servizi.trasmissione=http://10.3.205.143:8080/MockGL/ServiziTrasmissione -->
+    <!--  smp.ws.servizi.depositi=http://10.3.205.143:8080/MockGL/ServiziConsultazioneEsiti -->
+    <!--  smp.ws.servizi.accettazione=http://10.3.205.143:8080/MockGL/ServiziAccettazione -->
+
+
+	<!--  NOTIFICHE WS IN GIUSTIZIA  -->
+	<!--  smp.ws.servizi.trasmissione=http://10.3.205.194:8080/GL/InvioAtti/ServiziTrasmissione?WSDL -->
+	<!--  smp.ws.servizi.depositi=http://10.3.205.194:8080/GL/Accettazione/ConsultazioneEsiti?wsdl -->
+	<!--  smp.ws.servizi.accettazione=http://10.3.205.194:8080/GL/Accettazione/ServiziAccettazione?wsdl -->
+	  
+
+    <attribute name="Properties">
+	  <!-- 16/06/2016 inseriti indirizzi fittizzi per evitare i servizi invochino servizi realmente configurati
+			vengono comunque mantenuti e commentati gli indirizzi precedentemente configurati qui di seguito elencati -->
+			
+			<!--  smp.ws.albo=http://10.6.218.134:8080/AlboAmministratori/services -->
+			<!--  smp.ws.equitalia.fug=http://ministerogiustizia.spcoop.gov.it/openspcoop/PD/EQU_COLL_invioFUG -->
+			<!--  smp.ws.equitalia.fug=http://localhost:8080/WSEquitalia/InvioFUG?wsdl -->
+			<!--  smp.ws.casellario=http://10.6.44.208:80/SippiWeb/invioProvvedimento?WSDL -->
+			<!--  smp.ws.casellario.FC=http://10.6.44.208:80/SippiWeb/invioProvvedimentoEsecuzione?WSDL -->
+			<!--  smp.ws.casellario.ricerca=http://10.6.44.208:80/SippiWeb/RichiestaCertificato?WSDL -->
+			<!--  smp.ws.servizi.trasmissione=http://10.6.199.148:8080/GL/InvioAtti/ServiziTrasmissione?WSDL -->
+			<!--  smp.ws.servizi.depositi=http://10.6.199.148:8080/GL/Accettazione/ConsultazioneEsiti?wsdl -->
+			  
+			<!--  smp.ws.servizi.depositi.codugne.smp=08205300706,08205302104 -->
+			<!--  smp.ws.servizi.depositi.codugne.smp_giu=08205300605,08205302205 -->
+			<!--  smp.ws.servizi.depositi.stati.interrogazione=INFO,HALT,WARN -->
+			 
+			<!-- Modificato il 12/05/2016 -->
+			<!--  smp.ws.servizi.accettazione=http://10.6.199.142:8080/GL/Accettazione/ServiziAccettazione?wsdl      -->
+			<!-- smp.ws.servizi.accettazione=http://10.6.199.148:8080/GL/Accettazione/ServiziAccettazione?wsdl     --> 
+
+			<!--  smp.ws.ricorso.cassazione=http://10.6.199.145:8080/sit-cassazione/endpoints/RicorsoService.wsdl -->
+			<!--  smp.ws.agenzia.entrate=http://10.5.20.201:8181/agenziaEntrate/services -->
+			<!--  smp.ws.reginde=http://reginde.processotelematicotest.giustizia.it/ServiziInterrogazioneRegindeExt/ServiziInterrogazioneSoggetto -->
+			<!--  smp.ws.anbsc=https://ministerogiustizia.spcoop.gov.it/openspcoop/PD/ANBSC_SequestroWS -->
+			<!--  smp.ws.polizia=http://10.5.20.201:8088/mockTrasmissioneSITMPSOAP -->
+			  
+			<!--  smp.ds.jndi=smp -->
+			<!--  smpgiu.ds.jndi=smp_giu -->
+			  
+	  smp.ws.albo=http://10.6.218.134:8080/AlboAmministratori/services
+      <!-- FUG -->
+      <!--smp.ws.equitalia.fug=http://localhost:8080/WSEquitalia/InvioFUG?wsdl -->
+      <!-- smp.ws.equitalia.fug=http://10.6.218.134/openspcoop/PD/EQU_COLL_invioFUG -->
+      <!-- Cooperazione SITMP-FUG con Porta di Dominio 
+      	smp.ws.equitalia.fug=http://ministerogiustizia.spcoop.gov.it/openspcoop/PD/EQU_COLL_invioFUG -->
+	  	<!-- Cooperazione SITMP-FUG con Firewall XML -->
+      <!-- smp.ws.equitalia.fug=https://10.3.202.243/serviziCoopFUG/services/invioFUG -->
+	  	<!-- GC 24/04/2018: Cooperazione SITMP-FUG con Firewall XML -->
+	  	<!-- Modificato indirizzo IP con DNS del firewall -->
+       smp.ws.equitalia.fug=https://webservices.giustizia.it/serviziCoopFUG/services/invioFUG
+      
+      smp.ws.casellario=http://10.6.218.134/SippiWeb/invioProvvedimento?WSDL
+      smp.ws.casellario.FC=http://10.6.218.134/SippiWeb/invioProvvedimentoEsecuzione?WSDL
+      smp.ws.casellario.ricerca=http://10.6.218.134/SippiWeb/RichiestaCertificato?WSDL
+      smp.ws.servizi.trasmissione=http://10.6.218.134/GL/InvioAtti/ServiziTrasmissione?WSDL
+      smp.ws.servizi.depositi=http://10.6.218.134/GL/Accettazione/ConsultazioneEsiti?wsdl
+	  
+      smp.ws.servizi.depositi.codugne.smp=08205300706,08205302104
+      smp.ws.servizi.depositi.codugne.smp_giu=08205300605,08205302205
+      smp.ws.servizi.depositi.stati.interrogazione=INFO,HALT,WARN
+	 
+	 <!-- Modificato il 12/05/2016 
+      smp.ws.servizi.accettazione=http://10.6.199.142:8080/GL/Accettazione/ServiziAccettazione?wsdl      -->
+	  smp.ws.servizi.accettazione=http://10.6.218.134/GL/Accettazione/ServiziAccettazione?wsdl      
+
+      smp.ws.ricorso.cassazione=http://10.6.218.134/sit-cassazione/endpoints/RicorsoService.wsdl
+      smp.ws.agenzia.entrate=http://10.6.218.134/agenziaEntrate/services
+     <!--  smp.ws.reginde=http://10.6.218.134/ServiziInterrogazioneRegindeExt/ServiziInterrogazioneSoggetto -->
+      smp.ws.reginde=http://reginde.processotelematicotest.giustizia.it/ServiziInterrogazioneRegindeExt/ServiziInterrogazioneSoggetto 
+      smp.ws.anbsc=https://10.6.218.134/openspcoop/PD/ANBSC_SequestroWS
+      smp.ws.polizia=http://10.6.218.134/mockTrasmissioneSITMPSOAP
+      
+      smp.ds.jndi=smp
+      smpgiu.ds.jndi=smp_giu
+	  console.ds.jndi=SITMPDM_DS
+	  dm.url.pdf=/home/sitmpdm/PDF Converted/
+
+
+dm.scheduler.pdfgenerator.endpoint=http://localhost:8080/SitmpPdfGenerator4/wsdl/pdf.wsdl
+dm.scheduler.jdbc.connection.url=jdbc:oracle:thin:@161.27.213.183:1521:smpdb
+dm.scheduler.user=DM
+dm.scheduler.password=DM
+
+	<!-- Logout URL -->
+	IAA_LOGOUT_URL=http\://localhost\:8080/SMP2.sviluppoLocale/
+    </attribute>
+
+  </mbean>
+
+</server>

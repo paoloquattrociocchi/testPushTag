@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="PG_POLIZIA_inserisci_Messaggio" callable="true">
+		<return-scalar column="IDSER" type="long"/>		
+		{ call PG_POLIZIA.inserisci_dati_servizi_polizia(?, :IDAUTORITA, :VIDUFFICIO, :VIDTIPOSERV, :VIDPROC, :VXML, :VIDATTO, :VSTATO, :VERRORE, :VUTENTE, :VIDCATATTO) }
+ 	</sql-query>
+ 	
+ 	<sql-query name="PG_POLIZIA_getListaAttiDaProcedenti" callable="true" >
+ 	<return alias="att" class="it.giustizia.smp.model.TAtto"/>
+		{ call PG_POLIZIA.GET_LISTA_ATTI_DA_PROCEDENTI (?) }
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_POLIZIA_flussi_polizia">
+		{ call PG_POLIZIA.FLUSSI_POLIZIA(?,:vidUffOwn,:vflgDirezione) }
+	</sql-query>
+	
+	<sql-query name="PG_POLIZIA_getMsgDaInviare" callable="true" >
+	<return alias="pol" class="it.giustizia.smp.model.TPoliziaMsg"/>
+		{ call PG_POLIZIA.GET_MSG_DA_INVIARE (?) }
+	</sql-query>
+	
+	<sql-query callable="true" name="PG_POLIZIA_getTRelProcSogintList">
+	<return alias="psi" class="it.giustizia.smp.model.TRelProcSogint"/>
+		{ call PG_POLIZIA.GET_T_REL_PROC_SOGINT(?,:ID_PROC,:ID_UFF_OWNER) }
+	</sql-query>
+	
+	<sql-query name="PG_POLIZIA_aggiornaStatoMsg" callable="true" >
+		<return-scalar column="STATOUPDATE" type="string"/>
+		{ call PG_POLIZIA.SET_STATO_MSG(?,:id_mess,:numestato,:DESCRERRORE) }
+	</sql-query> 
+	
+	<sql-query name="PG_POLIZIA_get_flusso_polizia_by_id" callable="true" >
+		<return alias="pol" class="it.giustizia.smp.model.TPoliziaMsg"/>
+		{ call PG_POLIZIA.GET_FLUSSO_POLIZIA_BY_ID(?,:id_mes) }
+	</sql-query>
+	
+	<!-- idServizio 17 -->
+	<sql-query name="PG_POLIZIA_inserisci_fascicolo_indagine" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+		{ call PG_POLIZIA.inserisci_fascicolo_indagine(?,:vidMsg,:vidUfficio,:vidProcedimento,:vidAutorita,:vdataEmissione,:vdescrNote) }
+	</sql-query>
+	
+	<!-- idServizio 18 -->
+	<sql-query name="PG_POLIZIA_esito_indagini" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+		{ call PG_POLIZIA.ESITO_INDAGINI(?,:vidMsg,:vidUfficio,:vidProcedimento,:vidAutorita,:vdataEmissione,:vdescrNote) }
+	</sql-query>
+	
+	<!-- idServizio 19 -->
+	<sql-query name="PG_POLIZIA_proposta_misure_patr_pers" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+		{ call PG_POLIZIA.proposta_misure_patr_pers(?,:vidMsg,:vidUfficio,:vidAutorita,:vdescrNumAccert,:vdataEmissione,:vdescrNote) }
+	</sql-query>
+	
+	<!-- idServizio 20 -->
+	<sql-query name="PG_POLIZIA_stato_sottopos_mis_pers" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+		{ call PG_POLIZIA.SOTTOPOS_MIS_PERS(?,:vidMsg,:vidUfficio,:vidProcedimento,:vidAutorita,:vdataEmissione,:vdescrNote) }
+	</sql-query>
+	
+	<!-- idServizio 21 -->
+	<sql-query name="PG_POLIZIA_apll_mis_sic_lib_vig" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+		{ call PG_POLIZIA.LIBERTA_VIGILATA(?,:vidMsg,:vidUfficio,:vidProcedimento,:vidAutorita,:vdataEmissione,:vdescrNote) }
+	</sql-query>
+	
+	<!-- idServizio 22 -->
+	<sql-query name="PG_POLIZIA_violazione_sott_mis_pers" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+		{ call PG_POLIZIA.VIOLAZ_SOTTOPOS_MIS_PERS(?,:vidMsg,:vidUfficio,:vidProcedimento,:vidAutorita,:vdataEmissione,:vdescrNote) }
+	</sql-query>
+	
+	<!-- idServizio 23 -->
+	<sql-query name="PG_POLIZIA_aggravamento_mis_pers" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+		{ call PG_POLIZIA.aggravamento_misure_personali(?,:vidMsg,:vidUfficio,:vidAutorita,:vdescrNumAccert,:vdataEmissione,:vdescrNote) }
+	</sql-query>
+	
+	<!-- idServizio 24 -->
+	<sql-query name="PG_POLIZIA_revoca_modifica_mis_pers" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+		{ call PG_POLIZIA.pareri_revoca_modif_mis_pers(?,:vidMsg,:vidUfficio,:vidAutorita,:vdescrNumAccert,:vdataEmissione,:vdescrNote) }
+	</sql-query>
+	
+	<!-- idServizio 25 -->
+	<sql-query name="PG_POLIZIA_termini_cessazione" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+		{ call PG_POLIZIA.TERMINI_CESSAZIONE(?,:vidMsg,:vidUfficio,:vidProcedimento,:vidAutorita,:vdataEmissione,:vdescrNote) }
+	</sql-query>
+	
+	<sql-query name="PG_POLIZIA_GET_UFFICIO_DESTINATARIO" callable="true" >
+		{ call PG_POLIZIA.GET_UFFICIO_DESTINATARIO (?,:IDUFFOWNER,:IDPROCEDIMENTO,:IDPROCEDENTE,:TIPOPROCEDIMENTO)}
+	</sql-query>
+
+	<sql-query name="PG_POLIZIA_inserisciDocumentoAllegatoAtto" callable="true" >
+		{ call PG_POLIZIA.ins_doc_attegato_atto(?,:IDPROCEMISS,:IDATTO,:IDUFFOWN,:TIPODOCUMENTO,:NOMEDOCUMENTO,:DOCUMENTO) }
+    </sql-query>
+    
+</hibernate-mapping>

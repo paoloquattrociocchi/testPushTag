@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/animali" targetNamespace="http://anbsc.almaviva.it/schema/animali" elementFormDefault="qualified">
+	<complexType name="animali">
+		<sequence>
+			<sequence>
+				<element name="descrizione" type="string" minOccurs="0"/>
+				<element name="indirizzo" type="string" minOccurs="0"/>
+				<element name="numeroCivico" type="string" minOccurs="0"/>
+				<element name="numeroAnimali" type="integer" minOccurs="0"/>
+			</sequence>
+		</sequence>
+	</complexType>
+</schema>

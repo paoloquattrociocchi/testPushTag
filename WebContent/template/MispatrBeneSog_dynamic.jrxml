@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MispatrBeneSog" language="groovy" pageWidth="525" pageHeight="842" columnWidth="525" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="ID_SOGGETTO_INTERESSATO" class="java.math.BigDecimal"/>
+	<field name="COGNOME_INTERESSATO" class="java.lang.String"/>
+	<field name="NOME_INTERESSATO" class="java.lang.String"/>
+	<field name="DATA_NASCITA_INTERESSATO" class="java.util.Date"/>
+	<field name="DESC_STATO_NASC_INTERESSATO" class="java.lang.String"/>
+	<field name="DESC_COMUNE_NASC_INTERESSATO" class="java.lang.String"/>
+	<field name="SIGLA_PROV_NASC_INTERESSATO" class="java.lang.String"/>
+	<field name="COM_EST_NASC_INTERESSATO" class="java.lang.String"/>
+	<field name="RAG_SOC_INTERESSATO" class="java.lang.String"/>
+	<field name="PARTITA_IVA_INTERESSATO" class="java.math.BigDecimal"/>
+	<field name="DESC_STATO_SEDE_INTERESSATO" class="java.lang.String"/>
+	<field name="DESC_COMUNE_SEDE_INTERESSATO" class="java.lang.String"/>
+	<field name="SIGLA_PROV_SEDE_INTERESSATO" class="java.lang.String"/>
+	<field name="COM_EST_SEDE_INTERESSATO" class="java.lang.String"/>
+	<field name="TIPO_PERSONA_INTERESSATO" class="java.lang.String"/>
+	<field name="ID_BENE" class="java.math.BigDecimal"/>
+	<field name="DESCRIZIONE_BENE" class="java.lang.String"/>
+	<field name="NUM_QUOTA" class="java.math.BigDecimal"/>
+	<field name="NUME_FRAZIONE_DEN" class="java.math.BigDecimal"/>
+	<field name="NUME_FRAZIONE_NUM" class="java.math.BigDecimal"/>
+	<field name="TIPO_PERSONA_TITOLARE" class="java.lang.String"/>
+	<field name="ID_SOGGETTO_TITOLARE" class="java.math.BigDecimal"/>
+	<field name="COGNOME_TITOLARE" class="java.lang.String"/>
+	<field name="NOME_TITOLARE" class="java.lang.String"/>
+	<field name="SESSO_TITOLARE" class="java.lang.String"/>
+	<field name="DATA_NASCITA_TITOLARE" class="java.util.Date"/>
+	<field name="DESC_STATO_NASC_TITOLARE" class="java.lang.String"/>
+	<field name="DESC_COMUNE_NASC_TITOLARE" class="java.lang.String"/>
+	<field name="SIGLA_PROV_NASC_TITOLARE" class="java.lang.String"/>
+	<field name="COM_EST_NASC_TITOLARE" class="java.lang.String"/>
+	<field name="RAG_SOC_TITOLARE" class="java.lang.String"/>
+	<field name="PARTITA_IVA_TITOLARE" class="java.math.BigDecimal"/>
+	<field name="DESC_STATO_SEDE_TITOLARE" class="java.lang.String"/>
+	<field name="DESC_COMUNE_SEDE_TITOLARE" class="java.lang.String"/>
+	<field name="SIGLA_PROV_SEDE_TITOLARE" class="java.lang.String"/>
+	<field name="COM_EST_SEDE_TITOLARE" class="java.lang.String"/>
+	<field name="testoSoggettoInteressato" class="java.lang.String"/>
+	<group name="gruppoSoggetto1">
+		<groupExpression><![CDATA[$F{ID_SOGGETTO_INTERESSATO}]]></groupExpression>
+		<groupHeader>
+			<band height="95"/>
+		</groupHeader>
+	</group>
+	<group name="gruppoBene1">
+		<groupExpression><![CDATA[$F{ID_BENE}]]></groupExpression>
+		<groupHeader>
+			<band height="20"/>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="20" splitType="Stretch"/>
+	</detail>
+</jasperReport>

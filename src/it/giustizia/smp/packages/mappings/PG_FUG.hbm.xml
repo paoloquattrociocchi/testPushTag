@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<sql-query name="PG_FUG_beni_da_inviare" callable="true">
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+		{ call PG_FUG.BENI_FUG(?,:vidUffOwn, :vidProcedimento, :vidBene) }
+	</sql-query>
+	
+	<sql-query name="PG_FUG_quote_modelli_A_D" callable="true">
+		{ call PG_FUG.GET_QUOTE_MODELLI_A_D(?,:vidUffOwn, :vidProcedimento, :vidBene, :vidModello) }
+	</sql-query>
+	
+	<sql-query name="PG_FUG_quote_modelli_C" callable="true">
+		{ call PG_FUG.GET_QUOTE_MODELLI_C(?,:vidUffOwn, :vidProcedimento, :vidBene, :vidModello) }
+	</sql-query>
+	
+	<sql-query name="PG_FUG_quote_modelli_H" callable="true">
+		{ call PG_FUG.GET_QUOTE_MODELLI_H(?,:vidUffOwn, :vidProcedimento, :vidBene, :vidModello) }
+	</sql-query>
+	
+	<sql-query name="PG_FUG_modelli_inviati" callable="true">
+		{ call PG_FUG.GET_MODELLI_INVIATI(?,:vidUffOwn, :vidProcedimento, :vidBene, :vidAtto, :vidSogg, :vidModello, :seAnnull, :dataDa, :dataA) }
+	</sql-query> 
+	
+	<sql-query name="PG_FUG_inserisci_FugInvio" callable="true">
+		<return-scalar column="IDCURRENTINVIO" type="long"/>
+		{ call PG_FUG.INSERT_FUG_INVIO(?,:IDUFFOWN ,:DESCUTENTE ,:IDPROCEDIMENTO ,:IDATTO ,:IDBENE ,:MODELLO ,:PROTOCOLLO 
+		 ,:PROTOCOLLORIF ,:IDINVIO ,:FLGESITOANNULL ,:DATANOTIFICA ,:DATAIRRREVOCA ,:NOMEMETODO 
+		 ,:FLGSTATOINVIO ,:FLGDEFPOS ,:DATADEFPOS ,:IDSOGTIT 
+		 ,:NUMERISORSAEQUI ,:NUMEPROVVEQUI ,:NOTIFEQUI ,:NOTEEQUI, :IMPOVALUTA, :IDVALUTA, :IMPOEURO) }
+	</sql-query>
+	
+	<sql-query name="PG_FUG_update_FugInvio" callable="true">
+		<return-scalar column="IDINVIO" type="long"/>
+		{ call PG_FUG.UPDATE_INVIO(?,:IDINVIO ,:PROTOCOLLO ,:STATOINVIO ,:ESITOANNULL) }
+	</sql-query>
+	
+	<sql-query name="PG_FUG_inserisci_FugErrori" callable="true">
+		<return-scalar column="IDCURRENTINVIO" type="long"/>
+		{ call PG_FUG.INSERT_FUG_ERRORI(?,:VDESCPROT, :IDINVIO ,:IDPROGR ,:CODSEZIONE ,:CODCAMPO ,:CODERRORE ,:DESCERRORE,:TIPOERRORE ,:DESCUTENTE ) }
+	</sql-query>
+	
+	<sql-query name="PG_FUG_inserisci_FugMessaggi" callable="true">
+		<return-scalar column="VRESULT" type="int"/>
+		{ call PG_FUG.INSERT_T_FUG_MSG(?,:VIDINVIO, :VFLGDIREZIONE ,:VFLGTIPO ,:VDESCPROTOCOLLO ,:VMESSAGGIO) }
+ 	</sql-query>
+ 	
+	<sql-query name="PG_FUG_getSoggettiIntBene" callable="true" >
+		<return alias="rel" class="it.giustizia.smp.model.TRelBeneAtto" />
+		<return alias="pers_fisica" class="it.giustizia.smp.model.TPersonaFisica"/>
+	    <return alias="pers_giuridica" class="it.giustizia.smp.model.TPersonaGiur"/>
+	    <return alias="stato" class="it.giustizia.smp.model.TAnStato"/>
+	    <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+	    <return alias="provincia" class="it.giustizia.smp.model.TAnProvincia"/>
+	    <return alias="sogInt" class="it.giustizia.smp.model.TRelProcSogint"/>
+	    { call PG_FUG.SOGG_INTESTATARI_BENE_FUG(?,:vidUffOwn, :vidProcedimento, :vidAtto, :vidBene, :vidSoggetto) }
+	</sql-query>
+	
+	<sql-query name="GetSoggettiIntBene" >
+			<return alias="rel" class="it.giustizia.smp.model.TRelBeneAtto" />
+			<return alias="pers_fisica" class="it.giustizia.smp.model.TPersonaFisica"/>
+			<return alias="pers_giuridica" class="it.giustizia.smp.model.TPersonaGiur"/>
+			<return alias="stato" class="it.giustizia.smp.model.TAnStato"/>
+			<return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+			<return alias="provincia" class="it.giustizia.smp.model.TAnProvincia"/>
+			<return alias="sogInt" class="it.giustizia.smp.model.TRelProcSogint"/>
+	    SELECT {rel.*}, {pers_fisica.*}, {pers_giuridica.*}, {stato.*}, {comuni.*}, {provincia.*}, {sogInt.*}
+	    FROM T_REL_BENE_ATTO rel
+	    LEFT JOIN T_REL_PROC_SOGINT sogInt ON 
+	              SOGINT.CODI_K_ID_SOGG_INT = REL.CODI_K_ID_SOGG_TIT 
+	              AND SOGINT.CODI_K_ID_PROC = REL.CODI_K_ID_PROC
+	              AND SOGINT.CODI_K_ID_UFF_OWNER = REL.CODI_K_ID_UFF_OWNER
+	    LEFT JOIN T_PERSONA_FISICA pers_fisica ON 
+	              sogInt.CODI_K_ID_SOGG_INT = PERS_FISICA.CODI_K_ID_PERSONA_FIS 
+	              AND sogInt.CODI_K_ID_UFF_OWNER = PERS_FISICA.CODI_K_ID_UFF_OWNER
+	              AND SOGINT.CODI_FK_ID_VER=PERS_FISICA.CODI_K_ID_VER
+	    LEFT JOIN T_PERSONA_GIUR  pers_GIURIDICA ON 
+	              sogInt.CODI_K_ID_SOGG_INT = PERS_GIURIDICA.CODI_K_ID_PERS_GIUR 
+	              AND sogInt.CODI_K_ID_UFF_OWNER = PERS_GIURIDICA.CODI_K_ID_UFF_OWNER
+	              AND SOGINT.CODI_FK_ID_VER=PERS_GIURIDICA.CODI_K_ID_VER
+	    LEFT JOIN T_AN_STATO stato ON 
+	              pers_fisica.CODI_FK_ID_STATO_NASC = stato.CODI_K_ID_STATO
+	    LEFT JOIN T_AN_COMUNI comuni ON 
+	              pers_fisica.CODI_FK_ID_COM_NASC = comuni.CODI_K_ID_COMUNE
+	    LEFT JOIN T_AN_PROVINCIA provincia ON 
+	              COMUNI.CODI_FK_ID_ISTAT_PROV = PROVINCIA.CODI_K_ID_ISTAT_PROV     
+	    WHERE REL.CODI_K_ID_PROC = :vidProcedimento
+	          AND REL.CODI_K_ID_ATTO = :vidAtto
+	          AND REL.CODI_K_ID_BENE = :vidBene
+	          AND REL.CODI_K_ID_UFF_OWNER = :vidUffOwn
+	          AND (SOGINT.CODI_K_ID_SOGG_INT = :vidSoggetto OR :vidSoggetto IS NULL)
+	          AND REL.CODI_K_ID_TIPO_INT = 1
+	          AND PG_FUG.FNC_BENE_REV_SEQ_OPP_DISS (REL.CODI_K_ID_PROC, REL.CODI_K_ID_ATTO, REL.CODI_K_ID_BENE, REL.CODI_K_ID_UFF_OWNER, REL.CODI_K_ID_SOGG_TIT , REL.CODI_K_ID_TIPO_INT) = 0
+	          AND PG_FUG.FNC_BENE_DECRETO_REV_SEQ (REL.CODI_K_ID_PROC, REL.CODI_K_ID_ATTO, REL.CODI_K_ID_BENE, REL.CODI_K_ID_UFF_OWNER,REL.CODI_K_ID_SOGG_TIT , REL.CODI_K_ID_TIPO_INT) = 0
+	          AND PG_FUG.FNC_BENE_NON_CONV_SEQUESTRO (REL.CODI_K_ID_PROC, REL.CODI_K_ID_ATTO, REL.CODI_K_ID_BENE, REL.CODI_K_ID_UFF_OWNER, REL.CODI_K_ID_SOGG_TIT , REL.CODI_K_ID_TIPO_INT) = 0
+	</sql-query>
+	
+	<sql-query name="PG_FUG_get_DataSequestro" callable="true">
+		{ call PG_FUG.GET_DATA_SEQUESTRO(?,:idUffOwn, :idAtto) }
+	</sql-query>
+	           	
+	<sql-query name="PG_FUG_get_DataRestituzione" callable="true">
+		{ call PG_FUG.GET_DATA_RESTITUZIONE(?,:idUffOwn, :idAtto) }
+	</sql-query>
+	           	
+	<sql-query name="PG_FUG_get_dati_modello_inviato" callable="true">
+		{ call PG_FUG.GET_DATI_MODELLO_INVIATO(?,:idProc, :idAtto, :idBene, :idUffOwner, :descModello) }
+	</sql-query>
+
+	<sql-query name="PG_FUG_get_InvioFUGCollegato" callable="true">
+		<return alias="fug" class="it.giustizia.smp.model.TFugInvio" />
+		{ call PG_FUG.GET_MODELLO_ANNULLATO(?, :idUffOwner, :protRif) }
+	</sql-query>
+	
+	<sql-query name="PG_FUG_recupera_invii_XML" callable="true">
+		{ call PG_FUG.GET_XML_INVIO(?, :idUffOwner, :idInvio) }
+ 	</sql-query>
+ 	
+	<sql-query name="PG_FUG_is_bene_decreto_rev" callable="true">
+		<return-scalar column="VRESULT" type="int"/>
+		{ call PG_FUG.BENE_DECRETO_REV_SEQ(?, :idProc, :idAtto, :idBene, :idUffOwner) }
+ 	</sql-query>
+ 	
+	<sql-query name="PG_FUG_is_bene_decreto_conf" callable="true">
+		<return-scalar column="VRESULT" type="int"/>
+		{ call PG_FUG.BENE_DECRETO_CONF_SEQ(?, :idProc, :idAtto, :idBene, :idUffOwner) }
+ 	</sql-query>
+ 	
+</hibernate-mapping>

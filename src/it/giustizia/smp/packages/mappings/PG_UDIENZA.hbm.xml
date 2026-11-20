@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="PG_UDIENZA_ricerca_udienze" callable="true" >
+	   { call PG_UDIENZA.RICERCA_UDIENZE (?, :vidUffOwn, :vidProc) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_ricerca_udienze_by_stato_udi" callable="true" >
+	   { call PG_UDIENZA.RICERCA_UDIENZE_BY_STATO_UDI (?, :vidUffOwn, :vidProc, :vidStatoUdi) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_ricerca_udi_by_codAtto_statoUdi" callable="true" >
+	   { call PG_UDIENZA.RICERCA_UDI_BY_ATTO_STATO_UDI (?, :vcodAtto, :vidStatoUdi, :vidUffOwn) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_ricerca_udienze_by_codAtto" callable="true" >
+	   { call PG_UDIENZA.RICERCA_UDIENZE_BY_CODICE_ATTO (?, :vcodAtto, :vidUffOwn) }
+	</sql-query>
+	
+    <sql-query name="PG_UDIENZA_atto_lavorazione_dati_udi" callable="true" >
+    <return-scalar column="IDATTO" type="long"/>
+    <return-scalar column="IDSTATOATTO" type="long"/>
+    <return-scalar column="IDCATATTO" type="long"/>
+	   { call PG_UDIENZA.RICERCA_UDIENZA_ATTO_LAV (?, :vidProc, :vidUffOwn) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_dettaglio_udienza" callable="true" >
+	   { call PG_UDIENZA.DETTAGLIO_UDIENZA (?, :vidUffOwn, :vidProc, :vcodUdienza) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_magistrati_collegio" callable="true" >
+	   { call PG_UDIENZA.MAGISTRATI_COLLEGIO_UDIENZA (?, :vidUffOwn, :vidProc, :vcodUdienza) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_magistrati_pm" callable="true" >
+	   { call PG_UDIENZA.MAGISTRATI_PM_UDIENZA (?, :vidUffOwn, :vcodUdienza) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_soggetti_convocati" callable="true" >
+	   { call PG_UDIENZA.SOGGETTI_CONVOCATI_UDIENZA (?, :vidUffOwn, :vidProc, :vcodUdienza) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_difensori" callable="true" >
+	   { call PG_UDIENZA.DIFENSORI_UDIENZA (?, :vidUffOwn, :vcodUdienza) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_aggiorna_dati_udienza" callable="true" >
+		<return-scalar column="IDCURRENTUDIENZA" type="string"/>
+	 	{ call PG_UDIENZA.MODIFICA_UDIENZA(?, :idUdienza, :idUffOwn, :dataUdienza, :oraInizioUdienza, :oraFineUdienza, :indirizzoAula, :aula, :nomeCanc, :cognomeCanc, :note, :altriConv ) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_aggiorna_verbale_udienza" callable="true" >
+		<return-scalar column="IDCURRENTUDIENZA" type="string"/>
+	 	{ call PG_UDIENZA.MODIFICA_VERBALE_UDIENZA(?, :idUdienza, :idUffOwn, :dataUdienza, :oraInizioUdienza, :oraFineUdienza, :indirizzoAula, :aula, :nomeCanc, :cognomeCanc, :note, :altriConv,
+	 									 :idAtto, :documento, :tipoDocumento, :nomeDocumento) }
+	</sql-query>
+	
+    <sql-query name="PG_UDIENZA_lista_magistrati_uff" callable="true" >
+	   { call PG_UDIENZA.LISTA_MAGISTRATI_UFF (?, :vidUffOwn, :vcognomeMag, :vnomeMag, :vdataUdienza) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_lista_magistrati_pm_uff" callable="true" >
+	   { call PG_UDIENZA.LISTA_MAGISTRATI_PM_UFF (?,:vdataUdienza, :vidProcUdi) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_inserisci_pm_udienza" callable="true" >
+	<return-scalar column="IDUDIENZA" type="long"/>
+	   { call PG_UDIENZA.INSERISCI_PM_UDIENZA (?, :vidUdienza, :vidUffOwn, :vidMag, :vruolo, :vidUtente) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_elimina_mag_udienza" callable="true" >
+	   { call PG_UDIENZA.ELIMINA_MAG_UDIENZA (?, :vidUdienza, :vidUffOwn, :vidMag, :vruolo) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_aggiorna_mag_udienza" callable="true" >
+	   { call PG_UDIENZA.AGGIORNA_MAG_UDIENZA (?, :vidUdienza, :vidUffOwn, :vidMag, :vruolo) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_ConfInvio_udienza" callable="true" >
+		<return-scalar column="IDCURRENTUDIENZA" type="long"/>
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	   { call PG_UDIENZA.CONF_INVIO_UDIENZA (?, :vidProc, :vidUdienza, :vidUffOwn, :vidEsito, :vdataRinvioUdienza, :voraRinvioUdienza, 
+	   											:vaulaRinvioUdienza, :vindAulaRinvioUdienza, :vidUtente,:vidUffDest) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_ConfInvio_verbaleUdienza" callable="true" >
+		<return-scalar column="IDCURRENTUDIENZA" type="long"/>
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	   { call PG_UDIENZA.CONF_INVIO_VERBALE_UDIENZA (?, :vidProc, :vidUdienza, :vidUffOwn, :vidEsito, :vdataRinvioUdienza, :voraRinvioUdienza, 
+	   											:vaulaRinvioUdienza, :vindAulaRinvioUdienza, :vidUtente,:vidUffDest,
+	   											:idCurrentAtto, :documento, :tipoDocumento, :nomeDocumento) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_copia_dati_proc_per_udienza" callable="true" >
+	   { call PG_UDIENZA.COPIA_DATI_PROC_PER_UDIENZA (?, :idCurrentUdienza, :idUffOwn, :idCodiceUtente, :idProcedimento) }
+	</sql-query>
+	
+	<sql-query name="PG_UDIENZA_insVerbaleUdienza" callable="true" >
+		<return-scalar column="IDCURRENTATTO" type="long"/>
+	 	{ call PG_UDIENZA.INSERISCI_VERBALE(?, :idUffOwn, :descUtente, :idProcedimento, :idTipoAtto, :idCategoriaAtto, :idUdienza, :nomeMetodo) }
+	</sql-query>  
+	
+	<sql-query name="PG_UDIENZA_getUdienzaRicorso" callable="true" >
+		<return alias="udienza" class="it.giustizia.smp.model.TUdienza" />
+	 	{ call PG_UDIENZA.GET_UDIENZA_RICORSO(?, :idAtto, :idUfficio, :descUtente) }
+	</sql-query> 	
+	
+
+</hibernate-mapping>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by mazuki (darksiderg) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:proc="http://anbsc.almaviva.it/schema/proc" xmlns:provv="http://anbsc.almaviva.it/schema/provv" xmlns:bene="http://anbsc.almaviva.it/schema/bene" xmlns:sogg="http://anbsc.almaviva.it/schema/sogg" xmlns:misura="http://anbsc.almaviva.it/schema/misura" xmlns:amministratore="http://anbsc.almaviva.it/schema/amministratore" xmlns:amministrazione="http://anbsc.almaviva.it/schema/amministrazione" xmlns:nuovaUdienza="http://anbsc.almaviva.it/schema/nuovaUdienza" xmlns:vecchiaUdienza="http://anbsc.almaviva.it/schema/vecchiaUdienza" xmlns:procedimenti="http://anbsc.almaviva.it/schema/procedimenti" xmlns:provvedimentiOld="http://anbsc.almaviva.it/schema/provvedimentiOld" xmlns:esito="http://anbsc.almaviva.it/schema/esito" xmlns:ns1="http://anbsc.almaviva.it/schema" targetNamespace="http://anbsc.almaviva.it/bean" elementFormDefault="qualified">
+	<import namespace="http://anbsc.almaviva.it/schema/proc" schemaLocation="Procedimento.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/provv" schemaLocation="Provvedimento.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/bene" schemaLocation="Bene.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/sogg" schemaLocation="Soggetto.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/misura" schemaLocation="Misura.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/amministratore" schemaLocation="Amministratore.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/amministrazione" schemaLocation="Amministrazione.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/nuovaUdienza" schemaLocation="NuovaUdienza.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/vecchiaUdienza" schemaLocation="VecchiaUdienza.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/procedimenti" schemaLocation="Procedimenti.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/provvedimentiOld" schemaLocation="ProvvedimentiOld.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/esito" schemaLocation="Esito.xsd"/>
+	<element name="SequestroRequest">
+		<complexType>
+			<sequence>
+				<element name="procedimento" type="proc:procedimento"/>
+				<element name="provvedimento" type="provv:provvedimento"/>
+				<element name="bene" type="bene:bene" maxOccurs="unbounded"/>
+				<element name="soggetto" type="sogg:soggetto" maxOccurs="unbounded"/>
+				<element name="misura" type="misura:misura" maxOccurs="unbounded"/>
+				<element name="amministratore" type="amministratore:amministratore" minOccurs="0" maxOccurs="unbounded"/>
+				<element name="amministrazione" type="amministrazione:amministrazione" minOccurs="0" maxOccurs="unbounded"/>
+				<element name="nuovaUdienza" type="nuovaUdienza:nuovaUdienza" minOccurs="0"/>
+				<element name="vecchiaUdienza" type="vecchiaUdienza:vecchiaUdienza" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="SequestroResponse">
+		<complexType>
+			<sequence>
+				<element name="esito" type="esito:esito" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="StralcioRequest">
+		<complexType>
+			<sequence>
+				<element name="procedimenti" type="procedimenti:procedimenti"/>
+				<element name="procedimento" type="proc:procedimento"/>
+				<element name="amministratore" type="amministratore:amministratore" maxOccurs="unbounded" minOccurs="0" />
+				<element name="provvedimentiOld" type="provvedimentiOld:provvedimentiOld" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="StralcioResponse">
+		<complexType>
+			<sequence>
+				<element name="esito" type="esito:esito" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ConfiscaPrimoGradoRequest">
+		<complexType>
+			<sequence>
+				<element name="procedimento" type="proc:procedimento"/>
+				<element name="provvedimento" type="provv:provvedimento"/>
+				<element name="bene" type="bene:bene" maxOccurs="unbounded"/>
+				<element name="soggetto" type="sogg:soggetto" maxOccurs="unbounded"/>
+				<element name="misura" type="misura:misura" maxOccurs="unbounded"/>
+				<element name="amministratore" type="amministratore:amministratore" minOccurs="0" maxOccurs="unbounded"/>
+				<element name="amministrazione" type="amministrazione:amministrazione" minOccurs="0" maxOccurs="unbounded"/>
+				<element name="nuovaUdienza" type="nuovaUdienza:nuovaUdienza" minOccurs="0"/>
+				<element name="vecchiaUdienza" type="vecchiaUdienza:vecchiaUdienza" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ConfiscaPrimoGradoResponse">
+		<complexType>
+			<sequence>
+				<element name="esito" type="esito:esito" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ConfiscaSecondoGradoRequest">
+		<complexType>
+			<sequence>
+				<element name="procedimento" type="proc:procedimento"/>
+				<element name="provvedimento" type="provv:provvedimento"/>
+				<element name="bene" type="bene:bene" maxOccurs="unbounded"/>
+				<element name="soggetto" type="sogg:soggetto" maxOccurs="unbounded"/>
+				<element name="misura" type="misura:misura" maxOccurs="unbounded"/>
+				<element name="amministratore" type="amministratore:amministratore" minOccurs="0" maxOccurs="unbounded"/>
+				<element name="amministrazione" type="amministrazione:amministrazione" minOccurs="0" maxOccurs="unbounded"/>
+				<element name="nuovaUdienza" type="nuovaUdienza:nuovaUdienza" minOccurs="0"/>
+				<element name="vecchiaUdienza" type="vecchiaUdienza:vecchiaUdienza" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ConfiscaSecondoGradoResponse">
+		<complexType>
+			<sequence>
+				<element name="esito" type="esito:esito" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ConfiscaDefinitivaRequest">
+		<complexType>
+			<sequence>
+				<element name="procedimento" type="proc:procedimento"/>
+				<element name="provvedimento" type="provv:provvedimento"/>
+				<element name="bene" type="bene:bene" maxOccurs="unbounded"/>
+				<element name="soggetto" type="sogg:soggetto" maxOccurs="unbounded"/>
+				<element name="misura" type="misura:misura" maxOccurs="unbounded"/>
+				<element name="amministratore" type="amministratore:amministratore" minOccurs="0" maxOccurs="unbounded"/>
+				<element name="amministrazione" type="amministrazione:amministrazione" minOccurs="0" maxOccurs="unbounded"/>
+				<element name="nuovaUdienza" type="nuovaUdienza:nuovaUdienza" minOccurs="0"/>
+				<element name="vecchiaUdienza" type="vecchiaUdienza:vecchiaUdienza" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="ConfiscaDefinitivaResponse">
+		<complexType>
+			<sequence>
+				<element name="esito" type="esito:esito" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="RevocaSequestroRequest">
+		<complexType>
+			<sequence>
+				<element name="procedimento" type="proc:procedimento"/>
+				<element name="provvedimento" type="provv:provvedimento"/>
+				<element name="bene" type="bene:bene" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="RevocaSequestroResponse">
+		<complexType>
+			<sequence>
+				<element name="esito" type="esito:esito" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="RevocaConfiscaRequest">
+		<complexType>
+			<sequence>
+				<element name="procedimento" type="proc:procedimento"/>
+				<element name="provvedimento" type="provv:provvedimento"/>
+				<element name="bene" type="bene:bene" maxOccurs="unbounded"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="RevocaConfiscaResponse">
+		<complexType>
+			<sequence>
+				<element name="esito" type="esito:esito" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="RiunioneRequest">
+		<complexType>
+			<sequence>
+				<element name="procedimenti" type="procedimenti:procedimenti"/>
+			</sequence>
+		</complexType>
+	</element>
+	<element name="RiunioneResponse">
+		<complexType>
+			<sequence>
+				<element name="esito" type="esito:esito" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>	
+</schema>

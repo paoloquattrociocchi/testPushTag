@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping>
+		<class-a>it.giustizia.smp.form.EredeConviventeForm</class-a>
+		<class-b>it.giustizia.smp.model.TRelSogintErediConv</class-b>
+		<field>
+			<a>id</a>
+			<b>id.codiKIdPrg</b>
+		</field>
+		<field>
+			<a>cognome</a>
+			<b>descCognome</b>
+		</field>
+		<field>
+			<a>nome</a>
+			<b>descNome</b>
+		</field>
+		<field>
+			<a>dataNascita</a>
+			<b>dataNascita</b>
+		</field>
+		<field>
+			<a>statoNascitaErCon.id</a>
+			<b>TAnStato.codiKIdStato</b>
+		</field>
+		<field>
+			<a>statoNascitaErCon.descrizione</a>
+			<b>TAnStato.descStato</b>
+		</field>
+		<field>
+			<a>comuneNascitaErCon.id</a>
+			<b>TAnComuni.codiKIdComune</b>
+		</field>
+		<field>
+			<a>comuneNascitaItaliano</a>
+			<b>TAnComuni.descComune</b>
+		</field>
+		<field>
+			<a>siglaProvinciaNascitaErCon</a>
+			<b>TAnComuni.TAnProvincia.descSiglaProvincia</b>
+		</field>
+		<field>
+			<a>comuneNascitaEstero</a>
+			<b>descComEstero</b>
+		</field>
+		<field>
+			<a>parentela</a>
+			<b>descParentela</b>
+		</field>	
+	</mapping>
+	
+</mappings>

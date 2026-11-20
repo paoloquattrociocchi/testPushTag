@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping> 
+	<sql-query name="PG_RIUNIONE_prc_cntr_main" callable="true" >
+	    <return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_RIUNIONE.PRC_CNTR_MAIN(?,:IJ_ID_PROC_RIUNENTE,:IJ_ID_PROC_RIUNITO,:IJ_UTENTE,:IJ_UFFICIO,:IJ_NOME_METODO) }	
+	</sql-query> 
+	<sql-query name="PG_RIUNIONE_prc_insert_main" callable="true" >
+	    <return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_RIUNIONE.PRC_INSERT_MAIN(?,:IJ_FUNZIONE,:IJ_ID_ATTO,:IJ_ID_PROC_RIUNENTE,:IJ_ID_PROC_RIUNITO,:IJ_MAGISTRATO,:IJ_DATARIUNIONE,:IJ_UTENTE,:IJ_UFFICIO,:IJ_NOME_METODO,:DOCUMENTO,:TIPO_DOCUMENTO,:NOME_DOCUMENTO) }		
+	</sql-query> 
+</hibernate-mapping>

@@ -1,0 +1,3832 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:ax23="http://model.webservice.components.efgiustizia/xsd"
+	xmlns:ns="http://webservice.components.efgiustizia" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	targetNamespace="http://webservice.components.efgiustizia">
+	<wsdl:documentation>WSDL per il servizio di Allineamento dei fascicoli
+		PDoc - SITmp</wsdl:documentation>
+	<wsdl:types>
+		<xs:schema attributeFormDefault="qualified"
+			elementFormDefault="qualified"
+			targetNamespace="http://model.webservice.components.efgiustizia/xsd">
+			<xs:complexType name="RecuperaDocumentoResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="doccontent" nillable="true"
+						type="xs:base64Binary" />
+					<xs:element minOccurs="0" name="risposta" nillable="true"
+						type="xs:base64Binary" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="RecuperaMailOriginaleResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="mailContent" nillable="true"
+						type="xs:base64Binary" />
+					<xs:element minOccurs="0" name="risposta" nillable="true"
+						type="xs:base64Binary" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="RecuperaMailResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="allegati" nillable="true"
+						type="xs:base64Binary" />
+					<xs:element minOccurs="0" name="risposta" nillable="true"
+						type="xs:base64Binary" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:ax24="http://model.webservice.components.efgiustizia/xsd"
+			attributeFormDefault="qualified" elementFormDefault="qualified"
+			targetNamespace="http://webservice.components.efgiustizia">
+			<xs:import namespace="http://model.webservice.components.efgiustizia/xsd" />
+			<xs:element name="aggiuntaFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="aggiuntaFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="aperturaFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="aperturaFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cancellaFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cancellaFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cancellaFascicoloPermanente">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cancellaFascicoloPermanenteResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cancellazioneRelazioneDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cancellazioneRelazioneDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="checkInDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+						<xs:element minOccurs="0" name="filecontent" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="checkInDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="checkOutDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="checkOutDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="chiusuraFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="chiusuraFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cifraDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="cifraDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="consolidaFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="consolidaFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="creaFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="creaFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="elencoFascicoliOfGroup">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="elencoFascicoliOfGroupResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="eliminaDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="eliminaDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="eliminaDocumentoPermanente">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="eliminaDocumentoPermanenteResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="eliminaMail">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="eliminaMailResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="esportaDocumenti">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="esportaDocumentiResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="firmaDigitaleP7M">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="firmaDigitaleP7MResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="firmaDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="firmaDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="firmaRemotaHSM">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="firmaRemotaHSMResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getVideoUrl">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getVideoUrlResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inserimentoDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+						<xs:element minOccurs="0" name="filecontent" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inserimentoDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inserimentoRelazioneDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inserimentoRelazioneDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="interrogaRubrica">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="interrogaRubricaResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inviaMail">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inviaMailResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inviaMailExternalAttachs">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+						<xs:element minOccurs="0" name="attach" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inviaMailExternalAttachsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inviaServizioConservazioneDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="inviaServizioConservazioneDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="migrazioneFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="migrazioneFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="monitorJob">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="monitorJobResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pubblicaDocumenti">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="pubblicaDocumentiResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaDocFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaDocFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaFascicoliDaConsolidare">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaFascicoliDaConsolidareResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaRubrica">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaRubricaResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaSottoFascicoli">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaSottoFascicoliResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaStoricoDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaStoricoDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaStoricoFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaStoricoFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperoRegistri">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperoRegistriResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperoStatoMigrazione">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperoStatoMigrazioneResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="renderDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="renderDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ricercaDocumenti">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ricercaDocumentiResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ricercaDocumentiFullText">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ricercaDocumentiFullTextResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ricercaFascicoli">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ricercaFascicoliResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="riceviMail">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="riceviMailResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rimuoviDocumenti">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="rimuoviDocumentiResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ripristinoMail">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ripristinoMailResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="riunioneFascicoli">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="riunioneFascicoliResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="spostaDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="spostaDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="stralcioFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="stralcioFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="testConnessione">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="testConnessioneResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="undoCheckOutDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="undoCheckOutDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateDocument">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+						<xs:element minOccurs="0" name="filecontent" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateDocumentResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateSecurityDFascicolo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="updateSecurityDFascicoloResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="uploadDocumentoP7M">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+						<xs:element minOccurs="0" name="filecontent" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="uploadDocumentoP7MResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="verificaDigestDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+						<xs:element minOccurs="0" name="filecontent" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="verificaDigestDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="verificaEsitoMail">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="verificaEsitoMailResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="verificaFirmaDigitaleDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="verificaFirmaDigitaleDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="verificaIndirizzoRubrica">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="verificaIndirizzoRubricaResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="versioniDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="versioniDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="estrazionePagineDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="estrazionePagineDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="ax24:RecuperaDocumentoResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="ax24:RecuperaDocumentoResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaDocumentoCifrato">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaDocumentoCifratoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="ax24:RecuperaDocumentoResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaSerizioConservazioneDocumento">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaSerizioConservazioneDocumentoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="ax24:RecuperaDocumentoResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperoMailOriginale">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperoMailOriginaleResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="ax24:RecuperaMailOriginaleResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaMail">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="firma" nillable="true"
+							type="xs:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="recuperaMailResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="return" nillable="true"
+							type="ax24:RecuperaMailResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="estrazionePagineDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:estrazionePagineDocumento" />
+	</wsdl:message>
+	<wsdl:message name="estrazionePagineDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:estrazionePagineDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="pubblicaDocumentiRequest">
+		<wsdl:part name="parameters" element="ns:pubblicaDocumenti" />
+	</wsdl:message>
+	<wsdl:message name="pubblicaDocumentiResponse">
+		<wsdl:part name="parameters" element="ns:pubblicaDocumentiResponse" />
+	</wsdl:message>
+	<wsdl:message name="interrogaRubricaRequest">
+		<wsdl:part name="parameters" element="ns:interrogaRubrica" />
+	</wsdl:message>
+	<wsdl:message name="interrogaRubricaResponse">
+		<wsdl:part name="parameters" element="ns:interrogaRubricaResponse" />
+	</wsdl:message>
+	<wsdl:message name="riceviMailRequest">
+		<wsdl:part name="parameters" element="ns:riceviMail" />
+	</wsdl:message>
+	<wsdl:message name="riceviMailResponse">
+		<wsdl:part name="parameters" element="ns:riceviMailResponse" />
+	</wsdl:message>
+	<wsdl:message name="esportaDocumentiRequest">
+		<wsdl:part name="parameters" element="ns:esportaDocumenti" />
+	</wsdl:message>
+	<wsdl:message name="esportaDocumentiResponse">
+		<wsdl:part name="parameters" element="ns:esportaDocumentiResponse" />
+	</wsdl:message>
+	<wsdl:message name="updateDocumentRequest">
+		<wsdl:part name="parameters" element="ns:updateDocument" />
+	</wsdl:message>
+	<wsdl:message name="updateDocumentResponse">
+		<wsdl:part name="parameters" element="ns:updateDocumentResponse" />
+	</wsdl:message>
+	<wsdl:message name="inviaServizioConservazioneDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:inviaServizioConservazioneDocumento" />
+	</wsdl:message>
+	<wsdl:message name="inviaServizioConservazioneDocumentoResponse">
+		<wsdl:part name="parameters"
+			element="ns:inviaServizioConservazioneDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="creaFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:creaFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="creaFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:creaFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="verificaDigestDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:verificaDigestDocumento" />
+	</wsdl:message>
+	<wsdl:message name="verificaDigestDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:verificaDigestDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="elencoFascicoliOfGroupRequest">
+		<wsdl:part name="parameters" element="ns:elencoFascicoliOfGroup" />
+	</wsdl:message>
+	<wsdl:message name="elencoFascicoliOfGroupResponse">
+		<wsdl:part name="parameters" element="ns:elencoFascicoliOfGroupResponse" />
+	</wsdl:message>
+	<wsdl:message name="cancellazioneRelazioneDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:cancellazioneRelazioneDocumento" />
+	</wsdl:message>
+	<wsdl:message name="cancellazioneRelazioneDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:cancellazioneRelazioneDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaStoricoDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:recuperaStoricoDocumento" />
+	</wsdl:message>
+	<wsdl:message name="recuperaStoricoDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:recuperaStoricoDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="firmaRemotaHSMRequest">
+		<wsdl:part name="parameters" element="ns:firmaRemotaHSM" />
+	</wsdl:message>
+	<wsdl:message name="firmaRemotaHSMResponse">
+		<wsdl:part name="parameters" element="ns:firmaRemotaHSMResponse" />
+	</wsdl:message>
+	<wsdl:message name="aggiuntaFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:aggiuntaFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="aggiuntaFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:aggiuntaFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="ricercaFascicoliRequest">
+		<wsdl:part name="parameters" element="ns:ricercaFascicoli" />
+	</wsdl:message>
+	<wsdl:message name="ricercaFascicoliResponse">
+		<wsdl:part name="parameters" element="ns:ricercaFascicoliResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaSottoFascicoliRequest">
+		<wsdl:part name="parameters" element="ns:recuperaSottoFascicoli" />
+	</wsdl:message>
+	<wsdl:message name="recuperaSottoFascicoliResponse">
+		<wsdl:part name="parameters" element="ns:recuperaSottoFascicoliResponse" />
+	</wsdl:message>
+	<wsdl:message name="checkInDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:checkInDocumento" />
+	</wsdl:message>
+	<wsdl:message name="checkInDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:checkInDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaFascicoliDaConsolidareRequest">
+		<wsdl:part name="parameters" element="ns:recuperaFascicoliDaConsolidare" />
+	</wsdl:message>
+	<wsdl:message name="recuperaFascicoliDaConsolidareResponse">
+		<wsdl:part name="parameters" element="ns:recuperaFascicoliDaConsolidareResponse" />
+	</wsdl:message>
+	<wsdl:message name="eliminaDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:eliminaDocumento" />
+	</wsdl:message>
+	<wsdl:message name="eliminaDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:eliminaDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaMailRequest">
+		<wsdl:part name="parameters" element="ns:recuperaMail" />
+	</wsdl:message>
+	<wsdl:message name="recuperaMailResponse">
+		<wsdl:part name="parameters" element="ns:recuperaMailResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:recuperaDocumento" />
+	</wsdl:message>
+	<wsdl:message name="recuperaDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:recuperaDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="firmaDigitaleP7MRequest">
+		<wsdl:part name="parameters" element="ns:firmaDigitaleP7M" />
+	</wsdl:message>
+	<wsdl:message name="firmaDigitaleP7MResponse">
+		<wsdl:part name="parameters" element="ns:firmaDigitaleP7MResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaRubricaRequest">
+		<wsdl:part name="parameters" element="ns:recuperaRubrica" />
+	</wsdl:message>
+	<wsdl:message name="recuperaRubricaResponse">
+		<wsdl:part name="parameters" element="ns:recuperaRubricaResponse" />
+	</wsdl:message>
+	<wsdl:message name="chiusuraFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:chiusuraFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="chiusuraFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:chiusuraFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="consolidaFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:consolidaFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="consolidaFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:consolidaFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="undoCheckOutDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:undoCheckOutDocumento" />
+	</wsdl:message>
+	<wsdl:message name="undoCheckOutDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:undoCheckOutDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="inviaMailRequest">
+		<wsdl:part name="parameters" element="ns:inviaMail" />
+	</wsdl:message>
+	<wsdl:message name="inviaMailResponse">
+		<wsdl:part name="parameters" element="ns:inviaMailResponse" />
+	</wsdl:message>
+	<wsdl:message name="ripristinoMailRequest">
+		<wsdl:part name="parameters" element="ns:ripristinoMail" />
+	</wsdl:message>
+	<wsdl:message name="ripristinoMailResponse">
+		<wsdl:part name="parameters" element="ns:ripristinoMailResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperoStatoMigrazioneRequest">
+		<wsdl:part name="parameters" element="ns:recuperoStatoMigrazione" />
+	</wsdl:message>
+	<wsdl:message name="recuperoStatoMigrazioneResponse">
+		<wsdl:part name="parameters" element="ns:recuperoStatoMigrazioneResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperoRegistriRequest">
+		<wsdl:part name="parameters" element="ns:recuperoRegistri" />
+	</wsdl:message>
+	<wsdl:message name="recuperoRegistriResponse">
+		<wsdl:part name="parameters" element="ns:recuperoRegistriResponse" />
+	</wsdl:message>
+	<wsdl:message name="inserimentoRelazioneDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:inserimentoRelazioneDocumento" />
+	</wsdl:message>
+	<wsdl:message name="inserimentoRelazioneDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:inserimentoRelazioneDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="cifraDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:cifraDocumento" />
+	</wsdl:message>
+	<wsdl:message name="cifraDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:cifraDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaDocumentoCifratoRequest">
+		<wsdl:part name="parameters" element="ns:recuperaDocumentoCifrato" />
+	</wsdl:message>
+	<wsdl:message name="recuperaDocumentoCifratoResponse">
+		<wsdl:part name="parameters" element="ns:recuperaDocumentoCifratoResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaDocFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:recuperaDocFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="recuperaDocFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:recuperaDocFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="eliminaDocumentoPermanenteRequest">
+		<wsdl:part name="parameters" element="ns:eliminaDocumentoPermanente" />
+	</wsdl:message>
+	<wsdl:message name="eliminaDocumentoPermanenteResponse">
+		<wsdl:part name="parameters" element="ns:eliminaDocumentoPermanenteResponse" />
+	</wsdl:message>
+	<wsdl:message name="updateDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:updateDocumento" />
+	</wsdl:message>
+	<wsdl:message name="updateDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:updateDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaSerizioConservazioneDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:recuperaSerizioConservazioneDocumento" />
+	</wsdl:message>
+	<wsdl:message name="recuperaSerizioConservazioneDocumentoResponse">
+		<wsdl:part name="parameters"
+			element="ns:recuperaSerizioConservazioneDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="migrazioneFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:migrazioneFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="migrazioneFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:migrazioneFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperoMailOriginaleRequest">
+		<wsdl:part name="parameters" element="ns:recuperoMailOriginale" />
+	</wsdl:message>
+	<wsdl:message name="recuperoMailOriginaleResponse">
+		<wsdl:part name="parameters" element="ns:recuperoMailOriginaleResponse" />
+	</wsdl:message>
+	<wsdl:message name="firmaDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:firmaDocumento" />
+	</wsdl:message>
+	<wsdl:message name="firmaDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:firmaDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="verificaIndirizzoRubricaRequest">
+		<wsdl:part name="parameters" element="ns:verificaIndirizzoRubrica" />
+	</wsdl:message>
+	<wsdl:message name="verificaIndirizzoRubricaResponse">
+		<wsdl:part name="parameters" element="ns:verificaIndirizzoRubricaResponse" />
+	</wsdl:message>
+	<wsdl:message name="cancellaFascicoloPermanenteRequest">
+		<wsdl:part name="parameters" element="ns:cancellaFascicoloPermanente" />
+	</wsdl:message>
+	<wsdl:message name="cancellaFascicoloPermanenteResponse">
+		<wsdl:part name="parameters" element="ns:cancellaFascicoloPermanenteResponse" />
+	</wsdl:message>
+	<wsdl:message name="rimuoviDocumentiRequest">
+		<wsdl:part name="parameters" element="ns:rimuoviDocumenti" />
+	</wsdl:message>
+	<wsdl:message name="rimuoviDocumentiResponse">
+		<wsdl:part name="parameters" element="ns:rimuoviDocumentiResponse" />
+	</wsdl:message>
+	<wsdl:message name="uploadDocumentoP7MRequest">
+		<wsdl:part name="parameters" element="ns:uploadDocumentoP7M" />
+	</wsdl:message>
+	<wsdl:message name="uploadDocumentoP7MResponse">
+		<wsdl:part name="parameters" element="ns:uploadDocumentoP7MResponse" />
+	</wsdl:message>
+	<wsdl:message name="stralcioFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:stralcioFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="stralcioFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:stralcioFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="ricercaDocumentiFullTextRequest">
+		<wsdl:part name="parameters" element="ns:ricercaDocumentiFullText" />
+	</wsdl:message>
+	<wsdl:message name="ricercaDocumentiFullTextResponse">
+		<wsdl:part name="parameters" element="ns:ricercaDocumentiFullTextResponse" />
+	</wsdl:message>
+	<wsdl:message name="getVideoUrlRequest">
+		<wsdl:part name="parameters" element="ns:getVideoUrl" />
+	</wsdl:message>
+	<wsdl:message name="getVideoUrlResponse">
+		<wsdl:part name="parameters" element="ns:getVideoUrlResponse" />
+	</wsdl:message>
+	<wsdl:message name="eliminaMailRequest">
+		<wsdl:part name="parameters" element="ns:eliminaMail" />
+	</wsdl:message>
+	<wsdl:message name="eliminaMailResponse">
+		<wsdl:part name="parameters" element="ns:eliminaMailResponse" />
+	</wsdl:message>
+	<wsdl:message name="spostaDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:spostaDocumento" />
+	</wsdl:message>
+	<wsdl:message name="spostaDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:spostaDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="verificaFirmaDigitaleDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:verificaFirmaDigitaleDocumento" />
+	</wsdl:message>
+	<wsdl:message name="verificaFirmaDigitaleDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:verificaFirmaDigitaleDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="renderDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:renderDocumento" />
+	</wsdl:message>
+	<wsdl:message name="renderDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:renderDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="updateSecurityDFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:updateSecurityDFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="updateSecurityDFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:updateSecurityDFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="inviaMailExternalAttachsRequest">
+		<wsdl:part name="parameters" element="ns:inviaMailExternalAttachs" />
+	</wsdl:message>
+	<wsdl:message name="inviaMailExternalAttachsResponse">
+		<wsdl:part name="parameters" element="ns:inviaMailExternalAttachsResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaStoricoFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:recuperaStoricoFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="recuperaStoricoFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:recuperaStoricoFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="verificaEsitoMailRequest">
+		<wsdl:part name="parameters" element="ns:verificaEsitoMail" />
+	</wsdl:message>
+	<wsdl:message name="verificaEsitoMailResponse">
+		<wsdl:part name="parameters" element="ns:verificaEsitoMailResponse" />
+	</wsdl:message>
+	<wsdl:message name="recuperaFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:recuperaFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="recuperaFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:recuperaFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="versioniDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:versioniDocumento" />
+	</wsdl:message>
+	<wsdl:message name="versioniDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:versioniDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="testConnessioneRequest">
+		<wsdl:part name="parameters" element="ns:testConnessione" />
+	</wsdl:message>
+	<wsdl:message name="testConnessioneResponse">
+		<wsdl:part name="parameters" element="ns:testConnessioneResponse" />
+	</wsdl:message>
+	<wsdl:message name="updateFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:updateFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="updateFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:updateFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="monitorJobRequest">
+		<wsdl:part name="parameters" element="ns:monitorJob" />
+	</wsdl:message>
+	<wsdl:message name="monitorJobResponse">
+		<wsdl:part name="parameters" element="ns:monitorJobResponse" />
+	</wsdl:message>
+	<wsdl:message name="checkOutDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:checkOutDocumento" />
+	</wsdl:message>
+	<wsdl:message name="checkOutDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:checkOutDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="riunioneFascicoliRequest">
+		<wsdl:part name="parameters" element="ns:riunioneFascicoli" />
+	</wsdl:message>
+	<wsdl:message name="riunioneFascicoliResponse">
+		<wsdl:part name="parameters" element="ns:riunioneFascicoliResponse" />
+	</wsdl:message>
+	<wsdl:message name="ricercaDocumentiRequest">
+		<wsdl:part name="parameters" element="ns:ricercaDocumenti" />
+	</wsdl:message>
+	<wsdl:message name="ricercaDocumentiResponse">
+		<wsdl:part name="parameters" element="ns:ricercaDocumentiResponse" />
+	</wsdl:message>
+	<wsdl:message name="aperturaFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:aperturaFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="aperturaFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:aperturaFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:message name="inserimentoDocumentoRequest">
+		<wsdl:part name="parameters" element="ns:inserimentoDocumento" />
+	</wsdl:message>
+	<wsdl:message name="inserimentoDocumentoResponse">
+		<wsdl:part name="parameters" element="ns:inserimentoDocumentoResponse" />
+	</wsdl:message>
+	<wsdl:message name="cancellaFascicoloRequest">
+		<wsdl:part name="parameters" element="ns:cancellaFascicolo" />
+	</wsdl:message>
+	<wsdl:message name="cancellaFascicoloResponse">
+		<wsdl:part name="parameters" element="ns:cancellaFascicoloResponse" />
+	</wsdl:message>
+	<wsdl:portType name="EfGiustiziaServicePortType">
+		<wsdl:operation name="estrazionePagineDocumento">
+			<wsdl:input message="ns:estrazionePagineDocumentoRequest"
+				wsaw:Action="urn:estrazionePagineDocumento" />
+			<wsdl:output message="ns:estrazionePagineDocumentoResponse"
+				wsaw:Action="urn:estrazionePagineDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="pubblicaDocumenti">
+			<wsdl:input message="ns:pubblicaDocumentiRequest"
+				wsaw:Action="urn:pubblicaDocumenti" />
+			<wsdl:output message="ns:pubblicaDocumentiResponse"
+				wsaw:Action="urn:pubblicaDocumentiResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="interrogaRubrica">
+			<wsdl:input message="ns:interrogaRubricaRequest"
+				wsaw:Action="urn:interrogaRubrica" />
+			<wsdl:output message="ns:interrogaRubricaResponse"
+				wsaw:Action="urn:interrogaRubricaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="riceviMail">
+			<wsdl:input message="ns:riceviMailRequest" wsaw:Action="urn:riceviMail" />
+			<wsdl:output message="ns:riceviMailResponse" wsaw:Action="urn:riceviMailResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="esportaDocumenti">
+			<wsdl:input message="ns:esportaDocumentiRequest"
+				wsaw:Action="urn:esportaDocumenti" />
+			<wsdl:output message="ns:esportaDocumentiResponse"
+				wsaw:Action="urn:esportaDocumentiResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="updateDocument">
+			<wsdl:input message="ns:updateDocumentRequest"
+				wsaw:Action="urn:updateDocument" />
+			<wsdl:output message="ns:updateDocumentResponse"
+				wsaw:Action="urn:updateDocumentResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="inviaServizioConservazioneDocumento">
+			<wsdl:input message="ns:inviaServizioConservazioneDocumentoRequest"
+				wsaw:Action="urn:inviaServizioConservazioneDocumento" />
+			<wsdl:output message="ns:inviaServizioConservazioneDocumentoResponse"
+				wsaw:Action="urn:inviaServizioConservazioneDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="creaFascicolo">
+			<wsdl:input message="ns:creaFascicoloRequest" wsaw:Action="urn:creaFascicolo" />
+			<wsdl:output message="ns:creaFascicoloResponse"
+				wsaw:Action="urn:creaFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="verificaDigestDocumento">
+			<wsdl:input message="ns:verificaDigestDocumentoRequest"
+				wsaw:Action="urn:verificaDigestDocumento" />
+			<wsdl:output message="ns:verificaDigestDocumentoResponse"
+				wsaw:Action="urn:verificaDigestDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="elencoFascicoliOfGroup">
+			<wsdl:input message="ns:elencoFascicoliOfGroupRequest"
+				wsaw:Action="urn:elencoFascicoliOfGroup" />
+			<wsdl:output message="ns:elencoFascicoliOfGroupResponse"
+				wsaw:Action="urn:elencoFascicoliOfGroupResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="cancellazioneRelazioneDocumento">
+			<wsdl:input message="ns:cancellazioneRelazioneDocumentoRequest"
+				wsaw:Action="urn:cancellazioneRelazioneDocumento" />
+			<wsdl:output message="ns:cancellazioneRelazioneDocumentoResponse"
+				wsaw:Action="urn:cancellazioneRelazioneDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaStoricoDocumento">
+			<wsdl:input message="ns:recuperaStoricoDocumentoRequest"
+				wsaw:Action="urn:recuperaStoricoDocumento" />
+			<wsdl:output message="ns:recuperaStoricoDocumentoResponse"
+				wsaw:Action="urn:recuperaStoricoDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="firmaRemotaHSM">
+			<wsdl:input message="ns:firmaRemotaHSMRequest"
+				wsaw:Action="urn:firmaRemotaHSM" />
+			<wsdl:output message="ns:firmaRemotaHSMResponse"
+				wsaw:Action="urn:firmaRemotaHSMResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="aggiuntaFascicolo">
+			<wsdl:input message="ns:aggiuntaFascicoloRequest"
+				wsaw:Action="urn:aggiuntaFascicolo" />
+			<wsdl:output message="ns:aggiuntaFascicoloResponse"
+				wsaw:Action="urn:aggiuntaFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ricercaFascicoli">
+			<wsdl:input message="ns:ricercaFascicoliRequest"
+				wsaw:Action="urn:ricercaFascicoli" />
+			<wsdl:output message="ns:ricercaFascicoliResponse"
+				wsaw:Action="urn:ricercaFascicoliResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaSottoFascicoli">
+			<wsdl:input message="ns:recuperaSottoFascicoliRequest"
+				wsaw:Action="urn:recuperaSottoFascicoli" />
+			<wsdl:output message="ns:recuperaSottoFascicoliResponse"
+				wsaw:Action="urn:recuperaSottoFascicoliResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="checkInDocumento">
+			<wsdl:input message="ns:checkInDocumentoRequest"
+				wsaw:Action="urn:checkInDocumento" />
+			<wsdl:output message="ns:checkInDocumentoResponse"
+				wsaw:Action="urn:checkInDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaFascicoliDaConsolidare">
+			<wsdl:input message="ns:recuperaFascicoliDaConsolidareRequest"
+				wsaw:Action="urn:recuperaFascicoliDaConsolidare" />
+			<wsdl:output message="ns:recuperaFascicoliDaConsolidareResponse"
+				wsaw:Action="urn:recuperaFascicoliDaConsolidareResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="eliminaDocumento">
+			<wsdl:input message="ns:eliminaDocumentoRequest"
+				wsaw:Action="urn:eliminaDocumento" />
+			<wsdl:output message="ns:eliminaDocumentoResponse"
+				wsaw:Action="urn:eliminaDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaMail">
+			<wsdl:input message="ns:recuperaMailRequest" wsaw:Action="urn:recuperaMail" />
+			<wsdl:output message="ns:recuperaMailResponse"
+				wsaw:Action="urn:recuperaMailResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocumento">
+			<wsdl:input message="ns:recuperaDocumentoRequest"
+				wsaw:Action="urn:recuperaDocumento" />
+			<wsdl:output message="ns:recuperaDocumentoResponse"
+				wsaw:Action="urn:recuperaDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="firmaDigitaleP7M">
+			<wsdl:input message="ns:firmaDigitaleP7MRequest"
+				wsaw:Action="urn:firmaDigitaleP7M" />
+			<wsdl:output message="ns:firmaDigitaleP7MResponse"
+				wsaw:Action="urn:firmaDigitaleP7MResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaRubrica">
+			<wsdl:input message="ns:recuperaRubricaRequest"
+				wsaw:Action="urn:recuperaRubrica" />
+			<wsdl:output message="ns:recuperaRubricaResponse"
+				wsaw:Action="urn:recuperaRubricaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="chiusuraFascicolo">
+			<wsdl:input message="ns:chiusuraFascicoloRequest"
+				wsaw:Action="urn:chiusuraFascicolo" />
+			<wsdl:output message="ns:chiusuraFascicoloResponse"
+				wsaw:Action="urn:chiusuraFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="consolidaFascicolo">
+			<wsdl:input message="ns:consolidaFascicoloRequest"
+				wsaw:Action="urn:consolidaFascicolo" />
+			<wsdl:output message="ns:consolidaFascicoloResponse"
+				wsaw:Action="urn:consolidaFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="undoCheckOutDocumento">
+			<wsdl:input message="ns:undoCheckOutDocumentoRequest"
+				wsaw:Action="urn:undoCheckOutDocumento" />
+			<wsdl:output message="ns:undoCheckOutDocumentoResponse"
+				wsaw:Action="urn:undoCheckOutDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="inviaMail">
+			<wsdl:input message="ns:inviaMailRequest" wsaw:Action="urn:inviaMail" />
+			<wsdl:output message="ns:inviaMailResponse" wsaw:Action="urn:inviaMailResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ripristinoMail">
+			<wsdl:input message="ns:ripristinoMailRequest"
+				wsaw:Action="urn:ripristinoMail" />
+			<wsdl:output message="ns:ripristinoMailResponse"
+				wsaw:Action="urn:ripristinoMailResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperoStatoMigrazione">
+			<wsdl:input message="ns:recuperoStatoMigrazioneRequest"
+				wsaw:Action="urn:recuperoStatoMigrazione" />
+			<wsdl:output message="ns:recuperoStatoMigrazioneResponse"
+				wsaw:Action="urn:recuperoStatoMigrazioneResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperoRegistri">
+			<wsdl:input message="ns:recuperoRegistriRequest"
+				wsaw:Action="urn:recuperoRegistri" />
+			<wsdl:output message="ns:recuperoRegistriResponse"
+				wsaw:Action="urn:recuperoRegistriResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="inserimentoRelazioneDocumento">
+			<wsdl:input message="ns:inserimentoRelazioneDocumentoRequest"
+				wsaw:Action="urn:inserimentoRelazioneDocumento" />
+			<wsdl:output message="ns:inserimentoRelazioneDocumentoResponse"
+				wsaw:Action="urn:inserimentoRelazioneDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="cifraDocumento">
+			<wsdl:input message="ns:cifraDocumentoRequest"
+				wsaw:Action="urn:cifraDocumento" />
+			<wsdl:output message="ns:cifraDocumentoResponse"
+				wsaw:Action="urn:cifraDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocumentoCifrato">
+			<wsdl:input message="ns:recuperaDocumentoCifratoRequest"
+				wsaw:Action="urn:recuperaDocumentoCifrato" />
+			<wsdl:output message="ns:recuperaDocumentoCifratoResponse"
+				wsaw:Action="urn:recuperaDocumentoCifratoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocFascicolo">
+			<wsdl:input message="ns:recuperaDocFascicoloRequest"
+				wsaw:Action="urn:recuperaDocFascicolo" />
+			<wsdl:output message="ns:recuperaDocFascicoloResponse"
+				wsaw:Action="urn:recuperaDocFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="eliminaDocumentoPermanente">
+			<wsdl:input message="ns:eliminaDocumentoPermanenteRequest"
+				wsaw:Action="urn:eliminaDocumentoPermanente" />
+			<wsdl:output message="ns:eliminaDocumentoPermanenteResponse"
+				wsaw:Action="urn:eliminaDocumentoPermanenteResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="updateDocumento">
+			<wsdl:input message="ns:updateDocumentoRequest"
+				wsaw:Action="urn:updateDocumento" />
+			<wsdl:output message="ns:updateDocumentoResponse"
+				wsaw:Action="urn:updateDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaSerizioConservazioneDocumento">
+			<wsdl:input message="ns:recuperaSerizioConservazioneDocumentoRequest"
+				wsaw:Action="urn:recuperaSerizioConservazioneDocumento" />
+			<wsdl:output message="ns:recuperaSerizioConservazioneDocumentoResponse"
+				wsaw:Action="urn:recuperaSerizioConservazioneDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="migrazioneFascicolo">
+			<wsdl:input message="ns:migrazioneFascicoloRequest"
+				wsaw:Action="urn:migrazioneFascicolo" />
+			<wsdl:output message="ns:migrazioneFascicoloResponse"
+				wsaw:Action="urn:migrazioneFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperoMailOriginale">
+			<wsdl:input message="ns:recuperoMailOriginaleRequest"
+				wsaw:Action="urn:recuperoMailOriginale" />
+			<wsdl:output message="ns:recuperoMailOriginaleResponse"
+				wsaw:Action="urn:recuperoMailOriginaleResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="firmaDocumento">
+			<wsdl:input message="ns:firmaDocumentoRequest"
+				wsaw:Action="urn:firmaDocumento" />
+			<wsdl:output message="ns:firmaDocumentoResponse"
+				wsaw:Action="urn:firmaDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="verificaIndirizzoRubrica">
+			<wsdl:input message="ns:verificaIndirizzoRubricaRequest"
+				wsaw:Action="urn:verificaIndirizzoRubrica" />
+			<wsdl:output message="ns:verificaIndirizzoRubricaResponse"
+				wsaw:Action="urn:verificaIndirizzoRubricaResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="cancellaFascicoloPermanente">
+			<wsdl:input message="ns:cancellaFascicoloPermanenteRequest"
+				wsaw:Action="urn:cancellaFascicoloPermanente" />
+			<wsdl:output message="ns:cancellaFascicoloPermanenteResponse"
+				wsaw:Action="urn:cancellaFascicoloPermanenteResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="rimuoviDocumenti">
+			<wsdl:input message="ns:rimuoviDocumentiRequest"
+				wsaw:Action="urn:rimuoviDocumenti" />
+			<wsdl:output message="ns:rimuoviDocumentiResponse"
+				wsaw:Action="urn:rimuoviDocumentiResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="uploadDocumentoP7M">
+			<wsdl:input message="ns:uploadDocumentoP7MRequest"
+				wsaw:Action="urn:uploadDocumentoP7M" />
+			<wsdl:output message="ns:uploadDocumentoP7MResponse"
+				wsaw:Action="urn:uploadDocumentoP7MResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="stralcioFascicolo">
+			<wsdl:input message="ns:stralcioFascicoloRequest"
+				wsaw:Action="urn:stralcioFascicolo" />
+			<wsdl:output message="ns:stralcioFascicoloResponse"
+				wsaw:Action="urn:stralcioFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ricercaDocumentiFullText">
+			<wsdl:input message="ns:ricercaDocumentiFullTextRequest"
+				wsaw:Action="urn:ricercaDocumentiFullText" />
+			<wsdl:output message="ns:ricercaDocumentiFullTextResponse"
+				wsaw:Action="urn:ricercaDocumentiFullTextResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getVideoUrl">
+			<wsdl:input message="ns:getVideoUrlRequest" wsaw:Action="urn:getVideoUrl" />
+			<wsdl:output message="ns:getVideoUrlResponse"
+				wsaw:Action="urn:getVideoUrlResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="eliminaMail">
+			<wsdl:input message="ns:eliminaMailRequest" wsaw:Action="urn:eliminaMail" />
+			<wsdl:output message="ns:eliminaMailResponse"
+				wsaw:Action="urn:eliminaMailResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="spostaDocumento">
+			<wsdl:input message="ns:spostaDocumentoRequest"
+				wsaw:Action="urn:spostaDocumento" />
+			<wsdl:output message="ns:spostaDocumentoResponse"
+				wsaw:Action="urn:spostaDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="verificaFirmaDigitaleDocumento">
+			<wsdl:input message="ns:verificaFirmaDigitaleDocumentoRequest"
+				wsaw:Action="urn:verificaFirmaDigitaleDocumento" />
+			<wsdl:output message="ns:verificaFirmaDigitaleDocumentoResponse"
+				wsaw:Action="urn:verificaFirmaDigitaleDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="renderDocumento">
+			<wsdl:input message="ns:renderDocumentoRequest"
+				wsaw:Action="urn:renderDocumento" />
+			<wsdl:output message="ns:renderDocumentoResponse"
+				wsaw:Action="urn:renderDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="updateSecurityDFascicolo">
+			<wsdl:input message="ns:updateSecurityDFascicoloRequest"
+				wsaw:Action="urn:updateSecurityDFascicolo" />
+			<wsdl:output message="ns:updateSecurityDFascicoloResponse"
+				wsaw:Action="urn:updateSecurityDFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="inviaMailExternalAttachs">
+			<wsdl:input message="ns:inviaMailExternalAttachsRequest"
+				wsaw:Action="urn:inviaMailExternalAttachs" />
+			<wsdl:output message="ns:inviaMailExternalAttachsResponse"
+				wsaw:Action="urn:inviaMailExternalAttachsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaStoricoFascicolo">
+			<wsdl:input message="ns:recuperaStoricoFascicoloRequest"
+				wsaw:Action="urn:recuperaStoricoFascicolo" />
+			<wsdl:output message="ns:recuperaStoricoFascicoloResponse"
+				wsaw:Action="urn:recuperaStoricoFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="verificaEsitoMail">
+			<wsdl:input message="ns:verificaEsitoMailRequest"
+				wsaw:Action="urn:verificaEsitoMail" />
+			<wsdl:output message="ns:verificaEsitoMailResponse"
+				wsaw:Action="urn:verificaEsitoMailResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="recuperaFascicolo">
+			<wsdl:input message="ns:recuperaFascicoloRequest"
+				wsaw:Action="urn:recuperaFascicolo" />
+			<wsdl:output message="ns:recuperaFascicoloResponse"
+				wsaw:Action="urn:recuperaFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="versioniDocumento">
+			<wsdl:input message="ns:versioniDocumentoRequest"
+				wsaw:Action="urn:versioniDocumento" />
+			<wsdl:output message="ns:versioniDocumentoResponse"
+				wsaw:Action="urn:versioniDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="testConnessione">
+			<wsdl:input message="ns:testConnessioneRequest"
+				wsaw:Action="urn:testConnessione" />
+			<wsdl:output message="ns:testConnessioneResponse"
+				wsaw:Action="urn:testConnessioneResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="updateFascicolo">
+			<wsdl:input message="ns:updateFascicoloRequest"
+				wsaw:Action="urn:updateFascicolo" />
+			<wsdl:output message="ns:updateFascicoloResponse"
+				wsaw:Action="urn:updateFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="monitorJob">
+			<wsdl:input message="ns:monitorJobRequest" wsaw:Action="urn:monitorJob" />
+			<wsdl:output message="ns:monitorJobResponse" wsaw:Action="urn:monitorJobResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="checkOutDocumento">
+			<wsdl:input message="ns:checkOutDocumentoRequest"
+				wsaw:Action="urn:checkOutDocumento" />
+			<wsdl:output message="ns:checkOutDocumentoResponse"
+				wsaw:Action="urn:checkOutDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="riunioneFascicoli">
+			<wsdl:input message="ns:riunioneFascicoliRequest"
+				wsaw:Action="urn:riunioneFascicoli" />
+			<wsdl:output message="ns:riunioneFascicoliResponse"
+				wsaw:Action="urn:riunioneFascicoliResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="ricercaDocumenti">
+			<wsdl:input message="ns:ricercaDocumentiRequest"
+				wsaw:Action="urn:ricercaDocumenti" />
+			<wsdl:output message="ns:ricercaDocumentiResponse"
+				wsaw:Action="urn:ricercaDocumentiResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="aperturaFascicolo">
+			<wsdl:input message="ns:aperturaFascicoloRequest"
+				wsaw:Action="urn:aperturaFascicolo" />
+			<wsdl:output message="ns:aperturaFascicoloResponse"
+				wsaw:Action="urn:aperturaFascicoloResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="inserimentoDocumento">
+			<wsdl:input message="ns:inserimentoDocumentoRequest"
+				wsaw:Action="urn:inserimentoDocumento" />
+			<wsdl:output message="ns:inserimentoDocumentoResponse"
+				wsaw:Action="urn:inserimentoDocumentoResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="cancellaFascicolo">
+			<wsdl:input message="ns:cancellaFascicoloRequest"
+				wsaw:Action="urn:cancellaFascicolo" />
+			<wsdl:output message="ns:cancellaFascicoloResponse"
+				wsaw:Action="urn:cancellaFascicoloResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="EfGiustiziaServiceSoap11Binding" type="ns:EfGiustiziaServicePortType">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<wsdl:operation name="riceviMail">
+			<soap:operation soapAction="urn:riceviMail" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="interrogaRubrica">
+			<soap:operation soapAction="urn:interrogaRubrica"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="pubblicaDocumenti">
+			<soap:operation soapAction="urn:pubblicaDocumenti"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="estrazionePagineDocumento">
+			<soap:operation soapAction="urn:estrazionePagineDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="esportaDocumenti">
+			<soap:operation soapAction="urn:esportaDocumenti"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateDocument">
+			<soap:operation soapAction="urn:updateDocument" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inviaServizioConservazioneDocumento">
+			<soap:operation soapAction="urn:inviaServizioConservazioneDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="creaFascicolo">
+			<soap:operation soapAction="urn:creaFascicolo" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaDigestDocumento">
+			<soap:operation soapAction="urn:verificaDigestDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="elencoFascicoliOfGroup">
+			<soap:operation soapAction="urn:elencoFascicoliOfGroup"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancellazioneRelazioneDocumento">
+			<soap:operation soapAction="urn:cancellazioneRelazioneDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaStoricoDocumento">
+			<soap:operation soapAction="urn:recuperaStoricoDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="aggiuntaFascicolo">
+			<soap:operation soapAction="urn:aggiuntaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="firmaRemotaHSM">
+			<soap:operation soapAction="urn:firmaRemotaHSM" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ricercaFascicoli">
+			<soap:operation soapAction="urn:ricercaFascicoli"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaSottoFascicoli">
+			<soap:operation soapAction="urn:recuperaSottoFascicoli"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkInDocumento">
+			<soap:operation soapAction="urn:checkInDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaFascicoliDaConsolidare">
+			<soap:operation soapAction="urn:recuperaFascicoliDaConsolidare"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="eliminaDocumento">
+			<soap:operation soapAction="urn:eliminaDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaMail">
+			<soap:operation soapAction="urn:recuperaMail" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocumento">
+			<soap:operation soapAction="urn:recuperaDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="firmaDigitaleP7M">
+			<soap:operation soapAction="urn:firmaDigitaleP7M"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaRubrica">
+			<soap:operation soapAction="urn:recuperaRubrica"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="chiusuraFascicolo">
+			<soap:operation soapAction="urn:chiusuraFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consolidaFascicolo">
+			<soap:operation soapAction="urn:consolidaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inviaMail">
+			<soap:operation soapAction="urn:inviaMail" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="undoCheckOutDocumento">
+			<soap:operation soapAction="urn:undoCheckOutDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ripristinoMail">
+			<soap:operation soapAction="urn:ripristinoMail" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperoStatoMigrazione">
+			<soap:operation soapAction="urn:recuperoStatoMigrazione"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperoRegistri">
+			<soap:operation soapAction="urn:recuperoRegistri"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inserimentoRelazioneDocumento">
+			<soap:operation soapAction="urn:inserimentoRelazioneDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cifraDocumento">
+			<soap:operation soapAction="urn:cifraDocumento" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocFascicolo">
+			<soap:operation soapAction="urn:recuperaDocFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocumentoCifrato">
+			<soap:operation soapAction="urn:recuperaDocumentoCifrato"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="eliminaDocumentoPermanente">
+			<soap:operation soapAction="urn:eliminaDocumentoPermanente"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateDocumento">
+			<soap:operation soapAction="urn:updateDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="migrazioneFascicolo">
+			<soap:operation soapAction="urn:migrazioneFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaSerizioConservazioneDocumento">
+			<soap:operation soapAction="urn:recuperaSerizioConservazioneDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="firmaDocumento">
+			<soap:operation soapAction="urn:firmaDocumento" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperoMailOriginale">
+			<soap:operation soapAction="urn:recuperoMailOriginale"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaIndirizzoRubrica">
+			<soap:operation soapAction="urn:verificaIndirizzoRubrica"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancellaFascicoloPermanente">
+			<soap:operation soapAction="urn:cancellaFascicoloPermanente"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="rimuoviDocumenti">
+			<soap:operation soapAction="urn:rimuoviDocumenti"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="uploadDocumentoP7M">
+			<soap:operation soapAction="urn:uploadDocumentoP7M"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ricercaDocumentiFullText">
+			<soap:operation soapAction="urn:ricercaDocumentiFullText"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="stralcioFascicolo">
+			<soap:operation soapAction="urn:stralcioFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getVideoUrl">
+			<soap:operation soapAction="urn:getVideoUrl" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="eliminaMail">
+			<soap:operation soapAction="urn:eliminaMail" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateSecurityDFascicolo">
+			<soap:operation soapAction="urn:updateSecurityDFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="spostaDocumento">
+			<soap:operation soapAction="urn:spostaDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inviaMailExternalAttachs">
+			<soap:operation soapAction="urn:inviaMailExternalAttachs"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="renderDocumento">
+			<soap:operation soapAction="urn:renderDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaFirmaDigitaleDocumento">
+			<soap:operation soapAction="urn:verificaFirmaDigitaleDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaStoricoFascicolo">
+			<soap:operation soapAction="urn:recuperaStoricoFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaEsitoMail">
+			<soap:operation soapAction="urn:verificaEsitoMail"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaFascicolo">
+			<soap:operation soapAction="urn:recuperaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="testConnessione">
+			<soap:operation soapAction="urn:testConnessione"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="versioniDocumento">
+			<soap:operation soapAction="urn:versioniDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateFascicolo">
+			<soap:operation soapAction="urn:updateFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="monitorJob">
+			<soap:operation soapAction="urn:monitorJob" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkOutDocumento">
+			<soap:operation soapAction="urn:checkOutDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="aperturaFascicolo">
+			<soap:operation soapAction="urn:aperturaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ricercaDocumenti">
+			<soap:operation soapAction="urn:ricercaDocumenti"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="riunioneFascicoli">
+			<soap:operation soapAction="urn:riunioneFascicoli"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inserimentoDocumento">
+			<soap:operation soapAction="urn:inserimentoDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancellaFascicolo">
+			<soap:operation soapAction="urn:cancellaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="EfGiustiziaServiceSoap12Binding" type="ns:EfGiustiziaServicePortType">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<wsdl:operation name="riceviMail">
+			<soap12:operation soapAction="urn:riceviMail" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="interrogaRubrica">
+			<soap12:operation soapAction="urn:interrogaRubrica"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="pubblicaDocumenti">
+			<soap12:operation soapAction="urn:pubblicaDocumenti"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="estrazionePagineDocumento">
+			<soap12:operation soapAction="urn:estrazionePagineDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="esportaDocumenti">
+			<soap12:operation soapAction="urn:esportaDocumenti"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateDocument">
+			<soap12:operation soapAction="urn:updateDocument"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inviaServizioConservazioneDocumento">
+			<soap12:operation soapAction="urn:inviaServizioConservazioneDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="creaFascicolo">
+			<soap12:operation soapAction="urn:creaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaDigestDocumento">
+			<soap12:operation soapAction="urn:verificaDigestDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="elencoFascicoliOfGroup">
+			<soap12:operation soapAction="urn:elencoFascicoliOfGroup"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancellazioneRelazioneDocumento">
+			<soap12:operation soapAction="urn:cancellazioneRelazioneDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaStoricoDocumento">
+			<soap12:operation soapAction="urn:recuperaStoricoDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="aggiuntaFascicolo">
+			<soap12:operation soapAction="urn:aggiuntaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="firmaRemotaHSM">
+			<soap12:operation soapAction="urn:firmaRemotaHSM"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ricercaFascicoli">
+			<soap12:operation soapAction="urn:ricercaFascicoli"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaSottoFascicoli">
+			<soap12:operation soapAction="urn:recuperaSottoFascicoli"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkInDocumento">
+			<soap12:operation soapAction="urn:checkInDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaFascicoliDaConsolidare">
+			<soap12:operation soapAction="urn:recuperaFascicoliDaConsolidare"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="eliminaDocumento">
+			<soap12:operation soapAction="urn:eliminaDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaMail">
+			<soap12:operation soapAction="urn:recuperaMail"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocumento">
+			<soap12:operation soapAction="urn:recuperaDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="firmaDigitaleP7M">
+			<soap12:operation soapAction="urn:firmaDigitaleP7M"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaRubrica">
+			<soap12:operation soapAction="urn:recuperaRubrica"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="chiusuraFascicolo">
+			<soap12:operation soapAction="urn:chiusuraFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consolidaFascicolo">
+			<soap12:operation soapAction="urn:consolidaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inviaMail">
+			<soap12:operation soapAction="urn:inviaMail" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="undoCheckOutDocumento">
+			<soap12:operation soapAction="urn:undoCheckOutDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ripristinoMail">
+			<soap12:operation soapAction="urn:ripristinoMail"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperoStatoMigrazione">
+			<soap12:operation soapAction="urn:recuperoStatoMigrazione"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperoRegistri">
+			<soap12:operation soapAction="urn:recuperoRegistri"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inserimentoRelazioneDocumento">
+			<soap12:operation soapAction="urn:inserimentoRelazioneDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cifraDocumento">
+			<soap12:operation soapAction="urn:cifraDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocFascicolo">
+			<soap12:operation soapAction="urn:recuperaDocFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocumentoCifrato">
+			<soap12:operation soapAction="urn:recuperaDocumentoCifrato"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="eliminaDocumentoPermanente">
+			<soap12:operation soapAction="urn:eliminaDocumentoPermanente"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateDocumento">
+			<soap12:operation soapAction="urn:updateDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="migrazioneFascicolo">
+			<soap12:operation soapAction="urn:migrazioneFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaSerizioConservazioneDocumento">
+			<soap12:operation soapAction="urn:recuperaSerizioConservazioneDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="firmaDocumento">
+			<soap12:operation soapAction="urn:firmaDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperoMailOriginale">
+			<soap12:operation soapAction="urn:recuperoMailOriginale"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaIndirizzoRubrica">
+			<soap12:operation soapAction="urn:verificaIndirizzoRubrica"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancellaFascicoloPermanente">
+			<soap12:operation soapAction="urn:cancellaFascicoloPermanente"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="rimuoviDocumenti">
+			<soap12:operation soapAction="urn:rimuoviDocumenti"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="uploadDocumentoP7M">
+			<soap12:operation soapAction="urn:uploadDocumentoP7M"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ricercaDocumentiFullText">
+			<soap12:operation soapAction="urn:ricercaDocumentiFullText"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="stralcioFascicolo">
+			<soap12:operation soapAction="urn:stralcioFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getVideoUrl">
+			<soap12:operation soapAction="urn:getVideoUrl"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="eliminaMail">
+			<soap12:operation soapAction="urn:eliminaMail"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateSecurityDFascicolo">
+			<soap12:operation soapAction="urn:updateSecurityDFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="spostaDocumento">
+			<soap12:operation soapAction="urn:spostaDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inviaMailExternalAttachs">
+			<soap12:operation soapAction="urn:inviaMailExternalAttachs"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="renderDocumento">
+			<soap12:operation soapAction="urn:renderDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaFirmaDigitaleDocumento">
+			<soap12:operation soapAction="urn:verificaFirmaDigitaleDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaStoricoFascicolo">
+			<soap12:operation soapAction="urn:recuperaStoricoFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaEsitoMail">
+			<soap12:operation soapAction="urn:verificaEsitoMail"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaFascicolo">
+			<soap12:operation soapAction="urn:recuperaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="testConnessione">
+			<soap12:operation soapAction="urn:testConnessione"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="versioniDocumento">
+			<soap12:operation soapAction="urn:versioniDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateFascicolo">
+			<soap12:operation soapAction="urn:updateFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="monitorJob">
+			<soap12:operation soapAction="urn:monitorJob" style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkOutDocumento">
+			<soap12:operation soapAction="urn:checkOutDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="aperturaFascicolo">
+			<soap12:operation soapAction="urn:aperturaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ricercaDocumenti">
+			<soap12:operation soapAction="urn:ricercaDocumenti"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="riunioneFascicoli">
+			<soap12:operation soapAction="urn:riunioneFascicoli"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inserimentoDocumento">
+			<soap12:operation soapAction="urn:inserimentoDocumento"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancellaFascicolo">
+			<soap12:operation soapAction="urn:cancellaFascicolo"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="EfGiustiziaServiceHttpBinding" type="ns:EfGiustiziaServicePortType">
+		<http:binding verb="POST" />
+		<wsdl:operation name="riceviMail">
+			<http:operation location="EfGiustiziaService/riceviMail" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="riceviMail" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="riceviMail" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="interrogaRubrica">
+			<http:operation location="EfGiustiziaService/interrogaRubrica" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="interrogaRubrica" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="interrogaRubrica" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="pubblicaDocumenti">
+			<http:operation location="EfGiustiziaService/pubblicaDocumenti" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="pubblicaDocumenti" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="pubblicaDocumenti" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="estrazionePagineDocumento">
+			<http:operation location="EfGiustiziaService/estrazionePagineDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="estrazionePagineDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="estrazionePagineDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="esportaDocumenti">
+			<http:operation location="EfGiustiziaService/esportaDocumenti" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="esportaDocumenti" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="esportaDocumenti" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateDocument">
+			<http:operation location="EfGiustiziaService/updateDocument" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="updateDocument" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="updateDocument" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inviaServizioConservazioneDocumento">
+			<http:operation
+				location="EfGiustiziaService/inviaServizioConservazioneDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml"
+					part="inviaServizioConservazioneDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml"
+					part="inviaServizioConservazioneDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="creaFascicolo">
+			<http:operation location="EfGiustiziaService/creaFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="creaFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="creaFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaDigestDocumento">
+			<http:operation location="EfGiustiziaService/verificaDigestDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="verificaDigestDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="verificaDigestDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="elencoFascicoliOfGroup">
+			<http:operation location="EfGiustiziaService/elencoFascicoliOfGroup" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="elencoFascicoliOfGroup" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="elencoFascicoliOfGroup" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancellazioneRelazioneDocumento">
+			<http:operation location="EfGiustiziaService/cancellazioneRelazioneDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="cancellazioneRelazioneDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="cancellazioneRelazioneDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaStoricoDocumento">
+			<http:operation location="EfGiustiziaService/recuperaStoricoDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperaStoricoDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperaStoricoDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="aggiuntaFascicolo">
+			<http:operation location="EfGiustiziaService/aggiuntaFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="aggiuntaFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="aggiuntaFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="firmaRemotaHSM">
+			<http:operation location="EfGiustiziaService/firmaRemotaHSM" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="firmaRemotaHSM" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="firmaRemotaHSM" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ricercaFascicoli">
+			<http:operation location="EfGiustiziaService/ricercaFascicoli" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="ricercaFascicoli" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="ricercaFascicoli" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaSottoFascicoli">
+			<http:operation location="EfGiustiziaService/recuperaSottoFascicoli" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperaSottoFascicoli" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperaSottoFascicoli" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkInDocumento">
+			<http:operation location="EfGiustiziaService/checkInDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="checkInDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="checkInDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaFascicoliDaConsolidare">
+			<http:operation location="EfGiustiziaService/recuperaFascicoliDaConsolidare" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperaFascicoliDaConsolidare" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperaFascicoliDaConsolidare" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="eliminaDocumento">
+			<http:operation location="EfGiustiziaService/eliminaDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="eliminaDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="eliminaDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaMail">
+			<http:operation location="EfGiustiziaService/recuperaMail" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperaMail" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperaMail" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocumento">
+			<http:operation location="EfGiustiziaService/recuperaDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperaDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperaDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="firmaDigitaleP7M">
+			<http:operation location="EfGiustiziaService/firmaDigitaleP7M" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="firmaDigitaleP7M" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="firmaDigitaleP7M" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaRubrica">
+			<http:operation location="EfGiustiziaService/recuperaRubrica" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperaRubrica" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperaRubrica" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="chiusuraFascicolo">
+			<http:operation location="EfGiustiziaService/chiusuraFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="chiusuraFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="chiusuraFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consolidaFascicolo">
+			<http:operation location="EfGiustiziaService/consolidaFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="consolidaFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="consolidaFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inviaMail">
+			<http:operation location="EfGiustiziaService/inviaMail" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="inviaMail" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="inviaMail" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="undoCheckOutDocumento">
+			<http:operation location="EfGiustiziaService/undoCheckOutDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="undoCheckOutDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="undoCheckOutDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ripristinoMail">
+			<http:operation location="EfGiustiziaService/ripristinoMail" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="ripristinoMail" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="ripristinoMail" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperoStatoMigrazione">
+			<http:operation location="EfGiustiziaService/recuperoStatoMigrazione" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperoStatoMigrazione" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperoStatoMigrazione" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperoRegistri">
+			<http:operation location="EfGiustiziaService/recuperoRegistri" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperoRegistri" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperoRegistri" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inserimentoRelazioneDocumento">
+			<http:operation location="EfGiustiziaService/inserimentoRelazioneDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="inserimentoRelazioneDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="inserimentoRelazioneDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cifraDocumento">
+			<http:operation location="EfGiustiziaService/cifraDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="cifraDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="cifraDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocFascicolo">
+			<http:operation location="EfGiustiziaService/recuperaDocFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperaDocFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperaDocFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaDocumentoCifrato">
+			<http:operation location="EfGiustiziaService/recuperaDocumentoCifrato" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperaDocumentoCifrato" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperaDocumentoCifrato" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="eliminaDocumentoPermanente">
+			<http:operation location="EfGiustiziaService/eliminaDocumentoPermanente" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="eliminaDocumentoPermanente" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="eliminaDocumentoPermanente" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateDocumento">
+			<http:operation location="EfGiustiziaService/updateDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="updateDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="updateDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="migrazioneFascicolo">
+			<http:operation location="EfGiustiziaService/migrazioneFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="migrazioneFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="migrazioneFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaSerizioConservazioneDocumento">
+			<http:operation
+				location="EfGiustiziaService/recuperaSerizioConservazioneDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml"
+					part="recuperaSerizioConservazioneDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml"
+					part="recuperaSerizioConservazioneDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="firmaDocumento">
+			<http:operation location="EfGiustiziaService/firmaDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="firmaDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="firmaDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperoMailOriginale">
+			<http:operation location="EfGiustiziaService/recuperoMailOriginale" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperoMailOriginale" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperoMailOriginale" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaIndirizzoRubrica">
+			<http:operation location="EfGiustiziaService/verificaIndirizzoRubrica" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="verificaIndirizzoRubrica" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="verificaIndirizzoRubrica" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancellaFascicoloPermanente">
+			<http:operation location="EfGiustiziaService/cancellaFascicoloPermanente" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="cancellaFascicoloPermanente" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="cancellaFascicoloPermanente" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="rimuoviDocumenti">
+			<http:operation location="EfGiustiziaService/rimuoviDocumenti" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="rimuoviDocumenti" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="rimuoviDocumenti" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="uploadDocumentoP7M">
+			<http:operation location="EfGiustiziaService/uploadDocumentoP7M" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="uploadDocumentoP7M" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="uploadDocumentoP7M" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ricercaDocumentiFullText">
+			<http:operation location="EfGiustiziaService/ricercaDocumentiFullText" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="ricercaDocumentiFullText" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="ricercaDocumentiFullText" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="stralcioFascicolo">
+			<http:operation location="EfGiustiziaService/stralcioFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="stralcioFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="stralcioFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getVideoUrl">
+			<http:operation location="EfGiustiziaService/getVideoUrl" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="getVideoUrl" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="getVideoUrl" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="eliminaMail">
+			<http:operation location="EfGiustiziaService/eliminaMail" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="eliminaMail" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="eliminaMail" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateSecurityDFascicolo">
+			<http:operation location="EfGiustiziaService/updateSecurityDFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="updateSecurityDFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="updateSecurityDFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="spostaDocumento">
+			<http:operation location="EfGiustiziaService/spostaDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="spostaDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="spostaDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inviaMailExternalAttachs">
+			<http:operation location="EfGiustiziaService/inviaMailExternalAttachs" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="inviaMailExternalAttachs" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="inviaMailExternalAttachs" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="renderDocumento">
+			<http:operation location="EfGiustiziaService/renderDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="renderDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="renderDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaFirmaDigitaleDocumento">
+			<http:operation location="EfGiustiziaService/verificaFirmaDigitaleDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="verificaFirmaDigitaleDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="verificaFirmaDigitaleDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaStoricoFascicolo">
+			<http:operation location="EfGiustiziaService/recuperaStoricoFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperaStoricoFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperaStoricoFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="verificaEsitoMail">
+			<http:operation location="EfGiustiziaService/verificaEsitoMail" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="verificaEsitoMail" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="verificaEsitoMail" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="recuperaFascicolo">
+			<http:operation location="EfGiustiziaService/recuperaFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="recuperaFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="recuperaFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="testConnessione">
+			<http:operation location="EfGiustiziaService/testConnessione" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="testConnessione" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="testConnessione" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="versioniDocumento">
+			<http:operation location="EfGiustiziaService/versioniDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="versioniDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="versioniDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateFascicolo">
+			<http:operation location="EfGiustiziaService/updateFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="updateFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="updateFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="monitorJob">
+			<http:operation location="EfGiustiziaService/monitorJob" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="monitorJob" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="monitorJob" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkOutDocumento">
+			<http:operation location="EfGiustiziaService/checkOutDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="checkOutDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="checkOutDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="aperturaFascicolo">
+			<http:operation location="EfGiustiziaService/aperturaFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="aperturaFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="aperturaFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ricercaDocumenti">
+			<http:operation location="EfGiustiziaService/ricercaDocumenti" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="ricercaDocumenti" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="ricercaDocumenti" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="riunioneFascicoli">
+			<http:operation location="EfGiustiziaService/riunioneFascicoli" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="riunioneFascicoli" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="riunioneFascicoli" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="inserimentoDocumento">
+			<http:operation location="EfGiustiziaService/inserimentoDocumento" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="inserimentoDocumento" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="inserimentoDocumento" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancellaFascicolo">
+			<http:operation location="EfGiustiziaService/cancellaFascicolo" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="cancellaFascicolo" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="cancellaFascicolo" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="EfGiustiziaService">
+		<wsdl:port name="EfGiustiziaServiceHttpSoap11Endpoint"
+			binding="ns:EfGiustiziaServiceSoap11Binding">
+			<soap:address
+				location="http://161.27.213.212:8080/EfGiustizia/services/EfGiustiziaService.EfGiustiziaServiceHttpSoap11Endpoint/" />
+		</wsdl:port>
+		<wsdl:port name="EfGiustiziaServiceHttpSoap12Endpoint"
+			binding="ns:EfGiustiziaServiceSoap12Binding">
+			<soap12:address
+				location="http://161.27.213.212:8080/EfGiustizia/services/EfGiustiziaService.EfGiustiziaServiceHttpSoap12Endpoint/" />
+		</wsdl:port>
+		<wsdl:port name="EfGiustiziaServiceHttpEndpoint" binding="ns:EfGiustiziaServiceHttpBinding">
+			<http:address
+				location="http://161.27.213.212:8080/EfGiustizia/services/EfGiustiziaService.EfGiustiziaServiceHttpEndpoint/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

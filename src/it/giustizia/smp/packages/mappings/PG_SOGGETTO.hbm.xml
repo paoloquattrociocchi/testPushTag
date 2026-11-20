@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="PG_SOGGETTO_listaPersonaFisica" callable="true" >
+	    <return alias="pers" class="it.giustizia.smp.model.TPersonaFisica"/>
+    <!--<return alias="sogg" class="it.giustizia.smp.model.TSoggetto"/>-->
+	    <return alias="stato" class="it.giustizia.smp.model.TAnStato"/>
+	    <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+	    <return alias="provincia" class="it.giustizia.smp.model.TAnProvincia"/>  	   
+		{ call PG_SOGGETTO.LISTAPERSONAFISICA(?,:vidUffOwn,:vnome,:vcognome,:vstato,:vcomune,:vcomuneNascitaEstero,:vdataNascita,:vcodiceFiscale,:vcodiceCui,:vescludiInterv,:vruolo) }
+	</sql-query>
+	
+	<sql-query name="PG_SOGGETTO_listaIntervenientiFisici" callable="true" >
+	    <return alias="pers" class="it.giustizia.smp.model.TPersonaFisica"/>
+    <!--<return alias="sogg" class="it.giustizia.smp.model.TSoggetto"/>-->
+	    <return alias="stato" class="it.giustizia.smp.model.TAnStato"/>
+	    <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+	    <return alias="provincia" class="it.giustizia.smp.model.TAnProvincia"/>  	   
+		{ call PG_SOGGETTO.LISTAINTERVFISICI(?,:vidUffOwn,:vnome,:vcognome,:vstato,:vcomune,:vcomuneNascitaEstero,:vdataNascita,:vcodiceFiscale,:vcodiceCui) }
+	</sql-query>	
+
+    <sql-query name="PG_SOGGETTO_listaPersonaGiur" callable="true" >
+    	<return alias="p_giur" class="it.giustizia.smp.model.TPersonaGiur"/>
+	    <return alias="stato" class="it.giustizia.smp.model.TAnStato"/>
+	    <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+	    <return alias="provincia" class="it.giustizia.smp.model.TAnProvincia"/>  
+		{ call PG_SOGGETTO.LISTAPERSONAGIUR(?,:vidUffOwn,:vragioneSociale,:vpartitaIva,:vidStatoSede,:vidComuneSede,:vstatoSedeEstero,:vescludiInterv,:vruolo) }
+	</sql-query>
+	
+    <sql-query name="PG_SOGGETTO_listaIntervenientiaGiur" callable="true" >
+    	<return alias="p_giur" class="it.giustizia.smp.model.TPersonaGiur"/>
+	    <return alias="stato" class="it.giustizia.smp.model.TAnStato"/>
+	    <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+	    <return alias="provincia" class="it.giustizia.smp.model.TAnProvincia"/>  
+		{ call PG_SOGGETTO.LISTAINTERVGIUR(?,:vidUffOwn,:vragioneSociale,:vpartitaIva,:vidStatoSede,:vidComuneSede,:vstatoSedeEstero) }
+	</sql-query>	
+	
+	<sql-query name="PG_SOGGETTO_dettaglioPersonaFisica_Proc" callable="true" >
+		{ call PG_SOGGETTO.DETTAGLIOPERSONAFISICA_PROC(?,:vidPersonaFis,:vidUffOwn,:vidVer,:vidProc) }
+    </sql-query>
+    
+	<sql-query name="PG_SOGGETTO_dettaglioPersonaFisica" callable="true" >
+		{ call PG_SOGGETTO.DETTAGLIOPERSONAFISICA(?,:vidPersonaFis,:vidUffOwn,:vidVer) }
+    </sql-query>  
+     
+ 	<sql-query name="PG_SOGGETTO_dettaglioPersonaFisicaVer" callable="true" >
+		{ call PG_SOGGETTO.DETTAGLIOPERSONAFISICAVER(?,:vidPersonaFis,:vidUffOwn,:vidVer) }
+    </sql-query>  
+    
+    
+ 	<sql-query name="PG_SOGGETTO_dettaglioPersonaGiuridicaVer" callable="true" >
+		<return alias="p_giur" class="it.giustizia.smp.model.TPersonaGiur"/>	
+	    <return alias="tiposoc" class="it.giustizia.smp.model.TTpTipoSocieta"/>	
+        <return alias="stato" class="it.giustizia.smp.model.TAnStato"/>	
+        <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>	
+        <return alias="provincia" class="it.giustizia.smp.model.TAnProvincia"/>	
+        <return alias="strada" class="it.giustizia.smp.model.TTpTipoStrada"/>	
+        <return alias="settAtt" class="it.giustizia.smp.model.TTpSettoreAtt"/>
+		{ call PG_SOGGETTO.DETTAGLIOPERSONAGIURVER(?,:vidPersonaGiur,:vidUffOwn,:vidVer) }
+    </sql-query>     
+   
+ 
+	<sql-query name="PG_SOGGETTO_dettaglioPersonaGiur_Proc" callable="true" >
+		{ call PG_SOGGETTO.DETTAGLIOPERSONAGIUR_PROC(?,:vidPersonaGiur,:vidUffOwn,:vidVer,:vidProc) }
+    </sql-query>
+
+	<sql-query name="PG_SOGGETTO_getSogIntById" callable="true" >
+		{ call PG_SOGGETTO.GET_SOGINT_BY_ID(?,:idSogInt,:idUffOwn,:idProcedimento) }
+    </sql-query>
+	
+    <sql-query name="PG_SOGGETTO_getSogIntByIdERuolo" callable="true" >
+		{ call PG_SOGGETTO.GET_SOGINT_BY_ID(?,:idSogInt,:idUffOwn,:idProcedimento,:ruolo) }
+    </sql-query>
+	
+	<sql-query name="PG_SOGGETTO_dettaglioPersonaGiur" callable="true" >
+		<return alias="p_giur" class="it.giustizia.smp.model.TPersonaGiur"/>	
+	    <return alias="tiposoc" class="it.giustizia.smp.model.TTpTipoSocieta"/>	
+        <return alias="stato" class="it.giustizia.smp.model.TAnStato"/>	
+        <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>	
+        <return alias="provincia" class="it.giustizia.smp.model.TAnProvincia"/>	
+        <return alias="strada" class="it.giustizia.smp.model.TTpTipoStrada"/>	
+        <return alias="settAtt" class="it.giustizia.smp.model.TTpSettoreAtt"/>
+		{ call PG_SOGGETTO.DETTAGLIOPERSONAGIUR(?,:vidPersonaGiur,:vidUffOwn,:vidVer) }
+    </sql-query>   
+
+	<sql-query name="PG_SOGGETTO_associaNuovaPersFis" callable="true" >
+		{ call PG_SOGGETTO.ASSOCIANUOVAPERSFIS(?,:idUffOwn,:descUtente,:idProc,
+	 	:cognome,:nome,:sesso,:dataNascita,:flgDataPresunta,
+		:idStatoNasc,:comuneEsteroNasc,:idComuneNasc,:codiceFiscale,:cui,
+		:nomePadre,:cognomePadre,:nomeMadre,:cognomeMadre,:dataDecesso,
+		:idStatoMorte,:comuneEsteroMorte,:idComuneMorte,
+		:idProfess,:idCondGiur,:idIstDet,:descIstEstero,:idStatoRes,:descComuneEstRes,
+		:idComuneRes,:idTipoStradaRes,:indirizzoRes,:numCivicoRes,:capRes,:idStatoDom,
+		:descComuneEstDom,:idComuneDom,:idTipoStradaDom,:indirizzoDom,:numCivicoDom,
+		:capDom,:idStatoDim,:descComuneEstDim,:idComuneDim,:idTipoStradaDim,:indirizzoDim,
+		:numCivicoDim,:capDim,:idStatoDomel,:descComuneEstDomel,:idComuneDomel,:idTipoStradaDomel,
+		:indirizzoDomel,:numCivicoDomel,:capDomel,:pressoDomel,:domelNota,:flgValido,
+		:codMotivo,:idTipoPrev,:idTipoNorm,:idFonte,:dataUltAggiornamento,:ruolo) }
+	</sql-query>
+	
+	<sql-query name="PG_SOGGETTO_nuovaPersFis" callable="true" >
+		{ call PG_SOGGETTO.NUOVAPERSFIS(?,:idUffOwn,:descUtente,
+	 	:cognome,:nome,:sesso,:dataNascita,:flgDataPresunta,
+		:idStatoNasc,:comuneEsteroNasc,:idComuneNasc,:codiceFiscale,:cui,
+		:nomePadre,:cognomePadre,:nomeMadre,:cognomeMadre,:dataDecesso,
+		:idStatoMorte,:comuneEsteroMorte,:idComuneMorte,
+		:idProfess,:idCondGiur,:idIstDet,:descIstEstero,:idStatoRes,:descComuneEstRes,
+		:idComuneRes,:idTipoStradaRes,:indirizzoRes,:numCivicoRes,:capRes,:idStatoDom,
+		:descComuneEstDom,:idComuneDom,:idTipoStradaDom,:indirizzoDom,:numCivicoDom,
+		:capDom,:idStatoDim,:descComuneEstDim,:idComuneDim,:idTipoStradaDim,:indirizzoDim,
+		:numCivicoDim,:capDim,:idStatoDomel,:descComuneEstDomel,:idComuneDomel,:idTipoStradaDomel,
+		:indirizzoDomel,:numCivicoDomel,:capDomel,:pressoDomel,:domelNota,:flgValido,
+		:codMotivo,:idTipoPrev,:idTipoNorm,:idFonte,:dataUltAggiornamento,:ruolo) }
+	</sql-query>	
+	
+	<sql-query name="PG_SOGGETTO_aggiornaPersFis" callable="true" >
+		<return-scalar column="IDPRS" type="long"/>
+		{ call PG_SOGGETTO.AGGIORNAPERSONAFISICA(?,:idProcedimento,:idPersFis,:versione,:idUffOwn,:descUtente,
+	 												:cognome,:nome,:sesso,:dataNascita,:flgDataPresunta,:flgPersDaIdent,
+													:idStatoNasc,:comuneEsteroNasc,:idComuneNasc,:codiceFiscale,
+													:cui,:nomePadre,:cognomePadre,:nomeMadre,:cognomeMadre,
+													:dataDecesso,:idStatoMorte,:comuneEsteroMorte,:idComuneMorte,
+													:idProfess,:idCondGiur,:idIstDet,:descIstEstero,:idStatoRes,
+													:descComuneEstRes,:idComuneRes,:idTipoStradaRes,:indirizzoRes,
+													:numCivicoRes,:capRes,:idStatoDom,:descComuneEstDom,:idComuneDom,
+													:idTipoStradaDom,:indirizzoDom,:numCivicoDom,:capDom,:idStatoDim,
+													:descComuneEstDim,:idComuneDim,:idTipoStradaDim,:indirizzoDim,
+													:numCivicoDim,:capDim,:idStatoDomel,:descComuneEstDomel,:idComuneDomel,
+													:idTipoStradaDomel,:indirizzoDomel,:numCivicoDomel,:capDomel,
+													:pressoDomel,:domelNota												
+													) }
+	</sql-query>
+	
+	<sql-query name="PG_SOGGETTO_aggiornaPersGiur" callable="true" >
+		<return-scalar column="IDPRS_GIUR" type="long"/>
+		{ call PG_SOGGETTO.AGGIORNAPERSONAGIURIDICA(?,:idProcedimento,:idPersGiur,:versione,:idUffOwn,:descUtente,
+													:numCCIAA,:idSettAtt,:impoCapSoc,:note,:descRapprSoc,:descAmmin,
+													:idStatoDomel,:descComuneEstDomel,:idComuneDomel,:idTipoStradaDomel,:indirizzoDomel,
+													:numCivicoDomel,:pressoDomel) }
+	</sql-query>
+	
+	<sql-query name="PG_SOGGETTO_associaNuovaPersGiur" callable="true" >
+		  { call PG_SOGGETTO.ASSOCIANUOVAPERSGIUR(?,:idUffOwn,:descUtente,:idProc,
+		  :idTipoSoc, :descRagSoc,:partitaIva,:numCCIAA,:idStatoSede,:descComuneEsteroSede, 
+		  :idComuneSede,:idTipoStradaSede,:descIndirizzoSede,:civicoSede,:capSede,            
+		  :idSettAtt,:impoCapSoc,:note,:descRapprSoc,:descAmmin,:idStatoDomel,         
+		  :descComuneEstDomel,:idComuneDomel,:idTipoStradaDomel,:indirizzoDomel,       
+		  :numCivicoDomel,:capDomel,:pressoDomel,:domelNota,         
+		  :flgValido,:codMotivo,:idTipoPrev,:idTipoNorm,:idFonte,              
+		  :dataUltAggiornamento,:ruolo) }
+	</sql-query>	
+	
+	<sql-query name="PG_SOGGETTO_nuovaPersGiur" callable="true" >
+		  { call PG_SOGGETTO.NUOVAPERSGIUR(?,:idUffOwn,:descUtente,
+		  :idTipoSoc, :descRagSoc,:partitaIva,:numCCIAA,:idStatoSede,:descComuneEsteroSede, 
+		  :idComuneSede,:idTipoStradaSede,:descIndirizzoSede,:civicoSede,:capSede,            
+		  :idSettAtt,:impoCapSoc,:note,:descRapprSoc,:descAmmin,:idStatoDomel,         
+		  :descComuneEstDomel,:idComuneDomel,:idTipoStradaDomel,:indirizzoDomel,       
+		  :numCivicoDomel,:capDomel,:pressoDomel,:domelNota,         
+		  :flgValido,:codMotivo,:idTipoPrev,:idTipoNorm,:idFonte,              
+		  :dataUltAggiornamento,:ruolo) }
+	</sql-query>		
+	
+	<sql-query name="PG_SOGGETTO_associaPersFis" callable="true" >
+		{ call PG_SOGGETTO.ASSOCIAPERSFIS(?,:idUffOwn,:descUtente,:idProc,
+	 	:idPers,:idVers,:idProfess,:idCondGiur,:idIstDet,:descIstEstero,:idStatoRes,:descComuneEstRes,
+		:idComuneRes,:idTipoStradaRes,:indirizzoRes,:numCivicoRes,:capRes,:idStatoDom,
+		:descComuneEstDom,:idComuneDom,:idTipoStradaDom,:indirizzoDom,:numCivicoDom,
+		:capDom,:idStatoDim,:descComuneEstDim,:idComuneDim,:idTipoStradaDim,:indirizzoDim,
+		:numCivicoDim,:capDim,:idStatoDomel,:descComuneEstDomel,:idComuneDomel,:idTipoStradaDomel,
+		:indirizzoDomel,:numCivicoDomel,:capDomel,:pressoDomel,:domelNota,:flgValido,
+		:codMotivo,:idTipoPrev,:idTipoNorm,:idFonte,:dataUltAggiornamento,:ruolo) }
+	</sql-query>
+	
+	<sql-query name="PG_SOGGETTO_associaPersGiur" callable="true" >
+		  { call PG_SOGGETTO.ASSOCIAPERSGIUR(?,:idUffOwn,:descUtente,:idProc,
+		  :idPers,:idVers,:idStatoDomel,:descComuneEstDomel,:idComuneDomel,
+		  :idTipoStradaDomel,:indirizzoDomel,:numCivicoDomel,:capDomel,:pressoDomel,:domelNota,
+		  :flgValido,:codMotivo,:idTipoPrev,:idTipoNorm,:idFonte,              
+		  :dataUltAggiornamento,:ruolo,:impoCapSoc,:note,:descRapprSoc,:descAmmin) }
+	</sql-query>
+	
+	<sql-query name="PG_SOGGETTO_getSoggettoFisicoByCampiChiave" callable="true" >
+	    <return alias="pers" class="it.giustizia.smp.model.TPersonaFisica"/>
+	    <return alias="sogg" class="it.giustizia.smp.model.TSoggetto"/>
+	    <return alias="stato" class="it.giustizia.smp.model.TAnStato"/>
+	    <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+	    <return alias="provincia" class="it.giustizia.smp.model.TAnProvincia"/>  	   
+		{ call PG_SOGGETTO.GET_PERS_FIS_BY_CAMPI_CHIAVE(?,:idUffOwn,:cognome,:nome,:dataNascita,:idStatoNascita,:idComuneNascita,:descComuneEsteroNascita,:codiceFiscale,:codiceCui) }
+	</sql-query>
+	
+	<sql-query name="PG_SOGGETTO_getSoggettoGiuridicoByCampiChiave" callable="true" >
+	    <return alias="pers" class="it.giustizia.smp.model.TPersonaGiur"/>
+	    <return alias="stato" class="it.giustizia.smp.model.TAnStato"/>
+	    <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+	    <return alias="provincia" class="it.giustizia.smp.model.TAnProvincia"/>  	   
+		{ call PG_SOGGETTO.GET_PERS_GIUR_BY_CAMPI_CHIAVE(?,:idUffOwn,:tipoSocieta,:ragioneSociale,:idStatoSede,:idComuneSede,:comuneSedeEstero, :partitaIva) }
+	</sql-query>
+	
+	<sql-query name="PG_SOGGETTO_listaSoggCondannati" callable="true" >	  
+		{ call PG_SOGGETTO.LISTA_SOGG_CONDANNATI(?,:IDUFFOWN,:IDPROCEDIMENTO,:IDATTO,:FLAGSPESE,:FLAGCASSA) }
+	</sql-query>	
+	
+	<sql-query name="PG_SOGGETTO_beniCollegatiTerzo" callable="true" >	  
+		{ call PG_SOGGETTO.BENI_COLLEGATI_TERZO(?,:IDUFFOWN,:IDPROCEDIMENTO,:IDSOGGTIT) }
+	</sql-query>	
+	   
+	<sql-query name="PG_SOGGETTO_getIdSoggettoAnnullato" callable="true" >
+		<return-scalar column="IDCURRENTSOGGETTO" type="long"/>
+	 	{ call PG_SOGGETTO.GET_ID_SOGGETTO_ANNULLATO(?,:idUffOwn, :idProcedimento, :idSoggetto ) }
+	</sql-query>	   
+
+	<sql-query name="PG_SOGGETTO_flagDecretoSequestro" callable="true" >
+		<return alias="atto" class="it.giustizia.smp.model.TRelBeneAtto"/>
+	 	{ call PG_SOGGETTO.FLAG_DECRETO_SEQUESTRO(?,:idUffOwn, :idProcedimento, :idSoggetto ) }
+	</sql-query>
+	
+	<sql-query name="PG_SOGGETTO_gestioneRelSpeseProc" callable="true" >
+		{ call PG_SOGGETTO.gestionerelspeseproc(?,:idProcedimento,:idSoggetto,:idVersione,:idRuolo,:idUfficio,:idAtto,:idSpeseProc,:descUtente,:tipoOper) }
+	</sql-query> 	   
+			   
+</hibernate-mapping>

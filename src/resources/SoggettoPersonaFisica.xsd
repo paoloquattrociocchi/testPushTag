@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/soggettoPersonaFisica" targetNamespace="http://anbsc.almaviva.it/schema/soggettoPersonaFisica" elementFormDefault="qualified">
+	<complexType name="soggettoPersonaFisica">
+		<sequence>
+			<element name="cognome" type="string"/>
+			<element name="nome" type="string"/>
+			<element name="sesso" type="string" minOccurs="0"/>
+			<element name="dataNascita" type="dateTime" minOccurs="0"/>
+			<element name="luogoNascita" minOccurs="0">
+				<complexType>
+					<choice>
+						<element name="comuneNascitaItalia" type="string" minOccurs="0"/>
+						<element name="statoNascitaEstero" type="string" minOccurs="0"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="luogoresidenza" type="string" minOccurs="0"/>
+			<element name="indirizzo" type="string" minOccurs="0"/>
+			<element name="codiceFiscale" type="string" minOccurs="0"/>
+			<element name="CUI" type="string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

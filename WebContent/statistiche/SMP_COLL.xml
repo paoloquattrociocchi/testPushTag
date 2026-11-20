@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>SMP_COLL</name><driver>oracle.jdbc.driver.OracleDriver</driver><username>SMP_COLL</username><password>6f6e14af-c17d-4cc4-aaac-5c5be48fecf9</password><savePassword>true</savePassword><url>jdbc:oracle:thin:@156.54.180.69:1521:SITMP</url><database></database><serverAddress></serverAddress><classpath>C:\JAVA\tools\jboss-soa-p-5.1\jboss-as\server\default\lib\ojdbc14.jar</classpath></jdbcDataAdapter>

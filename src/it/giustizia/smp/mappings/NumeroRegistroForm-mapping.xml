@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping>
+		<class-a>it.giustizia.smp.form.NumeroRegistroForm</class-a>
+		<class-b>it.giustizia.smp.model.TAnUfficio</class-b>		
+		<field> 
+		  <a>sedeUfficio</a> 
+		  <b>descSedeUfficio</b> 
+		</field>   
+		<field>
+			<a>tipoUfficio</a>
+			<b>descTipoUfficio</b>
+		</field>
+		<field>
+			<a>idUfficio2</a>
+			<b>codiKIdUfficio</b>
+		</field>
+		<field>
+			<a>idTipoUfficio2</a>
+			<b>TTpTipoUfficio.codiKIdTipoUff</b>
+		</field>		
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.NumeroRegistroForm</class-a>
+		<class-b>it.giustizia.smp.model.TRelProcProc</class-b>
+		<field> 
+		  <a>annoProcedimento</a> 
+		  <b>numeAnnoProc2</b> 
+		</field>
+		<field> 
+		  <a>numeroProcedimento</a> 
+		  <b>numeProcedimento2</b> 
+		</field>
+		<field> 
+		  <a>dataIscrizione</a> 
+		  <b>dataApeProc2</b> 
+		</field>
+		<field> 
+		  <a>idProc2</a> 
+		  <b>id.codiKIdProc2</b> 
+		</field>		
+	</mapping>	
+				
+	<mapping>
+		<class-a>it.giustizia.smp.form.NumeroRegistroForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpStatoProc</class-b>
+		<field> 
+		  <a>iter</a> 
+		  <b>descStatoProc</b> 
+		</field>
+	</mapping>	
+		
+</mappings>

@@ -1,0 +1,417 @@
+package it.giustizia.smp.dto.pg_conservatorie;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class BeneAssociatoDto {
+
+	private BigDecimal CODI_K_ID_NOTA;
+	private BigDecimal CODI_K_ID_UFF_OWNER;
+	private BigDecimal CODI_K_PROGR_BENE;
+	private BigDecimal NUME_PROGR_UNEG_BENE;
+	private String     DESC_SEDE_IMMOBILE;
+	private String     DESC_CATASTO;
+	private String     DESC_CATASTO_P;
+	private Character  CODI_FK_ID_TIPO_CAT;
+	private Character  CODI_FK_ID_TIPO_CAT_P;
+	private String     DESC_SEZIONE;
+	private String     DESC_SEZIONE_P;
+	private String     DESC_FOGLIO;
+	private String     DESC_FOGLIO_P;
+	private String     DESC_PARTICELLA_1;
+	private String     DESC_PARTICELLA_1_P;
+	private String     DESC_PARTICELLA_2;
+	private String     DESC_PARTICELLA_2_P;
+	private String     DESC_SUBALTERNO_1;
+	private String     DESC_SUBALTERNO_1_P;
+	private String     DESC_SUBALTERNO_2;
+	private String     DESC_SUBALTERNO_2_P;
+	private Character  DESC_TIPO_DENUNCIA;
+	private Character  DESC_TIPO_DENUNCIA_P;
+	private BigDecimal NUME_DENUNCIA_1;
+	private BigDecimal NUME_DENUNCIA_1_P;
+	private BigDecimal NUME_DENUNCIA_2;
+	private BigDecimal NUME_DENUNCIA_2_P;
+	private BigDecimal NUME_ANNO_DENUNCIA;
+	private BigDecimal NUME_ANNO_DENUNCIA_P;
+	private BigDecimal NUME_GRAFFATI;
+	private Character  CODI_FK_ID_FONDO;
+	private BigDecimal NUME_SUP_ETTARI;
+	private BigDecimal NUME_SUP_ARE;
+	private BigDecimal NUME_SUP_CENTIARE;
+	private BigDecimal NUME_SUP_MQ_INT;
+	private BigDecimal NUME_SUP_MQ_DEC;
+	private BigDecimal NUME_VANI_INT;
+	private BigDecimal NUME_VANI_DEC;
+	private BigDecimal NUME_MC_INT;
+	private BigDecimal NUME_MC_DEC;
+	private BigDecimal CODI_FK_ID_CATEG_CAT;
+	private String     DESC_INDIRIZZO;
+	private BigDecimal NUME_CAPITALE_INT;
+	private BigDecimal NUME_CAPITALE_DEC;
+	private String     DESC_CIVICO;
+	private String     DESC_LOTTO;
+	private String     DESC_EDIFICIO;
+	private String     DESC_SCALA;
+	private String     DESC_INTERNO;
+	private String     DESC_PIANO;
+	private Character  FLG_ERR;
+	private String     DESC_UTENTE;
+    private Date       DATA_ULT_AGG;
+	private BigDecimal CODI_FK_ID_BENE;
+	private BigDecimal CODI_FK_PROGR_UNEG;
+	private String     DESCR_BENE;
+	private Character  FLG_STATO;
+	private String     DESC_COMUNE_P;
+	
+	public BigDecimal getCODI_K_ID_NOTA() {
+		return CODI_K_ID_NOTA;
+	}
+	public void setCODI_K_ID_NOTA(BigDecimal cODI_K_ID_NOTA) {
+		CODI_K_ID_NOTA = cODI_K_ID_NOTA;
+	}
+	public BigDecimal getCODI_K_ID_UFF_OWNER() {
+		return CODI_K_ID_UFF_OWNER;
+	}
+	public void setCODI_K_ID_UFF_OWNER(BigDecimal cODI_K_ID_UFF_OWNER) {
+		CODI_K_ID_UFF_OWNER = cODI_K_ID_UFF_OWNER;
+	}
+	public BigDecimal getCODI_K_PROGR_BENE() {
+		return CODI_K_PROGR_BENE;
+	}
+	public void setCODI_K_PROGR_BENE(BigDecimal cODI_K_PROGR_BENE) {
+		CODI_K_PROGR_BENE = cODI_K_PROGR_BENE;
+	}
+	public BigDecimal getNUME_PROGR_UNEG_BENE() {
+		return NUME_PROGR_UNEG_BENE;
+	}
+	public void setNUME_PROGR_UNEG_BENE(BigDecimal nUME_PROGR_UNEG_BENE) {
+		NUME_PROGR_UNEG_BENE = nUME_PROGR_UNEG_BENE;
+	}
+	public String getDESC_SEDE_IMMOBILE() {
+		return DESC_SEDE_IMMOBILE;
+	}
+	public void setDESC_SEDE_IMMOBILE(String dESC_SEDE_IMMOBILE) {
+		DESC_SEDE_IMMOBILE = dESC_SEDE_IMMOBILE;
+	}
+	public String getDESC_CATASTO() {
+		return DESC_CATASTO;
+	}
+	public void setDESC_CATASTO(String dESC_CATASTO) {
+		DESC_CATASTO = dESC_CATASTO;
+	}
+	public String getDESC_CATASTO_P() {
+		return DESC_CATASTO_P;
+	}
+	public void setDESC_CATASTO_P(String dESC_CATASTO_P) {
+		DESC_CATASTO_P = dESC_CATASTO_P;
+	}
+	public Character getCODI_FK_ID_TIPO_CAT() {
+		return CODI_FK_ID_TIPO_CAT;
+	}
+	public void setCODI_FK_ID_TIPO_CAT(Character cODI_FK_ID_TIPO_CAT) {
+		CODI_FK_ID_TIPO_CAT = cODI_FK_ID_TIPO_CAT;
+	}
+	public Character getCODI_FK_ID_TIPO_CAT_P() {
+		return CODI_FK_ID_TIPO_CAT_P;
+	}
+	public void setCODI_FK_ID_TIPO_CAT_P(Character cODI_FK_ID_TIPO_CAT_P) {
+		CODI_FK_ID_TIPO_CAT_P = cODI_FK_ID_TIPO_CAT_P;
+	}
+	public String getDESC_SEZIONE() {
+		return DESC_SEZIONE;
+	}
+	public void setDESC_SEZIONE(String dESC_SEZIONE) {
+		DESC_SEZIONE = dESC_SEZIONE;
+	}
+	public String getDESC_SEZIONE_P() {
+		return DESC_SEZIONE_P;
+	}
+	public void setDESC_SEZIONE_P(String dESC_SEZIONE_P) {
+		DESC_SEZIONE_P = dESC_SEZIONE_P;
+	}
+	public String getDESC_FOGLIO() {
+		return DESC_FOGLIO;
+	}
+	public void setDESC_FOGLIO(String dESC_FOGLIO) {
+		DESC_FOGLIO = dESC_FOGLIO;
+	}
+	public String getDESC_FOGLIO_P() {
+		return DESC_FOGLIO_P;
+	}
+	public void setDESC_FOGLIO_P(String dESC_FOGLIO_P) {
+		DESC_FOGLIO_P = dESC_FOGLIO_P;
+	}
+	public String getDESC_PARTICELLA_1() {
+		return DESC_PARTICELLA_1;
+	}
+	public void setDESC_PARTICELLA_1(String dESC_PARTICELLA_1) {
+		DESC_PARTICELLA_1 = dESC_PARTICELLA_1;
+	}
+	public String getDESC_PARTICELLA_1_P() {
+		return DESC_PARTICELLA_1_P;
+	}
+	public void setDESC_PARTICELLA_1_P(String dESC_PARTICELLA_1_P) {
+		DESC_PARTICELLA_1_P = dESC_PARTICELLA_1_P;
+	}
+	public String getDESC_PARTICELLA_2() {
+		return DESC_PARTICELLA_2;
+	}
+	public void setDESC_PARTICELLA_2(String dESC_PARTICELLA_2) {
+		DESC_PARTICELLA_2 = dESC_PARTICELLA_2;
+	}
+	public String getDESC_PARTICELLA_2_P() {
+		return DESC_PARTICELLA_2_P;
+	}
+	public void setDESC_PARTICELLA_2_P(String dESC_PARTICELLA_2_P) {
+		DESC_PARTICELLA_2_P = dESC_PARTICELLA_2_P;
+	}
+	public String getDESC_SUBALTERNO_1() {
+		return DESC_SUBALTERNO_1;
+	}
+	public void setDESC_SUBALTERNO_1(String dESC_SUBALTERNO_1) {
+		DESC_SUBALTERNO_1 = dESC_SUBALTERNO_1;
+	}
+	public String getDESC_SUBALTERNO_1_P() {
+		return DESC_SUBALTERNO_1_P;
+	}
+	public void setDESC_SUBALTERNO_1_P(String dESC_SUBALTERNO_1_P) {
+		DESC_SUBALTERNO_1_P = dESC_SUBALTERNO_1_P;
+	}
+	public String getDESC_SUBALTERNO_2() {
+		return DESC_SUBALTERNO_2;
+	}
+	public void setDESC_SUBALTERNO_2(String dESC_SUBALTERNO_2) {
+		DESC_SUBALTERNO_2 = dESC_SUBALTERNO_2;
+	}
+	public String getDESC_SUBALTERNO_2_P() {
+		return DESC_SUBALTERNO_2_P;
+	}
+	public void setDESC_SUBALTERNO_2_P(String dESC_SUBALTERNO_2_P) {
+		DESC_SUBALTERNO_2_P = dESC_SUBALTERNO_2_P;
+	}
+	public Character getDESC_TIPO_DENUNCIA() {
+		return DESC_TIPO_DENUNCIA;
+	}
+	public void setDESC_TIPO_DENUNCIA(Character dESC_TIPO_DENUNCIA) {
+		DESC_TIPO_DENUNCIA = dESC_TIPO_DENUNCIA;
+	}
+	public Character getDESC_TIPO_DENUNCIA_P() {
+		return DESC_TIPO_DENUNCIA_P;
+	}
+	public void setDESC_TIPO_DENUNCIA_P(Character dESC_TIPO_DENUNCIA_P) {
+		DESC_TIPO_DENUNCIA_P = dESC_TIPO_DENUNCIA_P;
+	}
+	public BigDecimal getNUME_DENUNCIA_1() {
+		return NUME_DENUNCIA_1;
+	}
+	public void setNUME_DENUNCIA_1(BigDecimal nUME_DENUNCIA_1) {
+		NUME_DENUNCIA_1 = nUME_DENUNCIA_1;
+	}
+	public BigDecimal getNUME_DENUNCIA_1_P() {
+		return NUME_DENUNCIA_1_P;
+	}
+	public void setNUME_DENUNCIA_1_P(BigDecimal nUME_DENUNCIA_1_P) {
+		NUME_DENUNCIA_1_P = nUME_DENUNCIA_1_P;
+	}
+	public BigDecimal getNUME_DENUNCIA_2() {
+		return NUME_DENUNCIA_2;
+	}
+	public void setNUME_DENUNCIA_2(BigDecimal nUME_DENUNCIA_2) {
+		NUME_DENUNCIA_2 = nUME_DENUNCIA_2;
+	}
+	public BigDecimal getNUME_DENUNCIA_2_P() {
+		return NUME_DENUNCIA_2_P;
+	}
+	public void setNUME_DENUNCIA_2_P(BigDecimal nUME_DENUNCIA_2_P) {
+		NUME_DENUNCIA_2_P = nUME_DENUNCIA_2_P;
+	}
+	public BigDecimal getNUME_ANNO_DENUNCIA() {
+		return NUME_ANNO_DENUNCIA;
+	}
+	public void setNUME_ANNO_DENUNCIA(BigDecimal nUME_ANNO_DENUNCIA) {
+		NUME_ANNO_DENUNCIA = nUME_ANNO_DENUNCIA;
+	}
+	public BigDecimal getNUME_ANNO_DENUNCIA_P() {
+		return NUME_ANNO_DENUNCIA_P;
+	}
+	public void setNUME_ANNO_DENUNCIA_P(BigDecimal nUME_ANNO_DENUNCIA_P) {
+		NUME_ANNO_DENUNCIA_P = nUME_ANNO_DENUNCIA_P;
+	}
+	public BigDecimal getNUME_GRAFFATI() {
+		return NUME_GRAFFATI;
+	}
+	public void setNUME_GRAFFATI(BigDecimal nUME_GRAFFATI) {
+		NUME_GRAFFATI = nUME_GRAFFATI;
+	}
+	public Character getCODI_FK_ID_FONDO() {
+		return CODI_FK_ID_FONDO;
+	}
+	public void setCODI_FK_ID_FONDO(Character cODI_FK_ID_FONDO) {
+		CODI_FK_ID_FONDO = cODI_FK_ID_FONDO;
+	}
+	public BigDecimal getNUME_SUP_ETTARI() {
+		return NUME_SUP_ETTARI;
+	}
+	public void setNUME_SUP_ETTARI(BigDecimal nUME_SUP_ETTARI) {
+		NUME_SUP_ETTARI = nUME_SUP_ETTARI;
+	}
+	public BigDecimal getNUME_SUP_ARE() {
+		return NUME_SUP_ARE;
+	}
+	public void setNUME_SUP_ARE(BigDecimal nUME_SUP_ARE) {
+		NUME_SUP_ARE = nUME_SUP_ARE;
+	}
+	public BigDecimal getNUME_SUP_CENTIARE() {
+		return NUME_SUP_CENTIARE;
+	}
+	public void setNUME_SUP_CENTIARE(BigDecimal nUME_SUP_CENTIARE) {
+		NUME_SUP_CENTIARE = nUME_SUP_CENTIARE;
+	}
+	public BigDecimal getNUME_SUP_MQ_INT() {
+		return NUME_SUP_MQ_INT;
+	}
+	public void setNUME_SUP_MQ_INT(BigDecimal nUME_SUP_MQ_INT) {
+		NUME_SUP_MQ_INT = nUME_SUP_MQ_INT;
+	}
+	public BigDecimal getNUME_SUP_MQ_DEC() {
+		return NUME_SUP_MQ_DEC;
+	}
+	public void setNUME_SUP_MQ_DEC(BigDecimal nUME_SUP_MQ_DEC) {
+		NUME_SUP_MQ_DEC = nUME_SUP_MQ_DEC;
+	}
+	public BigDecimal getNUME_VANI_INT() {
+		return NUME_VANI_INT;
+	}
+	public void setNUME_VANI_INT(BigDecimal nUME_VANI_INT) {
+		NUME_VANI_INT = nUME_VANI_INT;
+	}
+	public BigDecimal getNUME_VANI_DEC() {
+		return NUME_VANI_DEC;
+	}
+	public void setNUME_VANI_DEC(BigDecimal nUME_VANI_DEC) {
+		NUME_VANI_DEC = nUME_VANI_DEC;
+	}
+	public BigDecimal getNUME_MC_INT() {
+		return NUME_MC_INT;
+	}
+	public void setNUME_MC_INT(BigDecimal nUME_MC_INT) {
+		NUME_MC_INT = nUME_MC_INT;
+	}
+	public BigDecimal getNUME_MC_DEC() {
+		return NUME_MC_DEC;
+	}
+	public void setNUME_MC_DEC(BigDecimal nUME_MC_DEC) {
+		NUME_MC_DEC = nUME_MC_DEC;
+	}
+	public BigDecimal getCODI_FK_ID_CATEG_CAT() {
+		return CODI_FK_ID_CATEG_CAT;
+	}
+	public void setCODI_FK_ID_CATEG_CAT(BigDecimal cODI_FK_ID_CATEG_CAT) {
+		CODI_FK_ID_CATEG_CAT = cODI_FK_ID_CATEG_CAT;
+	}
+	public String getDESC_INDIRIZZO() {
+		return DESC_INDIRIZZO;
+	}
+	public void setDESC_INDIRIZZO(String dESC_INDIRIZZO) {
+		DESC_INDIRIZZO = dESC_INDIRIZZO;
+	}
+	public BigDecimal getNUME_CAPITALE_INT() {
+		return NUME_CAPITALE_INT;
+	}
+	public void setNUME_CAPITALE_INT(BigDecimal nUME_CAPITALE_INT) {
+		NUME_CAPITALE_INT = nUME_CAPITALE_INT;
+	}
+	public BigDecimal getNUME_CAPITALE_DEC() {
+		return NUME_CAPITALE_DEC;
+	}
+	public void setNUME_CAPITALE_DEC(BigDecimal nUME_CAPITALE_DEC) {
+		NUME_CAPITALE_DEC = nUME_CAPITALE_DEC;
+	}
+	public String getDESC_CIVICO() {
+		return DESC_CIVICO;
+	}
+	public void setDESC_CIVICO(String dESC_CIVICO) {
+		DESC_CIVICO = dESC_CIVICO;
+	}
+	public String getDESC_LOTTO() {
+		return DESC_LOTTO;
+	}
+	public void setDESC_LOTTO(String dESC_LOTTO) {
+		DESC_LOTTO = dESC_LOTTO;
+	}
+	public String getDESC_EDIFICIO() {
+		return DESC_EDIFICIO;
+	}
+	public void setDESC_EDIFICIO(String dESC_EDIFICIO) {
+		DESC_EDIFICIO = dESC_EDIFICIO;
+	}
+	public String getDESC_SCALA() {
+		return DESC_SCALA;
+	}
+	public void setDESC_SCALA(String dESC_SCALA) {
+		DESC_SCALA = dESC_SCALA;
+	}
+	public String getDESC_INTERNO() {
+		return DESC_INTERNO;
+	}
+	public void setDESC_INTERNO(String dESC_INTERNO) {
+		DESC_INTERNO = dESC_INTERNO;
+	}
+	public String getDESC_PIANO() {
+		return DESC_PIANO;
+	}
+	public void setDESC_PIANO(String dESC_PIANO) {
+		DESC_PIANO = dESC_PIANO;
+	}
+	public Character getFLG_ERR() {
+		return FLG_ERR;
+	}
+	public void setFLG_ERR(Character fLG_ERR) {
+		FLG_ERR = fLG_ERR;
+	}
+	public String getDESC_UTENTE() {
+		return DESC_UTENTE;
+	}
+	public void setDESC_UTENTE(String dESC_UTENTE) {
+		DESC_UTENTE = dESC_UTENTE;
+	}
+	public Date getDATA_ULT_AGG() {
+		return DATA_ULT_AGG;
+	}
+	public void setDATA_ULT_AGG(Date dATA_ULT_AGG) {
+		DATA_ULT_AGG = dATA_ULT_AGG;
+	}
+	public BigDecimal getCODI_FK_ID_BENE() {
+		return CODI_FK_ID_BENE;
+	}
+	public void setCODI_FK_ID_BENE(BigDecimal cODI_FK_ID_BENE) {
+		CODI_FK_ID_BENE = cODI_FK_ID_BENE;
+	}
+	public BigDecimal getCODI_FK_PROGR_UNEG() {
+		return CODI_FK_PROGR_UNEG;
+	}
+	public void setCODI_FK_PROGR_UNEG(BigDecimal cODI_FK_PROGR_UNEG) {
+		CODI_FK_PROGR_UNEG = cODI_FK_PROGR_UNEG;
+	}
+	public String getDESCR_BENE() {
+		return DESCR_BENE;
+	}
+	public void setDESCR_BENE(String dESCR_BENE) {
+		DESCR_BENE = dESCR_BENE;
+	}
+	public Character getFLG_STATO() {
+		return FLG_STATO;
+	}
+	public void setFLG_STATO(Character fLG_STATO) {
+		FLG_STATO = fLG_STATO;
+	}
+	public String getDESC_COMUNE_P() {
+		return DESC_COMUNE_P;
+	}
+	public void setDESC_COMUNE_P(String dESC_COMUNE_P) {
+		DESC_COMUNE_P = dESC_COMUNE_P;
+	}
+	
+	
+}

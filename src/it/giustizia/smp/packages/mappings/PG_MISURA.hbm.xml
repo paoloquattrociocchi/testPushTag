@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <sql-query callable="true"
+   name="PG_MISURA_inserisci_rel_atto_misPers">{ call
+		PG_MISURA.INSERISCI_REL_ATTO_MISPERS(?,:idMisureCaricate,:idProc,:idAtto,:idUffOwn,:idSoggInt,
+		:idTipoMisura, :idNormativa,:durataAnni,:durataMesi,:durataGiorni,
+		:descLoc,:descUltPresc,:cauzione,:articolo67,
+		:idEsito1,:idEsito2,:idEsito3,:idEsitoFin,:descAltro1,:descAltro2,
+		:descAltro3,:flgValido,:codiMotivo,:idTipoAtto,:descUtente,:idPrescrizioni,:importoCauzione,:articolo9c1)
+		}<return-scalar
+   column="IDMISURA" type="long"/>
+ </sql-query>
+ <sql-query callable="true"
+   name="PG_MISURA_inserisci_rel_atto_misPersDecisorioIGrado">{ call
+		PG_MISURA.INSERISCI_REL_ATTO_MISPERS_DEC(?, :idProc, :idEsito, :idAtto, :idUffOwn, :idUtente)
+		}<return-scalar
+   column="IDATTO" type="long"/>
+ </sql-query>
+  <sql-query callable="true"
+   name="PG_MISURA_inserisci_rel_atto_misPersDecIGrado">{ call
+		PG_MISURA.INSERT_REL_ATTO_MISPERS_DECIG(?,:idProc,:idAtto,:idUffOwn,:idSoggInt,
+		:idTipoMisura, :idNormativa,:durataAnni,:durataMesi,:durataGiorni,:descLoc,
+		:descUltPresc,:cauzione,:cauzioneProp,:noteCauz,:articolo67,:articolo67Prop,
+		:idTenore,:idEsito1,:idEsito2,:idEsito3,:idEsitoFin,:descAltro1,:descAltro2,
+		:descAltro3,:flgValido,:codiMotivo,:idTipoAtto,:descUtente,
+		:azionePrescrAcc,:azionePrescrNoAcc,:importoCauzione,:idDecisione,:tipoProc)
+		}<return-scalar
+   column="IDATTO" type="long"/>
+ </sql-query>
+ 
+ <sql-query callable="true" name="PG_MISURA_caricaMisuraPers">{ call
+		PG_MISURA.caricaMisuraPers(?,:idProc,:idAtto,:idUffOwn,:idSoggInt) }</sql-query>
+
+
+ <sql-query callable="true" name="PG_MISURA_duplicaMisuraPers">
+    { call PG_MISURA.duplicaMisuraPers(?,:idPadre,:idAggravamento,:idAttoPadreAggiornato,:idAttoAggravamento,:idSoggettoInteressato,:idUffOwn) }  
+     <return-scalar column="IDMISURAPERS" type="long"/>
+ </sql-query>
+ 
+ <sql-query callable="true"
+   name="PG_MISURA_inserisci_misura_sogg_diffidato">{ call PG_MISURA.INS_MISPERS_SOGG_DIFFIDATO(?,:vidProc,:vidUffOwn,:vidSoggInt,:vidTipoMisura,:vcarattereMisura,:vdescUtente)}<return-scalar
+   column="IDMISURAPERS" type="long"/>
+ </sql-query>
+ <sql-query callable="true" name="PG_MISURA_soggettiInteressatiSenzaDecisione">
+ 	{ call PG_MISURA.SOG_INT_SENZA_DECISIONE(?,:idUffOwn,:idProc,:idAtto,:descAtto,:tipiMisura)}
+ 	<return alias="personaFisica" class="it.giustizia.smp.model.TPersonaFisica" />
+ </sql-query>
+ <sql-query callable="true" name="PG_MISURA_beniSenzaDecisione">
+ 	{ call PG_MISURA.BENI_SENZA_DECISIONE(?,:idUffOwn,:idProc,:idAtto,:descAtto)}
+ 	<return alias="bene" class="it.giustizia.smp.model.TBene" />
+ </sql-query>
+  <sql-query callable="true" name="PG_MISURA_misuraSpecAtto">
+ 	{ call PG_MISURA.MISURA_SPECIFICA_ATTO(?,:vidProc,:vidUffOwn,:vidSoggInt,:vidAtto,:vcarMisura)}
+ 	<return alias="atto" class="it.giustizia.smp.model.TRelAttoMisPers" />
+ </sql-query>
+ 
+ <sql-query name="PG_MISURA_convalidaNonConvalidaSequestro" callable="true" >
+	{ call PG_MISURA.CONVALIDA_NONCONVALIDA_SEQ(?,:idProc,:idAtto,:idBene,:idTipoInteresse,:idSoggetto,:idTipoMisura,:idUffOwn, :descUtente, :tipoOperazione, :nomeMetodo) }
+ </sql-query>
+ 
+  <sql-query callable="true"
+   name="PG_MISURA_inserisciModificaRelBeneAtto">{ call
+		PG_MISURA.INS_MOD_REL_BENE_ATTO(?,:idProc, :idAtto, :idUffOwn,
+                       :idBene, :idTipoInteresse, :idSoggTitolare,
+                       :numeQuota, :numeFrazioneNum, :numeFrazioneDen, :importoBene, 
+                       :idNormativa, :idTipoMisura, :idEsito1, :idEsito2, :idEsito3, 
+                       :idEsitoFin, :descAltro1, :descAltro2, :descAltro3, 
+                       :descUtente, :daProposta, :nomeMetodo)
+		}<return-scalar
+   column="IDPROC" type="long"/>
+ </sql-query>
+ 
+  <sql-query callable="true"
+   name="PG_MISURA_elimina_rel_bene_atto">{ call
+		PG_MISURA.DELETE_REL_BENE_ATTO(?,:idProc, :idAtto, :idUffOwn,
+                       :idBene, :idTipoInteresse, :idSoggTitolare)
+		}
+ </sql-query>
+ <sql-query callable="true"
+   name="PG_MISURA_modificaRelBeneTit">{ call
+		PG_MISURA.MODIFICA_REL_BENE_TIT(?,:idProc, :idAtto, :idUffOwn,
+                       :idBene, :idTipoInteresse, :idSoggTitolare,     
+                       :numeQuotaSeq, :numeFrazioneNumSeq,:numeFrazioneDenSeq,
+             		   :descUtente, :daProposta, :tipoOperazione, :nomeMetodo)
+		}<return-scalar
+   column="IDPROC" type="long"/>
+ </sql-query>
+  <sql-query callable="true"
+   name="PG_MISURA_controlloQuota">{ call PG_MISURA.CONTROLLO_QUOTA(?,:idProc, :idAtto, :idUffOwn,
+                       :idBene, :idTipoInteresse, :idSoggTitolare,     
+                       :numeQuotaSeq, :numeFrazioneNumSeq,:numeFrazioneDenSeq, :idTipoMisura,
+             		   :descUtente, :daProposta, :tipoOperazione, :nomeMetodo)
+		}
+		<return-scalar column="MESSAGGIO" type="string"/>
+		<return-scalar column="STATUS" type="string"/>
+ </sql-query>
+ 
+ 
+ 
+ <sql-query callable="true" name="PG_MISURA_caricaMisuraPersIIGrado">{ call
+		PG_MISURA.CARICAMISURAPERSIIGRADO(?,:idProc,:idAtto,:idUffOwn,:idSoggInt) }
+		</sql-query>
+		
+ <sql-query callable="true" name="PG_MISURA_caricaMisuraPersIIIGrado">{ call
+		PG_MISURA.CARICAMISURAPERSIIIGRADO(?,:idProc,:idAtto,:idUffOwn,:idSoggInt) }
+		</sql-query>		
+ 
+ <sql-query callable="true" name="PG_MISURA_misuraSpecAttoRicorso">
+ 	{ call PG_MISURA.MISURA_SPECIFICA_ATTO_RICORSO(?,:vidProc,:vidUffOwn,:vidSoggInt,:vidAtto,:vcarMisura)}
+ 	<return alias="atto" class="it.giustizia.smp.model.TRelAttoMisPers" />
+ </sql-query>
+ 
+  <sql-query callable="true"
+   name="PG_MISURA_inserisci_rel_atto_misPersDecIIGrado">{ call
+		PG_MISURA.INSERT_REL_ATTO_MISPERS_DECIIG(?,:idProc,:idAtto,:idUffOwn,:idSoggInt,
+		:idTipoMisura, :idNormativa,:durataAnni,:durataMesi,:durataGiorni,:descLoc,
+		:descUltPresc,:cauzione,:noteCauz,:articolo67,
+		:flgValido,:codiMotivo,:idTipoAtto,:descUtente,
+		:importoCauzione,:idDecisione,:tipoProc,:idPrescrizioni,:visibilita)
+		}<return-scalar
+   column="IDATTO" type="long"/>
+ </sql-query>
+ 
+   <sql-query callable="true"
+   name="PG_MISURA_inserisci_rel_atto_misPersDecIIIGrado">{ call
+		PG_MISURA.INS_REL_ATTO_MISPERS_DECIIIG(?,:idProc,:idAtto,:idUffOwn,:idSoggInt,
+		:idDecisione,:idTipoProc,:DATA_RICEZIONE,:ANNO_SENTENZA,:NUMERO_SENTENZA,:descUtente)
+		}<return-scalar
+		
+		
+				
+   column="IDATTO" type="long"/>
+ </sql-query>
+ 
+</hibernate-mapping>

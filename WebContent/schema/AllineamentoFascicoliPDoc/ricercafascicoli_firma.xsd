@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:include schemaLocation="autenticazione.xsd"></xs:include>
+	<xs:element name="firma">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="autenticazione" />
+				<xs:element ref="criteri" minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+    <xs:element name="criteri">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="codicefascicolo" minOccurs="0"></xs:element>
+				<xs:element ref="oggetto" minOccurs="0"/>			
+				<xs:element ref="datacreazioneda" minOccurs="0"></xs:element>
+				<xs:element ref="datacreazionea" minOccurs="0"></xs:element>
+				<xs:element ref="idutentecreatore" minOccurs="0"></xs:element>
+				<xs:element ref="idufficiocreatore" minOccurs="0"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+    <xs:element name="codicefascicolo" nillable="true">
+    	<xs:simpleType>
+    		<xs:restriction base="xs:string">
+    			<xs:minLength value="1"></xs:minLength>
+    			<xs:maxLength value="2048"></xs:maxLength>
+    		</xs:restriction>
+    	</xs:simpleType>
+    </xs:element>
+    <xs:element name="oggetto" nillable="true">
+    	<xs:simpleType>
+    		<xs:restriction base="xs:string">
+    			<xs:minLength value="1"></xs:minLength>
+    		</xs:restriction>
+    	</xs:simpleType>
+    </xs:element>
+    <xs:element name="datacreazioneda" type="xs:dateTime" nillable="true"></xs:element>
+	<xs:element name="datacreazionea" type="xs:dateTime" nillable="true"></xs:element>
+	<xs:element name="idutentecreatore" nillable="true">
+		<xs:simpleType>
+			<xs:restriction base="xs:integer">
+				<xs:minInclusive value="1"></xs:minInclusive>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="idufficiocreatore" nillable="true">
+		<xs:simpleType>
+			<xs:restriction base="xs:integer">
+
+				<xs:minInclusive value="1"></xs:minInclusive>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+</xs:schema>

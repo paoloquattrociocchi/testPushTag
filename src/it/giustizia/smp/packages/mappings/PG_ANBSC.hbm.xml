@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	
+	<sql-query name="PG_ANBSC_get_data_proposta_sequestro" callable="true" >
+	<return-scalar column="dataEmiss" type="date"/>
+	<return-scalar column="idAtto" type="long"/>
+	   {call PG_ANBSC.GET_DATA_PROPOSTA_SEQUESTRO(?,:vidProc)}
+	</sql-query>
+	
+	<sql-query name="PG_ANBSC_getAmministrazione" callable="true" >
+		{ call PG_ANBSC.GET_AMMINISTRAZIONE(?,:vidProc,:vidAtto,:vidUffOwner) }	
+	</sql-query> 
+	
+	<sql-query name="PG_ANBSC_inserisci_Messaggio" callable="true">
+		<return-scalar column="IDMSG" type="long"/>
+		{ call PG_ANBSC.INSERT_T_ANBSC_MSG(?,:VIDPROC, :VIDATTO, :VXML ,:VDESCUTENTE) }
+ 	</sql-query>
+	
+</hibernate-mapping>

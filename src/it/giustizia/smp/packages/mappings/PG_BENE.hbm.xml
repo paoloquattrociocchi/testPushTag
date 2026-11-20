@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="PG_BENE_beni_per_proc" callable="true">
+       { call PG_BENE.BENI_PER_PROC(?,:vFiltro, :vidUffOwn, :vidProcedimento, :vidBene, :vidTipologia, :vidCategoria, :vidSottocategoria, :vidSogInv, :vIsFascGest, :idCatAtto) }
+	</sql-query>
+
+	<sql-query name="PG_BENE_beni_per_proc_FG" callable="true">
+       { call PG_BENE.BENI_PER_PROC_FG(?,:vFiltro, :vidUffOwn, :vidProcedimento, :vidBene, :vidTipologia, :vidCategoria, :vidSottocategoria) }
+	</sql-query>
+		
+  	<sql-query name="PG_BENE_sogint_bene_proc_atto" callable="true">
+		{ call PG_BENE.SOGINT_BENE_PROC_ATTO(?,:idProc,:vidUffOwn,:idBene,:idAtto) }
+	</sql-query>
+	
+	<sql-query name="PG_BENE_sogint_bene_proc_tutti_atti" callable="true">
+		{ call PG_BENE.SOGINT_BENE_PROC_TUTTI_ATTI(?,:idProc,:vidUffOwn,:idBene) }
+	</sql-query>
+
+	<sql-query name="PG_BENE_beni_ricerca_criteri" callable="true">
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+		
+		{ call PG_BENE.BENI_RICERCA_CRITERI(?,:vidUffOwn,:vidprocedimento,:vtipobene,:vcatbene,:vsottocatbene,
+                                 :vidstato,:vidcomune,:vcomuneestero,:vidtipostrada,:vdescindirizzo,
+                                 :vnumcivico,:vnumcap,:vragionesociale,:vsettoreaativita,:vsezione,
+                                 :vfoglio,:vparticella1,:vparticella2,:vsubparticella1,:vsubparticella2,
+                                 :vnumeroRegistrazione,:vtarga,:vdataMin,:vdataMax,:vnumident,:vdescente,:vtipoVal)}
+	</sql-query>
+
+	<sql-query name="PG_BENE_inserisciBene" callable="true" >
+		<return-scalar column="IDBENE" type="long"/>
+	 	{ call PG_BENE.INSERISCI_BENE(?,:vidUffOwn ,:vdescUtente, :vtipo,:vcategoria,:vsottocategoria,:vidstato,
+	 									:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,:vnumcap,:vdesccomuneestero,
+	 									:vnote,:vflagcostazienda,:vflaggravame,:vragionesociale,:vcodicefiscale,
+	 									:vnumerociaa,:vdescrappsociale,:vdescamministratore,:vpartitaiva,
+	 									:vcapitalesociale,:vnumdipendenti,:vsettoreattivita,:vidstatobene,
+	 									:vidprocedimento,:vdescComune,:vtipoStrada,:vdesccategoria,:vdescSottoCat,
+	 									:vdescrizioneCapo,:vnumeroAnimali) }
+	</sql-query>	
+	<sql-query name="PG_BENE_inserisciAzienda" callable="true" >
+		<return-scalar column="IDBENE" type="long"/>
+	 	{ call PG_BENE.INSERISCI_AZIENDA(?,:vidUffOwn ,:vdescUtente, :vtipo,:vcategoria,:vsottocategoria,:vidstato,
+	 									:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,:vnumcap,:vdesccomuneestero,
+	 									:vnote,:vflagcostazienda,:vflaggravame,:vragionesociale,:vcodicefiscale,
+	 									:vnumerociaa,:vdescrappsociale,:vdescamministratore,:vpartitaiva,
+	 									:vcapitalesociale,:vnumdipendenti,:vsettoreattivita,:vidstatocons,
+	 									:vidprocedimento,:vdescComune,:vtipoStrada,:vdesccategoria, :vidBene) }
+	</sql-query>
+	
+	<sql-query name="PG_BENE_inserisciMobile" callable="true" >
+		<return-scalar column="IDBENE" type="long"/>
+	 	{ call PG_BENE.INSERISCI_MOBILE(?,:vidUffOwn ,:vdescUtente, :vtipo,:vcategoria,:vsottocategoria,:vidstato,
+	 									:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,:vnumcap,:vdesccomuneestero,
+	 									:vnote,:vflaggravame,:vidstatocons,:vidprocedimento,:vdescComune,:vtipoStrada,:vdesccategoria,
+	 									:vdescSottoCat,:vdescrizioneCapo,:vnumeroAnimali,:vdescColl,:vnumPezzi,:vubicazione, :vidBene) }
+	</sql-query>
+	
+	<sql-query name="PG_BENE_modificaMobile" callable="true" >
+		<return-scalar column="IDBENE" type="long"/>
+	 	{ call PG_BENE.MODIFICA_MOBILE(?,:vidUffOwn ,:vdescUtente, :vtipo,:vcategoria,:vsottocategoria,:vidstato,
+	 									:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,:vnumcap,:vdesccomuneestero,
+	 									:vnote,:vflaggravame,:vidstatocons,:vidprocedimento,:vdescComune,:vtipoStrada,:vdesccategoria,
+	 									:vdescSottoCat,:vdescrizioneCapo,:vnumeroAnimali,:vdescColl,:vnumPezzi,:vubicazione, :vidBene) }
+	</sql-query>
+	
+	<sql-query name="PG_BENE_inserisciMobileRegistrato" callable="true" >
+		<return-scalar column="IDBENE" type="long"/>
+	 	{ call PG_BENE.INSERISCI_MOBILE_REGISTRATO(?,:vidUffOwn ,:vdescUtente, :vtipo,:vcategoria,:vsottocategoria,:vidstatocons,
+	 									:vidprocedimento,:vidstato,:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,
+	 									:vnumcap,:vdesccomuneestero,:vnote,:vflagcostazienda,:vflaggravame,:vnumeroRegistrazione,
+	 									:vdataRegistrazione,:vnumeroIdentificazione,:vcodiceImmatricolazione,:vtarga,:vtelaio,
+	 									:vcolore,:vmodello,:vidDisponibilita,:vdataScadenza, :vidBene) }
+	</sql-query>
+	
+	<sql-query name="PG_BENE_modificaMobileRegistrato" callable="true" >
+		<return-scalar column="IDBENE" type="long"/>
+	 	{ call PG_BENE.MODIFICA_MOBILE_REGISTRATO(?,:vidUffOwn ,:vdescUtente, :vtipo,:vcategoria,:vsottocategoria,:vidstatocons,
+	 									:vidprocedimento,:vidstato,:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,
+	 									:vnumcap,:vdesccomuneestero,:vnote,:vflagcostazienda,:vflaggravame,:vnumeroRegistrazione,
+	 									:vdataRegistrazione,:vnumeroIdentificazione,:vcodiceImmatricolazione,:vtarga,:vtelaio,
+	 									:vcolore,:vmodello,:vidDisponibilita,:vdataScadenza, :vidBene) }
+	</sql-query>
+	
+	<sql-query name="PG_BENE_inserisciImmobile" callable="true" >
+		<return-scalar column="IDBENE" type="long"/>
+	 	{ call PG_BENE.INSERISCI_IMMOBILE(?,:vidprocedimento,:vidUffOwn,:vdescUtente,:vtipo,:vcategoria,:vsottocategoria,
+	 									:vidStatoUbi,:vidComuneUbi,:vidTipoStradaUbi,:vdescIndirizzoUbi,:vnumCivicoUbi,:vnumCapUbi,
+	 									:vdescComuneEsteroUbi,:vdescScalaUbi,:vdescInternoUbi,:vdescPianoUbi,:vdescEdificioUbi,:vdescLottoUbi,
+	 									:vidComuneCatastale,:vdescCodiceCatastale,:vtipoCatasto,:vidCategoriaCatastale,:vdataAccatastamento,
+	 									:vfondo,:vsezione,:vfoglio,:vparticella1,:vparticella2,:vsubParticella1,:vsubParticella2,
+	 									:vidTipoDenuncia,:vnumeroDenuncia1,:vnumeroDenuncia2,:vannoDenuncia,:vcodiSchedaAcc,:vzonaCensuaria,
+	 									:vrenditaCatastale,:vrenditaDominicale,:vettari,:vare,:vcentiare,:vvaniInt,:vvaniDec,
+	 									:vmetriCubiInt,:vmetriCubiDec,:vmetriQuadriInt,:vmetriQuadriDec,:vflagAppFabbricatoConfiscato,
+	 									:vidComuneCatastaleP,:vdescCodiceCatastaleP,:vtipoCatastoP,:vsezioneP,:vfoglioP,:vparticella1P,:vparticella2P,
+	 									:vsubParticella1P,:vsubParticella2P,:vidTipoDenunciaP,:vnumeroDenuncia1_P,:vnumeroDenuncia2_P,:vannoDenunciaP,
+	 									:vidVincolo,:vdescVincolo,:vidStatoCons,:vflagGravame,:vidDisponibilita,:vnote, :vidBene,:vtipoOccupanti) }
+	</sql-query>
+	
+	<sql-query name="PG_BENE_modificaImmobile" callable="true" >
+		<return-scalar column="IDBENE" type="long"/>
+	 	{ call PG_BENE.MODIFICA_IMMOBILE(?,:vidprocedimento,:vidUffOwn,:vdescUtente,:vtipo,:vcategoria,:vsottocategoria,
+	 									:vidStatoUbi,:vidComuneUbi,:vidTipoStradaUbi,:vdescIndirizzoUbi,:vnumCivicoUbi,:vnumCapUbi,
+	 									:vdescComuneEsteroUbi,:vdescScalaUbi,:vdescInternoUbi,:vdescPianoUbi,:vdescEdificioUbi,:vdescLottoUbi,
+	 									:vidComuneCatastale,:vdescCodiceCatastale,:vtipoCatasto,:vidCategoriaCatastale,:vdataAccatastamento,
+	 									:vfondo,:vsezione,:vfoglio,:vparticella1,:vparticella2,:vsubParticella1,:vsubParticella2,
+	 									:vidTipoDenuncia,:vnumeroDenuncia1,:vnumeroDenuncia2,:vannoDenuncia,:vcodiSchedaAcc,:vzonaCensuaria,
+	 									:vrenditaCatastale,:vrenditaDominicale,:vettari,:vare,:vcentiare,:vvaniInt,:vvaniDec,
+	 									:vmetriCubiInt,:vmetriCubiDec,:vmetriQuadriInt,:vmetriQuadriDec,:vflagAppFabbricatoConfiscato,
+	 									:vidComuneCatastaleP,:vdescCodiceCatastaleP,:vtipoCatastoP,:vsezioneP,:vfoglioP,:vparticella1P,:vparticella2P,
+	 									:vsubParticella1P,:vsubParticella2P,:vidTipoDenunciaP,:vnumeroDenuncia1_P,:vnumeroDenuncia2_P,:vannoDenunciaP,
+	 									:vidVincolo,:vdescVincolo,:vidStatoCons,:vflagGravame,:vidDisponibilita,:vnote, :vidBene,:vtipoOccupanti) }
+	</sql-query>
+	
+	<sql-query name="PG_BENE_inserisciFinanziario" callable="true" >
+        <return-scalar column="IDBENE" type="long"/>
+         { call PG_BENE.INSERISCI_FINANZIARIO(?, :vidUffOwn,:vdescUtente,:vtipo,:vcategoria,:vsottocategoria,:vidstatocons,
+	                                         :vidprocedimento,:vidstato,:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,
+	                                         :vnumcap,:vdesccomuneestero,:vflagcostazienda,:vnote,:vflaggravame,:vdescente,
+	                                         :vdescindirizzoFin,:vdirettEnte,:vnumident,:vvalutaest,:vtipoval,:vvalutaeur,
+	                                         :vcodabi,:vcodcab,:vcodiban,:vcodswift,:vidBene) }
+    </sql-query>
+    
+    <sql-query name="PG_BENE_modificaFinanziario" callable="true" >
+        <return-scalar column="IDBENE" type="long"/>
+         { call PG_BENE.MODIFICA_FINANZIARIO(?, :vidUffOwn,:vdescUtente,:vtipo,:vcategoria,:vsottocategoria,:vidstatocons,
+	                                         :vidprocedimento,:vidstato,:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,
+	                                         :vnumcap,:vdesccomuneestero,:vflagcostazienda,:vnote,:vflaggravame,:vdescente,
+	                                         :vdescindirizzoFin,:vdirettEnte,:vnumident,:vvalutaest,:vtipoval,:vvalutaeur,
+	                                         :vcodabi,:vcodcab,:vcodiban,:vcodswift,:vidBene) }
+    </sql-query>
+    
+    <sql-query name="PG_BENE_inserisciDenaro_Contante" callable="true" >
+        <return-scalar column="IDBENE" type="long"/>
+         { call PG_BENE.INSERISCI_DENARO_CONTANTE(?, :vidUffOwn,:vdescUtente,:vtipo,:vcategoria,:vsottocategoria,:vidstatocons,
+		                                          :vidprocedimento,:vidstato,:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,
+		                                          :vnumcap,:vdesccomuneestero,:vflagcostazienda,:vnote,:vflaggravame,:vdescente,
+		                                          :vdescindirizzoDen,:vdirettEnte,:vnumident,:vvalutaest,:vtipoval,:vvalutaeur,
+		                                          :vcodabi,:vcodcab,:vcodiban,:vcodswift,:vintestatario,:vnummodtrib,:vbollettino, :vidBene, :flgVersamento) }
+    </sql-query>
+    
+     <sql-query name="PG_BENE_venditaBene" callable="true" >
+        <return-scalar column="IDBENE" type="long"/>
+         { call PG_BENE.VENDITA_BENE(?, :vidUffOwn,:vdescUtente,:vtipo,:vcategoria,:vsottocategoria,:vidstatocons,
+		                                          :vidprocedimento,:vidstato,:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,
+		                                          :vnumcap,:vdesccomuneestero,:vflagcostazienda,:vnote,:vflaggravame,:vdescente,
+		                                          :vdescindirizzoDen,:vdirettEnte,:vnumident,:vvalutaest,:vtipoval,:vvalutaeur,
+		                                          :vcodabi,:vcodcab,:vcodiban,:vcodswift,:vintestatario,:vnummodtrib,:vbollettino, :vidBene) }
+    </sql-query>
+    
+    <sql-query name="PG_BENE_modificaDenaro_Contante" callable="true" >
+        <return-scalar column="IDBENE" type="long"/>
+         { call PG_BENE.MODIFICA_DENARO_CONTANTE(?, :vidUffOwn,:vdescUtente,:vtipo,:vcategoria,:vsottocategoria,:vidstatocons,
+		                                          :vidprocedimento,:vidstato,:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,
+		                                          :vnumcap,:vdesccomuneestero,:vflagcostazienda,:vnote,:vflaggravame,:vdescente,
+		                                          :vdescindirizzoDen,:vdirettEnte,:vnumident,:vvalutaest,:vtipoval,:vvalutaeur,
+		                                          :vcodabi,:vcodcab,:vcodiban,:vcodswift,:vintestatario,:vnummodtrib,:vbollettino, :vidBene, :flgVersamento) }
+    </sql-query>
+    
+    <sql-query name="PG_BENE_modificaAzienda" callable="true" >
+		<return-scalar column="IDBENE" type="long"/>
+	 	{ call PG_BENE.MODIFICA_AZIENDA(?,:vidUffOwn ,:vdescUtente, :vtipo,:vcategoria,:vsottocategoria,:vidstato,
+	 									:vidcomune,:vidtipostrada,:vdescindirizzo,:vnumcivico,:vnumcap,:vdesccomuneestero,
+	 									:vnote,:vflagcostazienda,:vflaggravame,:vragionesociale,:vcodicefiscale,
+	 									:vnumerociaa,:vdescrappsociale,:vdescamministratore,:vpartitaiva,
+	 									:vcapitalesociale,:vnumdipendenti,:vsettoreattivita,:vidstatocons,
+	 									:vidprocedimento,:vdescComune,:vtipoStrada,:vdesccategoria, :vidBene) }
+	</sql-query>
+	
+	<sql-query name="PG_BENE_dettaglio_bene" callable="true" >
+	   <return alias="disp" class="it.giustizia.smp.model.TRelBeneProcDisp"/>
+       <return alias="vinc" class="it.giustizia.smp.model.TRelImmProcVinc"/>
+	   { call PG_BENE.DETTAGLIO_BENE (?, :vidUffOwn, :vidBene) }
+	</sql-query>
+
+	
+	<sql-query name="PG_BENE_beni_per_proc_no_atto" callable="true">
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+		{ call PG_BENE.BENI_PER_PROC_NO_ATTO(?,:idUffOwn, :idProcedimento, :idAtto1,:idAtto2,
+											:vidSoggettoDiretto,:vidSoggettoTit,:vidTipologia,:vidCategoria,:vidSottocategoria) }  
+		</sql-query>	
+	
+	<sql-query name="PG_BENE_beni_proc_decreto_filtro" callable="true">
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+		{ call PG_BENE.BENI_PROC_DECRETO_FILTRO(?,:vFiltro, :vidUffOwn, :vidProcedimento,:vidBene,:vidTipologia,:vidCategoria,
+													 :vidSottocategoria,:vidDecreto,:vidProposta,:vidAmministratore ,:AMMINISTRATORE) }
+	</sql-query>	
+	
+	<sql-query name="PG_BENE_beni_atto_no_mis_patr" callable="true">
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+		<return alias="rel" class="it.giustizia.smp.model.TRelBeneAtto" />
+		 { call PG_BENE.BENI_ATTO_NO_MIS_PATR(?,:idUffOwn, :idProcedimento, :idAtto, :idSoggetto,:vidSoggettoTit, :vidTipologia, :vidCategoria, :vidSottocategoria) }
+	</sql-query>	
+	
+	<sql-query name="PG_BENE_copia_titoli_diritto" callable="true">
+		{ call PG_BENE.COPIA_TITOLO_DIRITTO(?,:idBene, :idProcedimento, :idUfficioUtente,:listaIdBeni,:idAtto,:idCodiceUtente, :nomeMetodo) }
+	</sql-query>		
+   	
+	<sql-query name="PG_BENE_frazionamento_bene" callable="true" >
+		{ call PG_BENE.FRAZIONAMENTO_BENE(?,:idUffOwn,:idCodiceUtente,:idProcedimento,:idBene,:idAtto,:listaIdBeni) }
+	</sql-query>  
+	
+	<sql-query name="PG_BENE_TRASFORMA_BENE" callable="true">
+		<return-scalar column="IDBENE" type="long"/>
+		{ call PG_BENE.TRASFORMA_BENE(?,:vidprocedimento,:idBeneVecchio,:idBeneNuovo,:vidUffOwn,:descUtente,:vidMotivo,:vidTipoTrasformazione,:vidatto) }
+	</sql-query>  
+	
+	<sql-query name="PG_BENE_ERRORE_MATERIALE_BENE" callable="true">
+		<return-scalar column="IDBENE" type="long"/>
+		{ call PG_BENE.ERRORE_MATERIALE_BENE(?,:vidprocedimento,:idBeneVecchio,:idBeneNuovo,:vidUffOwn,:descUtente,:vidMotivo,:vidTipoTrasformazione,:vidatto) }
+	</sql-query> 
+  
+	<sql-query name="PG_BENE_salvaDecisorioBene" callable="true" >
+		{ call PG_BENE.SALVA_DECISORIO_BENE(?,:idAtto,:idBene,:idSoggetto,:idProcedimento,:idUfficio,:idDecisione,:idCodiceUtente,:descDecisorio) }
+	</sql-query> 
+	
+	<sql-query name="PG_BENE_salvaDecisorioBeneIstGen" callable="true" >
+		{ call PG_BENE.SALVA_DECIS_BENE_ISTGEN(?,:idAtto,:idProcedimento,:idUfficio,:idDecisione,:descUtente,:descDecisorio,
+		:IMPO_1, :DATA_PRESENT_2, :DATA_DEPOSITO_2, :IMPO_2, :DATA_DEF_2, :DATA_PRESENT_3, :DATA_DEPOSITO_3, :IMPO_3, :DATA_DEF_3,
+		:DESC_ALTRO_1, :DESC_ALTRO_2, :DESC_ALTRO_3, :DATA_DECISIONE , :DATA_DEPOSITO_DECISIONE, :DATA_SENTENZA, :DATA_DEPOSITO_SENTENZA) }
+	</sql-query>
+
+	<!--  sql-query name="PG_BENE_salvaDecisorioBene2" callable="true" >
+		{ call PG_BENE.SALVA_DECISORIO_BENE2(?,:idAtto,:idBene,:idSoggetto,:idProcedimento,:idUfficio,:idDecisione,:idCodiceUtente) }
+	</sql-query--> 
+		
+	<sql-query name="PG_BENE_dettaglioRevocaProcBene" callable="true" >
+		{ call PG_BENE.DETTAGLIO_REVOCA_REL_PROC_BENE(?,:idAttoRevoca,:idProcedimento,:descUtente,:idUffOwner,:nomeMetodo) }
+		<return alias="procBene" class="it.giustizia.smp.model.TRelProcBene" />
+	</sql-query>
+	
+	<sql-query name="PG_BENE_dettaglioRevocaTBene" callable="true" >
+		{ call PG_BENE.DETTAGLIO_REVOCA_T_BENE(?,:idAttoRevoca,:idProcedimento,:descUtente,:idUffOwner,:nomeMetodo,
+												  :idSoggettoDiretto,:idSoggettoTitolare,:idTipologia,:idCategoria,:idSottocategoria) }
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+	</sql-query> 
+
+	<sql-query name="PG_BENE_dettaglioOpposTBene" callable="true" >
+		{ call PG_BENE.DETTAGLIO_OPPOS_T_BENE(?,:idAttoRevoca,:idProcedimento,:descUtente,:idUffOwner,:nomeMetodo,
+												:idSoggettoDiretto,:idSoggettoTitolare,:idTipologia,:idCategoria,:idSottocategoria) }
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+	</sql-query> 
+
+	<sql-query name="PG_BENE_dettaglioRevocaOpposTBene" callable="true" >
+		{ call PG_BENE.DETTAGLIO_REV_OPPOS_T_BENE(?,:idAttoRevoca,:idProcedimento,:descUtente,:idUffOwner,:nomeMetodo) }
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+	</sql-query> 
+	
+	<sql-query name="PG_BENE_dettaglioRevocazioneTBene" callable="true" >
+		{ call PG_BENE.DETTAGLIO_REVOCAZIONE_T_BENE(?,:idAttoRevoca,:idProcedimento,:descUtente,:idUffOwner,:nomeMetodo,
+		                                            :idSoggettoDiretto,:idSoggettoTitolare,:idTipologia,:idCategoria,:idSottocategoria) }
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+	</sql-query> 
+	
+	<sql-query name="PG_BENE_controlloPresenzaBeni" callable="true" >
+		{ call PG_BENE.CONTROLLO_REVOCAZIONE_T_BENE(?,:idAtto,:idProcedimento,:descUtente,:idUffOwner,:nomeMetodo) }
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+	</sql-query>
+	
+    <sql-query name="PG_BENE_cntrDecrRestBeni" callable="true" >
+    	<return-scalar column="KEY" type="long"/>
+	    <return-scalar column="MESSAGGIO" type="string"/>
+	    <return-scalar column="STATUS" type="string"/>
+		{ call PG_BENE.CNTR_DECR_REST_BENI(?,:vidprocedimento,:vidUffOwn,:descUtente) }	
+		
+    </sql-query>	
+    
+	<sql-query name="PG_BENE_elencoRestBeniRelProcBene" callable="true" >
+		{ call PG_BENE.ELENCO_REST_BENI_REL_PROC_BENE(?,:idProcedimento,:descUtente,:idUffOwner,:nomeMetodo) }
+		<return alias="procBene" class="it.giustizia.smp.model.TRelProcBene" />
+	</sql-query>    	
+
+
+	<sql-query name="PG_BENE_elencoRestBeniTBene" callable="true" >
+		{ call PG_BENE.ELENCO_REST_BENI_T_BENE(?,:idAtto,:idProcedimento,:descUtente,:idUffOwner,:nomeMetodo,
+												:idSoggettoDiretto,:idSoggettoTitolare,:idTipologia,:idCategoria,:idSottocategoria) }
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+	</sql-query> 
+
+	<sql-query name="PG_BENE_get_amministratori" callable="true" >
+	   <return alias="rel" class="it.giustizia.smp.model.TRelProcAttoAmm"/>
+	   <return alias="amm" class="it.giustizia.smp.model.TAmministratori"/>
+	   <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+		{ call PG_BENE.GET_AMMINISTRATORI (?,:idUffOwn,:vidProcedimento,:vidAtto,:vidAmministratore, :vescludiAmm) }
+	</sql-query>
+	
+	<sql-query name="PG_BENE_elencoAmministratoriNonAsociatiAtto" callable="true" >
+	   <return alias="amm" class="it.giustizia.smp.model.TAmministratori"/>
+	   <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+		{ call PG_BENE.GET_AMM_NON_ASSOCIATI_ATTO (?,:IDUFFOWN,:VIDPROCEDIMENTO,:VIDATTO,:COGNOME,:NOME,:CODICEFISCALE,:CODIPROV,:CODICOMU) }
+	</sql-query>	
+	
+	<sql-query name="PG_BENE_inserisciAmministratore" callable="true" >
+		<return-scalar column="ID" type="long"/>
+	 	{ call PG_BENE.INSERISCI_AMMINISTRATORE(?,:IDUFFOWN ,:DESCUTENTE, 
+	 	:COGNOME, :NOME, :DATANASCITA, :CODICEFISCALE, :LUOGONASCITA, :IDSTATODL,          
+        :IDCOMUNEDL, :COMUNEESTERODL, :STUDIO, :TEL, :FAX, :PEC, :PARTITAIVA, :ISCRIZIONEALBO,       
+        :DATAISCRIZIONEALBO, :STATOISCRIZIONEALBO, :NOMEMETODO) }
+	</sql-query>	     
+	
+	<sql-query name="PG_BENE_getAmministratoreById" callable="true" >
+	   <return alias="amm" class="it.giustizia.smp.model.TAmministratori"/>
+	   <return alias="comuni" class="it.giustizia.smp.model.TAnComuni"/>
+	   <return alias="stato" class="it.giustizia.smp.model.TAnStato"/>
+		{ call PG_BENE.GET_AMMINISTRATORE_BY_ID (?,:vidAmministratore) }
+	</sql-query>	
+	
+	<sql-query name="PG_BENE_associaAmministratoreAtto" callable="true" >
+		<return-scalar column="ID" type="long"/>
+	 	{ call PG_BENE.ASSOCIA_AMMINISTRATORE_ATTO(?,:IDUFFOWN ,:DESCUTENTE, 
+	 	:IDPROCEDIMENTO, :IDATTO, :IDAMMINISTRATORE, :DATAINIZIOINCARICO, :NOMEMETODO) }
+    </sql-query>	     
+	
+	<sql-query name="PG_BENE_associaAmministratoreBeneAtto" callable="true" >
+		<return-scalar column="ID" type="long"/>
+	 	{ call PG_BENE.ASSOCIA_AMMIN_BENE_ATTO(?,:IDUFFOWN ,:DESCUTENTE, 
+	 	:IDPROCEDIMENTO, :IDATTO, :IDBENE, :IDAMMINISTRATORE, :DATAINIZIOINCARICO, :NOMEMETODO) }
+    </sql-query>	
+	
+	<sql-query name="PG_BENE_dissociaAmministratoreAtto" callable="true" >
+	 	{ call PG_BENE.DISSOCIA_AMMIN_BENE_ATTO(?,:IDUFFOWN ,:DESCUTENTE, 
+	 	:IDPROCEDIMENTO, :IDATTO, :IDAMMINISTRATORE, :NOMEMETODO) }
+    </sql-query>
+    
+	<sql-query name="PG_BENE_dettaglioProrogaSequestroTBene" callable="true" >
+		{ call PG_BENE.DETTAGLIO_PROR_SEQ_T_BENE(?,:idAttoRevoca,:idProcedimento,:descUtente,:idUffOwner,:nomeMetodo) }
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+	</sql-query> 
+	             
+	<sql-query name="PG_BENE_beni_in_amministrazione" callable="true">
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+		<return alias="rel" class="it.giustizia.smp.model.TRelProcBeneAttoAmm"/>
+		{ call PG_BENE.BENI_IN_AMMINISTRAZIONE(?,:vidUffOwn, :vidProcedimento, :vidAtto, :vidAmministratore) }
+	</sql-query>    
+	
+	<sql-query name="PG_BENE_dettaglioSequestroSospensioneTBene" callable="true" >
+		{ call PG_BENE.DETTAGLIO_SEQ_SOSP_T_BENE(?,:idAttoRevoca,:idProcedimento,:descUtente,:idUffOwner,:nomeMetodo) }
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+	</sql-query> 	
+
+	<sql-query name="PG_BENE_isBeneInIstanzaCamerale" callable="true" >
+		{ call PG_BENE.IS_BENE_IST_CAM(?,:idProc,:idUffOwn,:idBene) }
+		<return alias="bene" class="it.giustizia.smp.model.TRelProcBene" />
+	</sql-query> 	
+	
+	<sql-query name="PG_BENE_nomina_amm" callable="true">
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+		{ call PG_BENE.BENI_NOMINA_AMM(?,:vFiltro, :vidUffOwn, :vidProcedimento,:vidBene,:vidTipologia,:vidCategoria,
+													 :vidSottocategoria,:vidDecreto,:vidAmministratore ,:AMMINISTRATORE) }
+	</sql-query>	
+
+	<sql-query name="PG_BENE_lista_rel_proc_bene_filtrata" callable="true">
+		<return alias="bene" class="it.giustizia.smp.model.TBene" />
+		{ call PG_BENE.LISTA_REL_PROC_BENE_FILTRATA(?,:idProcedimento, :idUffOwn, :idAtto, 
+											:vidSoggettoDiretto,:vidSoggettoTit,:vidTipologia,:vidCategoria,:vidSottocategoria) }  
+	</sql-query>	
+
+</hibernate-mapping>

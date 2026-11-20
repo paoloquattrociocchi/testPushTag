@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+	<tlib-version>1.0</tlib-version>
+	<short-name>smp</short-name>
+	<tag>
+		<name>back</name>
+		<tag-class>it.giustizia.smp.utility.goback.GoBackTagLib</tag-class>
+		<!-- description>Costruisce il Tasto Indietro</description -->
+		<body-content>scriptless</body-content>
+		
+		<attribute>
+			<description>Id html del tasto indietro</description>
+			<name>buttonId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>commandName</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		
+		<attribute>
+			<name>target</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	
+	<tag>
+		<name>notificheButtons</name>
+		<tag-class>it.giustizia.smp.utility.notifiche.NotificheButtons</tag-class>
+		<!-- description>Bottoni per la gestione delle notifiche che implementano direttamente 
+			il controllo di visibilità ed il link alle form di notifiche.
+		</description -->
+		<body-content>scriptless</body-content>
+		<attribute>
+			<description>Id della form che contiene l'azione da sovrascrivere con il post</description>
+			<name>formId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Identificativo dell'atto (viene utilizzato per determinare se e quali pulsanti deve essere visibile)</description>
+			<name>codAtto</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>params</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+ <tag>
+		<name>flussoAggiunte</name>
+		<tag-class>it.giustizia.smp.utility.flussi.FlussiDaElaborareAggiunte</tag-class>
+		<!-- description></description -->
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>flussoId</name>
+			<required>false</required>
+                                      <rtexprvalue>true</rtexprvalue>			
+		</attribute>
+		<attribute>
+			<name>soggetto</name>
+			<required>false</required>
+                                      <rtexprvalue>true</rtexprvalue>			
+		</attribute>
+		<attribute>
+			<name>proposta</name>
+			<required>false</required>
+                                      <rtexprvalue>true</rtexprvalue>			
+		</attribute>
+		<attribute>
+			<description>flusso</description>
+			<name>formFlusso</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+            <type>it.giustizia.smp.form.FlussiForm</type>		
+		</attribute>
+		
+	</tag>
+	
+</taglib>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+	<mapping>
+		<class-a>it.giustizia.smp.form.ProcedimentoForm</class-a>
+		<class-b>it.giustizia.smp.model.TProcedimento</class-b>
+		<field>
+			<a>idProcedimento</a>
+			<b>codiKIdProc</b>
+		</field>
+		<field>
+			<a>anno</a>
+			<b>numeAnnoProc</b>
+		</field>
+		<field>
+			<a>numero</a>
+			<b>numeProc</b>
+		</field>
+		
+		<field>
+			<a>procedente</a>
+			<b>TAnProcedente</b>
+		</field>
+		<field>
+			<a>statoProcedimento</a>
+			<b>TTpStatoProc</b>
+		</field>
+		<field>
+			<a>dataApertura</a>
+			<b>dataIscrizione</b>
+		</field>
+		<field>
+			<a>antimafia</a>
+			<b>flgAntimafia</b>
+		</field>
+		<field>
+			<a>ordinaria</a>
+			<b>flgOrdinaria</b>
+		</field>
+		<field>
+			<a>antiterrorismo</a>
+			<b>flgAntiterrorismo</b>
+		</field>
+		<field>
+			<a>tipoProcedimento</a>
+			<b>TTpTipoProc</b>
+		</field>
+		<field>
+			<a>tipoFascicolo</a>
+			<b>TTpTipoFascicolo</b>
+		</field>
+		<field>
+		<a>tipoUfficioNascita</a>
+		<b>TAnUfficioByCodiFkIdUffOwner.TTpTipoUfficio.codiKIdTipoUff</b>
+		</field>
+		<field>
+		<a>ufficioPU</a>
+		<b>TAnUfficioByCodiFkIdPu.codiKIdUfficio</b>
+		</field>	
+			
+		<!-- <field>
+			<a>dataTrasmissioneTribunale</a>
+			<b>dataTrasmTrib</b>
+		</field> -->
+	</mapping>
+
+	<mapping wildcard="false">
+		<class-a>it.giustizia.smp.form.ProcedimentoForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpStatoProc</class-b>
+		<field>
+			<a>statoProcedimento.id</a>
+			<b>codiKIdStatoProc</b>
+		</field>
+	</mapping>
+
+	<mapping wildcard="false">
+		<class-a>it.giustizia.smp.form.ProcedimentoForm</class-a>
+		<class-b>it.giustizia.smp.model.TTpTipoFascicolo</class-b>
+		<field>
+			<a>tipoFascicolo.id</a>
+			<b>codiKIdTipoFasc</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ProcedimentoForm</class-a>
+		<class-b>it.giustizia.smp.model.TRelProcSogint</class-b>	
+		<field>
+			<a>tipologiaPrevenzione</a>
+			<b>TTpTipoPrevProc</b>
+		</field>	
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ProcedimentoForm</class-a>
+		<class-b>it.giustizia.smp.model.TAnProcedente</class-b>	
+		<field>
+			<a>procedente.id</a>
+			<b>codiKIdProced</b>
+		</field>
+		<field>
+			<a>procedente.descrizione</a>
+			<b>descProced</b>
+		</field>	
+	</mapping>
+	
+	<mapping>
+		<class-a>it.giustizia.smp.form.ProcedimentoForm</class-a>
+		<class-b>it.giustizia.smp.dto.pg_procedimento.RicercaProcedimentoDto</class-b>	
+		<field>
+			<a>idProcedimento</a>
+			<b>CODI_K_ID_PROC</b>
+		</field>
+		<field>
+			<a>anno</a>
+			<b>NUME_ANNO_PROC</b>
+		</field>
+		<field>
+			<a>numero</a>
+			<b>NUME_PROC</b>
+		</field>				
+		<field>
+			<a>dataApertura</a>
+			<b>DATA_ISCRIZIONE</b>
+		</field>
+		<field>
+			<a>statoProcedimento.descrizione</a>
+			<b>DESC_STATO_PROC</b>
+		</field>
+		<field>
+			<a>tipoFascicolo.id</a>
+			<b>CODI_K_ID_TIPO_FASC</b>
+		</field>			
+		<field>
+			<a>tipoFascicolo.descrizione</a>
+			<b>DESC_TIPO_FASC</b>
+		</field>			
+		<field>
+			<a>NUM_PROCURA</a>
+			<b>NUM_PROCURA</b>
+		</field>
+		<field>
+			<a>NUM_TRIBUNALE</a>
+			<b>NUM_TRIBUNALE</b>
+		</field>
+		<field>
+			<a>NUM_PG</a>
+			<b>NUM_PG</b>
+		</field>
+		<field>
+			<a>NUM_CDA</a>
+			<b>NUM_CDA</b>
+		</field>				
+	</mapping>
+
+	<mapping>
+		<class-a>it.giustizia.smp.form.ProcedimentoForm</class-a>
+		<class-b>it.giustizia.smp.dto.pg_procedimento.ListaProcedimentiSoggDto</class-b>	
+		<field>
+			<a>idProcedimento</a>
+			<b>CODI_K_ID_PROC</b>
+		</field>
+		<field>
+			<a>anno</a>
+			<b>NUME_ANNO_PROC</b>
+		</field>
+		<field>
+			<a>numero</a>
+			<b>NUME_PROC</b>
+		</field>				
+		<field>
+			<a>dataApertura</a>
+			<b>DATA_ISCRIZIONE</b>
+		</field>
+		<field>
+			<a>statoProcedimento.descrizione</a>
+			<b>DESC_STATO_PROC</b>
+		</field>
+		<field>
+			<a>tipoFascicolo.id</a>
+			<b>CODI_K_ID_TIPO_FASC</b>
+		</field>			
+		<field>
+			<a>tipoFascicolo.descrizione</a>
+			<b>DESC_TIPO_FASC</b>
+		</field>			
+		<field>
+			<a>DescrRuolo</a>
+			<b>DESC_RUOLO</b>
+		</field>	
+	</mapping>
+    
+</mappings>

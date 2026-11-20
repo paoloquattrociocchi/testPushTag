@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://fug.type.ws.mg.it/basetypes" xmlns:tb="http://fug.type.ws.mg.it/basetypes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!--tipi numerici-->
+	<xs:simpleType name="numerico">
+		<xs:annotation>
+			<xs:documentation>numerico di qualsiasi lunghezza </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:whiteSpace value="collapse"/>
+			<xs:pattern value="(\d)+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numerico1">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza fissa 1 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numerico2">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza fissa 2 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numerico5">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza fissa 5 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numerico11">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza fissa 11</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:length value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numerico15">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza fissa 15</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:length value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numerico16">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza 16 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:length value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numerico22">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza 22 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:length value="22"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numericoMax2">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza variabile fino a 2 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numericoMax3">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza variabile fino a 3 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numericoMax6">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza variabile fino a 6 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numericoMax7">
+		<xs:annotation>
+			<xs:documentation>
+				numerico di lunghezza variabile fino a 7 cifre
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:maxLength value="7"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numericoMax11">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza variabile fino a 11 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numericoMax16">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza variabile fino a 16 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Date -->
+	<xs:simpleType name="DataOraStruct">
+		<xs:annotation>
+			<xs:documentation>Accetta date nel formato GG/MM/AAAA-hh:mm:ss</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(((0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/(19|20)\d\d)-(([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])))"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Data">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(((0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])(19|20)\d\d))"/>
+			<!-- Accetta date nel formato GGMMAAAA   -->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Anno">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="((19|20)\d\d)"/>
+			<!-- Accetta numeri di 4 cifre >=1900 e <= 2099  -->
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Altro -->
+	<xs:simpleType name="alfanumMax25">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza massima 25</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanumMax27">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza massima 27</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="27"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanumMax40">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza massima 40</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanumMax60">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza massima 60</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanumMax140">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza massima 140</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="140"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanumMax300">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza massima 300</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="300"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanum15">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza 15</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanum16">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza 16</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanum11-16">
+		<xs:annotation>
+			<xs:documentation>Stringa alfanumerica di lunghezza 11 o 16</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([0-9A-Z]{11}|[0-9A-Z]{16})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanum2">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza 2</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanum3">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza 3</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Importo12">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d{1,12},\d{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Almaviva -->
+	<xs:simpleType name="numericoMax17">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza variabile fino a 17 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numericoMax22">
+		<xs:annotation>
+			<xs:documentation>numerico di lunghezza variabile fino a 22 cifre</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tb:numerico">
+			<xs:maxLength value="22"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alfanumMax100">
+		<xs:annotation>
+			<xs:documentation>Stringa di lunghezza massima 300</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Almaviva -->
+</xs:schema>

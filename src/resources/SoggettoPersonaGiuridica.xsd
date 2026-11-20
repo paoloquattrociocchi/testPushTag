@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/soggettoPersonaGiuridica" targetNamespace="http://anbsc.almaviva.it/schema/soggettoPersonaGiuridica" elementFormDefault="qualified">
+	<complexType name="soggettoPersonaGiuridica">
+		<sequence>
+			<element name="denominazione" type="string"/>
+			<element name="partitaIVA" type="string" minOccurs="0"/>
+			<element name="luogoSedeLegale" minOccurs="0">
+				<complexType>
+					<choice>
+						<element name="comuneSedeLegaleItalia" type="string" minOccurs="0"/>
+						<element name="statoSedeLegaleEstero" type="string" minOccurs="0"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="indirizzoSedeLegale" type="string" minOccurs="0"/>
+			<element name="tipologia" type="integer"/>
+		</sequence>
+	</complexType>
+</schema>

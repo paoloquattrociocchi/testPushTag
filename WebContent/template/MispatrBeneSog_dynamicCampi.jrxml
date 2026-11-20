@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MispatrBeneSog" language="groovy" pageWidth="525" pageHeight="842" columnWidth="525" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="ID_SOGGETTO_INTERESSATO" class="java.math.BigDecimal"/>
+	<field name="COGNOME_INTERESSATO" class="java.lang.String"/>
+	<field name="NOME_INTERESSATO" class="java.lang.String"/>
+	<field name="DATA_NASCITA_INTERESSATO" class="java.util.Date"/>
+	<field name="DESC_STATO_NASC_INTERESSATO" class="java.lang.String"/>
+	<field name="DESC_COMUNE_NASC_INTERESSATO" class="java.lang.String"/>
+	<field name="SIGLA_PROV_NASC_INTERESSATO" class="java.lang.String"/>
+	<field name="COM_EST_NASC_INTERESSATO" class="java.lang.String"/>
+	<field name="RAG_SOC_INTERESSATO" class="java.lang.String"/>
+	<field name="PARTITA_IVA_INTERESSATO" class="java.math.BigDecimal"/>
+	<field name="DESC_STATO_SEDE_INTERESSATO" class="java.lang.String"/>
+	<field name="DESC_COMUNE_SEDE_INTERESSATO" class="java.lang.String"/>
+	<field name="SIGLA_PROV_SEDE_INTERESSATO" class="java.lang.String"/>
+	<field name="COM_EST_SEDE_INTERESSATO" class="java.lang.String"/>
+	<field name="TIPO_PERSONA_INTERESSATO" class="java.lang.String"/>
+	<field name="ID_BENE" class="java.math.BigDecimal"/>
+	<field name="DESCRIZIONE_BENE" class="java.lang.String"/>
+	<field name="NUM_QUOTA" class="java.math.BigDecimal"/>
+	<field name="NUME_FRAZIONE_DEN" class="java.math.BigDecimal"/>
+	<field name="NUME_FRAZIONE_NUM" class="java.math.BigDecimal"/>
+	<field name="TIPO_PERSONA_TITOLARE" class="java.lang.String"/>
+	<field name="ID_SOGGETTO_TITOLARE" class="java.math.BigDecimal"/>
+	<field name="COGNOME_TITOLARE" class="java.lang.String"/>
+	<field name="NOME_TITOLARE" class="java.lang.String"/>
+	<field name="SESSO_TITOLARE" class="java.lang.String"/>
+	<field name="DATA_NASCITA_TITOLARE" class="java.util.Date"/>
+	<field name="DESC_STATO_NASC_TITOLARE" class="java.lang.String"/>
+	<field name="DESC_COMUNE_NASC_TITOLARE" class="java.lang.String"/>
+	<field name="SIGLA_PROV_NASC_TITOLARE" class="java.lang.String"/>
+	<field name="COM_EST_NASC_TITOLARE" class="java.lang.String"/>
+	<field name="RAG_SOC_TITOLARE" class="java.lang.String"/>
+	<field name="PARTITA_IVA_TITOLARE" class="java.math.BigDecimal"/>
+	<field name="DESC_STATO_SEDE_TITOLARE" class="java.lang.String"/>
+	<field name="DESC_COMUNE_SEDE_TITOLARE" class="java.lang.String"/>
+	<field name="SIGLA_PROV_SEDE_TITOLARE" class="java.lang.String"/>
+	<field name="COM_EST_SEDE_TITOLARE" class="java.lang.String"/>
+	<field name="testoSoggettoInteressato" class="java.lang.String"/>
+	<group name="gruppoSoggetto">
+		<groupExpression><![CDATA[$F{ID_SOGGETTO_INTERESSATO}]]></groupExpression>
+		<groupHeader>
+			<band height="95">
+				<staticText>
+					<reportElement x="210" y="31" width="100" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[ORDINA]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="75" width="169" height="20"/>
+					<textElement/>
+					<text><![CDATA[il sequestro dei seguenti beni:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="0" y="0" width="525" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{testoSoggettoInteressato}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="gruppoBene">
+		<groupExpression><![CDATA[$F{ID_BENE}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="0" y="0" width="151" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{DESCRIZIONE_BENE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="151" y="0" width="54" height="20"/>
+					<textElement/>
+					<text><![CDATA[intestato a ]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="169" y="0" width="182" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{COGNOME_TITOLARE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="351" y="0" width="174" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{NOME_TITOLARE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

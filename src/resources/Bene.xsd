@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/bene" xmlns:altriOggetti="http://anbsc.almaviva.it/schema/altriOggetti" xmlns:animali="http://anbsc.almaviva.it/schema/animali" xmlns:azienda="http://anbsc.almaviva.it/schema/azienda" xmlns:finanziario="http://anbsc.almaviva.it/schema/finanziario" xmlns:immateriale="http://anbsc.almaviva.it/schema/immateriale" xmlns:immobile="http://anbsc.almaviva.it/schema/immobile" xmlns:collezioni="http://anbsc.almaviva.it/schema/collezioni" xmlns:denaroContante="http://anbsc.almaviva.it/schema/denaroContante" xmlns:denaro="http://anbsc.almaviva.it/schema/denaro" xmlns:veicolo="http://anbsc.almaviva.it/schema/veicolo" xmlns:ubicazione="http://anbsc.almaviva.it/schema/ubicazione" targetNamespace="http://anbsc.almaviva.it/schema/bene" elementFormDefault="qualified">
+	<import namespace="http://anbsc.almaviva.it/schema/altriOggetti" schemaLocation="AltriOggetti.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/animali" schemaLocation="Animali.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/azienda" schemaLocation="Azienda.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/finanziario" schemaLocation="Finanziario.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/immateriale" schemaLocation="Immateriale.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/immobile" schemaLocation="Immobile.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/collezioni" schemaLocation="Collezioni.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/denaroContante" schemaLocation="DenaroContante.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/denaro" schemaLocation="Denaro.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/veicolo" schemaLocation="Veicolo.xsd"/>
+	<import namespace="http://anbsc.almaviva.it/schema/ubicazione" schemaLocation="Ubicazione.xsd"/>
+	<complexType name="bene">
+		<sequence>
+			<element name="identificativoBene" type="integer"/>
+			<element name="tipologia" type="integer"/>
+			<element name="categoria" type="integer"/>
+			<element name="sottocategoria" type="integer" minOccurs="0"/>
+			<element name="ubicazione" type="ubicazione:ubicazione" minOccurs="0"/>
+			<element name="datiSpecificiBene">
+				<complexType>
+					<choice>
+						<element name="altriOggetti" type="altriOggetti:altriOggetti"/>
+						<element name="animali" type="animali:animali"/>
+						<element name="azienda" type="azienda:azienda"/>
+						<element name="finanziario" type="finanziario:finanziario"/>
+						<element name="immateriale" type="immateriale:immateriale"/>
+						<element name="immobile" type="immobile:immobile"/>
+						<element name="collezioni" type="collezioni:collezioni"/>
+						<element name="denaroContante" type="denaroContante:denaroContante"/>
+						<element name="denaro" type="denaro:denaro"/>
+						<element name="veicolo" type="veicolo:veicolo"/>
+					</choice>
+				</complexType>
+			</element>
+			<element name="valoreStimato" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,13}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dataStima" type="dateTime" minOccurs="0"/>
+			<element name="esecutore" type="string" minOccurs="0"/>
+			<element name="gravatoDaPegnoIpoteca" type="string" minOccurs="0"/>
+			<element name="quotaSequestrataConfiscata" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+							<pattern value="\d{1,13}(\.\d{1,2})?"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

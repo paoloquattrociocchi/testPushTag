@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<sql-query name="PG_CONSERVATORIE_lista_comunicazioni" callable="true" >
+	   {call PG_CONSERVATORIE.LISTA_COMUNICAZIONI(?,:tipo,:tipoAtto,:anno,:dalNumero,:alNumero,:conservatoria,:cognome,:nome,:denominazione,:idUfficioUtente)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Dettaglio_Nota" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_DETTAGLIO_NOTA(?,:idUffOwn,:idNota)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Nota_Annot" callable="true" >
+	   {call PG_CONSERVATORIE.Ricerca_Nota_Annot(?,:idUffOwn,:idNota)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Nota_Trascr" callable="true" >
+	   {call PG_CONSERVATORIE.Ricerca_Nota_Trascr(?,:idUffOwn,:idNota)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_ricercaIdProcedimento" callable="true" >
+	 <return-scalar column="CODI_K_ID_PROC" type="long"/>
+	 { call PG_CONSERVATORIE.RICERCAIDPROCEDIMENTO(?,:idUffOwn,:annoProc,:numeProc, :tipoAtto, :catAtto ) }
+    </sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_cerca_Progressivo" callable="true" >
+	   {call PG_CONSERVATORIE.CERCAPROGRESSIVO(?,:idUffOwn,:annoProc,:numeProc)}
+	</sql-query>
+	
+	<sql-query name="PG_CONSERVATORIE_ricercaIdNota" callable="true" >
+	 <return-scalar column="MAXIDNOTA" type="long"/>
+	 { call PG_CONSERVATORIE.RICERCAIDNOTA(?,:idUffOwn) }
+    </sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_inserisciNota" callable="true" >
+		<return-scalar column="IDNOTA" type="long"/>
+	   {call PG_CONSERVATORIE.INSERIMENTO_NOTA(?,:codikidnota,:codikiduffowner,:descfiscalepu,:numerepert1,:numerepert2,:numeprogrnota,:desctitolo,:datatitolo,
+	   											 :desctipopubbluff,:descpubbluff,:descsedepubbluff,:descprovpubbluff,:descspecieatto,:descatto,:numeunitneg,
+	   											 :numeimmobili,:numesoggfavore,:numesoggcontro,:descconservat,:flgnotacollegata,:flgstato,:descutente,
+	   											 :dataultagg,:codifkidtipoatto,:codifkidcatatto,:codifkidtiponota,:codikidconserv,:codifktipocomunic,:codifkidproc)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_inserisciNotaAnnot" callable="true" >
+		<return-scalar column="IDNOTAANNOT" type="long"/>
+	   {call PG_CONSERVATORIE.INSERIMENTO_NOTA_ANNOT(?,:codikidnota,:codikiduffowner,:flgvoltura,:dataformalita,:numeformalita1,
+													   :numeformalita2,:numevaloreimmint,:numevaloreimmdec,:descutente,:dataultagg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_inserisciNotaTrascr" callable="true" >
+		<return-scalar column="IDNOTATRASCR" type="long"/>
+	   {call PG_CONSERVATORIE.INSERIMENTO_NOTA_TRASCR(?,:codikidnota,:codikiduffowner,:flgvoltura,:flgvolturadiff,:datavolturadiff,:flgfoglioinfo,:flgcondizione,
+														:flgtermini,:dataformalita,:numeformalita1,:numeformalita2,:flgquadroda,:flgquadrodb,:flgquadrodc,
+														:descutente,:dataultagg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_modificaNota" callable="true" >
+		<return-scalar column="IDNOTA" type="long"/>
+	   {call PG_CONSERVATORIE.MODIFICA_NOTA(?,:codikidnota,:codikiduffowner,:descfiscalepu,:desctitolo,:datatitolo,
+	   										  :descpubbluff,:descsedepubbluff,:descprovpubbluff,:descatto,:numeunitneg,
+	   										  :numeimmobili,:numesoggfavore,:numesoggcontro,:descconservat,:flgnotacollegata,:flgstato,:descutente,
+	   										  :dataultagg,:codikidconserv,:codifktipocomunic)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_modificaNotaAnnot" callable="true" >
+		<return-scalar column="IDNOTAANNOT" type="long"/>
+	   {call PG_CONSERVATORIE.MODIFICA_NOTA_ANNOT(?,:codikidnota,:codikiduffowner,:flgvoltura,:dataformalita,:numeformalita1,
+													   :numeformalita2,:numevaloreimmint,:numevaloreimmdec,:descutente,:dataultagg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_modificaNotaTrascr" callable="true" >
+		<return-scalar column="IDNOTATRASCR" type="long"/>
+	   {call PG_CONSERVATORIE.MODIFICA_NOTA_TRASCR(?,:codikidnota,:codikiduffowner,:flgvoltura,:flgvolturadiff,:datavolturadiff,:flgfoglioinfo,:flgcondizione,
+														:flgtermini,:dataformalita,:numeformalita1,:numeformalita2,:flgquadroda,:flgquadrodb,:flgquadrodc,
+														:descutente,:dataultagg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_eliminaNota" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+	 	{ call PG_CONSERVATORIE.ELIMINA_NOTA(?,:codikidnota,:codikiduffowner) }
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_eliminaNotaAnnot" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+	 	{ call PG_CONSERVATORIE.ELIMINA_NOTA_ANNOT(?,:codikidnota,:codikiduffowner) }
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_eliminaNotaTrascr" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+	 	{ call PG_CONSERVATORIE.ELIMINA_NOTA_TRASCR(?,:codikidnota,:codikiduffowner) }
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Bene_Da_Associare" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_BENE_DA_ASSOCIARE(?,:idBene,:idUffOwn)}
+	</sql-query>
+	
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Beni_Associati" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_BENI_ASSOCIATI(?,:idUffOwn,:idNota,:progrNotaBene)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Beni_Associabili_A" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_BENI_ASSOCIABILI_A(?,:idNota,:idUffOwn,:tipoAtto,:catAtto,:repAnno,:repNumero,:idProced,:idConserv)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Beni_Associabili_TD" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_BENI_ASSOCIABILI_TD(?,:idNota,:idUffOwn,:tipoAtto,:catAtto,:repAnno,:repNumero,:idProced,:idConserv)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Beni_Associabili_TS" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_BENI_ASSOCIABILI_TS(?,:idNota,:idUffOwn,:tipoAtto,:catAtto,:repAnno,:repNumero,:idProced,:idConserv)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_cerca_Osservazioni" callable="true" >
+	   {call PG_CONSERVATORIE.CERCAOSSERVAZIONI(?,:idUffOwn,:idNota,:tipoInfo)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_cancellaQuadroD" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+	   {call PG_CONSERVATORIE.CANCELLA_QUADROD(?,:idNota,:idUffOwn,:tipoInfo)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_inserisciQuadroD" callable="true" >
+		<return-scalar column="IDN" type="long"/>
+	   {call PG_CONSERVATORIE.INSERISCI_QUADROD(?,:idNota,:idUffOwn,:descUtente,:tipoInf,:blocco,:progr,:dataultagg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_aggiornaStatoNota" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+	   {call PG_CONSERVATORIE.AGGIORNA_STATO_NOTA(?,:idNota,:idUffOwn,:descUtente,:dataultagg,:flgstato)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_ricerca_progr_nota_bene" callable="true" >
+		 <return-scalar column="MAXPROGR" type="long"/>
+		 { call PG_CONSERVATORIE.RICERCA_PROGR_NOTA_BENE(?,:idUffOwn,:idNota) }
+    </sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_get_max_progr_nota_bene" callable="true" >
+		 <return-scalar column="MAXPROGR" type="long"/>
+		 { call PG_CONSERVATORIE.GET_MAX_PROGR_NOTA_BENE(?,:idNota,:idUffOwn,:idBene) }
+    </sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_inserisci_nota_bene" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+	   {call PG_CONSERVATORIE.INSERIMENTO_NOTA_BENE(?,:idNotaOld,:idNotaNew,:idUffOwn,:descutente,:dataultagg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_associa_nota_bene" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+	   {call PG_CONSERVATORIE.ASSOCIA_NOTA_BENE(?,:codikidnota,:codikiduffowner,:codikprogrbene,:numeprogrunegbene,:descsedeimmobile,:desccatasto,:desccatastop,:codifkidtipocat,
+											    :codifkidtipocatp,:descsezione,:descsezionep,:descfoglio,:descfogliop,:descparticella1,:descparticella1p,:descparticella2,
+												:descparticella2p,:descsubalterno1,:descsubalterno1p,:descsubalterno2,:descsubalterno2p,:desctipodenuncia,:desctipodenunciap,
+												:numedenuncia1,:numedenuncia1p,:numedenuncia2,:numedenuncia2p,:numeannodenuncia,:numeannodenunciap,:numegraffati,:codifkidfondo,
+												:numesupettari,:numesupare,:numesupcentiare,:numesupmqint,:numesupmqdec,:numevaniint,:numevanidec,:numemcint,:numemcdec,:codifkidcategcat,
+												:descindirizzo,:numecapitaleint,:numecapitaledec,:desccivico,:desclotto,:descedificio,:descscala,:descinterno,:descpiano,:flgerr,
+												:descutente,:dataultagg,:codifkidbene,:codifkprogruneg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_aggiorna_nota_bene" callable="true" >
+		<return-scalar column="STATO" type="string"/>
+	   {call PG_CONSERVATORIE.AGGIORNA_NOTA_BENE(?,:codikidnota,:codikiduffowner,:codikprogrbene,:numeprogrunegbene,:descsedeimmobile,:desccatasto,:desccatastop,:codifkidtipocat,
+											    :codifkidtipocatp,:descsezione,:descsezionep,:descfoglio,:descfogliop,:descparticella1,:descparticella1p,:descparticella2,
+												:descparticella2p,:descsubalterno1,:descsubalterno1p,:descsubalterno2,:descsubalterno2p,:desctipodenuncia,:desctipodenunciap,
+												:numedenuncia1,:numedenuncia1p,:numedenuncia2,:numedenuncia2p,:numeannodenuncia,:numeannodenunciap,:numegraffati,:codifkidfondo,
+												:numesupettari,:numesupare,:numesupcentiare,:numesupmqint,:numesupmqdec,:numevaniint,:numevanidec,:numemcint,:numemcdec,:codifkidcategcat,
+												:descindirizzo,:numecapitaleint,:numecapitaledec,:desccivico,:desclotto,:descedificio,:descscala,:descinterno,:descpiano,:flgerr,
+												:descutente,:dataultagg,:codifkidbene,:codifkprogruneg,:codCatasto)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_lista_comuni_conservatoria" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_COMUNI_CONSERVATORIA(?,:idConserv)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Beni_Annot" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_BENI_ANNOT(?,:idUffOwn,:tipoAtto,:catAtto,:repAnno,:repNumero,:idProced,:tenoreMisura)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Beni_Trascr_D" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_BENI_TRASCR_D(?,:idUffOwn,:tipoAtto,:catAtto,:repAnno,:repNumero,:idProced)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Beni_Trascr_S" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_BENI_TRASCR_S(?,:idUffOwn,:tipoAtto,:catAtto,:repAnno,:repNumero,:idProced)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_cerca_Max_Progressivo" callable="true">
+		<return-scalar column="MAXPROGR" type="short"/>
+		{call PG_CONSERVATORIE.CERCAMAXPROGR(?,:idUffOwn,:annoProc,:numeProc)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Soggetti_Contro_A" callable="true">
+	   {call PG_CONSERVATORIE.RICERCA_SOGGETTI_CONTRO_A(?,:idUffOwn,:tipoAtto,:catAtto,:repAnno,:repNumero,:idBene,:idProced,:tenoreMisura)}
+	</sql-query>
+	
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Soggetti_Contro_TD" callable="true">
+	   {call PG_CONSERVATORIE.RICERCA_SOGGETTI_CONTRO_TD(?,:idUffOwn,:tipoAtto,:catAtto,:repAnno,:repNumero,:idBene,:idProced)}
+	</sql-query>
+	
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Soggetti_Contro_TS" callable="true">
+	   {call PG_CONSERVATORIE.RICERCA_SOGGETTI_CONTRO_TS(?,:idUffOwn,:tipoAtto,:catAtto,:repAnno,:repNumero,:idBene,:idProced)}
+	</sql-query>
+	
+	<sql-query name="PG_CONSERVATORIE_lista_comunicazioni_predisp" callable="true" >
+	   {call PG_CONSERVATORIE.LISTA_COMUNICAZIONI_PREDISP(?,:ufficio,:tipoNota,:tipoAtto,:catAtto,:repAnno,:repNumero,:attoSpecie,:descSpecie)}
+	</sql-query>
+
+
+	<sql-query name="PG_CONSERVATORIE_ricerca_sigla_provincia" callable="true" >
+	   <return-scalar column="SIGLAPROV" type="string"/>
+	   {call PG_CONSERVATORIE.RICERCA_SIGLA_PROVINCIA(?,:comune)}
+	 </sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_comune_by_belfiore" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_COMUNE_BY_BELFIORE(?,:codBelfiore)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_comune_by_istat" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_COMUNE_BY_ISTAT(?,:codIstat)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_inserisci_nota_un" callable="true" >
+	    <return-scalar column="STATO" type="string"/>
+	   {call PG_CONSERVATORIE.INSERIMENTO_NOTA_UN(?,:idNota,:idUffOwn,:progrUn,:utente,:dataultagg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_lista_progr_uneg" callable="true" >
+	   {call PG_CONSERVATORIE.LISTA_PROGR_UNEG(?,:oldIdNota,:idUff)}
+	</sql-query>
+	
+	<sql-query name="PG_CONSERVATORIE_elimina_NotaSoggPf" callable="true" >
+	    <return-scalar column="STATO" type="string"/>
+	    { call PG_CONSERVATORIE.ELIMINA_NOTA_SOGG_PF(?,:idNota,:idUffOwn,:progrNotaSogg) }
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_elimina_NotaSoggPnf" callable="true" >
+	    <return-scalar column="STATO" type="string"/>
+	    { call PG_CONSERVATORIE.ELIMINA_NOTA_SOGG_PNF(?,:idNota,:idUffOwn,:progrNotaSogg) }
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_elimina_NotaSogg" callable="true" >
+	    <return-scalar column="STATO" type="string"/>
+	    { call PG_CONSERVATORIE.ELIMINA_NOTA_SOGG(?,:idNota,:idUffOwn,:progrNotaSogg) }
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_inserisciNotaSogg" callable="true" >
+		<return-scalar column="IDNOTASOGG" type="long"/>
+	   {call PG_CONSERVATORIE.INSERIMENTO_NOTA_SOGG(?,:idNota,:idUffOwn,:progressivo,:tipologia,:idSoggetto,:flgErrore,:utente,:dataultagg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_cerca_Max_Progr_NotaSogg" callable="true" >
+	 <return-scalar column="MAXPROGR" type="long"/>
+	 { call PG_CONSERVATORIE.CERCA_MAX_PROGR_NOTA_SOGG(?,:idNota,:idUffOwn) }
+    </sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_inserisciNotaSoggPf" callable="true" >
+		<return-scalar column="IDNOTASOGGPF" type="long"/>
+	   {call PG_CONSERVATORIE.INSERIMENTO_NOTA_SOGG_PF(?,:idNota,:idUffOwn,:progressivo,:cognome,:nome,:flagSesso,:dataNascita,:codComuneNascita,:descComuneNascita,
+	                                                     :descProvNascita,:codFiscale,:utente,:dataultagg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_inserisciNotaSoggPnf" callable="true" >
+		<return-scalar column="IDNOTASOGGPNF" type="long"/>
+	   {call PG_CONSERVATORIE.INSERIMENTO_NOTA_SOGG_PNF(?,:idNota,:idUffOwn,:progressivo,:denominazione,:codComuneSede,:descComuneSede,:descProvSede,
+	                                                      :codFiscale,:utente,:dataultagg)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Dettaglio_Pf" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_DETTAGLIO_PF(?,:idNota,:idUffOwn,:progressivo)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Ricerca_Dettaglio_Pnf" callable="true" >
+	   {call PG_CONSERVATORIE.RICERCA_DETTAGLIO_PNF(?,:idNota,:idUffOwn,:progressivo)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Lista_Persone_Fisiche" callable="true" >
+	   {call PG_CONSERVATORIE.LISTA_PERSONE_FISICHE(?,:idNota,:idUffOwn)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Lista_Persone_Giuridiche" callable="true" >
+	   {call PG_CONSERVATORIE.LISTA_PERSONE_GIURIDICHE(?,:idNota,:idUffOwn)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_listaSituazProprieta" callable="true" > 
+	   {call PG_CONSERVATORIE.listaSituazProprieta(?,:idNota,:idUffOwn)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_listaPFAssociabiliAnnot" callable="true" >
+	   {call PG_CONSERVATORIE.LISTAPFASSOCIABILIANNOT(?,:idTipoAtto,:idCatAtto,:idUff, :repert2, :repert,:idProc,:idNota,:idConservatoria)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_listaPFAssocAttoSequesTrascr" callable="true" >
+	   {call PG_CONSERVATORIE.LISTAPFASSOCATTOSEQUESTRASCR(?,:idTipoAtto,:idCatAtto,:idUff, :repert2, :repert,:idProc,:idNota,:idConservatoria)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_listaPFAssocAttoDecisTrascr" callable="true" >
+	   {call PG_CONSERVATORIE.LISTAPFASSOCATTODECISTRASCR(?,:idTipoAtto,:idCatAtto,:idUff, :repert2, :repert,:idProc,:idNota,:idConservatoria)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_listaPGAssociabiliAnnot" callable="true" >
+	   {call PG_CONSERVATORIE.LISTAPGASSOCIABILIANNOT(?,:idTipoAtto,:idCatAtto,:idUff, :repert2, :repert,:idProc,:idNota,:idConservatoria)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_listaPGAssocAttoSequesTrascr" callable="true" >
+	   {call PG_CONSERVATORIE.LISTAPGASSOCATTOSEQUESTRASCR(?,:idTipoAtto,:idCatAtto,:idUff, :repert2, :repert,:idProc,:idNota,:idConservatoria)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_listaPGAssocAttoDecisTrascr" callable="true" >
+	   {call PG_CONSERVATORIE.LISTAPGASSOCATTODECISTRASCR(?,:idTipoAtto,:idCatAtto,:idUff, :repert2, :repert,:idProc,:idNota,:idConservatoria)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Dettaglio_Persona_Fisica" callable="true" >
+	   {call PG_CONSERVATORIE.DETTAGLIO_PERSONA_FISICA(?,:idSoggetto,:idUff,:versione)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_Dettaglio_Persona_Giuridica" callable="true" >
+	   {call PG_CONSERVATORIE.DETTAGLIO_PERSONA_GIURIDICA(?,:idSoggetto,:idUff,:versione)}
+	</sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_getCategorieAttiNonSequestri" callable="true" >
+       {call PG_CONSERVATORIE.CATEGORIE_ATTI_NONSEQUESTRI(?,:tipoUff)}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_getCategorieAttiRicerca" callable="true" >
+       {call PG_CONSERVATORIE.CATEGORIE_ATTI_RICERCA(?,:tipoUff)}
+    </sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_getCategorieAttiInserimento" callable="true" >
+	   {call PG_CONSERVATORIE.CATEGORIE_ATTI_INSERIMENTO(?,:tipoUff)}
+	</sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_getNumSoggettiContro" callable="true" >
+       {call PG_CONSERVATORIE.getNumSoggettiContro(?,:idNota,:idUff )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_pulisciNotaBeneUN" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+       {call PG_CONSERVATORIE.pulisciNotaBeneUN(?,:idNota,:idUff )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_aggiornaNotaBeneUN" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+       {call PG_CONSERVATORIE.aggiornaNotaBeneUN(?,:idNota,:idUff,:progrUn,:progrRiga,:utente,:progrBene )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_aggiornaUnNota" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+       {call PG_CONSERVATORIE.aggiornaUnNota(?,:idNota,:idUff,:soggContro,:beniInteressati,:utente,:unitaNeg )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_modificaSoggettoFisico" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+       {call PG_CONSERVATORIE.modificaSoggettoFisico( ?, :idNota, :idUff, :utente, :cognome, :nome, :sesso, :dataNascita,
+            :statoNascita, :provNascita, :comuneNascita, :codFiscale, :regime, :progrSoggCon, :progressivo )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_modificaSoggettoGiurid" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+       {call PG_CONSERVATORIE.modificaSoggettoGiurid( ?, :idNota, :idUff, :utente, :denom, :comune, :provincia, :pIva, :codComune, :progressivo )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_resetErroreSoggetto" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+       {call PG_CONSERVATORIE.resetErroreSoggetto( ?, :idNota, :idUff, :utente, :progressivo )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_inserisciNotaSoggettoUn" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+       {call PG_CONSERVATORIE.inserisciNotaSoggettoUn( ?, :idNota, :idUff, :progrSogg, :progrUn, :idTipoInt,
+                                                       :progrRiga, :interoQuota, :decimaleQuota, :denomQuota, 
+                                                       :flagTipoInt, :descTipoInt, :idProgrSoggC, :idTipoRegime, :utente )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_controllaConiugi" callable="true" >
+       {call PG_CONSERVATORIE.controllaConiugi(?,:idNota,:idUff )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_controllaBeniConiugi" callable="true" >
+       {call PG_CONSERVATORIE.controllaBeniConiugi(?,:idNota,:idUff )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_soggettiErrati" callable="true" >
+       {call PG_CONSERVATORIE.soggettiErrati(?,:idNota,:idUff )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_beniErrati" callable="true" >
+       {call PG_CONSERVATORIE.beniErrati(?,:idNota,:idUff )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_beniSenzaSoggetto" callable="true" >
+       {call PG_CONSERVATORIE.beniSenzaSoggetto(?,:idNota,:idUff )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_soggettiSenzaBene" callable="true" >
+       {call PG_CONSERVATORIE.soggettiSenzaBene(?,:idNota,:idUff )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_riproponiNotaSogg" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+        { call PG_CONSERVATORIE.riproponiNotaSogg(?, :oldIdNota, :idNota, :idUff, :utente ) }
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_riproponiNotaSoggPF" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+        { call PG_CONSERVATORIE.riproponiNotaSoggPF(?, :oldIdNota, :idNota, :idUff, :utente ) }
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_riproponiNotaSoggPNF" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+        { call PG_CONSERVATORIE.riproponiNotaSoggPNF(?, :oldIdNota, :idNota, :idUff, :utente ) }
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_riproponiNotaSoggUn" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+        { call PG_CONSERVATORIE.riproponiNotaSoggUn(?, :oldIdNota, :idNota, :idUff, :utente ) }
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_riproponiNotaSoggBene" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+        { call PG_CONSERVATORIE.riproponiNotaSoggBene(?, :oldIdNota, :idNota, :idUff, :utente ) }
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_riproponiNotaQuadroD" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+        { call PG_CONSERVATORIE.riproponiNotaQuadroD(?, :oldIdNota, :idNota, :idUff, :utente ) }
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_inserisciTitoliDiritto" callable="true" >
+        <return-scalar column="STATO" type="string"/>
+        { call PG_CONSERVATORIE.inserisciTitoliDiritto( 
+            ?, :idNota, :idUff, :progrSogg, :beneSitMp, :tipoInteresse, :quotaIntero, :quotaDecimale, :denominQuota, :utente ) }
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_sessoSoggettoFisico" callable="true" >
+       {call PG_CONSERVATORIE.sessoSoggettoFisico( ?, :idNota, :idUff, :progrSoggCon )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_listaTitoliDiritto" callable="true" > 
+       {call PG_CONSERVATORIE.listaTitoliDiritto( ?, :idNota, :idUff, :progressivoNotaBene )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_getTipoSogg" callable="true" > 
+       {call PG_CONSERVATORIE.getTipoSogg( ?, :idNota, :idUff, :progressivoNotaBene, :titoloSel )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_titoloDirittoPF" callable="true" > 
+       {call PG_CONSERVATORIE.titoloDirittoPF( ?, :idNota, :idUff, :progressivoNotaBene, :titoloSel, :idTipoInteresse )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_titoloDirittoPG" callable="true" > 
+       {call PG_CONSERVATORIE.titoloDirittoPG( ?, :idNota, :idUff, :progressivoNotaBene, :titoloSel, :idTipoInteresse )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_listaSoggettiUnitaNegoziali" callable="true" >
+       {call PG_CONSERVATORIE.LISTASOGGETTIUNITANEGOZIALI( ?, :idNota, :idUff)}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_listaUnitaNegoziali" callable="true" >
+       {call PG_CONSERVATORIE.listaUnitaNegoziali( ?, :idNota, :idUff )}
+    </sql-query>
+
+    <sql-query name="PG_CONSERVATORIE_controllaCapienza" callable="true" >
+       {call PG_CONSERVATORIE.controllaCapienza( ?, :idNota, :idUff, :beneSitMp, :progrSogg, :tipoInteresse )}
+    </sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_getComuniSediTribun" callable="true" >
+	   {call PG_CONSERVATORIE.GETCOMUNISEDITRIBUN(?,:pattern)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_getAllComuniProv" callable="true" >
+	   {call PG_CONSERVATORIE.GETALLCOMUNIPROV(?,:pattern)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_getBelfComuniStartingWith" callable="true" >
+	   {call PG_CONSERVATORIE.GETBELFCOMUNISTARTINGWITH(?,:pattern)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_getIstatComuniStartingWith" callable="true" >
+	   {call PG_CONSERVATORIE.GETISTATCOMUNISTARTINGWITH(?,:pattern)}
+	</sql-query>
+
+	<sql-query name="PG_CONSERVATORIE_getComuneByUfficio" callable="true" >
+	   {call PG_CONSERVATORIE.GETCOMUNEBYUFFICIO(?,:codUfficio)}
+	</sql-query>
+	
+	<sql-query name="PG_CONSERVATORIE_lista_PF_Regime" callable="true" >
+       {call PG_CONSERVATORIE.listaPfRegime( ?, :idNota, :idUff, :progrSogg)}
+    </sql-query>
+
+</hibernate-mapping>

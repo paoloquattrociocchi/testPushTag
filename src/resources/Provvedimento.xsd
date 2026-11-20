@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/provv" targetNamespace="http://anbsc.almaviva.it/schema/provv" elementFormDefault="qualified">
+	<complexType name="provvedimento">
+		<sequence>
+			<element name="identificativoProvvedimento" type="integer"/>
+			<element name="ufficioEmittente" type="string"/>
+			<element name="annoProcedimentoEmittente" type="integer"/>
+			<element name="numProcedimentoEmittente" type="integer"/>
+			<element name="dataDepositoProvv" type="dateTime"/>
+			<element name="annoProvvedimento" type="integer"/>
+			<element name="numeroProvvedimento" type="integer"/>
+			<element name="tipoProvvedimento" type="integer"/>
+			<element name="dataDefinitivita" type="dateTime"  minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

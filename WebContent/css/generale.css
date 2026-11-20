@@ -1,0 +1,733 @@
+.error {
+	background-image: url('../images/warning.gif');
+	background-repeat: no-repeat;
+	background-position: left center; 
+	border: 1px solid #CCCCCC; 
+	background-color: #F0F0F0;
+	text-align: left;
+	padding: 5px;
+}
+
+.success {
+	background-image: url('../images/Icon_Confirm.png');
+	background-repeat: no-repeat;
+	background-position: left center; 
+	border: 1px solid #E0E0E0;
+	background-color: #F0F0F0;
+	text-align: left;
+	padding: 5px;
+	font-color: #1E466C;
+}
+
+.testoRosso {
+	color: red;
+	font-style: italic;
+	font-weight: bold;
+	font-family: verdana, arial;
+	font-size: 10px;
+}
+
+.testoSuccess {
+	color: #006600;
+	font-style: italic;
+	font-weight: bold;
+	font-family: verdana, arial;
+	font-size: 12px;
+	margin-left: 50px;	
+}
+
+.testo {
+	color: red;
+	font-style: italic;
+	font-weight: bold;
+	font-family: verdana, arial;
+	font-size: 12px;
+	margin-left: 50px;
+}
+
+.dialogSpan {		
+	background-repeat: no-repeat;
+	background-position: left center;
+	color:red;
+	font-weight:bold;
+	text-align: center;
+	vertical-align: middle;	
+}
+
+.dialogIcon {
+/* 	background-image: url('../images/warning-small.gif'); */
+	background-repeat: no-repeat;
+	background-position: center bottom;	
+	padding: 15px;
+}
+
+body {
+	margin: 10px 10px 10px 10px;
+	background-color: white;
+}
+
+.contenitore {
+	background-color: white;
+	width: 100%;
+	min-width: 1020px;
+}
+
+.contenitore_parziale {
+	position: relative;
+}
+
+/** TABELLA DI INTESTAZIONE PAGINA */
+table.tb_header {
+	background-image: none;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.tb_header tr {
+	background-image: url("../images/heather_bg.jpg");
+	height: 104px;
+}
+
+table.tb_header tr td {
+	padding: 0px;
+	margin: 0px;
+}
+
+div.utenteLogin {
+	width: 586px;
+	height: 104px;
+	background-image: url("../images/heather_dx.jpg");
+	color: #ffffff;
+	font-family: verdana, arial;
+	font-size: 12px;
+}
+
+div.utenteLogin a {
+	text-decoration: none;
+}
+
+/** TABELLA SFONDO TASTI BARRA TESTATA */
+table.tb_header_tasti {
+	background-image: none;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.tb_header_tasti tr {
+	background-image: url("../images/tasto_bg.jpg");
+	height: 40px;
+}
+
+table.tb_header_tasti tr td {
+	padding: 0px;
+	margin: 0px;
+	vertical-align: top;
+	text-align: center;
+}
+
+table.tb_header_tasti td.tb_header_tasti_sx {
+	background-image: url("../images/tasto_bg-sx.jpg");
+	background-repeat: no-repeat;
+	width: 7px;
+}
+
+table.tb_header_tasti td.tb_header_tasti_dx {
+	background-image: url("../images/tasto_bg-dx.jpg");
+	background-repeat: no-repeat;
+	width: 7px;
+}
+
+/** TABELLA TASTI BARRA TESTATA */
+table.tb_header_link {
+	background-image: none;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.tb_header_link tr {
+	height: 35px;
+}
+
+table.tb_header_link tr td {
+	padding: 0px;
+	margin: 0px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+table.tb_header_link tr td.link_sx {
+	background-image: url("../images/tasto_inizio.jpg");
+	background-repeat: no-repeat;
+	width: 9px;
+}
+
+table.tb_header_link tr td.link_dx {
+	background-image: url("../images/tasto_fine.jpg");
+	background-repeat: no-repeat;
+	width: 9px;
+}
+
+table.tb_header_link tr td.link_div {
+	background-image: url("../images/tasto_divisore.jpg");
+	background-repeat: no-repeat;
+	width: 14px;
+}
+
+table.tb_header_link tr td.link_tasto {
+	background-image: url("../images/tasto.jpg");
+	background-repeat: repeat-x;
+	font-family: verdana, arial;
+	font-size: 12px;
+	font-weight: bolder;
+}
+
+table.tb_header_link tr td.link_tasto a {
+	color: #02325B;
+	text-decoration: none;
+}
+
+table.tb_header_link tr td.link_tasto a:hover {
+	color: #993300;
+	text-decoration: none;
+}
+
+/** TABELLA DI PIEDE PAGINA */
+table.tb_footer {
+	background-image: none;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.tb_footer tr {
+	background-image: url("../images/footer_bg.jpg");
+	background-repeat: repeat-x;
+	height: 28px;
+}
+
+table.tb_footer tr td {
+	padding: 0px;
+	margin: 0px;
+	vertical-align: top;
+}
+
+/** TABELLA DI CORPO PAGINA */
+table.tb_body {
+	background-image: none;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table.tb_body tr td {
+	padding: 0px;
+	margin: 0px;
+	vertical-align: top;
+}
+
+table.tb_body td.bodySX_Home {
+	background-image: url("../images/home_immagine.jpg");
+	background-repeat: no-repeat;
+	width: 216px;
+	text-align: left;
+	position: relative;
+}
+
+table.tb_body td.bodySX {
+	background-image: url("../images/content_bg-sx.jpg");
+	background-repeat: repeat-y;
+	width: 216px;
+	text-align: left;
+	position: relative;
+}
+
+table.tb_body td.bodyDX {
+	background-image: url("../images/content_bg-dx.jpg");
+	background-repeat: repeat-y;
+	width: 7px;
+	text-align: right;
+}
+
+table.tb_body td.bodyContent {
+	background-color: white;
+}
+
+/** MENU 1 LIV*/
+ul.menu1liv {
+    list-style: none;
+	width: 150px;
+	margin: 0px;
+	margin-left: 30px;
+	padding: 0px;
+}
+
+ul.menu1liv li {
+	font-size: 14px;
+	font-family: calibri, tahoma;
+	font-weight: bold;
+}
+
+ul.menu1liv li a {
+	color: #000000;
+	text-decoration: none;
+}
+
+ul.menu1liv li a:hover {
+	color: #808080;
+	text-decoration: underline;
+}
+
+/** MENU 2 LIV*/
+ul.menu2liv {
+    list-style-image: url("../images/puntele_quadrato.jpg");
+}
+
+ul.menu2liv li {
+    font-size: 14px;
+	font-family: calibri, tahoma;
+	font-weight: normal;
+	margin-left: -23px;
+}
+
+ul.menu2liv li a {
+	color: #000000;
+	text-decoration: none;
+}
+ul.menu2liv li a:hover {
+    color: #808080;
+    text-decoration: underline;
+}
+
+/** MENU 3 LIV*/
+ul.menu3liv {
+    list-style-image: url("../images/puntele_cerchio.jpg");
+}
+ul.menu3liv li {
+    font-size: 12px;
+    font-family: calibri,tahoma;
+    font-weight: normal;
+    margin-left: -55px;
+}
+ul.menu3liv li a {
+    color:#000000;
+    text-decoration: none;
+}
+ul.menu3liv li a:hover {
+	color: #808080;
+	text-decoration: underline;
+}
+
+img.filoMenu {
+	border: 0px;
+	float: right;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+/** AREE DIV PER GESTIONE MENU LEFT E BODY PAGE */
+#divMenu {
+	width: 165px;
+	height: 22px;
+	text-align: left;
+	vertical-align: middle;
+	margin: 0px;
+	padding: 0px;
+	padding-left: 35px;
+	font-family: calibri, tahoma;
+	font-size: 15px;
+	font-weight: bold;
+	color: #02325B;
+	background-image: url("../images/BulletMenu.jpg");
+	background-repeat: no-repeat;
+	background-position: 0 .5em;
+}
+
+#divMenuImage2 {
+	background-color: red;
+	position: relative;
+	bottom: 0;
+	left: 0;
+}
+
+#divMenuImage {
+	background-color: red;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+#divBodyContent {
+	margin: 2px 2px 2px 2px;
+	padding: 2px 2px 2px 2px;
+	border: 0px;
+	overflow: hidden;
+	width: 99%;
+	height: 490px;
+	background-color: #FFFFFF;
+	scrollbar-face-color: #e3e3e3;
+	scrollbar-highlight-color: #ffffff;
+	scrollbar-shadow-color: #ffffff;
+	scrollbar-3dlight-color: #ffffff;
+	scrollbar-arrov-color: #ffffff;
+	scrollbar-track-color: #ffffff;
+	scrollbar-darkshadow-color: #ffffff;
+}
+
+#divImgHome {
+	width: 100%;
+	height: 100%;
+	margin-top: 10px;
+	background-image: url('../images/immagineHOME-bg.jpg');
+	background-repeat: no-repeat;
+	background-position: top right;
+	background-size: 100%;
+	overflow: auto;
+}
+/** TITOLI E TESTI */
+.titolo_page {
+	font-family: Calibri, Tahoma;
+	font-size: 18px;
+	font-weight: bold;
+	color: #1C548C;
+}
+
+.titolo_1 {
+	font-family: Calibri, Tahoma;
+	font-size: 18px;
+	font-weight: bold;
+	color: #993300;
+}
+
+.titolo_2 {
+	font-family: Calibri, Tahoma;
+	font-size: 18px;
+	font-weight: bold;
+	color: #1E466C;
+}
+
+.testo_Body {
+	font-family: Calibri, Tahoma;
+	font-size: 18px;
+	font-weight: normal;
+	color: #000000;
+}
+
+.testo_MenuTitolo {
+	font-family: Calibri, tahoma;
+	font-size: 15px;
+	font-weight: bold;
+	color: #02325B;
+}
+
+.testo_Menu {
+	font-family: Calibri, Tahoma;
+	font-size: 13px;
+	font-weight: normal;
+	color: #000000;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.testo_MenuLink {
+	font-family: Calibri, Tahoma;
+	font-size: 13px;
+	font-weight: bold;
+	color: #000000;
+}
+
+.testo_Campo {
+	font-family: Calibri, Tahoma;
+	font-size: 18px;
+	font-weight: normal;
+	color: #02325B;
+}
+
+.testo_Link a {
+	color: #02325B;
+	text-decoration: none;
+}
+
+.testo_Link a:hover {
+	color: #808080;
+	text-decoration: underline;
+}
+
+.pagebanner {
+	padding-top:3px;
+	font-family: Calibri, Tahoma;
+	font-size: 13px;
+	
+}
+
+.pagelinks {
+	padding-top:3px;
+	font-family: Calibri, Tahoma;
+	font-size: 13px;
+}
+
+/** CAMPI DI COMPILAZIONE */
+input.login {
+	font-family: Calibri, Tahoma;
+	font-size: 15px;
+	font-weight: normal;
+	width: 150px;
+	height: 20px;
+	color: #02325B;
+}
+
+input {
+	font-size: 15px;
+	font-weight: normal;
+}
+
+.tr_titolo td {
+	font-family: Calibri, tahoma;
+	font-size: 15px;
+	font-weight: bold;
+	color: #a04041;
+}
+
+.tr_dati td {
+	width: 25%;
+	font-family: Calibri, tahoma;
+	font-size: 15px;
+	font-weight: normal;
+	color: #000000;
+}
+
+/** TABELLA FORM DATI */
+table.tb_form {
+	width: 100%;
+	font-family: Calibri, tahoma;
+	font-size: 12px;
+	border-collapse: collapse;
+}
+
+table.tb_form tr td {
+	/* white-space: nowrap; */
+	height: 24px;
+	border-bottom: 1px dotted gray;
+	vertical-align: middle;
+	padding-left: 5px;
+	color: #000000;
+}
+
+table.tb_form td label {
+	font-weight: bolder;
+}
+
+table.tb_form td.td_titolo {
+	vertical-align: middle;
+	font-family: Calibri, tahoma;
+	font-size: 14px;
+	font-weight: normal;
+	color: #1c5791;
+	background-color: #EBEBEB;
+	padding-left: 5px;
+}
+
+table.tb_form td.td_titolo_label {
+	vertical-align: middle;
+	font-family: Calibri, tahoma;
+	font-size: 14px;
+	font-weight: bold;
+	color: #1c5791;
+	background-color: #EBEBEB;
+	padding-left: 5px;
+}
+
+table.tb_form td input {
+	font-size: 11px;
+	color: #000000;
+             text-transform: uppercase; 
+}
+
+table.tb_form td select {
+	font-size: 11px;
+	color: #000000;
+}
+
+table.tb_form td #propostaFileData {
+	width: 500px;
+}
+
+table.tb_form colgroup #tb_form_col_label {
+	width: 15%;
+}
+
+table.tb_form colgroup #tb_form_col_value {
+	width: 35%;
+}
+
+
+/** TABELLA BOTTONI */
+table.tb_bottoni {
+	height: 24px;
+	margin: 0;
+	padding: 0;
+}
+
+table.tb_bottoni td.td_tasto {
+	height: 24px;
+	float: left;
+	margin: 0 0.2em 0;
+	padding: 0 0 0 8px;
+	background: url('../images/bottoneIntero.png') no-repeat top left;
+	vertical-align: middle;
+	font-family: verdana, arial;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+table.tb_bottoni td.td_tasto input {
+	height: 24px;
+	float: left;
+	padding: 0.4em 8px 0.4em 0;
+	background: url('../images/bottoneIntero.png') no-repeat top right;
+	color: #1c5791;
+	text-decoration: none;
+	cursor: pointer;
+	background-color: #fff;
+	border: 0;
+	vertical-align: middle;
+	font-family: verdana, arial;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+table.tb_bottoni td.td_tasto a {
+	height: 24px;
+	float: left;
+	padding: 0.4em 8px 0.4em 0;
+	background: url('../images/bottoneIntero.png') no-repeat top right;
+	color: #1c5791;
+	text-decoration: none;
+}
+
+table.tb_bottoni td.td_tasto a:hover {
+	height: 24px;
+	color: #993300;
+	text-decoration: none;
+}
+
+/** TABELLA LISTA */
+table.tb_lista {
+	width: 100%;
+	font-family: Calibri, tahoma;
+	font-size: 12px;
+	border-collapse: collapse;
+	/*border-bottom: solid 1px #1C548C;*/
+}
+
+table.tb_lista caption {
+	font-weight: bold;
+	font-size: 16px;
+	background-color: #1C548C;
+	height: 24px;
+	text-align: left;
+	vertical-align: middle;
+	color: #FFFFFF;
+	padding-left: 10px;
+}
+
+table.tb_lista th.titolo {
+	font-weight: bold;
+	font-size: 16px;
+	background-color: #1C548C;
+	height: 24px;
+	text-align: left;
+	vertical-align: middle;
+	color: #FFFFFF;
+	padding-left: 10px;
+}
+
+table.tb_lista th {
+	background-color: #1C548C;
+	height: 20px;
+	text-align: left;
+	vertical-align: middle;
+	color: #FFFFFF;
+	padding-left: 5px;
+}
+
+table.tb_lista th a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+table.tb_lista th a:hover {
+	color: #ECF2F9;
+	text-decoration: none;
+}
+
+table.tb_lista tr.odd td {
+	background-color: #FFFFFF;
+	height: 20px;
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 5px;
+}
+
+table.tb_lista tr.even td {
+	background-color: #ECF2F9;
+	height: 20px;
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 5px;
+}
+
+/** TABELLA SOTTOLISTA */
+table.tb_sotto_lista {
+	width: 98%;
+	font-family: Calibri, tahoma;
+	font-size: 11px;
+	border-collapse: collapse;
+	background-color: white;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+table.tb_sotto_lista th {
+	height: 0px;
+	border: 1px solid #cecece;
+	background-color: #EBEBEB;
+	vertical-align: middle;
+	color: #000000;
+}
+
+table.tb_sotto_lista tr.odd td {
+	border: 1px solid #cecece;
+	background-color: #FFFFFF;
+	color: #000000;
+}
+
+table.tb_sotto_lista tr.even td {
+	border: 1px solid #cecece;
+	background-color: #ECF2F9;
+	color: #000000;
+}
+
+table.tb_sotto_lista tr td {
+	border: 1px solid #cecece;
+	background-color: #FFFFFF;
+	color: #000000;
+}
+
+
+label.required {
+  /* constrain the absolutely positioned pseudo */
+  position: relative;
+  /* create some space for the '*' */
+  margin-right: .4em;
+}
+label.required:after {
+  content:"*";
+  display: block;
+  position: absolute;
+  right: -.6em;
+  color: red;
+  top: -.1em;
+}
+
+input[type="text"][readonly] {
+    background-color:#e5e5e5;
+    color: #a2a2a2;
+}

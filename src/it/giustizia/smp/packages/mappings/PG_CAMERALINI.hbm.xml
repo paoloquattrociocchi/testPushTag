@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+
+	<sql-query name="PG_CAMERALINI_GetProcedimentoByKeys" callable="true" >
+	   {call PG_C_PROCEDIMENTO.GETPROCEDIMENTOBYKEYS(?,:idUffOwn,:numProc,:annoProc,:tipoProc)}
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_GetProcedimentoByKeysProc" callable="true" >
+	   {call PG_C_PROCEDIMENTO.GETPROCEDIMENTOBYKEYSPROC(?,:idUffOwn,:numProc,:annoProc,:tipoProc)}
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_GetMisurePatrProcedimento" callable="true" >
+	   {call PG_C_PROCEDIMENTO.GETMISUREPATRPROCEDIMENTO(?,:idUffOwn,:idProc)}
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_GetMisurePersProcedimento" callable="true" >
+	   {call PG_C_PROCEDIMENTO.GET_MISURE_PERS_PROCEDIMENTO(?,:idUffOwn,:idProc,:tipoMisura)}
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_insTRelProcProc" callable="true" >
+		<return-scalar column="IDPROC" type="long"/>
+		{ call PG_C_PROCEDIMENTO.INS_T_REL_PROC_PROC(?, :idProc1, :idProc2, :idUffOwn, :descUtente, :idTipoAtto, :idCatAtto, :codiTipoRel, :flagPadre)} 	
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_inserisciProcedimento" callable="true" >
+		<return-scalar column="IDPROC" type="long"/>
+		{ call PG_C_PROCEDIMENTO.INSERISCIPROCEDIMENTO(?,:idUffOwn,:descUtente,:dataAperFasc,
+		    :idStatoProc,:idTipoProc,:idTipoAtto,:idCatAtto,:idProcedente,:flgOrdinaria,:flgAntimafia,:flgAntiterrorismo,:dataUltAggiornamento, :idTipoFascicolo ,
+		    :cognomeRichiedente,:nomeRichiedente,:dataEmissione,:dataDeposito,:idModalitaTrasmissione,:codicePU) } 	
+	</sql-query>	
+	
+	<sql-query name="PG_CAMERALINI_inserisciIntestario" callable="true" >
+		{ call PG_C_PROCEDIMENTO.INSERISCIINTESTATARIO(?,:codSoggetto,:idTipoSogg,:nome,:cognome,:sesso,:dataNascita,
+	 												:comEsteroNasc,:codiceFiscale,:ragioneSociale,:comEsteroSede,:indirizzoSede,:descPartitaIva,
+													:descUtente,:idUffOwn,:descNumeCcia,:descCodFiscale,
+													:descCivico,:descCap,:idTipoStrada,:idComSede,:idComNascita,
+													:idStatoSede,:idStatoNasc,:idTipoSoc										
+													) }
+	</sql-query>
+	
+	
+	<sql-query name="PG_C_PROCEDIMENTO_updateIntestatario" callable="true" >
+		{ call PG_C_PROCEDIMENTO.UPDATEINTESTATARIO(?,:CODINTESTATARIO,:NOME,:COGNOME,:SESSO,:DATANASCITA,
+	 												:COMUNEESTERONASC,:CODICEFISCALE,:RAGIONESOCIALE,:COMUNEESTEROSEDE,:INDIRIZZOSEDE,:DESCPARTITAIVA,
+													:DESC_UTENTE,:CODUFFICIOOWN,:DESCNUMECCIA,:DESC_COD_FISC,
+													:DESC_CIVICO,:DESC_CAP,:CODI_FK_ID_TIPO_STRADA,:CODI_FK_ID_COM_SEDE,:CODI_FK_ID_COM_NASC,
+													:CODI_FK_ID_STATO_SEDE,:CODI_FK_ID_STATO_NASC,:CODI_FK_ID_TIPO_SOC										
+													) }
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_registraCamereConsiglio" callable="true" >
+		<return-scalar column="IDPROC" type="long"/>
+		{ call PG_C_PROCEDIMENTO.REGISTRA_CAMERA_CONSIGLIO(?,:ID_PROC_MERITO,:ID_UFFICIO,:ID_TIPO_PROC,
+		    :STR_LISTAIDSOGGETTI,:TIPOSOGGETTO,:IDVERSIONE,:DESC_UTENTE) } 	
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_getAmmLiquidazione" callable="true" >
+	   {call PG_C_PROCEDIMENTO.GET_AMM_LIQUIDAZIONE(?,:idUffOwn,:idProc)}
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_getAmmOmonimi" callable="true" >
+	   {call PG_C_PROCEDIMENTO.GET_AMM_OMONIMI(?,:cognome,:nome,:ragSoc)}
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_getIntestOmonimi" callable="true" >
+	   {call PG_C_PROCEDIMENTO.GET_INTEST_OMONIMI(?,:tipoSoggetto,:cognome, :nome, :dataNascita, :idStatoNasc, :idComNasc, :comuneNascEst,
+	                                                :codiceFiscale, :ragioneSoc, :pIvaCompl, :idStatoSede, :idComuneSede, 
+	                                                :comuneSedeEst)}
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_registraCamereConsiglioInt" callable="true" >
+		<return-scalar column="IDPROC" type="long"/>
+		{ call PG_C_PROCEDIMENTO.REGISTRA_CAMERA_CONSIGLIO_INT(?,:ID_PROC_MERITO,:ID_UFFICIO,:ID_TIPO_PROC,
+		    :CODINTESTATARIO,:CODTIPOSOGGETTO,:NOME,:COGNOME,:SESSO,:DATANASCITA,:COMUNEESTERONASC,:CODICEFISCALE,:RAGIONESOCIALE,:COMUNEESTEROSEDE,
+		    :INDIRIZZOSEDE,:DESCPARTITAIVA,:CODUFFICIOOWN,:DESCNUMECCIA,:DESC_COD_FISC,:DESC_CIVICO,:DESC_CAP,:CODI_FK_ID_TIPO_STRADA,:CODI_FK_ID_COM_SEDE,
+		    :CODI_FK_ID_COM_NASC,:CODI_FK_ID_STATO_SEDE,:CODI_FK_ID_STATO_NASC,:CODI_FK_ID_TIPO_SOC,:CODI_FK_ID_SOGG_INT,:CODI_FK_ID_VER,:DESC_UTENTE) } 	
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_getIntestatari" callable="true" >
+		{ call PG_C_PROCEDIMENTO.GETINTESTATARI(?,:idUffOwn,:idProc) } 	
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_dettaglioProcedimentoCam" callable="true" >
+	   <return alias="proced" class="it.giustizia.smp.model.TProcedimento"/>
+       <return alias="statoProc" class="it.giustizia.smp.model.TTpStatoProc"/>
+       <return alias="tipoProc" class="it.giustizia.smp.model.TTpTipoProc"/>
+       <return alias="tipoFasc" class="it.giustizia.smp.model.TTpTipoFascicolo"/>
+	   { call PG_C_PROCEDIMENTO.DETTAGLIOPROCEDIMENTOCAM (?, :vidProc) }
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_getIdComuneNascita" callable="true" >
+	   {call PG_C_PROCEDIMENTO.GETIDCOMUNENASCITA (?, :descComune)}
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_getIntestatarioById" callable="true" >
+	   {call PG_C_PROCEDIMENTO.GET_INTESTATARIO_BY_ID(?,:idIntest,:idUfficio)}
+	</sql-query>
+	
+	<sql-query name="PG_CAMERALINI_getEsitoDecisione" callable="true" >
+		<return-scalar column="DESC_ESITO1" type="string"/>
+		<return-scalar column="DESC_ESITO2" type="string"/>
+	   {call PG_C_PROCEDIMENTO.GET_ESITO_DECISIONE(?,:ID_PROCEDIMENTO,:ID_ATTODECRETO,:ID_UFFICIO, :DESCUTENTE)}
+	</sql-query>
+
+</hibernate-mapping>

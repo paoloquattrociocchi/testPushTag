@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://anbsc.almaviva.it/bean" xmlns:tns="http://anbsc.almaviva.it/schema/veicolo" targetNamespace="http://anbsc.almaviva.it/schema/veicolo" elementFormDefault="qualified">
+	<complexType name="veicolo">
+		<sequence>
+			<element name="numeroRegistro" type="string" minOccurs="0"/>
+			<element name="dataRegistrazione" type="dateTime" minOccurs="0"/>
+			<element name="numeroIdentificativo" type="integer" minOccurs="0"/>
+			<element name="codiceImmatricolazione" type="string" minOccurs="0"/>
+			<element name="descrizioneModello" type="string" minOccurs="0"/>
+			<element name="identificativo">
+				<complexType>
+					<sequence>
+						<element name="numeroTarga" type="string" minOccurs="0"/>
+						<element name="numeroTelaio" type="string" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="descrizioneColore" type="string" minOccurs="0"/>
+			<element name="identificativoTipoDisponibilita" type="integer" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>
